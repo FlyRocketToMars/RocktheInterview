@@ -1,0 +1,56 @@
+name: Daily Study Push
+
+on:
+  schedule:
+    # 每天早上8点 (UTC+8 北京时间) = UTC 0点
+    - cron: '0 0 * * *'
+  workflow_dispatch:  # 允许手动触发
+
+env:
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  SMTP_HOST: ${{ secrets.SMTP_HOST }}
+  SMTP_PORT: ${{ secrets.SMTP_PORT }}
+  SMTP_USER: ${{ secrets.SMTP_USER }}
+  SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+  NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+  WECHAT_CORP_ID: ${{ secrets.WECHAT_CORP_ID }}
+  WECHAT_AGENT_ID: ${{ secrets.WECHAT_AGENT_ID }}
+  WECHAT_SECRET: ${{ secrets.WECHAT_SECRET }}
+
+jobs:
+  send-daily-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install requests python-dotenv
+      
+      - name: Generate daily study content
+        id: generate
+        run: |
+          python notifications/generate_daily_content.py
+      
+      - name: Send Telegram notification
+        if: env.TELEGRAM_BOT_TOKEN != ''
+        run: |
+          python notifications/telegram_bot.py
+      
+      - name: Send Email notification
+        if: env.SMTP_USER != ''
+        run: |
+          python notifications/email_sender.py
+      
+      - name: Send WeChat notification
+        if: env.WECHAT_CORP_ID != ''
+        run: |
+          python notifications/wechat_push.py
