@@ -1,6 +1,6 @@
-# MLE Interview Prep Platform
+# 🎸 RocktheInterview
 
-🎯 基于 Gap Analysis 的个性化机器学习工程师面试准备平台
+🎯 基于 Gap Analysis 的个性化面试准备平台 - 支持SDE/MLE/PM/DS等多种角色
 
 ## 功能特点
 

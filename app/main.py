@@ -8,8 +8,8 @@ from pathlib import Path
 
 # Page config - must be first Streamlit command
 st.set_page_config(
-    page_title="Interview Prep Platform",
-    page_icon="🎯",
+    page_title="RocktheInterview",
+    page_icon="🎸",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -209,7 +209,7 @@ def render_hero():
     st.markdown("""
     <div style="text-align: center; padding: 2rem 0;">
         <h1 style="font-size: 3.5rem; margin-bottom: 0.5rem;">
-            🎯 Interview Prep Platform
+            🎸 RocktheInterview
         </h1>
         <p style="font-size: 1.25rem; color: #94a3b8; max-width: 600px; margin: 0 auto;">
             基于 Gap Analysis 的个性化面试准备平台 - 支持SDE/MLE/PM/DS等多种角色
