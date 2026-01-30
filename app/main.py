@@ -302,74 +302,103 @@ def main():
         user_email = get_current_user()
         is_guest = st.session_state.get("is_guest", False)
         
+        # Import translation function
+        from components.i18n import t
+        lang = st.session_state.get("language", "zh")
+        
         if is_guest:
-            st.markdown("### 👤 访客模式")
-            st.caption("登录后可保存进度")
+            st.markdown(f"### {t('sidebar_guest', lang)}")
+            st.caption(t("sidebar_guest_hint", lang))
         else:
             st.markdown(f"### 👋 {user_email}")
         
-        if st.button("🚪 退出登录", use_container_width=True):
+        if st.button(t("auth_logout", lang), use_container_width=True):
             logout()
             st.rerun()
         
         st.markdown("---")
-        st.markdown("### 🧭 导航")
+        st.markdown(f"### {t('nav_title', lang)}")
+        
+        # Build navigation options based on language
+        nav_options = [
+            t("nav_home", lang),
+            t("nav_resume", lang),
+            t("nav_target", lang),
+            t("nav_jd", lang),
+            t("nav_analysis", lang),
+            t("nav_plan", lang),
+            t("nav_questions", lang),
+            t("nav_mock", lang),
+            t("nav_jobs", lang),
+            t("nav_resources", lang),
+            t("nav_community", lang),
+            t("nav_profile", lang),
+            t("nav_notifications", lang),
+        ]
         
         page = st.radio(
-            "选择页面",
-            ["🏠 首页", "📄 输入简历", "🎯 选择目标", "📋 输入JD", "📊 Gap分析", "📚 学习计划", "📖 面试题库", "💼 职位匹配", "📝 技术资源", "🔔 通知设置"],
-            label_visibility="collapsed"
+            t("nav_select", lang),
+            nav_options,
+            label_visibility="collapsed",
+            key="nav_selection"
         )
         
         st.markdown("---")
-        st.markdown("### 📊 快速统计")
+        st.markdown(f"### {t('sidebar_stats', lang)}")
         render_stats()
         
         st.markdown("---")
-        st.markdown("""
+        st.markdown(f"""
         <div style="text-align: center; color: #64748b; font-size: 0.8rem;">
-            Made with ❤️ for Job Seekers
+            {t("footer", lang)}
         </div>
         """, unsafe_allow_html=True)
     
-    # Main content based on selected page
-    if page == "🏠 首页":
+    # Get page index for routing
+    from components.i18n import t
+    lang = st.session_state.get("language", "zh")
+    
+    # Map pages by index
+    page_index = nav_options.index(page) if page in nav_options else 0
+    
+    # Main content based on selected page index
+    if page_index == 0:  # Home
         render_hero()
         render_progress_steps()
         
         st.markdown("---")
         
         # Feature cards
-        st.markdown("### ✨ 核心功能")
+        st.markdown(f"### {t('home_features', lang)}")
         
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            st.markdown("""
+            st.markdown(f"""
             <div class="card">
-                <h3>🔍 Gap Analysis</h3>
+                <h3>{t('home_gap_title', lang)}</h3>
                 <p style="color: #94a3b8;">
-                    对比你的简历和目标JD，精准识别需要补齐的技能短板
+                    {t('home_gap_desc', lang)}
                 </p>
             </div>
             """, unsafe_allow_html=True)
         
         with col2:
-            st.markdown("""
+            st.markdown(f"""
             <div class="card">
-                <h3>🏢 公司定制</h3>
+                <h3>{t('home_company_title', lang)}</h3>
                 <p style="color: #94a3b8;">
-                    针对Google/Meta/Amazon等公司的面试结构，定制化准备策略
+                    {t('home_company_desc', lang)}
                 </p>
             </div>
             """, unsafe_allow_html=True)
         
         with col3:
-            st.markdown("""
+            st.markdown(f"""
             <div class="card">
-                <h3>📚 智能计划</h3>
+                <h3>{t('home_plan_title', lang)}</h3>
                 <p style="color: #94a3b8;">
-                    根据面试日期倒推，生成按轮次组织的学习计划
+                    {t('home_plan_desc', lang)}
                 </p>
             </div>
             """, unsafe_allow_html=True)
@@ -377,23 +406,38 @@ def main():
         st.markdown("---")
         
         # Quick start
-        st.markdown("### 🚀 快速开始")
-        if st.button("开始准备面试 →", use_container_width=True):
+        st.markdown(f"### {t('home_quickstart', lang)}")
+        if st.button(t("home_start_btn", lang), use_container_width=True):
+            # Navigate to Resume page (Index 1)
+            st.session_state.nav_selection = nav_options[1]
             st.session_state.current_step = 1
             st.rerun()
     
-    elif page == "📄 输入简历":
-        st.markdown("## 📄 输入你的简历")
-        st.markdown("粘贴你的简历内容，我们将自动提取技能关键词")
+    elif page_index == 1:  # Resume
+        st.markdown(f"## {t('resume_title', lang)}")
+        st.markdown(t("resume_hint", lang))
+        
+        # File uploader
+        uploaded_file = st.file_uploader("📥 Upload Resume (PDF)", type="pdf")
+        
+        if uploaded_file is not None:
+            from components.utils import parse_pdf
+            with st.spinner("Parsing PDF..."):
+                pdf_text = parse_pdf(uploaded_file.getvalue())
+                if pdf_text and not pdf_text.startswith("Error"):
+                     st.session_state.user_profile["resume_text"] = pdf_text
+                     st.success("PDF loaded successfully! You can edit the text below if needed.")
+                else:
+                    st.error(f"Failed to parse PDF: {pdf_text}")
         
         resume_text = st.text_area(
-            "简历内容",
+            t("resume_label", lang),
             value=st.session_state.user_profile.get("resume_text", ""),
             height=400,
-            placeholder="粘贴你的简历内容...\n\n例如:\nSenior Machine Learning Engineer with 5 years of experience...\n\nSkills: PyTorch, TensorFlow, Recommendation Systems..."
+            placeholder=t("resume_placeholder", lang)
         )
         
-        if st.button("提取技能 →", use_container_width=True):
+        if st.button(t("resume_extract_btn", lang), use_container_width=True):
             if resume_text.strip():
                 st.session_state.user_profile["resume_text"] = resume_text
                 # Extract skills (简化版本，使用关键词匹配)
@@ -401,13 +445,13 @@ def main():
                 extracted = extract_skills(resume_text, st.session_state.skills_taxonomy)
                 st.session_state.user_profile["extracted_skills"] = extracted
                 st.session_state.current_step = 2
-                st.success(f"成功提取 {len(extracted)} 个技能!")
+                st.success(t("resume_success", lang).format(len(extracted)))
                 st.rerun()
             else:
-                st.error("请先输入简历内容")
+                st.error(t("resume_error", lang))
     
-    elif page == "🎯 选择目标":
-        st.markdown("## 🎯 选择目标公司和职位")
+    elif page_index == 2:  # Target
+        st.markdown(f"## {t('target_title', lang)}")
         
         companies_data = st.session_state.companies.get("companies", [])
         role_descriptions = st.session_state.companies.get("role_descriptions", {})
@@ -416,7 +460,7 @@ def main():
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            company = st.selectbox("目标公司", company_names)
+            company = st.selectbox(t("target_company", lang), company_names)
         
         # Get selected company data
         selected_company = next((c for c in companies_data if c["name"] == company), None)
@@ -424,66 +468,81 @@ def main():
         with col2:
             # Get available roles for selected company
             available_roles = list(selected_company.get("roles", {}).keys()) if selected_company else []
-            role = st.selectbox("目标角色", available_roles, 
+            role = st.selectbox(t("target_role", lang), available_roles, 
                               format_func=lambda x: f"{x} - {role_descriptions.get(x, x)}")
         
         with col3:
             # Get levels for selected role
             role_data = selected_company.get("roles", {}).get(role, {}) if selected_company else {}
             levels = role_data.get("levels", [])
-            level = st.selectbox("目标级别", levels)
+            level = st.selectbox(t("target_level", lang), levels)
         
         if selected_company and role and role_data:
-            st.markdown("### 📋 面试结构")
+            st.markdown(f"### {t('target_rounds', lang)}")
             for round_info in role_data.get("interview_rounds", []):
+                focus_text = ', '.join(round_info['focus'])
                 st.markdown(f"""
                 <div class="card">
                     <strong>Round {round_info['round']}: {round_info['name']}</strong>
                     <br>
                     <span style="color: #94a3b8;">
-                        ⏱️ {round_info['duration_min']}分钟 | 
-                        🎯 {', '.join(round_info['focus'])}
+                        ⏱️ {round_info['duration_min']} {t('target_duration', lang)} | 
+                        🎯 {focus_text}
                     </span>
                 </div>
                 """, unsafe_allow_html=True)
         
-        if st.button("确认目标 →", use_container_width=True):
+        if st.button(t("target_confirm_btn", lang), use_container_width=True):
             st.session_state.target["company"] = company
             st.session_state.target["role"] = role
             st.session_state.target["level"] = level
             st.session_state.current_step = 3
             st.rerun()
     
-    elif page == "📋 输入JD":
-        st.markdown("## 📋 输入职位描述 (JD)")
+    elif page_index == 3:  # JD
+        st.markdown(f"## {t('jd_title', lang)}")
+        
+        # URL Input
+        jd_url = st.text_input("🔗 Import from URL", placeholder="https://www.linkedin.com/jobs/...")
+        
+        if st.button("Fetch URL"):
+            if jd_url:
+                from components.utils import fetch_url_content
+                with st.spinner("Fetching content..."):
+                    fetched_text = fetch_url_content(jd_url)
+                    if not fetched_text.startswith("Error"):
+                        st.session_state.target["jd_text"] = fetched_text
+                        st.success("Content fetched successfully!")
+                    else:
+                        st.error(fetched_text)
         
         jd_text = st.text_area(
-            "JD内容",
+            t("jd_label", lang),
             value=st.session_state.target.get("jd_text", ""),
             height=400,
-            placeholder="粘贴职位描述...\n\n例如:\nWe are looking for a Machine Learning Engineer to join our team...\n\nRequirements:\n- 3+ years of experience in ML\n- Experience with PyTorch or TensorFlow..."
+            placeholder=t("jd_placeholder", lang)
         )
         
-        if st.button("分析JD →", use_container_width=True):
+        if st.button(t("jd_analyze_btn", lang), use_container_width=True):
             if jd_text.strip():
                 st.session_state.target["jd_text"] = jd_text
                 from components.skill_extractor import extract_skills
                 jd_skills = extract_skills(jd_text, st.session_state.skills_taxonomy)
                 st.session_state.target["jd_skills"] = jd_skills
                 st.session_state.current_step = 4
-                st.success(f"从JD中提取 {len(jd_skills)} 个技能要求!")
+                st.success(t("jd_success", lang).format(len(jd_skills)))
                 st.rerun()
             else:
-                st.error("请先输入JD内容")
+                st.error(t("jd_error", lang))
     
-    elif page == "📊 Gap分析":
-        st.markdown("## 📊 Gap Analysis")
+    elif page_index == 4:  # Gap Analysis
+        st.markdown(f"## {t('analysis_title', lang)}")
         
         resume_skills = set(st.session_state.user_profile.get("extracted_skills", []))
         jd_skills = set(st.session_state.target.get("jd_skills", []))
         
         if not resume_skills or not jd_skills:
-            st.warning("请先完成简历和JD的输入")
+            st.warning(t("analysis_warning", lang))
         else:
             gaps = jd_skills - resume_skills
             strengths = resume_skills & jd_skills
@@ -495,83 +554,94 @@ def main():
             col1, col2, col3 = st.columns(3)
             
             with col1:
-                st.markdown("### 🔴 需要补齐")
+                st.markdown(f"### {t('analysis_gaps', lang)}")
                 for skill in sorted(gaps):
                     st.markdown(f"- {skill}")
             
             with col2:
-                st.markdown("### 🟢 已具备")
+                st.markdown(f"### {t('analysis_strengths', lang)}")
                 for skill in sorted(strengths):
                     st.markdown(f"- ✅ {skill}")
             
             with col3:
-                st.markdown("### 🔵 额外技能")
+                st.markdown(f"### {t('analysis_extra', lang)}")
                 for skill in sorted(extra):
                     st.markdown(f"- {skill}")
             
-            if st.button("生成学习计划 →", use_container_width=True):
+            if st.button(t("analysis_generate_btn", lang), use_container_width=True):
                 st.session_state.current_step = 5
                 st.rerun()
     
-    elif page == "📚 学习计划":
-        st.markdown("## 📚 个性化学习计划")
+    elif page_index == 5:  # Study Plan
+        st.markdown(f"## {t('plan_title', lang)}")
         
         gaps = st.session_state.analysis.get("gaps", [])
-        company = st.session_state.target.get("company")
         
         if not gaps:
-            st.info("你没有明显的技能Gap，可以专注于面试模拟练习！")
+            st.info(t("plan_no_gaps", lang))
         else:
             # Generate study plan
-            st.markdown("### 📅 学习阶段")
+            st.markdown(f"### {t('plan_phases', lang)}")
             
             # Phase 1: Gap filling
-            with st.expander("📖 阶段1: 技能补齐 (1-2周)", expanded=True):
+            with st.expander(t("plan_phase1", lang), expanded=True):
                 for i, skill in enumerate(gaps):
                     col1, col2 = st.columns([3, 1])
                     with col1:
-                        st.checkbox(f"学习: {skill}", key=f"gap_{i}")
+                        st.checkbox(t("plan_learn", lang).format(skill), key=f"gap_{i}")
                     with col2:
-                        st.markdown(f"[搜索资料](https://www.google.com/search?q={skill}+tutorial)")
+                        st.markdown(f"[{t('plan_search', lang)}](https://www.google.com/search?q={skill}+tutorial)")
             
             # Phase 2: Coding
-            with st.expander("💻 阶段2: Coding练习 (1-2周)"):
+            with st.expander(t("plan_phase2", lang)):
                 st.markdown("""
-                - [ ] LeetCode Medium x 50题
-                - [ ] LeetCode Hard x 20题  
-                - [ ] 公司Tag题目练习
+                - [ ] LeetCode Medium x 50
+                - [ ] LeetCode Hard x 20  
+                - [ ] Company Tagged Questions
                 """)
             
             # Phase 3: System Design
-            with st.expander("🏗️ 阶段3: ML System Design (1周)"):
+            with st.expander(t("plan_phase3", lang)):
                 st.markdown("""
-                - [ ] 推荐系统设计
-                - [ ] 搜索排序系统
-                - [ ] 广告系统设计
-                - [ ] 内容审核系统
+                - [ ] Recommendation System Design
+                - [ ] Search & Ranking System
+                - [ ] Ad System Design
+                - [ ] Content Moderation System
                 """)
             
             # Phase 4: Behavioral
-            with st.expander("🗣️ 阶段4: Behavioral准备 (3-5天)"):
+            with st.expander(t("plan_phase4", lang)):
                 st.markdown("""
-                - [ ] 准备STAR故事 x 10
-                - [ ] 简历项目深挖准备
-                - [ ] 模拟面试练习
+                - [ ] STAR Stories x 10
+                - [ ] Resume Deep Dive
+                - [ ] Mock Interviews
                 """)
     
-    elif page == "📖 面试题库":
+    elif page_index == 6:  # Interview Questions
         from components.interview_questions import render_interview_questions
         render_interview_questions()
     
-    elif page == "💼 职位匹配":
+    elif page_index == 7:  # Mock Interview
+        from components.mock_interview import render_mock_interview
+        render_mock_interview()
+    
+    elif page_index == 8:  # Job Match
         from components.job_matching import render_job_matching
         render_job_matching()
     
-    elif page == "📝 技术资源":
+    elif page_index == 9:  # Resources
         from components.tech_resources import render_tech_resources
         render_tech_resources()
     
-    elif page == "🔔 通知设置":
+    elif page_index == 10:  # Community
+        from components.community_qa import render_community_qa
+        render_community_qa()
+    
+    elif page_index == 11:  # Profile
+        from components.user_profile import render_user_profile
+        render_user_profile()
+    
+    elif page_index == 12:  # Notifications
         from components.notification_settings import render_notification_settings
         render_notification_settings()
 

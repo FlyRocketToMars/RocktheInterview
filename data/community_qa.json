@@ -1,0 +1,76 @@
+{
+    "questions": [
+        {
+            "id": "demo_q1",
+            "title": "Google L5 系统设计面试：设计一个推荐系统，应该从哪些方面展开？",
+            "content": "我下周有Google L5的面试，系统设计环节可能会问推荐系统。我知道基本架构，但不确定面试时应该怎么展开讲，重点说什么？请问有经验的大佬能分享一下吗？",
+            "author": "面试小白",
+            "category": "system_design",
+            "tags": [
+                "Google",
+                "推荐系统",
+                "系统设计",
+                "L5"
+            ],
+            "created_at": "2026-01-29T10:00:00",
+            "views": 128,
+            "upvotes": 15,
+            "downvotes": 0,
+            "status": "answered",
+            "ai_answer": {
+                "id": "ai_answer",
+                "content": "## 推荐系统设计面试框架\n\n### 1️⃣ 需求澄清 (5分钟)\n- **用户规模**: DAU 多少？\n- **推荐场景**: 首页推荐？搜索后推荐？\n- **实时性要求**: 实时个性化 vs 预计算\n- **核心指标**: CTR? 用户停留时间?\n\n### 2️⃣ 高层架构 (10分钟)\n```\n用户请求 → API Gateway → 召回层 → 排序层 → 重排序 → 返回\n                ↓\n            用户特征服务 ← Feature Store\n```\n\n### 3️⃣ 召回层设计\n- **协同过滤**: User-CF, Item-CF\n- **Embedding召回**: 双塔模型\n- **热门/新品召回**: 多路召回融合\n\n### 4️⃣ 排序层设计\n- **模型选择**: Wide&Deep, DeepFM, DIN\n- **特征工程**: 用户特征、物品特征、交叉特征\n- **实时特征**: 最近点击、会话信息\n\n### 5️⃣ 工程挑战\n- **低延迟**: P99 < 100ms\n- **高并发**: 分布式缓存\n- **冷启动**: 利用内容特征\n\n**面试技巧**: 先画大图，再深入你最熟悉的模块！",
+                "author": "🤖 AI 助手",
+                "is_ai": true,
+                "created_at": "2026-01-29T10:00:01",
+                "upvotes": 23,
+                "downvotes": 2,
+                "is_accepted": false
+            },
+            "answers": [
+                {
+                    "id": "ans_1",
+                    "content": "我刚面完 Google L5，补充几点经验：\n\n1. **一定要画图**，白板/屏幕共享画清楚架构\n2. **问清楚约束条件**，比如预算、延迟要求\n3. **主动提 trade-off**，比如实时性 vs 准确性\n4. **准备好 deep dive**，面试官可能会深入问某个模块\n\n祝你顺利！",
+                    "author": "Google_ML_er",
+                    "is_ai": false,
+                    "created_at": "2026-01-29T11:30:00",
+                    "upvotes": 18,
+                    "downvotes": 0,
+                    "is_accepted": true
+                }
+            ]
+        },
+        {
+            "id": "demo_q2",
+            "title": "Transformer 的 Self-Attention 时间复杂度是多少？为什么？",
+            "content": "面试被问到这个问题，我回答了 O(n²d)，但面试官追问为什么是这个复杂度，我解释得不太清楚。请问应该怎么解释？",
+            "author": "ML新手",
+            "category": "ml_theory",
+            "tags": [
+                "Transformer",
+                "Attention",
+                "复杂度"
+            ],
+            "created_at": "2026-01-28T14:00:00",
+            "views": 256,
+            "upvotes": 32,
+            "downvotes": 1,
+            "status": "answered",
+            "ai_answer": {
+                "id": "ai_answer",
+                "content": "## Self-Attention 复杂度分析\n\n### 时间复杂度：O(n²d)\n\n其中 n = 序列长度，d = embedding 维度\n\n### 计算步骤分解\n\n```python\n# 1. Q, K, V 线性变换: O(nd²) 或 O(nd·d_k)\nQ = X @ W_Q  # (n, d) @ (d, d_k) = (n, d_k)\nK = X @ W_K\nV = X @ W_V\n\n# 2. Attention Score: O(n²d_k)\nscores = Q @ K.T  # (n, d_k) @ (d_k, n) = (n, n)\n\n# 3. Softmax: O(n²)\nattn = softmax(scores / sqrt(d_k))\n\n# 4. Value 加权: O(n²d_k)\noutput = attn @ V  # (n, n) @ (n, d_k) = (n, d_k)\n```\n\n### 为什么是 n²？\n**每个 token 都要和所有其他 token 计算注意力权重**\n\n这就是为什么长序列处理很慢，也是 Sparse Attention、Linear Attention 研究的动机。\n\n### 面试回答要点\n1. 明确说出 O(n²d)\n2. 解释 n² 来自 Q·K^T 矩阵乘法\n3. 提及这是 Transformer 的瓶颈\n4. 可以扩展讲 Flash Attention 等优化",
+                "author": "🤖 AI 助手",
+                "is_ai": true,
+                "created_at": "2026-01-28T14:00:01",
+                "upvotes": 45,
+                "downvotes": 0,
+                "is_accepted": false
+            },
+            "answers": []
+        }
+    ],
+    "stats": {
+        "total_questions": 2,
+        "total_answers": 1
+    }
+}

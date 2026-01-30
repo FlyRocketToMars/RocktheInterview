@@ -4,10 +4,11 @@
         "last_updated": "2026-01-30",
         "total_questions": 30,
         "sources": [
-            "Curated",
-            "Chip Huyen ML Interviews",
-            "Real Interview Experience"
-        ]
+            "Community Contributed (Mock Data)",
+            "Aggregated from Public Boards (Glassdoor, etc.)",
+            "Educational Resources"
+        ],
+        "disclaimer": "All questions are mock data for educational purposes only. Not actual confidential interview questions."
     },
     "categories": {
         "rounds": [
@@ -685,7 +686,7 @@
             "company": "Meta",
             "role": "MLE",
             "level": "L5/E5",
-            "round": "ml_theory",
+            "round": "ml_system_design",
             "domain": "mlops",
             "question": "How would you monitor an ML model in production? What metrics would you track?",
             "answer": "**Monitoring Layers**:\n\n**1. Infrastructure Metrics**:\n- Latency (p50, p95, p99)\n- Throughput (QPS)\n- Error rates\n- Resource usage (CPU, GPU, memory)\n\n**2. Data Quality**:\n- Schema drift\n- Feature distribution shift\n- Missing values, outliers\n- Volume changes\n\n**3. Model Performance**:\n- Prediction distribution shift\n- Confidence calibration\n- Business metrics (CTR, revenue)\n- A/B test metrics\n\n**4. Alerting Strategy**:\n- Statistical tests (KS, PSI)\n- Thresholds + anomaly detection\n- Tiered alerts (warning → critical)\n\n**Tools**: Evidently, WhyLabs, custom dashboards (Grafana)\n\n**Response**: Automated rollback, retraining triggers",
@@ -714,7 +715,7 @@
             "level": "L6/E6",
             "round": "ml_theory",
             "domain": "llm",
-            "question": "Explain RLHF (Reinforcement Learning from Human Feedback). Why is it important for LLMs?",
+            "question": "Explain RLHF (Reinforcement Learning from Human Feedback). Why is it important for LLMs? (Source: Public Concepts)",
             "answer": "**RLHF Pipeline**:\n\n**1. Supervised Fine-Tuning (SFT)**:\n- Train on demonstration data\n- Human-written examples\n\n**2. Reward Model Training**:\n- Collect comparison data (A vs B)\n- Train model to predict human preference\n- Bradley-Terry model for ranking\n\n**3. RL Optimization (PPO)**:\n- Optimize policy against reward model\n- KL penalty to stay close to SFT\n- Prevents reward hacking\n\n**Why Important**:\n- Aligns model with human values\n- Reduces harmful outputs\n- Improves instruction following\n- Can't be achieved with SFT alone\n\n**Alternatives**: DPO (Direct Preference Optimization) - simpler, no RL",
             "follow_ups": [
                 "What's reward hacking?",
