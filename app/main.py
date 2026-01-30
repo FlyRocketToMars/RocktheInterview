@@ -317,7 +317,7 @@ def main():
         
         page = st.radio(
             "选择页面",
-            ["🏠 首页", "📄 输入简历", "🎯 选择目标", "📋 输入JD", "📊 Gap分析", "📚 学习计划"],
+            ["🏠 首页", "📄 输入简历", "🎯 选择目标", "📋 输入JD", "📊 Gap分析", "📚 学习计划", "📖 面试题库", "💼 职位匹配", "📝 技术资源", "🔔 通知设置"],
             label_visibility="collapsed"
         )
         
@@ -558,6 +558,22 @@ def main():
                 - [ ] 简历项目深挖准备
                 - [ ] 模拟面试练习
                 """)
+    
+    elif page == "📖 面试题库":
+        from components.interview_questions import render_interview_questions
+        render_interview_questions()
+    
+    elif page == "💼 职位匹配":
+        from components.job_matching import render_job_matching
+        render_job_matching()
+    
+    elif page == "📝 技术资源":
+        from components.tech_resources import render_tech_resources
+        render_tech_resources()
+    
+    elif page == "🔔 通知设置":
+        from components.notification_settings import render_notification_settings
+        render_notification_settings()
 
 
 if __name__ == "__main__":

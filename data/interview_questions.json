@@ -1,0 +1,879 @@
+{
+    "metadata": {
+        "version": "2.0",
+        "last_updated": "2026-01-30",
+        "total_questions": 30,
+        "sources": [
+            "Curated",
+            "Chip Huyen ML Interviews",
+            "Real Interview Experience"
+        ]
+    },
+    "categories": {
+        "rounds": [
+            "phone_screen",
+            "coding",
+            "ml_coding",
+            "ml_theory",
+            "ml_system_design",
+            "system_design",
+            "behavioral"
+        ],
+        "domains": [
+            "fundamentals",
+            "deep_learning",
+            "nlp",
+            "cv",
+            "recsys",
+            "ranking",
+            "llm",
+            "mlops",
+            "experimentation"
+        ],
+        "levels": [
+            "L3/E3",
+            "L4/E4",
+            "L5/E5",
+            "L6/E6",
+            "L7/Staff"
+        ]
+    },
+    "questions": [
+        {
+            "id": "ml_fund_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_theory",
+            "domain": "fundamentals",
+            "question": "Explain the bias-variance tradeoff. How would you diagnose whether a model is suffering from high bias or high variance?",
+            "answer": "**Bias**: Error from wrong assumptions (underfitting). **Variance**: Error from sensitivity to training data (overfitting).\n\n**Diagnosis**:\n- High Bias: Low training accuracy, similar train/test error\n- High Variance: High training accuracy, large train/test gap\n\n**Solutions**:\n- High Bias: More features, complex model, less regularization\n- High Variance: More data, regularization, simpler model, ensemble",
+            "follow_ups": [
+                "How does ensemble learning address bias-variance?",
+                "Draw the bias-variance curve"
+            ],
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "bias-variance",
+                "overfitting",
+                "underfitting"
+            ],
+            "common_mistakes": [
+                "Confusing bias with variance",
+                "Not mentioning training vs test error comparison"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_fund_002",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_theory",
+            "domain": "fundamentals",
+            "question": "What is regularization? Compare L1 and L2 regularization.",
+            "answer": "**Regularization**: Technique to prevent overfitting by adding penalty to loss function.\n\n**L1 (Lasso)**:\n- Penalty: λ∑|w|\n- Effect: Sparse weights (feature selection)\n- Use: When you want automatic feature selection\n\n**L2 (Ridge)**:\n- Penalty: λ∑w²\n- Effect: Small weights (weight decay)\n- Use: When all features are potentially useful\n\n**Elastic Net**: Combination of L1 + L2",
+            "follow_ups": [
+                "Why does L1 produce sparse solutions?",
+                "How to choose λ?"
+            ],
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "regularization",
+                "L1",
+                "L2",
+                "overfitting"
+            ],
+            "common_mistakes": [
+                "Not explaining the geometric intuition",
+                "Forgetting Elastic Net"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_fund_003",
+            "company": "Amazon",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "fundamentals",
+            "question": "How would you handle class imbalance in a fraud detection problem where only 0.1% of transactions are fraudulent?",
+            "answer": "**Data Level**:\n- Oversampling: SMOTE, ADASYN\n- Undersampling: Random, Tomek Links\n- Data augmentation\n\n**Algorithm Level**:\n- Class weights (cost-sensitive learning)\n- Focal Loss\n- Anomaly detection approach\n\n**Evaluation**:\n- Use Precision-Recall curve, not ROC\n- F1, F2 scores\n- Consider business cost matrix\n\n**Threshold Tuning**: Adjust classification threshold based on business needs",
+            "follow_ups": [
+                "Why not use accuracy?",
+                "How does SMOTE work?",
+                "What's Focal Loss?"
+            ],
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "imbalanced-data",
+                "fraud-detection",
+                "sampling"
+            ],
+            "common_mistakes": [
+                "Using accuracy as metric",
+                "Not considering business cost"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_fund_004",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_theory",
+            "domain": "fundamentals",
+            "question": "Explain cross-validation. When would you use k-fold vs stratified k-fold?",
+            "answer": "**Cross-validation**: Technique to evaluate model by splitting data into k folds, training on k-1, validating on 1, repeating k times.\n\n**K-Fold**: Random splits, good for large balanced datasets\n\n**Stratified K-Fold**: Preserves class distribution in each fold. Use when:\n- Imbalanced classes\n- Small datasets\n- Classification tasks\n\n**Time Series**: Use TimeSeriesSplit (no future data leakage)\n\n**Leave-One-Out**: k=n, computationally expensive, high variance",
+            "follow_ups": [
+                "What k value should you choose?",
+                "What about nested cross-validation?"
+            ],
+            "difficulty": "easy",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "cross-validation",
+                "model-selection"
+            ],
+            "common_mistakes": [
+                "Data leakage in time series",
+                "Not stratifying for imbalanced data"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "dl_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "deep_learning",
+            "question": "Explain the Transformer architecture. Why is self-attention important?",
+            "answer": "**Transformer Components**:\n1. **Self-Attention**: Computes relationships between all positions\n2. **Multi-Head Attention**: Parallel attention with different projections\n3. **Feed-Forward**: Position-wise MLP\n4. **Positional Encoding**: Injects position information\n5. **Layer Norm + Residual Connections**\n\n**Self-Attention Importance**:\n- Captures long-range dependencies (vs RNN's sequential processing)\n- Parallelizable (faster training)\n- Attention weights are interpretable\n\n**Attention Formula**: Attention(Q,K,V) = softmax(QK^T/√d)V",
+            "follow_ups": [
+                "Why divide by √d?",
+                "Compare to RNN/LSTM",
+                "What's the complexity?"
+            ],
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "transformer",
+                "attention",
+                "deep-learning"
+            ],
+            "common_mistakes": [
+                "Forgetting positional encoding",
+                "Not explaining the scaling factor"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "dl_002",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "deep_learning",
+            "question": "Compare BatchNorm and LayerNorm. When would you use each?",
+            "answer": "**BatchNorm**:\n- Normalizes across batch dimension\n- Statistics: mean/var per feature across batch\n- Use: CNNs, large batch sizes\n- Issue: Batch size dependency, different train/test behavior\n\n**LayerNorm**:\n- Normalizes across feature dimension\n- Statistics: mean/var per sample\n- Use: Transformers, RNNs, small batch sizes\n- Advantage: Batch-size independent\n\n**Key Insight**: LayerNorm in Transformers because sequence length varies and batch statistics are unstable.",
+            "follow_ups": [
+                "What about GroupNorm and InstanceNorm?",
+                "Why does BatchNorm act as regularization?"
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "normalization",
+                "batchnorm",
+                "layernorm"
+            ],
+            "common_mistakes": [
+                "Confusing normalization dimensions",
+                "Forgetting train/test behavior difference"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "dl_003",
+            "company": "ByteDance",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_theory",
+            "domain": "deep_learning",
+            "question": "What is gradient vanishing/exploding? How do you address them?",
+            "answer": "**Vanishing Gradients**: Gradients become very small in deep networks, early layers don't learn.\n\n**Exploding Gradients**: Gradients become very large, unstable training.\n\n**Solutions**:\n1. **Architecture**: Skip connections (ResNet), LSTM gates\n2. **Initialization**: Xavier/Glorot, He initialization\n3. **Normalization**: BatchNorm, LayerNorm\n4. **Activation**: ReLU (vs sigmoid/tanh)\n5. **Gradient Clipping**: Cap gradient magnitude\n6. **Learning Rate**: Adaptive optimizers (Adam)",
+            "follow_ups": [
+                "Why does ReLU help?",
+                "Explain skip connections"
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "vanishing-gradient",
+                "training",
+                "initialization"
+            ],
+            "common_mistakes": [
+                "Not mentioning multiple solutions",
+                "Forgetting architectural fixes"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "recsys",
+            "question": "Design YouTube's video recommendation system.",
+            "answer": "**Two-Stage Architecture**:\n\n**1. Candidate Generation** (Millions → Hundreds)\n- Content-based: Video embeddings similarity\n- Collaborative Filtering: User-item matrix\n- Two-Tower Model: User tower + Video tower\n\n**2. Ranking** (Hundreds → Tens)\n- Deep neural network\n- Features: User history, video features, context\n- Multi-task: CTR, watch time, engagement\n\n**Key Components**:\n- Feature Store for real-time features\n- Embedding index (FAISS/ScaNN)\n- A/B testing framework\n- Freshness: Balance explore/exploit\n\n**Metrics**: Watch time, CTR, user retention",
+            "follow_ups": [
+                "How to handle cold start?",
+                "How to balance diversity?",
+                "Explain two-tower architecture"
+            ],
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "recommendation",
+                "system-design",
+                "two-tower"
+            ],
+            "common_mistakes": [
+                "Missing two-stage approach",
+                "Forgetting cold start",
+                "Not discussing offline vs online"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_002",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "ranking",
+            "question": "Design Facebook's News Feed ranking system.",
+            "answer": "**Problem**: Rank posts for each user from thousands of candidates.\n\n**Architecture**:\n1. **Candidate Selection**: Follow graph, interest groups\n2. **Feature Engineering**:\n   - User: Demographics, history, interests\n   - Post: Content, author, engagement\n   - Context: Time, device\n3. **Ranking Model**: Deep learning with multi-task heads\n   - P(like), P(comment), P(share), P(hide)\n4. **Business Rules**: Diversity, freshness, creator fairness\n\n**Serving**:\n- Pre-compute heavy features\n- Real-time lightweight ranking\n- Cache optimization\n\n**Metrics**: Engagement, time spent, user satisfaction surveys",
+            "follow_ups": [
+                "How to handle filter bubbles?",
+                "How to A/B test?",
+                "What about real-time updates?"
+            ],
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "ranking",
+                "feed",
+                "system-design"
+            ],
+            "common_mistakes": [
+                "Missing multi-objective optimization",
+                "Forgetting integrity/safety"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_003",
+            "company": "Amazon",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "ranking",
+            "question": "Design an ad click prediction system.",
+            "answer": "**Problem**: Predict P(click) for ads, optimize revenue.\n\n**Data**:\n- User: Demographics, browsing history, purchase history\n- Ad: Creative, advertiser, category, bid\n- Context: Page, position, time\n\n**Model Pipeline**:\n1. **Feature Engineering**: Cross features, embeddings\n2. **Model**: Wide & Deep, DCN, or DeepFM\n3. **Calibration**: Platt scaling for probability\n\n**Serving Architecture**:\n- Feature Store (offline + real-time)\n- Model serving with low latency (<50ms)\n- Auction mechanism (second-price)\n\n**Metrics**: AUC, log-loss, revenue, advertiser ROI\n\n**Challenges**: Position bias, selection bias, cold start ads",
+            "follow_ups": [
+                "How to handle position bias?",
+                "What's calibration?",
+                "Compare Wide&Deep vs DCN"
+            ],
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "ads",
+                "ctr",
+                "ranking",
+                "system-design"
+            ],
+            "common_mistakes": [
+                "Forgetting calibration",
+                "Missing auction design"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "llm_001",
+            "company": "OpenAI",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "llm",
+            "question": "Design a RAG (Retrieval-Augmented Generation) system for enterprise Q&A.",
+            "answer": "**Architecture**:\n\n**1. Ingestion Pipeline**:\n- Document parsing (PDF, HTML, etc.)\n- Chunking strategy (fixed, semantic, hierarchical)\n- Embedding generation (e5, ada-002)\n- Vector DB storage (Pinecone, Weaviate, Milvus)\n\n**2. Retrieval**:\n- Query embedding\n- Hybrid search: Dense + Sparse (BM25)\n- Re-ranking (cross-encoder)\n- Top-k selection\n\n**3. Generation**:\n- Context construction\n- Prompt engineering\n- LLM inference (GPT-4, Claude)\n- Citation/grounding\n\n**Key Challenges**:\n- Chunking granularity\n- Context window limits\n- Hallucination detection\n- Latency optimization",
+            "follow_ups": [
+                "How to chunk documents?",
+                "How to handle multi-hop questions?",
+                "How to evaluate RAG?"
+            ],
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "rag",
+                "llm",
+                "vector-db",
+                "system-design"
+            ],
+            "common_mistakes": [
+                "Missing hybrid search",
+                "Ignoring chunking strategy"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "llm_002",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "llm",
+            "question": "Compare fine-tuning vs prompting for adapting LLMs. When would you use each?",
+            "answer": "**Prompting (In-Context Learning)**:\n- No training required\n- Fast iteration\n- Limited by context window\n- Good for: General tasks, quick prototypes\n\n**Fine-tuning**:\n- Requires labeled data\n- Better task performance\n- Expensive (compute + data)\n- Good for: Specialized domains, style adaptation\n\n**PEFT Methods** (Parameter-Efficient Fine-Tuning):\n- LoRA: Low-rank adaptation\n- Prefix Tuning: Learnable prefixes\n- Adapter: Small bottleneck layers\n\n**Decision Framework**:\n- Small data → Prompting + Few-shot\n- Medium data → PEFT\n- Large data + specialized → Full fine-tuning",
+            "follow_ups": [
+                "Explain LoRA",
+                "What's instruction tuning?",
+                "How to evaluate?"
+            ],
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "llm",
+                "fine-tuning",
+                "prompting",
+                "lora"
+            ],
+            "common_mistakes": [
+                "Not mentioning PEFT methods",
+                "Forgetting data requirements"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "exp_001",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "experimentation",
+            "question": "Design an A/B test for a new ML ranking model. What metrics would you track?",
+            "answer": "**Experiment Design**:\n1. **Hypothesis**: New model improves engagement\n2. **Randomization**: User-level, stratified by segments\n3. **Sample Size**: Power analysis (80% power, 5% significance)\n4. **Duration**: Account for novelty effect, weekly patterns\n\n**Metrics**:\n- **Primary**: Target metric (e.g., CTR, time spent)\n- **Guardrails**: Latency, revenue, user complaints\n- **Secondary**: Supporting metrics (sessions, retention)\n\n**Analysis**:\n- Statistical significance (t-test, Mann-Whitney)\n- Confidence intervals\n- Segment analysis\n- Long-term holdout\n\n**Pitfalls**: Network effects, multiple testing, novelty effect",
+            "follow_ups": [
+                "How to handle network effects?",
+                "What if metrics conflict?",
+                "Explain power analysis"
+            ],
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "ab-testing",
+                "experimentation",
+                "statistics"
+            ],
+            "common_mistakes": [
+                "Missing guardrail metrics",
+                "Ignoring novelty effect"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "coding_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_coding",
+            "domain": "fundamentals",
+            "question": "Implement Logistic Regression from scratch using gradient descent.",
+            "answer": "```python\nimport numpy as np\n\nclass LogisticRegression:\n    def __init__(self, lr=0.01, n_iters=1000):\n        self.lr = lr\n        self.n_iters = n_iters\n        self.weights = None\n        self.bias = None\n    \n    def sigmoid(self, z):\n        return 1 / (1 + np.exp(-np.clip(z, -500, 500)))\n    \n    def fit(self, X, y):\n        n_samples, n_features = X.shape\n        self.weights = np.zeros(n_features)\n        self.bias = 0\n        \n        for _ in range(self.n_iters):\n            linear = np.dot(X, self.weights) + self.bias\n            predictions = self.sigmoid(linear)\n            \n            dw = (1/n_samples) * np.dot(X.T, (predictions - y))\n            db = (1/n_samples) * np.sum(predictions - y)\n            \n            self.weights -= self.lr * dw\n            self.bias -= self.lr * db\n    \n    def predict(self, X):\n        linear = np.dot(X, self.weights) + self.bias\n        return (self.sigmoid(linear) >= 0.5).astype(int)\n```",
+            "follow_ups": [
+                "Add L2 regularization",
+                "Derive the gradient",
+                "Handle numerical stability"
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "coding",
+                "logistic-regression",
+                "gradient-descent"
+            ],
+            "common_mistakes": [
+                "Numerical overflow in sigmoid",
+                "Wrong gradient formula"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "coding_002",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_coding",
+            "domain": "fundamentals",
+            "question": "Implement K-Means clustering from scratch.",
+            "answer": "```python\nimport numpy as np\n\nclass KMeans:\n    def __init__(self, n_clusters=3, max_iters=100):\n        self.n_clusters = n_clusters\n        self.max_iters = max_iters\n        self.centroids = None\n    \n    def fit(self, X):\n        # Random initialization\n        idx = np.random.choice(len(X), self.n_clusters, replace=False)\n        self.centroids = X[idx]\n        \n        for _ in range(self.max_iters):\n            # Assign clusters\n            labels = self._assign_clusters(X)\n            \n            # Update centroids\n            new_centroids = np.array([X[labels == k].mean(axis=0) \n                                       for k in range(self.n_clusters)])\n            \n            # Check convergence\n            if np.allclose(self.centroids, new_centroids):\n                break\n            self.centroids = new_centroids\n        \n        return labels\n    \n    def _assign_clusters(self, X):\n        distances = np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)\n        return np.argmin(distances, axis=1)\n```",
+            "follow_ups": [
+                "What's K-Means++?",
+                "How to choose K?",
+                "Complexity analysis"
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "coding",
+                "kmeans",
+                "clustering"
+            ],
+            "common_mistakes": [
+                "Not handling empty clusters",
+                "Poor initialization"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "bq_001",
+            "company": "Amazon",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "behavioral",
+            "domain": "fundamentals",
+            "question": "Tell me about a time when you had to make a decision with incomplete data. (LP: Bias for Action)",
+            "answer": "**STAR Format**:\n\n**Situation**: Needed to decide on model architecture for a time-sensitive launch. Couldn't run full experiments.\n\n**Task**: Make informed decision quickly while managing risk.\n\n**Action**:\n1. Identified key unknowns and their potential impact\n2. Ran quick proof-of-concept on representative subset\n3. Made decision with rollback plan\n4. Set up monitoring for early detection of issues\n\n**Result**: Launched on time, model performed within 5% of expected. Later experiments validated the decision.\n\n**Learnings**: Speed vs accuracy tradeoff, importance of reversible decisions.",
+            "follow_ups": [
+                "What would you do differently?",
+                "How did you communicate uncertainty?"
+            ],
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "behavioral",
+                "leadership-principles",
+                "decision-making"
+            ],
+            "common_mistakes": [
+                "Not using STAR format",
+                "Missing concrete numbers"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "bq_002",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "behavioral",
+            "domain": "fundamentals",
+            "question": "Describe a project where you had to influence without authority.",
+            "answer": "**STAR Format**:\n\n**Situation**: Proposed a new feature store architecture that required buy-in from 3 different teams.\n\n**Task**: Get alignment without direct authority over those teams.\n\n**Action**:\n1. Built a prototype demonstrating value (data-driven)\n2. Identified champions in each team\n3. Addressed concerns individually before group meeting\n4. Showed cost savings and efficiency gains with metrics\n5. Offered to lead migration effort\n\n**Result**: Got approval, led cross-functional implementation. Reduced feature engineering time by 40%.\n\n**Learnings**: Empathy, finding shared goals, showing value early.",
+            "follow_ups": [
+                "How did you handle resistance?",
+                "What if you couldn't get buy-in?"
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "behavioral",
+                "leadership",
+                "influence"
+            ],
+            "common_mistakes": [
+                "Not showing concrete impact",
+                "Missing stakeholder analysis"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nlp_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "nlp",
+            "question": "Explain BERT architecture. How does it differ from GPT?",
+            "answer": "**BERT (Bidirectional Encoder Representations from Transformers)**:\n- Encoder-only architecture\n- Bidirectional context (sees left and right)\n- Pre-training: MLM (Masked Language Modeling) + NSP\n- Use: Classification, NER, QA\n\n**GPT (Generative Pre-trained Transformer)**:\n- Decoder-only architecture\n- Unidirectional (left-to-right)\n- Pre-training: Causal LM (next token prediction)\n- Use: Text generation, completion\n\n**Key Differences**:\n| | BERT | GPT |\n|---|---|---|\n| Direction | Bi | Uni |\n| Task | Understanding | Generation |\n| Attention | Full | Causal mask |",
+            "follow_ups": [
+                "What's RoBERTa?",
+                "Explain MLM vs CLM",
+                "When to use which?"
+            ],
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "nlp",
+                "bert",
+                "gpt",
+                "transformer"
+            ],
+            "common_mistakes": [
+                "Confusing encoder/decoder",
+                "Not explaining pre-training objectives"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nlp_002",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_theory",
+            "domain": "nlp",
+            "question": "How do word embeddings work? Compare Word2Vec and contextual embeddings.",
+            "answer": "**Word2Vec**:\n- Static embeddings (one vector per word)\n- Skip-gram: Predict context from word\n- CBOW: Predict word from context\n- Limitation: Same vector for \"bank\" (river) and \"bank\" (finance)\n\n**Contextual Embeddings (BERT, ELMo)**:\n- Dynamic embeddings based on context\n- Different vectors for same word in different contexts\n- Captures polysemy\n\n**Comparison**:\n- Word2Vec: Fast, simple, good for similarity\n- BERT: Slower, richer, better for downstream tasks\n\n**Key Insight**: Contextual embeddings are the foundation of modern NLP.",
+            "follow_ups": [
+                "Explain negative sampling",
+                "What's subword tokenization?"
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "nlp",
+                "embeddings",
+                "word2vec"
+            ],
+            "common_mistakes": [
+                "Not distinguishing static vs contextual",
+                "Forgetting subword methods"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "cv_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "cv",
+            "question": "Explain the evolution of CNN architectures from AlexNet to Vision Transformers.",
+            "answer": "**Evolution Timeline**:\n\n1. **AlexNet (2012)**: Deep CNNs work, ReLU, Dropout, GPU training\n\n2. **VGG (2014)**: Deeper with small 3x3 filters, simple architecture\n\n3. **GoogLeNet/Inception (2014)**: Multi-scale filters, 1x1 convolutions for efficiency\n\n4. **ResNet (2015)**: Skip connections, enabled very deep networks (152 layers)\n\n5. **EfficientNet (2019)**: Compound scaling (depth, width, resolution)\n\n6. **Vision Transformer (2020)**: Patches as tokens, self-attention, no inductive bias\n\n**Key Insights**:\n- Depth matters (with residuals)\n- Attention can replace convolution\n- ViT needs more data, but scales better",
+            "follow_ups": [
+                "Why do skip connections help?",
+                "Compare ViT vs CNN on small data"
+            ],
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "cv",
+                "cnn",
+                "vit",
+                "architecture"
+            ],
+            "common_mistakes": [
+                "Missing key innovations",
+                "Not explaining why each worked"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_004",
+            "company": "ByteDance",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "recsys",
+            "question": "Design TikTok's For You Page recommendation system.",
+            "answer": "**Unique Challenges**:\n- Short video format (seconds to decide)\n- Cold start for new users\n- Viral content dynamics\n- Diversity over filter bubbles\n\n**Architecture**:\n\n**1. Real-time Signals**:\n- Watch time (completion rate)\n- Replay, share, comment\n- Negative: Skip, not interested\n\n**2. Content Understanding**:\n- Video embeddings (visual, audio)\n- OCR, ASR for text content\n- Creator features\n\n**3. User Modeling**:\n- Short-term interests (session)\n- Long-term preferences\n- Social graph\n\n**4. Ranking Strategy**:\n- Multi-objective (engagement + diversity)\n- Explore/exploit (MAB, Thompson Sampling)\n- Fresh content boost\n\n**Metrics**: Watch time, DAU, creator diversity",
+            "follow_ups": [
+                "How to handle viral content?",
+                "Cold start for new users?",
+                "Content safety?"
+            ],
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "recsys",
+                "short-video",
+                "system-design"
+            ],
+            "common_mistakes": [
+                "Missing real-time aspect",
+                "Forgetting content understanding"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_005",
+            "company": "Amazon",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "ranking",
+            "question": "Design Amazon's product search ranking system.",
+            "answer": "**Problem**: Rank products for search queries, optimize purchases.\n\n**Two-Stage Architecture**:\n\n**1. Retrieval** (Millions → Thousands):\n- Text matching (BM25, semantic search)\n- Category filtering\n- Availability check\n\n**2. Ranking**:\n\n**Features**:\n- Query: Intent, category, reformulations\n- Product: Title, price, reviews, sales\n- Query-Product: Relevance score, click history\n- Context: User history, device, location\n\n**Model**: Learning to Rank (LambdaMART, Neural LTR)\n\n**Business Objectives**:\n- Relevance + Purchase probability\n- Seller fairness\n- Sponsored products integration\n\n**Serving**: <100ms latency, pre-computed embeddings\n\n**Metrics**: NDCG, purchase rate, revenue",
+            "follow_ups": [
+                "How to handle synonyms?",
+                "Position bias in training?",
+                "Fresh vs popular products?"
+            ],
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "search",
+                "ranking",
+                "e-commerce",
+                "system-design"
+            ],
+            "common_mistakes": [
+                "Missing two-stage design",
+                "Forgetting business constraints"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "mlops_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "mlops",
+            "question": "Design a Feature Store for a large-scale ML platform.",
+            "answer": "**Problem**: Consistent feature computation for training and serving.\n\n**Architecture**:\n\n**1. Feature Registry**:\n- Schema definitions\n- Ownership, lineage\n- Discovery UI\n\n**2. Offline Store**:\n- Historical features for training\n- Storage: Data warehouse (BigQuery, Hive)\n- Point-in-time correct joins\n\n**3. Online Store**:\n- Real-time serving (<10ms)\n- Storage: Redis, DynamoDB\n- Pre-computed features\n\n**4. Transformation**:\n- Batch: Spark, Beam\n- Streaming: Flink, Kafka\n- Shared logic (avoid train-serve skew)\n\n**Key Features**:\n- Time travel for training\n- Feature versioning\n- Monitoring & drift detection\n\n**Examples**: Feast, Tecton, Vertex AI Feature Store",
+            "follow_ups": [
+                "How to handle feature freshness?",
+                "Train-serve skew solutions?"
+            ],
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 5,
+            "tags": [
+                "mlops",
+                "feature-store",
+                "infrastructure"
+            ],
+            "common_mistakes": [
+                "Missing offline/online split",
+                "Forgetting point-in-time correctness"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "mlops_002",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "mlops",
+            "question": "How would you monitor an ML model in production? What metrics would you track?",
+            "answer": "**Monitoring Layers**:\n\n**1. Infrastructure Metrics**:\n- Latency (p50, p95, p99)\n- Throughput (QPS)\n- Error rates\n- Resource usage (CPU, GPU, memory)\n\n**2. Data Quality**:\n- Schema drift\n- Feature distribution shift\n- Missing values, outliers\n- Volume changes\n\n**3. Model Performance**:\n- Prediction distribution shift\n- Confidence calibration\n- Business metrics (CTR, revenue)\n- A/B test metrics\n\n**4. Alerting Strategy**:\n- Statistical tests (KS, PSI)\n- Thresholds + anomaly detection\n- Tiered alerts (warning → critical)\n\n**Tools**: Evidently, WhyLabs, custom dashboards (Grafana)\n\n**Response**: Automated rollback, retraining triggers",
+            "follow_ups": [
+                "What's concept drift vs data drift?",
+                "How to detect it automatically?"
+            ],
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "mlops",
+                "monitoring",
+                "production"
+            ],
+            "common_mistakes": [
+                "Only tracking accuracy",
+                "Missing data quality checks"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "llm_003",
+            "company": "Anthropic",
+            "role": "MLE",
+            "level": "L6/E6",
+            "round": "ml_theory",
+            "domain": "llm",
+            "question": "Explain RLHF (Reinforcement Learning from Human Feedback). Why is it important for LLMs?",
+            "answer": "**RLHF Pipeline**:\n\n**1. Supervised Fine-Tuning (SFT)**:\n- Train on demonstration data\n- Human-written examples\n\n**2. Reward Model Training**:\n- Collect comparison data (A vs B)\n- Train model to predict human preference\n- Bradley-Terry model for ranking\n\n**3. RL Optimization (PPO)**:\n- Optimize policy against reward model\n- KL penalty to stay close to SFT\n- Prevents reward hacking\n\n**Why Important**:\n- Aligns model with human values\n- Reduces harmful outputs\n- Improves instruction following\n- Can't be achieved with SFT alone\n\n**Alternatives**: DPO (Direct Preference Optimization) - simpler, no RL",
+            "follow_ups": [
+                "What's reward hacking?",
+                "Explain DPO",
+                "RLHF limitations?"
+            ],
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "llm",
+                "rlhf",
+                "alignment"
+            ],
+            "common_mistakes": [
+                "Missing the 3-stage pipeline",
+                "Not explaining why SFT isn't enough"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "coding_003",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_coding",
+            "domain": "deep_learning",
+            "question": "Implement Multi-Head Self-Attention from scratch in PyTorch.",
+            "answer": "```python\nimport torch\nimport torch.nn as nn\nimport math\n\nclass MultiHeadAttention(nn.Module):\n    def __init__(self, d_model, n_heads):\n        super().__init__()\n        assert d_model % n_heads == 0\n        \n        self.d_model = d_model\n        self.n_heads = n_heads\n        self.d_k = d_model // n_heads\n        \n        self.W_q = nn.Linear(d_model, d_model)\n        self.W_k = nn.Linear(d_model, d_model)\n        self.W_v = nn.Linear(d_model, d_model)\n        self.W_o = nn.Linear(d_model, d_model)\n    \n    def forward(self, x, mask=None):\n        batch_size, seq_len, _ = x.shape\n        \n        # Linear projections\n        Q = self.W_q(x).view(batch_size, seq_len, self.n_heads, self.d_k).transpose(1, 2)\n        K = self.W_k(x).view(batch_size, seq_len, self.n_heads, self.d_k).transpose(1, 2)\n        V = self.W_v(x).view(batch_size, seq_len, self.n_heads, self.d_k).transpose(1, 2)\n        \n        # Scaled dot-product attention\n        scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(self.d_k)\n        if mask is not None:\n            scores = scores.masked_fill(mask == 0, -1e9)\n        attn = torch.softmax(scores, dim=-1)\n        \n        # Apply attention to values\n        out = torch.matmul(attn, V)\n        out = out.transpose(1, 2).contiguous().view(batch_size, seq_len, self.d_model)\n        \n        return self.W_o(out)\n```",
+            "follow_ups": [
+                "Add dropout",
+                "Explain the scaling factor",
+                "Cross-attention variant?"
+            ],
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 5,
+            "tags": [
+                "coding",
+                "attention",
+                "transformer",
+                "pytorch"
+            ],
+            "common_mistakes": [
+                "Wrong reshape/transpose",
+                "Missing scaling factor"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "exp_002",
+            "company": "Netflix",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "experimentation",
+            "question": "Explain different types of biases in A/B testing. How would you address them?",
+            "answer": "**Common Biases**:\n\n**1. Selection Bias**:\n- Non-random assignment\n- Solution: Proper randomization, stratification\n\n**2. Survivorship Bias**:\n- Only analyzing users who completed\n- Solution: Intent-to-treat analysis\n\n**3. Novelty/Primacy Effect**:\n- Users react to newness, not feature\n- Solution: Longer tests, holdout groups\n\n**4. Position Bias**:\n- Higher positions get more clicks\n- Solution: Randomize positions, IPW\n\n**5. Network Effects**:\n- Treatment affects control (social apps)\n- Solution: Cluster randomization, switchback\n\n**6. Multiple Testing**:\n- Too many metrics inflates false positives\n- Solution: Bonferroni, FDR correction\n\n**Best Practices**: Pre-registration, guardrails, peer review",
+            "follow_ups": [
+                "Explain IPW",
+                "How to detect these biases?"
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 5,
+            "tags": [
+                "experimentation",
+                "ab-testing",
+                "bias"
+            ],
+            "common_mistakes": [
+                "Missing key bias types",
+                "No solutions provided"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "fund_005",
+            "company": "Apple",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_theory",
+            "domain": "fundamentals",
+            "question": "Compare different optimization algorithms: SGD, Adam, AdaGrad. When to use each?",
+            "answer": "**SGD (Stochastic Gradient Descent)**:\n- Basic: w = w - lr * gradient\n- + Momentum: Adds velocity term\n- Pros: Good generalization, simple\n- Cons: Sensitive to learning rate\n- Use: Final training, well-tuned settings\n\n**AdaGrad**:\n- Adapts learning rate per parameter\n- Pros: Good for sparse features\n- Cons: Learning rate decays too fast\n- Use: NLP with sparse embeddings\n\n**Adam (Adaptive Moment Estimation)**:\n- Combines momentum + adaptive LR\n- First moment (mean) + second moment (variance)\n- Pros: Fast convergence, robust\n- Cons: May not generalize as well as SGD\n- Use: Default choice, especially early training\n\n**AdamW**: Adam with decoupled weight decay (recommended)",
+            "follow_ups": [
+                "Why does SGD generalize better?",
+                "Explain learning rate scheduling"
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "optimization",
+                "sgd",
+                "adam",
+                "training"
+            ],
+            "common_mistakes": [
+                "Not explaining adaptive LR",
+                "Missing momentum explanation"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_006",
+            "company": "Uber",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "ranking",
+            "question": "Design Uber's ETA (Estimated Time of Arrival) prediction system.",
+            "answer": "**Problem**: Predict trip duration for routing, pricing, matching.\n\n**Features**:\n\n**1. Route Features**:\n- Distance, number of turns\n- Road types (highway, local)\n- Historical route times\n\n**2. Real-time Features**:\n- Current traffic conditions\n- Weather\n- Time of day, day of week\n\n**3. Context**:\n- Origin/destination characteristics\n- Special events\n- Driver behavior patterns\n\n**Model Architecture**:\n- Segment-based prediction (road segments)\n- Graph neural networks for road network\n- Ensemble with gradient boosting\n\n**Serving**:\n- Pre-computed segment speeds\n- Real-time traffic overlay\n- <100ms latency requirement\n\n**Metrics**: MAE, MAPE, % within 5 min accuracy",
+            "follow_ups": [
+                "How to handle new areas?",
+                "Real-time traffic integration?"
+            ],
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "eta",
+                "prediction",
+                "maps",
+                "system-design"
+            ],
+            "common_mistakes": [
+                "Missing real-time traffic",
+                "Not segment-based approach"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "bq_003",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "behavioral",
+            "domain": "fundamentals",
+            "question": "Tell me about a time when your ML model failed in production. How did you handle it?",
+            "answer": "**STAR Format**:\n\n**Situation**: Deployed a ranking model that showed good offline metrics but caused 15% drop in user engagement in production.\n\n**Task**: Quickly diagnose and fix while minimizing user impact.\n\n**Action**:\n1. Immediately rolled back to previous model\n2. Root cause analysis: Training-serving skew in feature pipeline\n3. Added monitoring for feature distributions\n4. Fixed the skew, validated with shadow mode\n5. Gradual rollout with kill switch\n\n**Result**: Recovered engagement, implemented better MLOps practices. Model eventually launched successfully with 8% improvement.\n\n**Learnings**: Offline metrics aren't everything, need robust monitoring, always have rollback plan.",
+            "follow_ups": [
+                "How did you communicate to stakeholders?",
+                "What monitoring did you add?"
+            ],
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "behavioral",
+                "failure",
+                "incident-response"
+            ],
+            "common_mistakes": [
+                "Blaming others",
+                "Not showing ownership",
+                "Missing learnings"
+            ],
+            "year": 2024
+        }
+    ]
+}

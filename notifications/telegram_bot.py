@@ -6,6 +6,11 @@ import os
 import requests
 import json
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables explicitly from .env file at project root
+env_path = Path(__file__).parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
 
 
 def send_telegram_message(message: str) -> bool:
