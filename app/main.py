@@ -407,11 +407,14 @@ def main():
         
         # Quick start
         st.markdown(f"### {t('home_quickstart', lang)}")
-        if st.button(t("home_start_btn", lang), use_container_width=True):
-            # Navigate to Resume page (Index 1)
-            st.session_state.nav_selection = nav_options[1]
+        
+        def start_prep():
+            st.session_state.nav_selection = t("nav_resume", lang)
             st.session_state.current_step = 1
-            st.rerun()
+            
+        st.button(t("home_start_btn", lang), 
+                 use_container_width=True, 
+                 on_click=start_prep)
     
     elif page_index == 1:  # Resume
         st.markdown(f"## {t('resume_title', lang)}")
