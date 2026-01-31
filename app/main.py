@@ -6,6 +6,10 @@ import streamlit as st
 import json
 from pathlib import Path
 
+# Load environment variables
+from dotenv import load_dotenv
+load_dotenv()
+
 # Page config - must be first Streamlit command
 st.set_page_config(
     page_title="RocktheInterview",

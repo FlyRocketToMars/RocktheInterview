@@ -179,10 +179,15 @@ class SupabaseAuth:
 
 def get_auth_handler():
     """Get the appropriate auth handler based on environment."""
-    if SUPABASE_AVAILABLE and os.getenv("SUPABASE_URL"):
-        return SupabaseAuth()
-    else:
-        return LocalAuth()
+    # Force LocalAuth to avoid Supabase Auth email rate limits
+    # User data is still saved to Supabase via gamification module
+    return LocalAuth()
+    
+    # Original code (uncomment if you want Supabase Auth):
+    # if SUPABASE_AVAILABLE and os.getenv("SUPABASE_URL"):
+    #     return SupabaseAuth()
+    # else:
+    #     return LocalAuth()
 
 
 def render_auth_page():
@@ -215,6 +220,15 @@ def render_auth_page():
                         st.session_state.authenticated = True
                         st.session_state.user_email = email
                         st.session_state.user_data = user_data
+                        
+                        # Sync with gamification system (creates Supabase record)
+                        try:
+                            from data.gamification import gamification
+                            gamification.get_or_create_user(email)
+                            gamification.record_login(email)
+                        except Exception as e:
+                            pass  # Silently fail if gamification isn't available
+                        
                         st.success(message)
                         st.rerun()
                     else:
@@ -241,6 +255,13 @@ def render_auth_page():
                     success, message = auth.sign_up(new_email, new_password)
                     
                     if success:
+                        # Create gamification record in Supabase
+                        try:
+                            from data.gamification import gamification
+                            gamification.get_or_create_user(new_email)
+                        except Exception as e:
+                            pass
+                        
                         st.success(message)
                     else:
                         st.error(message)
