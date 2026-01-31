@@ -1,12 +1,20 @@
 """
 User Gamification System
 Points, badges, levels, and achievements for user engagement
+Supports Supabase for persistent storage with JSON fallback
 """
 import json
 import hashlib
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional
+
+# Try to import Supabase client
+try:
+    from data.supabase_client import user_store, is_supabase_configured
+    HAS_SUPABASE = True
+except ImportError:
+    HAS_SUPABASE = False
 
 
 class UserGamification:
@@ -122,20 +130,28 @@ class UserGamification:
     def __init__(self):
         self.data_file = Path(__file__).parent / "users_gamification.json"
         self.template_file = Path(__file__).parent / "users_gamification.json.template"
-        self._ensure_data_file()
+        
+        # Check if Supabase is available
+        self.use_supabase = HAS_SUPABASE and is_supabase_configured()
+        
+        if not self.use_supabase:
+            self._ensure_data_file()
     
     def _ensure_data_file(self):
         """Initialize data file from template if it doesn't exist."""
         if not self.data_file.exists():
-            # Try to copy from template
             if self.template_file.exists():
                 import shutil
                 shutil.copy(self.template_file, self.data_file)
             else:
-                # Create empty data file
                 self._save_data({"users": {}, "leaderboard": []})
     
     def _load_data(self) -> Dict:
+        """Load data from Supabase or JSON file."""
+        if self.use_supabase:
+            users = user_store.get_all_users()
+            return {"users": {u["user_id"]: u for u in users}, "leaderboard": []}
+        
         try:
             with open(self.data_file, "r", encoding="utf-8") as f:
                 return json.load(f)
@@ -143,8 +159,19 @@ class UserGamification:
             return {"users": {}, "leaderboard": []}
     
     def _save_data(self, data: Dict):
-        with open(self.data_file, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+        """Save data to JSON file (Supabase saves directly in methods)."""
+        if not self.use_supabase:
+            with open(self.data_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+    
+    def _save_user_to_supabase(self, user: Dict):
+        """Save or update user in Supabase."""
+        if self.use_supabase:
+            existing = user_store.get_user(user["user_id"])
+            if existing:
+                user_store.update_user(user["user_id"], user)
+            else:
+                user_store.create_user(user)
     
     def _get_user_id(self, username: str) -> str:
         """Generate consistent user ID from username."""
@@ -152,11 +179,19 @@ class UserGamification:
     
     def get_or_create_user(self, username: str) -> Dict:
         """Get or create a user profile."""
-        data = self._load_data()
         user_id = self._get_user_id(username)
         
+        # Try Supabase first
+        if self.use_supabase:
+            existing = user_store.get_user(user_id)
+            if existing:
+                return existing
+        
+        # Fallback to JSON or create new
+        data = self._load_data()
+        
         if user_id not in data["users"]:
-            data["users"][user_id] = {
+            new_user = {
                 "username": username,
                 "user_id": user_id,
                 "points": 0,
@@ -174,7 +209,9 @@ class UserGamification:
                 "ml_answers_accepted": 0,
                 "sd_answers_accepted": 0,
             }
+            data["users"][user_id] = new_user
             self._save_data(data)
+            self._save_user_to_supabase(new_user)
         
         return data["users"][user_id]
     
