@@ -121,11 +121,19 @@ class UserGamification:
     
     def __init__(self):
         self.data_file = Path(__file__).parent / "users_gamification.json"
+        self.template_file = Path(__file__).parent / "users_gamification.json.template"
         self._ensure_data_file()
     
     def _ensure_data_file(self):
+        """Initialize data file from template if it doesn't exist."""
         if not self.data_file.exists():
-            self._save_data({"users": {}, "leaderboard": []})
+            # Try to copy from template
+            if self.template_file.exists():
+                import shutil
+                shutil.copy(self.template_file, self.data_file)
+            else:
+                # Create empty data file
+                self._save_data({"users": {}, "leaderboard": []})
     
     def _load_data(self) -> Dict:
         try:
