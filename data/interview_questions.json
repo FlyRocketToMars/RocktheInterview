@@ -48,7 +48,18 @@
             "round": "ml_theory",
             "domain": "fundamentals",
             "question": "Explain the bias-variance tradeoff. How would you diagnose whether a model is suffering from high bias or high variance?",
-            "answer": "**Bias**: Error from wrong assumptions (underfitting). **Variance**: Error from sensitivity to training data (overfitting).\n\n**Diagnosis**:\n- High Bias: Low training accuracy, similar train/test error\n- High Variance: High training accuracy, large train/test gap\n\n**Solutions**:\n- High Bias: More features, complex model, less regularization\n- High Variance: More data, regularization, simpler model, ensemble",
+            "answer": [
+                "**Bias**: Error from wrong assumptions (underfitting).",
+                "**Variance**: Error from sensitivity to training data (overfitting).",
+                "",
+                "**Diagnosis:**",
+                "- High Bias: Low training accuracy, similar train/test error",
+                "- High Variance: High training accuracy, large train/test gap",
+                "",
+                "**Solutions:**",
+                "- High Bias: More features, complex model, less regularization",
+                "- High Variance: More data, regularization, simpler model, ensemble"
+            ],
             "follow_ups": [
                 "How does ensemble learning address bias-variance?",
                 "Draw the bias-variance curve"
@@ -813,6 +824,7 @@
             "follow_ups": [
                 "Add dropout",
                 "Explain the scaling factor",
+                "What does the mask do? Why is it needed?",
                 "Cross-attention variant?"
             ],
             "difficulty": "hard",
