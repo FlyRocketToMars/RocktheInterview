@@ -440,18 +440,27 @@ def main():
             placeholder=t("resume_placeholder", lang)
         )
         
-        if st.button(t("resume_extract_btn", lang), use_container_width=True):
+        def extract_and_navigate():
             if resume_text.strip():
                 st.session_state.user_profile["resume_text"] = resume_text
-                # Extract skills (简化版本，使用关键词匹配)
                 from components.skill_extractor import extract_skills
                 extracted = extract_skills(resume_text, st.session_state.skills_taxonomy)
                 st.session_state.user_profile["extracted_skills"] = extracted
                 st.session_state.current_step = 2
-                st.success(t("resume_success", lang).format(len(extracted)))
-                st.rerun()
+                st.session_state.nav_selection = t("nav_target", lang)
+                st.session_state.extract_success = len(extracted)
             else:
-                st.error(t("resume_error", lang))
+                st.session_state.extract_error = True
+        
+        st.button(t("resume_extract_btn", lang), use_container_width=True, on_click=extract_and_navigate)
+        
+        # Show success/error messages
+        if st.session_state.get("extract_success"):
+            st.success(t("resume_success", lang).format(st.session_state.extract_success))
+            del st.session_state.extract_success
+        if st.session_state.get("extract_error"):
+            st.error(t("resume_error", lang))
+            del st.session_state.extract_error
     
     elif page_index == 2:  # Target
         st.markdown(f"## {t('target_title', lang)}")
