@@ -588,50 +588,9 @@ def main():
                 st.session_state.current_step = 5
                 st.rerun()
     
-    elif page_index == 5:  # Study Plan
-        st.markdown(f"## {t('plan_title', lang)}")
-        
-        gaps = st.session_state.analysis.get("gaps", [])
-        
-        if not gaps:
-            st.info(t("plan_no_gaps", lang))
-        else:
-            # Generate study plan
-            st.markdown(f"### {t('plan_phases', lang)}")
-            
-            # Phase 1: Gap filling
-            with st.expander(t("plan_phase1", lang), expanded=True):
-                for i, skill in enumerate(gaps):
-                    col1, col2 = st.columns([3, 1])
-                    with col1:
-                        st.checkbox(t("plan_learn", lang).format(skill), key=f"gap_{i}")
-                    with col2:
-                        st.markdown(f"[{t('plan_search', lang)}](https://www.google.com/search?q={skill}+tutorial)")
-            
-            # Phase 2: Coding
-            with st.expander(t("plan_phase2", lang)):
-                st.markdown("""
-                - [ ] LeetCode Medium x 50
-                - [ ] LeetCode Hard x 20  
-                - [ ] Company Tagged Questions
-                """)
-            
-            # Phase 3: System Design
-            with st.expander(t("plan_phase3", lang)):
-                st.markdown("""
-                - [ ] Recommendation System Design
-                - [ ] Search & Ranking System
-                - [ ] Ad System Design
-                - [ ] Content Moderation System
-                """)
-            
-            # Phase 4: Behavioral
-            with st.expander(t("plan_phase4", lang)):
-                st.markdown("""
-                - [ ] STAR Stories x 10
-                - [ ] Resume Deep Dive
-                - [ ] Mock Interviews
-                """)
+    elif page_index == 5:  # Study Plan - Dynamic Learning Planner
+        from components.learning_plan import render_learning_plan
+        render_learning_plan()
     
     elif page_index == 6:  # Interview Questions
         from components.interview_questions import render_interview_questions
