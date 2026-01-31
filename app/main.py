@@ -15,7 +15,7 @@ st.set_page_config(
     page_title="RocktheInterview",
     page_icon="🎸",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"  # Better for mobile - user can expand
 )
 
 # Custom CSS for premium dark theme
@@ -162,6 +162,121 @@ st.markdown("""
     /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    
+    /* ========== MOBILE RESPONSIVE ========== */
+    
+    /* Mobile breakpoint: < 768px */
+    @media (max-width: 768px) {
+        /* Adjust main container padding */
+        .main .block-container {
+            padding: 1rem 0.5rem !important;
+            max-width: 100% !important;
+        }
+        
+        /* Stack columns vertically on mobile */
+        [data-testid="column"] {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+        }
+        
+        /* Smaller headers on mobile */
+        h1 {
+            font-size: 1.5rem !important;
+        }
+        h2 {
+            font-size: 1.25rem !important;
+        }
+        h3 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Smaller metrics on mobile */
+        [data-testid="stMetricValue"] {
+            font-size: 1.5rem !important;
+        }
+        
+        /* Adjust button size */
+        .stButton > button {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Compact tabs on mobile */
+        .stTabs [data-baseweb="tab"] {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+        }
+        
+        /* Sidebar auto-collapse on mobile */
+        [data-testid="stSidebar"] {
+            min-width: 0 !important;
+        }
+        
+        [data-testid="stSidebar"][aria-expanded="false"] {
+            min-width: 0 !important;
+            width: 0 !important;
+        }
+        
+        /* Full-width cards */
+        .card {
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+        
+        /* Expander styling */
+        .streamlit-expanderHeader {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Table scrolling on mobile */
+        .stDataFrame {
+            overflow-x: auto;
+        }
+        
+        /* Radio buttons vertical */
+        [data-testid="stRadio"] > div {
+            flex-direction: column !important;
+        }
+    }
+    
+    /* Tablet breakpoint: 768px - 1024px */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .main .block-container {
+            padding: 1.5rem 1rem !important;
+        }
+        
+        h1 {
+            font-size: 1.75rem !important;
+        }
+        
+        [data-testid="stMetricValue"] {
+            font-size: 2rem !important;
+        }
+    }
+    
+    /* Touch-friendly elements */
+    @media (pointer: coarse) {
+        /* Larger touch targets */
+        .stButton > button {
+            min-height: 44px;
+        }
+        
+        .stCheckbox, .stRadio {
+            padding: 0.5rem 0;
+        }
+        
+        /* Increase spacing between interactive elements */
+        [data-testid="stVerticalBlock"] > div {
+            margin-bottom: 0.75rem;
+        }
+    }
+    
+    /* Landscape phone optimization */
+    @media (max-height: 500px) and (orientation: landscape) {
+        .main .block-container {
+            padding: 0.5rem !important;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 

@@ -1,0 +1,785 @@
+{
+    "metadata": {
+        "version": "3.0",
+        "last_updated": "2026-01-31",
+        "total_questions": 120,
+        "sources": [
+            "Community Contributed",
+            "Aggregated from Glassdoor, Blind, 一亩三分地",
+            "Educational Resources"
+        ],
+        "disclaimer": "For educational purposes only."
+    },
+    "questions": [
+        {
+            "id": "ml_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_theory",
+            "domain": "fundamentals",
+            "question": "Explain the bias-variance tradeoff. How would you diagnose whether a model is suffering from high bias or high variance?",
+            "answer": "**Bias-Variance Tradeoff:**\n\n**High Bias (Underfitting):**\n- Training error high, validation error high\n- Model too simple\n- Fix: Add features, increase model complexity, reduce regularization\n\n**High Variance (Overfitting):**\n- Training error low, validation error high\n- Large gap between train/val\n- Fix: More data, regularization, simpler model, dropout\n\n**Diagnosis:**\n- Plot learning curves\n- Compare train vs val error\n- Check if adding data helps (only helps variance)",
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "fundamentals",
+                "model-evaluation"
+            ],
+            "follow_ups": [
+                "How does regularization affect bias/variance?",
+                "What about ensemble methods?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_002",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "fundamentals",
+            "question": "What is gradient descent? Explain the differences between batch, mini-batch, and stochastic gradient descent.",
+            "answer": "**Gradient Descent:**\nOptimization algorithm that iteratively updates parameters in the direction of steepest descent.\n\n**Types:**\n\n| Type | Batch Size | Pros | Cons |\n|------|-----------|------|------|\n| Batch GD | All data | Stable, accurate gradient | Slow, memory intensive |\n| Stochastic (SGD) | 1 sample | Fast, can escape local minima | Noisy, unstable |\n| Mini-batch | 32-512 | Best of both, GPU efficient | Needs tuning |\n\n**Key Formula:** θ = θ - α * ∇J(θ)\n\n**Modern Variants:** Adam, AdaGrad, RMSprop (adaptive learning rates)",
+            "difficulty": "easy",
+            "frequency": 4,
+            "importance": 5,
+            "tags": [
+                "optimization",
+                "fundamentals"
+            ],
+            "follow_ups": [
+                "Why does Adam work well?",
+                "When would you use SGD over Adam?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_003",
+            "company": "Amazon",
+            "role": "Applied Scientist",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "fundamentals",
+            "question": "How do you handle class imbalance in a classification problem?",
+            "answer": "**Handling Class Imbalance:**\n\n**1. Data Level:**\n- Oversampling minority (SMOTE)\n- Undersampling majority\n- Data augmentation\n\n**2. Algorithm Level:**\n- Class weights (inverse frequency)\n- Threshold tuning\n- Focal loss (penalize easy examples less)\n\n**3. Evaluation:**\n- Use F1, Precision-Recall curve, not accuracy\n- Use stratified splits\n\n**4. Ensemble:**\n- EasyEnsemble, BalancedBagging\n\n**Best Practice:** Start with class weights, then try SMOTE if needed",
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "classification",
+                "data-preprocessing"
+            ],
+            "follow_ups": [
+                "When would you not use SMOTE?",
+                "How does focal loss work?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_004",
+            "company": "Netflix",
+            "role": "ML Engineer",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "recsys",
+            "question": "Explain collaborative filtering vs content-based filtering. When would you use each?",
+            "answer": "**Content-Based Filtering:**\n- Recommends based on item features\n- User profile from liked items\n- Pros: No cold start for items, explainable\n- Cons: Feature engineering, no serendipity\n\n**Collaborative Filtering:**\n- Recommends based on similar users/items\n- Types: User-based, Item-based, Matrix Factorization\n- Pros: No feature engineering, discovers new interests\n- Cons: Cold start problem, sparsity\n\n**Hybrid (Best in Practice):**\n- Two-tower: User embedding + Item embedding\n- Netflix uses hybrid with deep learning\n\n**When to Use:**\n- New platform: Content-based first\n- Established: Collaborative or Hybrid\n- Diversity needed: Add explore/exploit",
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "recommendation",
+                "collaborative-filtering"
+            ],
+            "follow_ups": [
+                "How to handle cold start?",
+                "Explain matrix factorization"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_005",
+            "company": "OpenAI",
+            "role": "Research Engineer",
+            "level": "L6/E6",
+            "round": "ml_theory",
+            "domain": "llm",
+            "question": "Explain the Transformer architecture. What is self-attention and why is it important?",
+            "answer": "**Transformer Architecture:**\n\n**Key Components:**\n1. Input Embedding + Positional Encoding\n2. Multi-Head Self-Attention\n3. Feed-Forward Network\n4. Layer Normalization + Residual Connections\n\n**Self-Attention:**\n```\nAttention(Q,K,V) = softmax(QK^T / √d_k) * V\n```\n\n**Why Important:**\n- Captures long-range dependencies (unlike RNN)\n- Parallelizable (fast training)\n- Each token attends to all other tokens\n\n**Multi-Head:**\n- Multiple attention heads = different \"perspectives\"\n- Concatenated and projected\n\n**Improvements:**\n- Rotary positional encoding (RoPE)\n- Flash Attention (memory efficient)\n- Grouped Query Attention (GQA)",
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "transformer",
+                "attention",
+                "nlp"
+            ],
+            "follow_ups": [
+                "What is Flash Attention?",
+                "Explain positional encoding"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_006",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "fundamentals",
+            "question": "Explain L1 vs L2 regularization. When would you use each?",
+            "answer": "**L1 (Lasso):**\n- Penalty: λ|w|\n- Creates sparse solutions (feature selection)\n- Some weights become exactly 0\n- Use when: Many irrelevant features\n\n**L2 (Ridge):**\n- Penalty: λw²\n- Shrinks all weights (never exactly 0)\n- More stable with correlated features\n- Use when: Want to keep all features, prevent overfitting\n\n**Elastic Net:**\n- Combines both: α*L1 + (1-α)*L2\n- Best of both worlds\n\n**Intuition:**\n- L1: Diamond-shaped constraint region, corners touch axes\n- L2: Circular constraint region, no corners",
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "regularization",
+                "fundamentals"
+            ],
+            "follow_ups": [
+                "Why does L1 give sparse solutions?",
+                "How to choose lambda?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_007",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "deep_learning",
+            "question": "What is batch normalization and why does it help training?",
+            "answer": "**Batch Normalization:**\n\nNormalizes inputs to each layer by:\n1. Compute mean and variance per mini-batch\n2. Normalize: x̂ = (x - μ) / √(σ² + ε)\n3. Scale and shift: y = γx̂ + β (learnable)\n\n**Why It Helps:**\n- Reduces internal covariate shift\n- Allows higher learning rates\n- Acts as regularization (noise from batch statistics)\n- Reduces sensitivity to initialization\n\n**Variants:**\n- Layer Norm: Normalize across features (good for NLP, transformers)\n- Group Norm: Normalize across groups (good for small batches)\n- Instance Norm: Normalize per sample (style transfer)\n\n**Inference:**\n- Use running mean/variance from training, not batch stats",
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "normalization",
+                "deep-learning"
+            ],
+            "follow_ups": [
+                "Why prefer Layer Norm in transformers?",
+                "BatchNorm issues with small batches?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_008",
+            "company": "Apple",
+            "role": "ML Engineer",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "cv",
+            "question": "Explain CNNs. What are the key components and why do they work well for images?",
+            "answer": "**Convolutional Neural Networks:**\n\n**Key Components:**\n\n1. **Convolutional Layers:**\n   - Local receptive fields (kernels)\n   - Weight sharing → fewer parameters\n   - Translation equivariance\n\n2. **Pooling Layers:**\n   - Max/Average pooling\n   - Dimensionality reduction\n   - Translation invariance\n\n3. **Activation (ReLU):**\n   - Non-linearity\n   - Helps with gradient flow\n\n**Why Good for Images:**\n- Exploits spatial locality\n- Hierarchical features (edges → shapes → objects)\n- Parameter efficient\n\n**Modern Architectures:**\n- ResNet: Skip connections\n- EfficientNet: Compound scaling\n- Vision Transformer (ViT): Attention, no convolution",
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "cnn",
+                "computer-vision"
+            ],
+            "follow_ups": [
+                "What is the receptive field?",
+                "ResNet vs VGG?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_009",
+            "company": "Anthropic",
+            "role": "Research Scientist",
+            "level": "L6/E6",
+            "round": "ml_theory",
+            "domain": "llm",
+            "question": "What is RLHF? Explain the components and why it's important for LLMs.",
+            "answer": "**RLHF (Reinforcement Learning from Human Feedback):**\n\n**3-Stage Pipeline:**\n\n**1. Supervised Fine-Tuning (SFT):**\n- Train on high-quality demonstrations\n- Human-written examples\n\n**2. Reward Model Training:**\n- Collect comparison data (A vs B)\n- Train model to predict human preferences\n- Bradley-Terry model for ranking\n\n**3. RL Optimization (PPO):**\n- Optimize policy against reward model\n- KL penalty to stay close to SFT model\n- Prevents reward hacking\n\n**Why Important:**\n- Aligns model with human values\n- Reduces harmful outputs\n- Improves instruction following\n- Can't achieve with SFT alone\n\n**Alternatives:**\n- DPO: Direct Preference Optimization (no RL needed)\n- RLAIF: AI feedback instead of human",
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "rlhf",
+                "llm",
+                "alignment"
+            ],
+            "follow_ups": [
+                "What is reward hacking?",
+                "Explain DPO"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_010",
+            "company": "Microsoft",
+            "role": "Applied Scientist",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "nlp",
+            "question": "Explain word embeddings (Word2Vec, GloVe). How do they capture semantic meaning?",
+            "answer": "**Word Embeddings:**\n\nDense vector representations where similar words have similar vectors.\n\n**Word2Vec (Google, 2013):**\n- Skip-gram: Predict context from word\n- CBOW: Predict word from context\n- Learns from local context windows\n\n**GloVe (Stanford):**\n- Uses global co-occurrence statistics\n- Matrix factorization approach\n- word_i · word_j = log(co-occurrence)\n\n**How They Capture Meaning:**\n- Distributional hypothesis: words in similar contexts have similar meanings\n- Famous: king - man + woman ≈ queen\n\n**Modern Approaches:**\n- Contextual embeddings (BERT, GPT)\n- Different vectors for same word in different contexts\n- Much more powerful but larger",
+            "difficulty": "medium",
+            "frequency": 3,
+            "importance": 3,
+            "tags": [
+                "embeddings",
+                "nlp"
+            ],
+            "follow_ups": [
+                "Word2Vec vs BERT embeddings?",
+                "How to evaluate embeddings?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "recsys",
+            "question": "Design YouTube's video recommendation system.",
+            "answer": "**📋 Clarifying Questions:**\n| Question | Assumption |\n|----------|------------|\n| Primary goal? | Maximize watch time |\n| Scale? | 2B users, 500M videos |\n| Latency? | <200ms |\n\n**🏗️ Architecture:**\n\n**1. Candidate Generation (Millions → Hundreds):**\n- Two-Tower Model (User + Video embeddings)\n- Content-based: Similar to watched videos\n- Collaborative Filtering: Similar users liked\n\n**2. Ranking (Hundreds → Tens):**\n- Multi-task DNN: P(click), P(watch), P(like)\n- Features: User history, video features, context\n\n**3. Re-ranking:**\n- Diversity injection\n- Freshness boost\n- Business rules\n\n**Key Components:**\n- Feature Store (real-time + batch)\n- Embedding Index (FAISS/ScaNN)\n- A/B Testing Framework",
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "recommendation",
+                "system-design"
+            ],
+            "follow_ups": [
+                "Cold start?",
+                "How to balance explore/exploit?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_002",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "ranking",
+            "question": "Design Facebook's News Feed ranking system.",
+            "answer": "**📋 Clarifying Questions:**\n| Question | Assumption |\n|----------|------------|\n| Goal? | Maximize engagement + user satisfaction |\n| Scale? | 3B users, 10K posts/user/day candidates |\n| Latency? | <100ms |\n\n**🏗️ Architecture:**\n\n**1. Candidate Selection:**\n- Friends' posts\n- Group posts\n- Pages followed\n- Ads (separate system)\n\n**2. Feature Engineering:**\n- User: Demographics, interests, history\n- Post: Content, author, engagement\n- Context: Time, device\n\n**3. Ranking Model:**\n- Multi-task learning\n- Heads: P(like), P(comment), P(share), P(hide)\n- Weighted combination\n\n**4. Integrity Filters:**\n- Misinformation detection\n- Hate speech filtering\n\n**Metrics:**\n- Primary: Time spent, DAU\n- Guardrail: User surveys, content diversity",
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "ranking",
+                "feed",
+                "system-design"
+            ],
+            "follow_ups": [
+                "Filter bubbles?",
+                "How to A/B test?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_003",
+            "company": "Uber",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "pricing",
+            "question": "Design Uber's surge pricing system.",
+            "answer": "**📋 Clarifying Questions:**\n| Question | Assumption |\n|----------|------------|\n| Goal? | Balance supply/demand, maximize rides |\n| Constraint? | Max 5x surge |\n| Update frequency? | Every 5 minutes |\n\n**🏗️ Architecture:**\n\n**1. Demand Prediction:**\n- Time series forecasting\n- Features: Time, location, events, weather\n- Model: Gradient Boosting or LSTM\n\n**2. Supply Prediction:**\n- Current active drivers\n- Predicted driver availability\n- Historical patterns\n\n**3. Surge Calculation:**\n- Supply-Demand ratio per zone\n- Smoothing to avoid oscillation\n- Geographic spillover effects\n\n**4. Real-time Updates:**\n- Kafka for event streaming\n- Redis for fast lookups\n- Geospatial indexing (H3)\n\n**Guardrails:**\n- Price caps during emergencies\n- Fairness constraints",
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "pricing",
+                "real-time",
+                "system-design"
+            ],
+            "follow_ups": [
+                "How to prevent gaming?",
+                "Fairness concerns?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_004",
+            "company": "TikTok",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "recsys",
+            "question": "Design TikTok's For You Page recommendation system.",
+            "answer": "**📋 Clarifying Questions:**\n| Question | Assumption |\n|----------|------------|\n| Goal? | Maximize watch time + DAU |\n| Cold start? | Solve aggressively (new users) |\n| Content moderation? | Built-in |\n\n**🏗️ Architecture:**\n\n**Key Insight:** Watch time is THE signal (more powerful than likes)\n\n**1. Video Understanding:**\n- Visual: CNN features\n- Audio: Speech-to-text, music\n- Text: Hashtags, captions\n- → Video embedding\n\n**2. User Modeling:**\n- Watch history embeddings\n- Interaction patterns\n- Demographic features\n\n**3. Candidate Generation:**\n- Popular videos (explore)\n- Similar to watched (exploit)\n- Creator graph\n\n**4. Ranking:**\n- Predict: % watched, replay, share, follow\n- Multi-gate Mixture of Experts (MMoE)\n\n**Cold Start Solution:**\n- Rapid exploration in first 30 videos\n- Use device/location signals\n- Diverse initial set",
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "recommendation",
+                "short-video",
+                "system-design"
+            ],
+            "follow_ups": [
+                "How to encourage creators?",
+                "Filter bubble prevention?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_005",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "search",
+            "question": "Design a Google Search ranking system.",
+            "answer": "**📋 Clarifying Questions:**\n| Question | Assumption |\n|----------|------------|\n| Goal? | Relevance + User satisfaction |\n| Scale? | 8.5B queries/day |\n| Latency? | <200ms |\n\n**🏗️ Architecture:**\n\n**1. Query Understanding:**\n- Intent classification\n- Query expansion\n- Spell correction\n\n**2. Candidate Retrieval:**\n- Inverted index (BM25)\n- Semantic search (dense vectors)\n- Hybrid combination\n\n**3. Ranking:**\n- L1: Fast linear model (millions → thousands)\n- L2: BERT-based reranker (thousands → hundreds)\n- L3: Final ranking with business rules\n\n**Features:**\n- Query-document match\n- PageRank\n- User signals (click history)\n- Freshness\n\n**Training:**\n- Click data (position bias correction)\n- Human ratings\n- Pairwise learning to rank",
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 5,
+            "tags": [
+                "search",
+                "ranking",
+                "system-design"
+            ],
+            "follow_ups": [
+                "Position bias?",
+                "How to handle new pages?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "sys_006",
+            "company": "OpenAI",
+            "role": "MLE",
+            "level": "L6/E6",
+            "round": "ml_system_design",
+            "domain": "llm",
+            "question": "Design a RAG (Retrieval-Augmented Generation) system for enterprise Q&A.",
+            "answer": "**📋 Clarifying Questions:**\n| Question | Assumption |\n|----------|------------|\n| Document types? | PDF, Confluence, Slack |\n| Latency? | <3s response |\n| Accuracy priority? | Yes (enterprise) |\n\n**🏗️ Architecture:**\n\n**1. Ingestion Pipeline:**\n- Document parsing (PDF, HTML)\n- Chunking: 512 tokens, 50 overlap\n- Embedding: ada-002 or e5-large\n- Vector DB: Pinecone/Weaviate\n\n**2. Retrieval:**\n- Query embedding\n- Hybrid: Dense + BM25\n- Re-ranking: Cross-encoder\n- Top-k = 5\n\n**3. Generation:**\n- Context construction\n- Prompt with citations\n- LLM inference (GPT-4)\n\n**4. Guardrails:**\n- Hallucination detection (NLI)\n- Source attribution\n- Confidence scoring\n\n**Metrics:**\n- Answer relevance (human eval)\n- Citation accuracy\n- Latency p95",
+            "difficulty": "hard",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "rag",
+                "llm",
+                "system-design"
+            ],
+            "follow_ups": [
+                "Multi-hop questions?",
+                "How to chunk?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "beh_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "behavioral",
+            "domain": "behavioral",
+            "question": "Tell me about a time you had to make a decision with incomplete information.",
+            "answer": "**STAR Framework:**\n\n**Situation:** [Describe the context]\n\"At [Company], we needed to decide whether to launch a new ML model for production, but we only had 2 weeks of A/B test data instead of the usual 4 weeks.\"\n\n**Task:** [Your responsibility]\n\"As the ML lead, I had to recommend go/no-go with limited statistical confidence.\"\n\n**Action:** [What you did]\n- Analyzed what data we DID have\n- Identified key metrics showing clear trends\n- Consulted with stakeholders on risk tolerance\n- Proposed staged rollout (1% → 10% → 100%)\n\n**Result:** [Quantifiable outcome]\n\"We launched successfully. The staged rollout caught one edge case at 10%, which we fixed. Full rollout achieved 15% improvement in key metric.\"",
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "behavioral",
+                "decision-making"
+            ],
+            "follow_ups": [
+                "What would you do differently?",
+                "How did you manage stakeholder expectations?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "beh_002",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "behavioral",
+            "domain": "behavioral",
+            "question": "Describe a time when you disagreed with your manager. How did you handle it?",
+            "answer": "**STAR Framework:**\n\n**Situation:**\n\"My manager wanted to use a complex deep learning model for a problem, but I believed a simpler XGBoost approach would be more appropriate given our timeline and data constraints.\"\n\n**Task:**\n\"I needed to advocate for my approach while maintaining a good relationship and respecting hierarchy.\"\n\n**Action:**\n- Prepared data-driven comparison\n- Requested 1:1 meeting to discuss\n- Presented pros/cons objectively\n- Proposed: \"Can we run both as experiment?\"\n- Listened to manager's perspective\n\n**Result:**\n\"Manager agreed to test both. XGBoost achieved 95% of DL performance with 10x faster iteration. Manager appreciated the data-driven approach and we shipped on time.\"",
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "behavioral",
+                "conflict-resolution"
+            ],
+            "follow_ups": [
+                "What if manager still disagreed?",
+                "How do you build trust?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "beh_003",
+            "company": "Amazon",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "behavioral",
+            "domain": "behavioral",
+            "question": "Tell me about a project that failed. What did you learn?",
+            "answer": "**STAR Framework:**\n\n**Situation:**\n\"Led a project to build a real-time fraud detection system. After 3 months, we couldn't meet latency requirements.\"\n\n**Task:**\n\"Had to decide whether to continue or pivot.\"\n\n**Action:**\n- Conducted honest retrospective\n- Identified root cause: Chose wrong architecture early\n- Documented learnings\n- Proposed alternative approach\n- Communicated transparently with leadership\n\n**Result:**\n\"Project was paused. However:\n- Learnings shared company-wide (prevented similar failures)\n- Rebuilt with correct architecture in 6 weeks\n- Now handles 10x traffic with 5ms latency\"\n\n**Key Learnings:**\n1. Prototype early for latency-critical systems\n2. Fail fast, learn faster\n3. Transparency builds trust",
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "behavioral",
+                "failure",
+                "growth"
+            ],
+            "follow_ups": [
+                "How did you handle team morale?",
+                "What would you do differently?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "code_001",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_coding",
+            "domain": "ml_coding",
+            "question": "Implement K-Means clustering from scratch in Python.",
+            "answer": "```python\nimport numpy as np\n\ndef kmeans(X, k, max_iters=100):\n    # Initialize centroids randomly\n    n_samples = X.shape[0]\n    idx = np.random.choice(n_samples, k, replace=False)\n    centroids = X[idx]\n    \n    for _ in range(max_iters):\n        # Assign points to nearest centroid\n        distances = np.sqrt(((X - centroids[:, np.newaxis])**2).sum(axis=2))\n        labels = np.argmin(distances, axis=0)\n        \n        # Update centroids\n        new_centroids = np.array([X[labels == i].mean(axis=0) for i in range(k)])\n        \n        # Check convergence\n        if np.allclose(centroids, new_centroids):\n            break\n        centroids = new_centroids\n    \n    return labels, centroids\n```\n\n**Key Points:**\n- O(n*k*d*iterations) complexity\n- K-means++ for better initialization\n- Elbow method for choosing k",
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "coding",
+                "clustering",
+                "implementation"
+            ],
+            "follow_ups": [
+                "K-means++ initialization?",
+                "How to choose k?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "code_002",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_coding",
+            "domain": "ml_coding",
+            "question": "Implement logistic regression from scratch with gradient descent.",
+            "answer": "```python\nimport numpy as np\n\nclass LogisticRegression:\n    def __init__(self, lr=0.01, n_iters=1000):\n        self.lr = lr\n        self.n_iters = n_iters\n        self.weights = None\n        self.bias = None\n    \n    def sigmoid(self, z):\n        return 1 / (1 + np.exp(-z))\n    \n    def fit(self, X, y):\n        n_samples, n_features = X.shape\n        self.weights = np.zeros(n_features)\n        self.bias = 0\n        \n        for _ in range(self.n_iters):\n            linear = np.dot(X, self.weights) + self.bias\n            predictions = self.sigmoid(linear)\n            \n            # Gradients\n            dw = (1/n_samples) * np.dot(X.T, (predictions - y))\n            db = (1/n_samples) * np.sum(predictions - y)\n            \n            # Update\n            self.weights -= self.lr * dw\n            self.bias -= self.lr * db\n    \n    def predict(self, X):\n        linear = np.dot(X, self.weights) + self.bias\n        return (self.sigmoid(linear) >= 0.5).astype(int)\n```",
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "coding",
+                "logistic-regression",
+                "implementation"
+            ],
+            "follow_ups": [
+                "Add regularization?",
+                "Binary cross-entropy loss?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "code_003",
+            "company": "Amazon",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_coding",
+            "domain": "ml_coding",
+            "question": "Write code to compute AUC-ROC without using sklearn.",
+            "answer": "```python\nimport numpy as np\n\ndef compute_auc(y_true, y_scores):\n    \"\"\"Compute AUC using trapezoidal rule.\"\"\"\n    # Sort by scores descending\n    sorted_idx = np.argsort(y_scores)[::-1]\n    y_true = np.array(y_true)[sorted_idx]\n    \n    # Count positives and negatives\n    n_pos = np.sum(y_true)\n    n_neg = len(y_true) - n_pos\n    \n    # Compute TPR and FPR at each threshold\n    tpr = np.cumsum(y_true) / n_pos\n    fpr = np.cumsum(1 - y_true) / n_neg\n    \n    # Add origin\n    tpr = np.concatenate([[0], tpr])\n    fpr = np.concatenate([[0], fpr])\n    \n    # Trapezoidal integration\n    auc = np.trapz(tpr, fpr)\n    return auc\n\n# Alternative: Mann-Whitney U statistic\ndef auc_mann_whitney(y_true, y_scores):\n    pos_scores = y_scores[y_true == 1]\n    neg_scores = y_scores[y_true == 0]\n    return np.mean([p > n for p in pos_scores for n in neg_scores])\n```",
+            "difficulty": "hard",
+            "frequency": 3,
+            "importance": 4,
+            "tags": [
+                "coding",
+                "metrics",
+                "evaluation"
+            ],
+            "follow_ups": [
+                "AUC interpretation?",
+                "PR-AUC vs ROC-AUC?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_011",
+            "company": "ByteDance",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "deep_learning",
+            "question": "Explain dropout and why it helps prevent overfitting.",
+            "answer": "**Dropout:**\n\nRandomly sets neurons to 0 during training with probability p.\n\n**Why It Works:**\n1. **Ensemble Effect:** Like training many sub-networks\n2. **Prevents Co-adaptation:** Forces redundant representations\n3. **Implicit Regularization:** Reduces model complexity\n\n**Implementation:**\n- Training: Drop neurons with prob p, scale by 1/(1-p)\n- Inference: Use all neurons (no dropout)\n\n**Typical Values:**\n- Hidden layers: p = 0.5\n- Input layer: p = 0.2\n\n**Variants:**\n- DropConnect: Drop weights instead of neurons\n- Spatial Dropout: Drop entire feature maps (CNNs)\n- Attention Dropout: Drop attention weights",
+            "difficulty": "easy",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "regularization",
+                "deep-learning"
+            ],
+            "follow_ups": [
+                "Dropout at test time?",
+                "Why not use with BatchNorm?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_012",
+            "company": "LinkedIn",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "recsys",
+            "question": "Explain how you would build a job recommendation system for LinkedIn.",
+            "answer": "**📋 Problem Setup:**\n- Match candidates to jobs\n- Two-sided marketplace\n- Binary outcome: Apply/Not Apply\n\n**🏗️ Architecture:**\n\n**1. Candidate Generation:**\n- Job seeker embedding (skills, experience, preferences)\n- Job embedding (requirements, company, benefits)\n- Two-tower model for fast retrieval\n\n**2. Features:**\n- Profile-Job match (skill overlap)\n- Location compatibility\n- Salary expectations\n- Career trajectory fit\n- Network signals (connections at company)\n\n**3. Ranking Model:**\n- GBM or DNN\n- Predict: P(apply), P(hired)\n- Multi-objective: User satisfaction + Job fill rate\n\n**4. Cold Start:**\n- New users: Onboarding questionnaire\n- New jobs: Content-based initially\n\n**Metrics:**\n- Apply rate, Quality of applies (hired ratio)\n- User engagement, Time to hire",
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "recommendation",
+                "two-sided-market"
+            ],
+            "follow_ups": [
+                "How to handle bias?",
+                "Fairness in job recommendations?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_013",
+            "company": "Stripe",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "anomaly",
+            "question": "How would you design a fraud detection system for payments?",
+            "answer": "**🏗️ Architecture:**\n\n**1. Feature Engineering:**\n- Transaction features: Amount, merchant, time\n- User behavior: Velocity, deviation from pattern\n- Device/IP features: New device, VPN detection\n- Graph features: Merchant reputation, user network\n\n**2. Model Types:**\n- Real-time: Rules + Light model (latency critical)\n- Batch: Complex ensemble for review queue\n\n**3. Handling Imbalance:**\n- 0.1% fraud rate\n- Use focal loss, class weights\n- Precision-Recall tradeoff (not accuracy)\n\n**4. Deployment Pattern:**\n- Rule engine (fast, interpretable)\n- ML model (complex patterns)\n- Manual review queue (high-value/uncertain)\n\n**5. Feedback Loop:**\n- Chargebacks (ground truth, delayed)\n- User reports\n- Continuous retraining\n\n**Metrics:**\n- Precision @ high recall (e.g., 95%)\n- $ loss prevented vs false positive cost",
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 5,
+            "tags": [
+                "fraud",
+                "anomaly-detection",
+                "real-time"
+            ],
+            "follow_ups": [
+                "Adversarial attacks?",
+                "Explainability for disputes?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_014",
+            "company": "Tesla",
+            "role": "ML Engineer",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "cv",
+            "question": "Explain object detection. Compare one-stage vs two-stage detectors.",
+            "answer": "**Object Detection Task:**\nLocalize and classify objects in images.\n\n**Two-Stage Detectors:**\n- **R-CNN Family:** Region proposal → Classification\n- Faster R-CNN: RPN for proposals\n- Pros: Higher accuracy\n- Cons: Slower (50ms+)\n\n**One-Stage Detectors:**\n- **YOLO:** Single forward pass, grid-based\n- **SSD:** Multi-scale feature maps\n- **RetinaNet:** Focal loss for class imbalance\n- Pros: Real-time (30+ FPS)\n- Cons: Lower accuracy on small objects\n\n**Modern Approaches:**\n- DETR: Transformer-based, end-to-end\n- YOLOv8: State-of-art speed/accuracy trade-off\n\n**Metrics:**\n- mAP (mean Average Precision)\n- IoU thresholds (0.5, 0.75)\n- FPS for real-time applications",
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "object-detection",
+                "computer-vision"
+            ],
+            "follow_ups": [
+                "Explain NMS?",
+                "How does DETR work?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_015",
+            "company": "Spotify",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "recsys",
+            "question": "How would you design Discover Weekly for Spotify?",
+            "answer": "**🎵 Discover Weekly Design:**\n\n**Goal:** Personalized playlist of songs user hasn't heard but will like.\n\n**1. User Modeling:**\n- Listening history embeddings\n- Skip patterns (negative signal)\n- Playlist follows\n- Explicit feedback (likes, saves)\n\n**2. Song Representation:**\n- Audio features (CNN on spectrograms)\n- Collaborative embeddings\n- Metadata (genre, artist, tempo)\n\n**3. Candidate Generation:**\n- Similar to liked songs\n- From similar users (collaborative)\n- Same playlist co-occurrence\n- Artist/genre exploration\n\n**4. Ranking:**\n- Predict: P(complete listen), P(save), P(skip)\n- Diversity constraint: Not too similar\n- Novelty: Must be new to user\n\n**5. Editorial Layer:**\n- Playlist flow/mood coherence\n- Time-of-day preferences\n\n**Metrics:**\n- Save rate, Listen-through rate\n- Discovery rate (new artists)",
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "recommendation",
+                "music",
+                "personalization"
+            ],
+            "follow_ups": [
+                "Audio-based recommendations?",
+                "Cold start for new songs?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "mlops_001",
+            "company": "Meta",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "mlops",
+            "question": "How would you design a feature store? What are the key considerations?",
+            "answer": "**Feature Store Architecture:**\n\n**Key Components:**\n\n1. **Feature Registry:**\n   - Metadata: Name, type, owner, lineage\n   - Documentation and contracts\n\n2. **Offline Store:**\n   - Batch features\n   - Point-in-time correct joins\n   - Storage: Data warehouse (BigQuery, Snowflake)\n\n3. **Online Store:**\n   - Low-latency serving (<10ms)\n   - Storage: Redis, DynamoDB\n\n4. **Feature Transformation:**\n   - Batch: Spark, Flink\n   - Real-time: Kafka Streams\n\n**Key Considerations:**\n- Time-travel (avoid data leakage)\n- Feature reuse across teams\n- Consistency between training/serving\n- Monitoring feature drift\n\n**Open Source Options:**\n- Feast, Tecton, Feathr\n\n**Production Features:**\n- Versioning\n- Access control\n- Lineage tracking",
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 5,
+            "tags": [
+                "feature-store",
+                "mlops",
+                "system-design"
+            ],
+            "follow_ups": [
+                "Point-in-time correctness?",
+                "Feature drift monitoring?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "mlops_002",
+            "company": "Google",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "mlops",
+            "question": "How do you monitor ML models in production? What metrics would you track?",
+            "answer": "**ML Model Monitoring:**\n\n**1. Infrastructure Metrics:**\n- Latency: p50, p95, p99\n- Throughput: QPS\n- Error rates\n- Resource usage: CPU, GPU, memory\n\n**2. Data Quality:**\n- Schema drift\n- Feature distribution shift\n- Missing values, outliers\n- Volume changes\n\n**3. Model Performance:**\n- Prediction distribution shift\n- Confidence calibration\n- Business metrics (CTR, revenue)\n- A/B test metrics\n\n**4. Alerting Strategy:**\n- Statistical tests: KS, PSI\n- Threshold-based + anomaly detection\n- Tiered: Warning → Critical\n\n**Tools:**\n- Evidently, WhyLabs\n- Custom: Grafana + Prometheus\n\n**Response Plan:**\n- Automated rollback triggers\n- Retraining pipelines\n- On-call escalation",
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "monitoring",
+                "mlops",
+                "production"
+            ],
+            "follow_ups": [
+                "Concept drift vs data drift?",
+                "Auto-retraining triggers?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_016",
+            "company": "Airbnb",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "recsys",
+            "question": "Design Airbnb's search ranking system for listings.",
+            "answer": "**🏠 Airbnb Search Ranking:**\n\n**📋 Clarifying Questions:**\n| Question | Assumption |\n|----------|------------|\n| Goal? | Maximize bookings + guest satisfaction |\n| Two-sided? | Yes, also host satisfaction |\n\n**🏗️ Architecture:**\n\n**1. Query Understanding:**\n- Location parsing\n- Date parsing\n- Guest count\n- Implicit preferences\n\n**2. Candidate Retrieval:**\n- Availability filtering\n- Location radius\n- Price range\n\n**3. Ranking Features:**\n- Listing quality: Reviews, response rate, photos\n- Host: Superhost, acceptance rate\n- Match: Amenities match preferences\n- Price: Price-quality ratio\n- Context: Mobile vs desktop, time to booking\n\n**4. Model:**\n- GBDT (LambdaMART) or DNN\n- Pairwise learning to rank\n\n**5. Business Layer:**\n- New listing boost\n- Diversity in results\n- Instant bookable preference\n\n**Metrics:**\n- Booking rate, Revenue\n- Guest review scores\n- Host satisfaction (acceptance)",
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "search",
+                "ranking",
+                "marketplace"
+            ],
+            "follow_ups": [
+                "Position bias?",
+                "Fairness for new hosts?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_017",
+            "company": "Doordash",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_system_design",
+            "domain": "logistics",
+            "question": "Design an ETA prediction system for food delivery.",
+            "answer": "**🚗 ETA Prediction System:**\n\n**📋 Goal:** Predict delivery time accurately\n\n**🏗️ Pipeline:**\n\n**1. Component ETAs:**\n- Restaurant prep time: Historical + current queue\n- Dasher pickup time: Assignment + travel\n- Delivery time: Distance + traffic\n\n**2. Features:**\n- Restaurant: Cuisine, capacity, current orders\n- Route: Distance, traffic, weather\n- Dasher: Experience, current orders\n- Time: Rush hour, day of week\n- Order: Size, complexity\n\n**3. Model:**\n- Gradient Boosting (XGBoost)\n- Separate models per stage\n- Ensemble for total ETA\n\n**4. Real-time Updates:**\n- Re-predict on state changes\n- Kalman filter for smoothing\n\n**5. Confidence Intervals:**\n- Quantile regression for ranges\n- \"25-35 min\" display\n\n**Metrics:**\n- MAE, MAPE\n- % within ±5 min\n- Customer satisfaction",
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "eta",
+                "time-series",
+                "logistics"
+            ],
+            "follow_ups": [
+                "Cold start for new restaurants?",
+                "How to handle delays?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_018",
+            "company": "Pinterest",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "recsys",
+            "question": "Explain the Two-Tower model architecture and when to use it.",
+            "answer": "**Two-Tower (Dual Encoder) Model:**\n\n**Architecture:**\n```\nUser Tower          Item Tower\n    |                   |\n User Features    Item Features\n    |                   |\n   DNN                 DNN\n    |                   |\n User Embedding   Item Embedding\n    \\                 /\n     \\               /\n      Dot Product/Cosine\n           |\n        Score\n```\n\n**Training:**\n- Contrastive loss (InfoNCE)\n- In-batch negatives\n- Hard negative mining\n\n**Advantages:**\n- Pre-compute item embeddings → Fast retrieval\n- Scales to billions of items\n- ANN search (FAISS, ScaNN)\n\n**When to Use:**\n- Candidate generation stage\n- Large item corpus\n- Need <10ms latency\n\n**Limitations:**\n- No cross-features (user-item interaction)\n- Usually followed by ranking model\n\n**Variants:**\n- YouTube, Google Search, Instagram",
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "two-tower",
+                "recommendation",
+                "embedding"
+            ],
+            "follow_ups": [
+                "Hard negative mining?",
+                "Cold start handling?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_019",
+            "company": "Twitter/X",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "nlp",
+            "question": "Explain BERT architecture and how it differs from GPT.",
+            "answer": "**BERT vs GPT:**\n\n| Aspect | BERT | GPT |\n|--------|------|-----|\n| Architecture | Encoder only | Decoder only |\n| Attention | Bidirectional | Causal (left-to-right) |\n| Pre-training | MLM + NSP | Next token prediction |\n| Best for | Understanding, classification | Generation, completion |\n\n**BERT Details:**\n- Masked Language Model: Predict [MASK] tokens\n- Sees full context both directions\n- 12-24 transformer layers\n- Fine-tune for downstream tasks\n\n**GPT Details:**\n- Autoregressive: P(word|previous words)\n- Can generate new text\n- Scales better with size\n- In-context learning (GPT-3+)\n\n**When to Use:**\n- Classification, NER, QA → BERT\n- Text generation, chat → GPT\n- Both → T5 (encoder-decoder)\n\n**Modern Trend:**\n- GPT architecture dominates LLMs\n- BERT-style for embeddings/ranking",
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 5,
+            "tags": [
+                "bert",
+                "gpt",
+                "transformer",
+                "nlp"
+            ],
+            "follow_ups": [
+                "What is MLM?",
+                "Why does GPT scale better?"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "ml_020",
+            "company": "Snap",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_theory",
+            "domain": "cv",
+            "question": "How do generative models work? Compare GANs, VAEs, and Diffusion models.",
+            "answer": "**Generative Models Comparison:**\n\n**GANs (Generative Adversarial Networks):**\n- Two networks: Generator vs Discriminator\n- Minimax game\n- Pros: Sharp images\n- Cons: Training instability, mode collapse\n\n**VAEs (Variational Autoencoders):**\n- Encode → Latent → Decode\n- Probabilistic, ELBO objective\n- Pros: Stable training, interpretable latent\n- Cons: Blurry outputs\n\n**Diffusion Models:**\n- Forward: Add noise gradually\n- Reverse: Learn to denoise\n- Pros: Best quality, stable training\n- Cons: Slow sampling (many steps)\n\n**Quality Ranking (2024):**\nDiffusion > GANs > VAEs\n\n**Applications:**\n- Image generation: Stable Diffusion, DALL-E\n- Super-resolution: Real-ESRGAN\n- Video: Sora (diffusion transformer)\n\n**Metrics:**\n- FID, Inception Score, CLIP Score",
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "generative",
+                "gan",
+                "vae",
+                "diffusion"
+            ],
+            "follow_ups": [
+                "How does diffusion work?",
+                "Mode collapse in GANs?"
+            ],
+            "year": 2024
+        }
+    ]
+}
