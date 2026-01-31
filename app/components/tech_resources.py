@@ -37,11 +37,86 @@ def render_tech_resources():
     cutting_edge = data.get("cutting_edge_2024", {})
     
     # Tabs for different sections
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["🔥 最新论文", "🏢 公司论文", "📖 公司博客", "📚 经典必读", "🎓 学习资源"])
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+        "📰 博客聚合", "🔥 最新论文", "🏢 公司论文", "📖 公司博客", "📚 经典必读", "🎓 学习资源"
+    ])
+    
+    # ============ Tab 0: Blog Aggregator ============
+    with tab1:
+        st.markdown("### 📰 面试准备博客聚合")
+        st.markdown("*自动聚合顶级 ML/AI 面试准备博客的最新内容*")
+        
+        try:
+            import sys
+            sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+            from data.blog_aggregator import blog_aggregator, get_latest_articles, get_blog_sources
+            
+            col1, col2 = st.columns([3, 1])
+            with col2:
+                if st.button("🔄 刷新博客", key="refresh_blogs"):
+                    with st.spinner("正在获取最新文章..."):
+                        blog_aggregator.fetch_all(force_refresh=True)
+                    st.success("已更新！")
+                    st.rerun()
+            
+            # Show blog sources
+            with st.expander("📚 收录的博客源", expanded=False):
+                sources = get_blog_sources()
+                cols = st.columns(3)
+                for i, source in enumerate(sources):
+                    with cols[i % 3]:
+                        rating = "⭐" * source.get("quality_rating", 3)
+                        st.markdown(f"""
+                        **[{source.get('name')}]({source.get('url')})**  
+                        作者: {source.get('author')}  
+                        {rating}  
+                        *{source.get('description', '')[:50]}...*
+                        """)
+            
+            st.markdown("---")
+            
+            # Filter by topic
+            categories = blog_aggregator.get_categories()
+            selected_topic = st.selectbox(
+                "按主题筛选",
+                ["全部"] + list(categories.keys()),
+                format_func=lambda x: categories.get(x, x) if x != "全部" else "📋 全部文章"
+            )
+            
+            # Get articles
+            if selected_topic == "全部":
+                articles = get_latest_articles(limit=30)
+            else:
+                articles = blog_aggregator.get_by_topic(selected_topic)
+            
+            if articles:
+                for article in articles[:20]:
+                    with st.container():
+                        st.markdown(f"""
+                        <div style="padding: 1rem; border-radius: 8px; background: #1e293b; margin-bottom: 0.5rem;">
+                            <h4 style="margin: 0;">
+                                <a href="{article.get('url')}" target="_blank" style="color: #60a5fa; text-decoration: none;">
+                                    {article.get('title')}
+                                </a>
+                            </h4>
+                            <p style="color: #94a3b8; font-size: 0.9rem; margin: 0.5rem 0;">
+                                {article.get('summary', '')}
+                            </p>
+                            <p style="color: #64748b; font-size: 0.8rem; margin: 0;">
+                                📝 {article.get('source_name')} · {article.get('published', '')[:10]}
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+            else:
+                st.info("暂无文章，点击刷新获取最新内容")
+                
+        except Exception as e:
+            st.error(f"加载博客聚合器失败: {e}")
+            st.info("请确保已安装 feedparser: pip install feedparser")
     
     
     # ============ Tab 1: Latest Papers (Dynamic) ============
-    with tab1:
+    with tab2:
         st.markdown("### 🔥 最新 ML/AI 论文")
         st.markdown("*实时从 arXiv、Hugging Face 获取最新研究*")
         
@@ -109,7 +184,7 @@ def render_tech_resources():
     
     
     # ============ Tab 2: Company Papers ============
-    with tab2:
+    with tab3:
         st.markdown("### 🏢 公司最新论文")
         st.markdown("*追踪各大科技公司的最新研究成果*")
         
@@ -176,7 +251,7 @@ def render_tech_resources():
             st.info("请访问各公司官方研究页面查看最新论文")
     
     # ============ Tab 3: Company Blogs ============
-    with tab3:
+    with tab4:
         st.markdown("### 📖 技术博客导航")
         st.markdown("*点击链接直接访问各公司工程博客*")
         
@@ -214,7 +289,7 @@ def render_tech_resources():
             st.markdown("---")
     
     # ============ Tab 4: Must-Read Papers ============
-    with tab4:
+    with tab5:
         st.markdown("### 📚 必读论文 & 文章")
         st.markdown("*MLE 面试高频引用的经典论文*")
         
@@ -276,7 +351,7 @@ def render_tech_resources():
                     st.info(f"💡 {paper.get('relevance', '')}")
     
     # ============ Tab 5: Learning Resources ============
-    with tab5:
+    with tab6:
         st.markdown("### 🎓 学习资源")
         
         # Courses
