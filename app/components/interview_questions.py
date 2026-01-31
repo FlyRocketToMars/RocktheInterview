@@ -392,8 +392,8 @@ def render_interview_questions():
                     answer = "\n".join(answer[1:-1])
                     st.code(answer, language="python")
                 else:
-                answer = "\n".join(answer)
-                st.markdown(answer)
+                    answer = "\n".join(answer)
+                    st.markdown(answer)
             elif answer.startswith("```"):
                 st.code(answer.replace("```python", "").replace("```", ""), language="python")
             else:
