@@ -446,6 +446,7 @@ def main():
             t("nav_jd", lang),
             t("nav_analysis", lang),
             t("nav_plan", lang),
+            t("nav_trends", lang),
             t("nav_questions", lang),
             t("nav_mock", lang),
             t("nav_jobs", lang),
@@ -707,31 +708,35 @@ def main():
         from components.learning_plan import render_learning_plan
         render_learning_plan()
     
-    elif page_index == 6:  # Interview Questions
+    elif page_index == 6:  # Interview Trends
+        from components.interview_trends import render_interview_trends
+        render_interview_trends()
+    
+    elif page_index == 7:  # Interview Questions
         from components.interview_questions import render_interview_questions
         render_interview_questions()
     
-    elif page_index == 7:  # Mock Interview
+    elif page_index == 8:  # Mock Interview
         from components.mock_interview import render_mock_interview
         render_mock_interview()
     
-    elif page_index == 8:  # Job Match
+    elif page_index == 9:  # Job Match
         from components.job_matching import render_job_matching
         render_job_matching()
     
-    elif page_index == 9:  # Resources
+    elif page_index == 10:  # Resources
         from components.tech_resources import render_tech_resources
         render_tech_resources()
     
-    elif page_index == 10:  # Community
+    elif page_index == 11:  # Community
         from components.community_qa import render_community_qa
         render_community_qa()
     
-    elif page_index == 11:  # Profile
+    elif page_index == 12:  # Profile
         from components.user_profile import render_user_profile
         render_user_profile()
     
-    elif page_index == 12:  # Notifications
+    elif page_index == 13:  # Notifications
         from components.notification_settings import render_notification_settings
         render_notification_settings()
 

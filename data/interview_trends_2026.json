@@ -1,0 +1,680 @@
+{
+    "metadata": {
+        "version": "2026-Q1",
+        "last_updated": "2026-01-31",
+        "sources": [
+            "Industry interviews",
+            "Glassdoor",
+            "Blind",
+            "一亩三分地",
+            "Tech blogs"
+        ]
+    },
+    "trends_overview": {
+        "title": "2026 MLE 面试趋势总览",
+        "summary": "LLM/GenAI 成为面试必考项，传统 ML 依然重要但权重下降。系统设计更强调端到端 AI 产品思维。",
+        "hot_topics": [
+            "RAG 系统设计",
+            "LLM 微调与部署",
+            "AI Agent 架构",
+            "模型安全与对齐",
+            "MLOps 成熟度"
+        ],
+        "cooling_topics": [
+            "传统 ML 算法手推",
+            "特征工程细节",
+            "单一模型优化"
+        ]
+    },
+    "trends_by_domain": {
+        "llm_genai": {
+            "name": "LLM / GenAI",
+            "icon": "🤖",
+            "heat": 5,
+            "weight_in_interview": "40%",
+            "summary": "几乎所有 MLE 面试都会涉及 LLM，从基础原理到生产部署",
+            "hot_topics": [
+                {
+                    "topic": "RAG 系统设计",
+                    "frequency": "极高",
+                    "companies": [
+                        "Google",
+                        "Meta",
+                        "OpenAI",
+                        "Anthropic",
+                        "Microsoft"
+                    ],
+                    "key_points": [
+                        "Chunking 策略选择",
+                        "Embedding 模型选择与评估",
+                        "Hybrid Search (Dense + Sparse)",
+                        "Reranking 模型",
+                        "Hallucination 检测",
+                        "多轮对话上下文管理"
+                    ],
+                    "sample_questions": [
+                        "设计一个企业知识库问答系统",
+                        "如何检测和减少 RAG 系统的幻觉？",
+                        "比较不同的 chunking 策略"
+                    ]
+                },
+                {
+                    "topic": "LLM 微调 (Fine-tuning)",
+                    "frequency": "高",
+                    "companies": [
+                        "OpenAI",
+                        "Anthropic",
+                        "Google",
+                        "Meta"
+                    ],
+                    "key_points": [
+                        "LoRA / QLoRA 原理",
+                        "Full fine-tuning vs PEFT",
+                        "数据准备与清洗",
+                        "评估指标选择",
+                        "Catastrophic forgetting"
+                    ],
+                    "sample_questions": [
+                        "解释 LoRA 的工作原理",
+                        "什么时候选择 fine-tuning vs RAG？",
+                        "如何评估 fine-tuned 模型质量？"
+                    ]
+                },
+                {
+                    "topic": "Prompt Engineering",
+                    "frequency": "高",
+                    "companies": [
+                        "All"
+                    ],
+                    "key_points": [
+                        "Chain-of-Thought (CoT)",
+                        "Few-shot vs Zero-shot",
+                        "Self-consistency",
+                        "ReAct 框架",
+                        "Prompt injection 防护"
+                    ],
+                    "sample_questions": [
+                        "如何设计一个稳定的 prompt？",
+                        "解释 Chain-of-Thought 的原理",
+                        "如何防止 prompt injection？"
+                    ]
+                },
+                {
+                    "topic": "LLM 推理优化",
+                    "frequency": "中高",
+                    "companies": [
+                        "Google",
+                        "Meta",
+                        "NVIDIA",
+                        "AWS"
+                    ],
+                    "key_points": [
+                        "KV Cache 管理",
+                        "Continuous Batching",
+                        "Speculative Decoding",
+                        "量化 (INT8/INT4)",
+                        "vLLM / TensorRT-LLM"
+                    ],
+                    "sample_questions": [
+                        "如何降低 LLM 推理延迟？",
+                        "解释 KV Cache 的作用",
+                        "设计一个高吞吐 LLM serving 系统"
+                    ]
+                },
+                {
+                    "topic": "AI Agent",
+                    "frequency": "中",
+                    "companies": [
+                        "OpenAI",
+                        "Google",
+                        "Anthropic"
+                    ],
+                    "key_points": [
+                        "ReAct / Plan-and-Execute",
+                        "Tool Use / Function Calling",
+                        "Memory 管理",
+                        "Multi-agent 协作",
+                        "Safety guardrails"
+                    ],
+                    "sample_questions": [
+                        "设计一个可以浏览网页的 AI agent",
+                        "Agent 如何决定使用哪个工具？",
+                        "如何确保 Agent 行为安全？"
+                    ]
+                }
+            ],
+            "preparation_tips": [
+                "熟悉 Transformer 架构细节",
+                "动手实践 RAG 系统",
+                "了解主流 LLM 的差异 (GPT-4, Claude, Llama)",
+                "关注 AI safety 和对齐问题"
+            ]
+        },
+        "ml_fundamentals": {
+            "name": "ML 基础理论",
+            "icon": "📚",
+            "heat": 3,
+            "weight_in_interview": "15%",
+            "summary": "权重下降但仍是基础，主要考察理解深度而非记忆公式",
+            "hot_topics": [
+                {
+                    "topic": "经典算法原理",
+                    "frequency": "中",
+                    "companies": [
+                        "Meta",
+                        "Google",
+                        "Amazon"
+                    ],
+                    "key_points": [
+                        "Bias-Variance Tradeoff",
+                        "正则化 (L1/L2)",
+                        "梯度下降优化器",
+                        "过拟合/欠拟合诊断",
+                        "交叉验证"
+                    ],
+                    "sample_questions": [
+                        "解释 L1 和 L2 正则化的区别",
+                        "如何诊断模型是过拟合还是欠拟合？",
+                        "SGD vs Adam 什么时候用哪个？"
+                    ]
+                },
+                {
+                    "topic": "评估指标",
+                    "frequency": "高",
+                    "companies": [
+                        "All"
+                    ],
+                    "key_points": [
+                        "Classification: Precision, Recall, F1, AUC",
+                        "Regression: MAE, RMSE, R²",
+                        "Ranking: NDCG, MAP, MRR",
+                        "类别不平衡处理",
+                        "Online vs Offline 指标"
+                    ],
+                    "sample_questions": [
+                        "什么时候用 Precision 什么时候用 Recall？",
+                        "如何处理类别不平衡问题？",
+                        "AUC 的直观解释是什么？"
+                    ]
+                },
+                {
+                    "topic": "深度学习基础",
+                    "frequency": "中",
+                    "companies": [
+                        "All"
+                    ],
+                    "key_points": [
+                        "反向传播",
+                        "激活函数选择",
+                        "BatchNorm vs LayerNorm",
+                        "Dropout 原理",
+                        "梯度消失/爆炸"
+                    ],
+                    "sample_questions": [
+                        "为什么 ReLU 比 Sigmoid 好？",
+                        "LayerNorm 和 BatchNorm 什么时候用？",
+                        "解释 Dropout 为什么能防止过拟合"
+                    ]
+                }
+            ],
+            "preparation_tips": [
+                "理解原理比记忆公式更重要",
+                "能够解释给非技术人员",
+                "准备 trade-off 分析"
+            ]
+        },
+        "system_design": {
+            "name": "ML 系统设计",
+            "icon": "🏗️",
+            "heat": 5,
+            "weight_in_interview": "25%",
+            "summary": "越来越强调端到端思维，从问题定义到上线监控的完整链路",
+            "hot_topics": [
+                {
+                    "topic": "推荐系统",
+                    "frequency": "极高",
+                    "companies": [
+                        "TikTok",
+                        "Meta",
+                        "Netflix",
+                        "Spotify",
+                        "YouTube"
+                    ],
+                    "key_points": [
+                        "Two-Tower 模型",
+                        "召回 vs 排序 vs 重排",
+                        "实时特征",
+                        "冷启动问题",
+                        "多目标优化",
+                        "Explore-Exploit"
+                    ],
+                    "sample_questions": [
+                        "设计 TikTok 的推荐系统",
+                        "如何解决新用户冷启动？",
+                        "如何平衡用户体验和商业目标？"
+                    ]
+                },
+                {
+                    "topic": "搜索排序",
+                    "frequency": "高",
+                    "companies": [
+                        "Google",
+                        "Microsoft",
+                        "Amazon",
+                        "Airbnb"
+                    ],
+                    "key_points": [
+                        "Query Understanding",
+                        "候选召回 (BM25 + Dense)",
+                        "Learning to Rank",
+                        "Position Bias",
+                        "多阶段排序"
+                    ],
+                    "sample_questions": [
+                        "设计 Google 搜索的排序系统",
+                        "如何处理 position bias？",
+                        "Semantic search 如何实现？"
+                    ]
+                },
+                {
+                    "topic": "广告系统",
+                    "frequency": "中高",
+                    "companies": [
+                        "Meta",
+                        "Google",
+                        "TikTok",
+                        "Amazon"
+                    ],
+                    "key_points": [
+                        "CTR 预估",
+                        "CVR 预估",
+                        "竞价机制",
+                        "归因模型",
+                        "预算分配"
+                    ],
+                    "sample_questions": [
+                        "设计 Facebook 广告系统",
+                        "如何预估广告点击率？",
+                        "解释 delayed conversion 问题"
+                    ]
+                },
+                {
+                    "topic": "内容审核 / Trust & Safety",
+                    "frequency": "中",
+                    "companies": [
+                        "Meta",
+                        "TikTok",
+                        "YouTube",
+                        "Twitter"
+                    ],
+                    "key_points": [
+                        "多模态检测 (文本+图片+视频)",
+                        "实时 vs 批处理",
+                        "误判权衡",
+                        "对抗样本",
+                        "人工审核队列"
+                    ],
+                    "sample_questions": [
+                        "设计一个短视频内容审核系统",
+                        "如何处理 false positive 问题？",
+                        "对抗性内容如何检测？"
+                    ]
+                },
+                {
+                    "topic": "实时特征系统",
+                    "frequency": "中",
+                    "companies": [
+                        "Uber",
+                        "Doordash",
+                        "Stripe"
+                    ],
+                    "key_points": [
+                        "Feature Store 架构",
+                        "Online/Offline 一致性",
+                        "Point-in-time correctness",
+                        "特征回填",
+                        "特征监控"
+                    ],
+                    "sample_questions": [
+                        "设计一个实时特征系统",
+                        "如何保证训练和推理特征一致？",
+                        "解释 point-in-time correctness"
+                    ]
+                }
+            ],
+            "preparation_tips": [
+                "掌握标准框架 (Clarify, Metrics, Architecture, Deep Dive)",
+                "准备 5-10 个经典系统",
+                "理解 trade-off (latency vs accuracy)",
+                "关注端到端流程"
+            ]
+        },
+        "mlops": {
+            "name": "MLOps / 生产 ML",
+            "icon": "⚙️",
+            "heat": 4,
+            "weight_in_interview": "10%",
+            "summary": "公司越来越重视模型的可维护性和可靠性",
+            "hot_topics": [
+                {
+                    "topic": "模型监控",
+                    "frequency": "高",
+                    "companies": [
+                        "All"
+                    ],
+                    "key_points": [
+                        "数据漂移检测",
+                        "模型性能监控",
+                        "告警策略",
+                        "自动回滚",
+                        "A/B 测试框架"
+                    ],
+                    "sample_questions": [
+                        "如何监控生产中的 ML 模型？",
+                        "什么时候触发模型重训练？",
+                        "数据漂移如何检测？"
+                    ]
+                },
+                {
+                    "topic": "模型部署",
+                    "frequency": "高",
+                    "companies": [
+                        "All"
+                    ],
+                    "key_points": [
+                        "容器化 (Docker/K8s)",
+                        "模型版本管理",
+                        "金丝雀发布",
+                        "蓝绿部署",
+                        "GPU 资源管理"
+                    ],
+                    "sample_questions": [
+                        "如何安全地发布新模型？",
+                        "模型 rollback 策略是什么？",
+                        "如何处理模型多版本？"
+                    ]
+                },
+                {
+                    "topic": "实验平台",
+                    "frequency": "中",
+                    "companies": [
+                        "Meta",
+                        "Netflix",
+                        "Airbnb",
+                        "Google"
+                    ],
+                    "key_points": [
+                        "A/B 测试设计",
+                        "统计显著性",
+                        "多臂老虎机",
+                        "长期效应评估",
+                        "干扰效应"
+                    ],
+                    "sample_questions": [
+                        "如何设计一个 A/B 测试？",
+                        "如何确定样本量？",
+                        "网络效应如何处理？"
+                    ]
+                }
+            ],
+            "preparation_tips": [
+                "了解常见 MLOps 工具 (MLflow, Kubeflow)",
+                "理解 CI/CD for ML",
+                "准备生产问题处理案例"
+            ]
+        },
+        "cv_vision": {
+            "name": "计算机视觉",
+            "icon": "👁️",
+            "heat": 3,
+            "weight_in_interview": "5%",
+            "summary": "独立 CV 岗位减少，但多模态理解成为热点",
+            "hot_topics": [
+                {
+                    "topic": "多模态模型",
+                    "frequency": "高",
+                    "companies": [
+                        "OpenAI",
+                        "Google",
+                        "Meta"
+                    ],
+                    "key_points": [
+                        "CLIP 架构",
+                        "Vision-Language Models",
+                        "Image-Text Matching",
+                        "Visual QA",
+                        "Image Generation (Diffusion)"
+                    ],
+                    "sample_questions": [
+                        "解释 CLIP 的工作原理",
+                        "如何训练一个 VLM？",
+                        "图文检索系统怎么设计？"
+                    ]
+                },
+                {
+                    "topic": "检测与分割",
+                    "frequency": "中",
+                    "companies": [
+                        "Tesla",
+                        "Waymo",
+                        "Apple"
+                    ],
+                    "key_points": [
+                        "YOLO 系列",
+                        "Segment Anything (SAM)",
+                        "实时推理优化",
+                        "边缘部署"
+                    ],
+                    "sample_questions": [
+                        "比较 one-stage 和 two-stage 检测器",
+                        "如何在移动端部署视觉模型？"
+                    ]
+                }
+            ],
+            "preparation_tips": [
+                "关注多模态而非单纯 CV",
+                "了解 Diffusion Models 基础",
+                "结合 LLM 的视觉应用"
+            ]
+        },
+        "nlp": {
+            "name": "NLP",
+            "icon": "📝",
+            "heat": 4,
+            "weight_in_interview": "5%",
+            "summary": "传统 NLP 被 LLM 取代，但文本处理基础仍是加分项",
+            "hot_topics": [
+                {
+                    "topic": "文本嵌入",
+                    "frequency": "高",
+                    "companies": [
+                        "All"
+                    ],
+                    "key_points": [
+                        "Sentence Transformers",
+                        "Embedding 质量评估",
+                        "多语言嵌入",
+                        "领域适配"
+                    ],
+                    "sample_questions": [
+                        "如何选择 embedding 模型？",
+                        "如何评估 embedding 质量？"
+                    ]
+                },
+                {
+                    "topic": "信息抽取",
+                    "frequency": "中",
+                    "companies": [
+                        "Google",
+                        "LinkedIn",
+                        "Amazon"
+                    ],
+                    "key_points": [
+                        "NER",
+                        "关系抽取",
+                        "结构化输出",
+                        "LLM for IE"
+                    ],
+                    "sample_questions": [
+                        "从非结构化文本提取实体",
+                        "如何保证抽取结果的结构化？"
+                    ]
+                }
+            ],
+            "preparation_tips": [
+                "理解 Transformer 原理",
+                "关注 LLM 时代的 NLP 新范式",
+                "文本预处理基础"
+            ]
+        },
+        "behavioral": {
+            "name": "行为面试",
+            "icon": "🗣️",
+            "heat": 4,
+            "weight_in_interview": "不计入技术分但可一票否决",
+            "summary": "越来越重要，特别是 Staff+ 级别",
+            "hot_topics": [
+                {
+                    "topic": "Leadership / Impact",
+                    "frequency": "极高",
+                    "companies": [
+                        "All"
+                    ],
+                    "key_points": [
+                        "项目 ownership",
+                        "跨团队协作",
+                        "技术决策",
+                        "Conflict resolution",
+                        "Mentorship"
+                    ],
+                    "sample_questions": [
+                        "Tell me about a project you led",
+                        "Describe a conflict with a teammate",
+                        "How do you handle ambiguity?"
+                    ]
+                },
+                {
+                    "topic": "公司价值观匹配",
+                    "frequency": "高",
+                    "companies": [
+                        "Amazon (LP)",
+                        "Meta",
+                        "Google"
+                    ],
+                    "key_points": [
+                        "Amazon: Customer Obsession, Ownership, Bias for Action",
+                        "Meta: Move Fast, Be Bold",
+                        "Google: Googleyness"
+                    ],
+                    "sample_questions": [
+                        "Tell me about a time you disagreed with your manager",
+                        "Describe a failure and what you learned",
+                        "How do you prioritize competing priorities?"
+                    ]
+                }
+            ],
+            "preparation_tips": [
+                "准备 8-10 个 STAR stories",
+                "每个故事要能回答多个问题",
+                "练习简洁有力的表达",
+                "了解目标公司的价值观"
+            ]
+        }
+    },
+    "company_specific_trends": {
+        "google": {
+            "name": "Google",
+            "focus_areas": [
+                "LLM/RAG",
+                "Search ranking",
+                "ML fundamentals deep dive"
+            ],
+            "unique_aspects": [
+                "More theoretical depth",
+                "Googleyness behavioral"
+            ],
+            "recent_changes": [
+                "More LLM questions since 2024",
+                "Less coding, more system design"
+            ]
+        },
+        "meta": {
+            "name": "Meta",
+            "focus_areas": [
+                "Ranking/Recommendation",
+                "Ads",
+                "Content moderation"
+            ],
+            "unique_aspects": [
+                "Very coding heavy",
+                "Move fast culture fit"
+            ],
+            "recent_changes": [
+                "GenAI integration into products",
+                "Focus on efficiency"
+            ]
+        },
+        "openai": {
+            "name": "OpenAI",
+            "focus_areas": [
+                "LLM internals",
+                "RLHF/Alignment",
+                "Safety"
+            ],
+            "unique_aspects": [
+                "Research depth required",
+                "Mission alignment critical"
+            ],
+            "recent_changes": [
+                "More engineering focus, less pure research"
+            ]
+        },
+        "amazon": {
+            "name": "Amazon",
+            "focus_areas": [
+                "System design",
+                "Leadership Principles",
+                "Scale"
+            ],
+            "unique_aspects": [
+                "LP stories are critical",
+                "Operational focus"
+            ],
+            "recent_changes": [
+                "AWS AI services knowledge helpful",
+                "Bedrock/SageMaker"
+            ]
+        },
+        "tiktok": {
+            "name": "TikTok/ByteDance",
+            "focus_areas": [
+                "Recommendation",
+                "Content understanding",
+                "Real-time ML"
+            ],
+            "unique_aspects": [
+                "Speed matters",
+                "Global scale challenges"
+            ],
+            "recent_changes": [
+                "More LLM integration",
+                "Focus on efficiency"
+            ]
+        }
+    },
+    "salary_trends": {
+        "note": "Ranges for US markets, E5/L5 equivalent",
+        "ranges": {
+            "Google L5 MLE": "$250K - $350K TC",
+            "Meta E5 MLE": "$280K - $400K TC",
+            "OpenAI": "$300K - $450K TC",
+            "Amazon L6 Applied Scientist": "$220K - $320K TC",
+            "Startups (Series B+)": "$200K - $350K TC"
+        },
+        "trends": [
+            "LLM/GenAI specialists command 20-30% premium",
+            "Remote positions still available but less common",
+            "Stock-heavy compensation at pre-IPO startups"
+        ]
+    }
+}
