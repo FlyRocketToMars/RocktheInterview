@@ -226,11 +226,27 @@ except ImportError:
                 "auth_login": "🔑 登录",
                 "auth_register": "📝 注册",
                 "auth_email": "📧 邮箱",
+                "auth_email_placeholder": "your@email.com",
                 "auth_password": "🔒 密码",
+                "auth_password_placeholder": "输入密码",
+                "auth_password_set": "设置密码 (至少6位)",
+                "auth_confirm_password": "🔒 确认密码",
+                "auth_confirm_placeholder": "再次输入密码",
                 "auth_login_btn": "登录", 
                 "auth_register_btn": "注册",
                 "auth_guest": "👤 以访客身份继续",
-                "auth_or": "或者"
+                "auth_or": "或者",
+                "auth_guest_mode": "👤 访客模式",
+                "auth_guest_hint": "登录后可保存进度",
+                "auth_error_empty": "请填写邮箱和密码",
+                "auth_error_all": "请填写所有字段",
+                "auth_error_password_short": "密码至少6位",
+                "auth_error_password_mismatch": "两次密码不一致",
+                "auth_error_user_exists": "该邮箱已注册",
+                "auth_error_user_not_found": "用户不存在",
+                "auth_error_wrong_password": "密码错误",
+                "auth_success_login": "登录成功！",
+                "auth_success_register": "注册成功！"
             },
             "en": {
                 "auth_title": "🔐 Sign In",
@@ -238,16 +254,35 @@ except ImportError:
                 "auth_login": "🔑 Sign In",
                 "auth_register": "📝 Sign Up", 
                 "auth_email": "📧 Email",
+                "auth_email_placeholder": "your@email.com",
                 "auth_password": "🔒 Password",
+                "auth_password_placeholder": "Enter password",
+                "auth_password_set": "Set password (min 6 chars)",
+                "auth_confirm_password": "🔒 Confirm Password",
+                "auth_confirm_placeholder": "Re-enter password",
                 "auth_login_btn": "Sign In",
                 "auth_register_btn": "Sign Up",
                 "auth_guest": "👤 Continue as Guest",
-                "auth_or": "or"
+                "auth_or": "or",
+                "auth_guest_mode": "👤 Guest Mode",
+                "auth_guest_hint": "Sign in to save progress",
+                "auth_error_empty": "Please enter email and password",
+                "auth_error_all": "Please fill in all fields",
+                "auth_error_password_short": "Password must be at least 6 characters",
+                "auth_error_password_mismatch": "Passwords do not match",
+                "auth_error_user_exists": "Email already registered",
+                "auth_error_user_not_found": "User not found",
+                "auth_error_wrong_password": "Incorrect password",
+                "auth_success_login": "Login successful!",
+                "auth_success_register": "Registration successful!"
             }
         }
         
         def t(key, lang="zh"):
             return FALLBACK_TRANSLATIONS.get(lang, {}).get(key, key)
+            
+        def get_language():
+            return st.session_state.get("language", "zh")
 
 def render_auth_page():
     """Render the authentication page with i18n support."""
@@ -258,17 +293,31 @@ def render_auth_page():
         if "language" not in st.session_state:
             st.session_state.language = "zh"
         
-        lang = st.selectbox(
+        current_lang = st.session_state.language
+        lang_options = list(LANGUAGES.keys())
+        
+        # Determine index safely
+        try:
+            current_index = lang_options.index(current_lang)
+        except ValueError:
+            current_index = 0
+            
+        selected_lang = st.selectbox(
             "🌐",
-            list(LANGUAGES.keys()),
-            format_func=lambda x: LANGUAGES[x],
-            index=list(LANGUAGES.keys()).index(st.session_state.language),
+            lang_options,
+            format_func=lambda x: LANGUAGES.get(x, x),
+            index=current_index,
             key="auth_lang_selector",
             label_visibility="collapsed"
         )
-        st.session_state.language = lang
-    
-    lang = get_language()
+        
+        # Update state if changed
+        if selected_lang != st.session_state.language:
+            st.session_state.language = selected_lang
+            st.rerun()
+            
+    # Use selected_lang directly to ensure immediate update
+    lang = selected_lang
     
     st.markdown(f"""
     <div style="text-align: center; padding: 2rem 0;">
