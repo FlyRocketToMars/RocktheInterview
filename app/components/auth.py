@@ -190,24 +190,31 @@ def get_auth_handler():
     #     return LocalAuth()
 
 
+
+# Import i18n with robust fallback
+try:
+    from components.i18n import t, get_language, LANGUAGES
+except ImportError:
+    try:
+        from app.components.i18n import t, get_language, LANGUAGES
+    except ImportError:
+        # Last resort path hack
+        import sys
+        from pathlib import Path
+        current_dir = str(Path(__file__).parent)
+        if current_dir not in sys.path:
+            sys.path.append(current_dir)
+        try:
+            from i18n import t, get_language, LANGUAGES
+        except ImportError:
+            # Emergency fallback if all fails
+            t = lambda k, l: k
+            get_language = lambda: "zh"
+            LANGUAGES = {"zh": "中文", "en": "English"}
+
 def render_auth_page():
     """Render the authentication page with i18n support."""
-    # Robust import for i18n
-    try:
-        from components.i18n import t, get_language, LANGUAGES
-    except ImportError:
-        try:
-            from app.components.i18n import t, get_language, LANGUAGES
-        except ImportError:
-            # Fallback for relative import if needed
-            import sys
-            from pathlib import Path
-            # Add current directory to path
-            current_dir = str(Path(__file__).parent)
-            if current_dir not in sys.path:
-                sys.path.append(current_dir)
-            from i18n import t, get_language, LANGUAGES
-
+    
     # Language selector at top right
     col1, col2, col3 = st.columns([2, 1, 1])
     with col3:
