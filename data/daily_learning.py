@@ -299,146 +299,201 @@ class DailyLearningEngine:
         return "theory"
     
     def _get_theory_topic(self, weak_areas: List[str], progress: Dict, role: str) -> str:
-        """Get a theory topic to study."""
+        """Get a theory/fundamentals topic to study."""
         topics = {
-            "LLM": [
-                "Transformer 架构详解",
-                "Attention 机制原理",
-                "LoRA/QLoRA 微调",
-                "RAG 系统设计",
-                "Prompt Engineering 技巧",
-                "LLM 推理优化 (KV Cache)",
-                "RLHF 和对齐技术"
-            ],
             "ML": [
-                "Bias-Variance Tradeoff",
-                "正则化 L1 vs L2",
-                "评估指标选择",
-                "梯度下降优化器",
-                "过拟合诊断与处理",
-                "特征工程最佳实践"
+                # ML Foundations
+                "Bias-Variance Tradeoff (偏差-方差权衡)",
+                "Regularization: L1 vs L2 (正则化)",
+                "Gradient Descent Variants (SGD, Adam, RMSprop)",
+                "Activation Functions (ReLU, Gelu, Swish)",
+                "Batch Normalization & Layer Normalization",
+                "Evaluation Metrics (AUC, ROC, F1, Precision/Recall)",
+                "Loss Functions (Cross Entropy, Hinge, Huber)",
+                "Decision Trees & Random Forests (原理与推导)",
+                "XGBoost/LightGBM (核心原理与区别)",
+                "K-Means vs GMM (聚类算法)",
+                "PCA & t-SNE (降维技术)",
+                "SVM (Kernel Trick, Margins)",
+                "Naive Bayes (朴素贝叶斯)",
+                "Logistic Regression (推导与优缺点)"
             ],
-            "System Design": [
-                "推荐系统架构",
-                "搜索排序系统",
-                "实时特征系统",
-                "模型服务架构",
-                "A/B 测试平台"
+            "DL": [
+                # Deep Learning
+                "Backpropagation (反向传播推导)",
+                "CNN Architectures (ResNet, EfficientNet)",
+                "RNN/LSTM/GRU (原理与Vanishing Gradient)",
+                "Dropout & Implementation",
+                "Weight Initialization (Xavier, He)",
+                "Optimizers (Momentum, AdamW)"
+            ],
+            "LLM": [
+                # GenAI & LLM
+                "Transformer Architecture (Encoder/Decoder)",
+                "Self-Attention Mechanism (Q, K, V计算)",
+                "Positional Encoding (RoPE, ALiBi)",
+                "LLM Training: Pre-training vs Fine-tuning",
+                "PEFT: LoRA, QLoRA, Prefix Tuning",
+                "RLHF: PPO, DPO",
+                "Inference Optimization (KV Cache, PagedAttention)",
+                "RAG Systems (Retrieval, Vector DBs)",
+                "Prompt Engineering (CoT, ToT)",
+                "Scaling Laws (Chinchilla)"
             ]
         }
         
-        # Prioritize weak areas
-        for area in weak_areas:
-            if area in topics:
-                completed = progress.get("completed_topics", [])
-                available = [t for t in topics[area] if t not in completed]
-                if available:
-                    return random.choice(available)
+        # Determine focus based on weak areas
+        candidates = []
+        if "ML" in weak_areas or "theory" in [self._map_area_to_key(a) for a in weak_areas]:
+            candidates.extend(topics["ML"])
         
-        # Default
-        all_topics = [t for topics_list in topics.values() for t in topics_list]
-        return random.choice(all_topics)
-    
-    def _get_theory_resources(self, weak_areas: List[str]) -> List[Dict]:
-        """Get resources for theory study."""
-        resources = []
+        # Always include some ML basics if specifically requested or early phase
+        candidates.extend(topics["ML"]) 
         
-        if "LLM" in weak_areas or not weak_areas:
-            resources.append({
-                "name": "Attention Is All You Need",
-                "type": "paper",
-                "url": "https://arxiv.org/abs/1706.03762"
-            })
+        if "LLM" in weak_areas:
+            candidates.extend(topics["LLM"])
+        else:
+            candidates.extend(topics["DL"]) # Add DL basics generally
+            
+        # Filter completed
+        completed = progress.get("completed_topics", [])
+        available = [t for t in candidates if t not in completed]
         
-        resources.append({
-            "name": "ML Interview 知识点总结",
-            "type": "notes",
-            "url": "#"  # Internal link
-        })
-        
-        return resources[:3]
-    
-    def _get_coding_questions(self, company: str, progress: Dict, count: int) -> List[Dict]:
-        """Get coding questions for practice."""
-        completed = progress.get("completed_questions", [])
-        
-        # Sample questions (in real app, pull from question bank)
-        questions = [
-            {"id": "q1", "title": "两数之和", "difficulty": "Easy", "topic": "Array", "source": "LeetCode 1"},
-            {"id": "q2", "title": "合并K个排序链表", "difficulty": "Hard", "topic": "Heap", "source": "LeetCode 23"},
-            {"id": "q3", "title": "LRU Cache", "difficulty": "Medium", "topic": "Design", "source": "LeetCode 146"},
-            {"id": "q4", "title": "二叉树层序遍历", "difficulty": "Medium", "topic": "Tree", "source": "LeetCode 102"},
-            {"id": "q5", "title": "最长递增子序列", "difficulty": "Medium", "topic": "DP", "source": "LeetCode 300"},
-            {"id": "q6", "title": "实现 Trie", "difficulty": "Medium", "topic": "Trie", "source": "LeetCode 208"},
-        ]
-        
-        available = [q for q in questions if q["id"] not in completed]
-        if len(available) < count:
-            available = questions  # Reset if all done
-        
-        return random.sample(available, min(count, len(available)))
-    
+        return random.choice(available) if available else random.choice(candidates)
+
     def _get_system_design_topic(self, company: str, progress: Dict) -> str:
         """Get a system design topic."""
-        company_topics = {
-            "Google": ["搜索排序系统", "YouTube 推荐", "Google Maps 路径规划", "Gmail 垃圾邮件检测"],
-            "Meta": ["Facebook Feed 排序", "Instagram Explore", "广告 CTR 预估", "内容审核系统"],
-            "Amazon": ["商品推荐系统", "搜索相关性", "欺诈检测", "Prime Video 推荐"],
-            "TikTok": ["短视频推荐", "实时内容审核", "直播推荐", "音乐推荐"],
-            "OpenAI": ["LLM Serving 系统", "RAG 知识问答", "内容安全检测", "模型评估平台"],
-            "Snap": ["AR 滤镜推荐", "Stories 排序", "好友推荐", "广告系统"],
-            "Netflix": ["视频推荐系统", "内容个性化", "A/B 测试平台", "带宽优化"],
+        # Core ML System Design Topics
+        core_topics = [
+            "Recommendation System (推荐系统通用架构)",
+            "Search Ranking System (搜索排序)",
+            "Personalized News Feed (信息流)",
+            "Ad Click Prediction (CTR 预估)",
+            "Video Recommendation (YouTube/TikTok类)",
+            "Image Search System (以图搜图)",
+            "Near-line/Real-time Updates (实时更新)",
+            "Feature Store Design (特征平台)",
+            "Model Monitoring & Training Pipeline (MLOps)",
+            "LLM RAG System Design (企业级知识库)"
+        ]
+        
+        company_specific = {
+            "Google": ["YouTube Recommendation", "Google Search Ranking", "Google Photos Search", "Translate System"],
+            "Meta": ["News Feed Ranking", "Instagram Explore", "Ads Ranking", "Friend Recommendation"],
+            "Amazon": ["Product Recommendation", "People Also Bought", "Supply Chain Demand Forecasting"],
+            "TikTok": ["Short Video Recommendation", "Live Streaming Rec", "Content Moderation System"],
+            "Uber": ["ETA Prediction", "Surge Pricing", "Driver-Rider Matching", "UberEats Ranking"],
+            "Netflix": ["Movie Recommendation", "Homepage Personalization", "Artwork Personalization"],
+            "LinkedIn": ["Job Recommendation", "People You May Know", "Feed Ranking"],
         }
         
-        topics = company_topics.get(company, company_topics["Google"])
+        # Mix core topics with company specific ones
+        topics = core_topics + company_specific.get(company, [])
+        
         completed = progress.get("completed_topics", [])
         available = [t for t in topics if t not in completed]
         
         return random.choice(available) if available else random.choice(topics)
-    
-    def _get_behavioral_question(self, company: str, progress: Dict) -> str:
-        """Get a behavioral question."""
-        questions = [
-            "Tell me about a project you led and the impact you made.",
-            "Describe a time when you had a conflict with a teammate.",
-            "Tell me about a time you failed and what you learned.",
-            "How do you handle ambiguity in a project?",
-            "Describe a situation where you had to make a difficult decision.",
-            "Tell me about a time you went above and beyond.",
-            "How do you prioritize when you have multiple deadlines?",
-            "Describe a time you had to convince others of your idea.",
-        ]
+
+    def _create_smart_plan(self, profile: Dict, progress: Dict, days_left: int, date: str) -> Dict:
+        """Create a smart, balanced daily plan."""
         
-        return random.choice(questions)
-    
-    def _get_daily_motivation(self, days_left: int, phase: str) -> str:
-        """Get daily motivation message."""
-        messages = {
-            "foundation": [
-                "🌱 每天进步一点点，面试时你会感谢现在的自己！",
-                "💪 基础打得越牢，面试越从容！",
-                "📚 今天的积累，是明天的底气！"
+        # ... (keep existing logic) ...
+        daily_hours = profile.get("daily_hours", 2)
+        total_minutes = daily_hours * 60
+        
+        target_company = profile.get("target_company", "Google")
+        weak_areas = profile.get("weak_areas", [])
+        
+        tasks = []
+        task_id = 1
+        
+        # 1. ML Fundamentals (Always included now)
+        theory_mins = 30
+        tasks.append({
+            "id": task_id,
+            "type": "theory",
+            "icon": "🧠", # Brain icon for theory
+            "title": self._get_theory_topic(weak_areas, progress, profile.get("target_role", "MLE")),
+            "description": "复习核心概念、公式推导与优缺点",
+            "duration_min": theory_mins,
+            "time_slot": "上午 9:00",
+            "priority": "high",
+            "completed": False
+        })
+        task_id += 1
+        
+        # 2. Coding Practice
+        coding_mins = 45 
+        coding_questions = self._get_coding_questions(target_company, progress, 2)
+        tasks.append({
+            "id": task_id,
+            "type": "coding",
+            "icon": "💻",
+            "title": "算法题练习",
+            "description": f"完成 {len(coding_questions)} 道题 (重点：数据结构)",
+            "duration_min": coding_mins,
+            "time_slot": "上午 10:00",
+            "priority": "high",
+            "questions": coding_questions,
+            "completed": False
+        })
+        task_id += 1
+        
+        # 3. ML System Design (Always included for MLE)
+        sd_mins = 45
+        sd_topic = self._get_system_design_topic(target_company, progress)
+        tasks.append({
+            "id": task_id,
+            "type": "system_design",
+            "icon": "🏗️",
+            "title": f"ML系统设计: {sd_topic}",
+            "description": "设计数据流、模型选择、在线/离线架构",
+            "duration_min": sd_mins,
+            "time_slot": "下午 2:00",
+            "priority": "high",
+            "topic": sd_topic,
+            "steps": [
+                "1. 需求分析 (Metrics, Constraints)",
+                "2. 数据工程 (Data, Features, Labels)",
+                "3. 模型设计 (Model Selection, Loss)",
+                "4. 系统架构 (Training, Serving, Pipeline)",
+                "5. 扩展性与优化 (Scaling, Failure Handling)"
             ],
-            "intensive": [
-                "🔥 冲刺阶段，保持专注！你已经很棒了！",
-                "⚡ 高强度练习 = 面试时的条件反射！",
-                "🎯 每解决一道难题，就离 offer 更近一步！"
-            ],
-            "review": [
-                "📝 复习不是重复，是更深的理解！",
-                "✨ 相信自己的准备，你已经很强了！",
-                "🧘 保持节奏，稳中求进！"
-            ],
-            "final": [
-                "🎉 准备已经足够，相信自己！",
-                "😌 放松心态，正常发挥就是超常发挥！",
-                "🌟 你已经是最好的自己了，加油！"
-            ]
+            "completed": False
+        })
+        task_id += 1
+        
+        # 4. Behavioral / Review / Optional
+        if total_minutes > (theory_mins + coding_mins + sd_mins):
+            remaining = total_minutes - (theory_mins + coding_mins + sd_mins)
+            if remaining >= 15:
+                tasks.append({
+                    "id": task_id,
+                    "type": "review",
+                    "icon": "📝",
+                    "title": "今日回顾 & 笔记",
+                    "description": "总结今天的知识点，记录到笔记中",
+                    "duration_min": remaining,
+                    "time_slot": "下午/晚上",
+                    "priority": "medium",
+                    "prompts": ["今天掌握的一个新公式/概念", "系统设计中的一个Trade-off"],
+                    "completed": False
+                })
+
+        return {
+            "date": date,
+            "phase": "custom", # Simplified for now
+            "phase_name": "🔥 全面提升",
+            "focus": "ML基础 + 算法 + 系统设计",
+            "days_left": days_left,
+            "target_company": target_company,
+            "total_minutes": total_minutes,
+            "tasks": tasks,
+            "motivation": self._get_daily_motivation(days_left, "intensive"),
+            "generated_at": datetime.now().isoformat()
         }
-        
-        phase_messages = messages.get(phase, messages["foundation"])
-        return random.choice(phase_messages)
-    
+
     def _generate_default_plan(self, date: str) -> Dict:
         """Generate a default plan for new users."""
         return {
@@ -490,7 +545,7 @@ class DailyLearningEngine:
                 )
                 
                 # Track completed items
-                if task["type"] == "coding":
+                if task["type"] == "coding" and "questions" in task:
                     for q in task.get("questions", []):
                         if q["id"] not in user_data["progress"]["completed_questions"]:
                             user_data["progress"]["completed_questions"].append(q["id"])
@@ -498,6 +553,11 @@ class DailyLearningEngine:
                     topic = task.get("topic", "")
                     if topic and topic not in user_data["progress"]["completed_topics"]:
                         user_data["progress"]["completed_topics"].append(topic)
+                elif task["type"] == "theory":
+                    # Also track theory topics
+                    title = task.get("title", "")
+                    if title and title not in user_data["progress"]["completed_topics"]:
+                         user_data["progress"]["completed_topics"].append(title)
                 
                 self._save_data(data)
                 return True
