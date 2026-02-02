@@ -191,26 +191,63 @@ def get_auth_handler():
 
 
 
-# Import i18n with robust fallback
+
+# Import i18n using file path to guarantee loading in Streamlit Cloud
+import importlib.util
+import sys
+from pathlib import Path
+
+# Try standard import first
 try:
     from components.i18n import t, get_language, LANGUAGES
 except ImportError:
     try:
-        from app.components.i18n import t, get_language, LANGUAGES
-    except ImportError:
-        # Last resort path hack
-        import sys
-        from pathlib import Path
-        current_dir = str(Path(__file__).parent)
-        if current_dir not in sys.path:
-            sys.path.append(current_dir)
-        try:
-            from i18n import t, get_language, LANGUAGES
-        except ImportError:
-            # Emergency fallback if all fails
-            t = lambda k, l: k
-            get_language = lambda: "zh"
-            LANGUAGES = {"zh": "中文", "en": "English"}
+        # Load directly from file
+        i18n_path = Path(__file__).parent / "i18n.py"
+        spec = importlib.util.spec_from_file_location("i18n_auth", i18n_path)
+        i18n_module = importlib.util.module_from_spec(spec)
+        sys.modules["i18n_auth"] = i18n_module
+        spec.loader.exec_module(i18n_module)
+        
+        t = i18n_module.t
+        get_language = i18n_module.get_language
+        LANGUAGES = i18n_module.LANGUAGES
+    except Exception as e:
+        print(f"Auth i18n loading failed: {e}")
+        # Define basic fallbacks
+        LANGUAGES = {"zh": "中文", "en": "English"}
+        get_language = lambda: "zh"
+        
+        # Hardcoded fallback dictionary
+        FALLBACK_TRANSLATIONS = {
+            "zh": {
+                "auth_title": "🔐 用户登录",
+                "auth_subtitle": "登录后可保存你的学习进度",
+                "auth_login": "🔑 登录",
+                "auth_register": "📝 注册",
+                "auth_email": "📧 邮箱",
+                "auth_password": "🔒 密码",
+                "auth_login_btn": "登录", 
+                "auth_register_btn": "注册",
+                "auth_guest": "👤 以访客身份继续",
+                "auth_or": "或者"
+            },
+            "en": {
+                "auth_title": "🔐 Sign In",
+                "auth_subtitle": "Sign in to save your progress",
+                "auth_login": "🔑 Sign In",
+                "auth_register": "📝 Sign Up", 
+                "auth_email": "📧 Email",
+                "auth_password": "🔒 Password",
+                "auth_login_btn": "Sign In",
+                "auth_register_btn": "Sign Up",
+                "auth_guest": "👤 Continue as Guest",
+                "auth_or": "or"
+            }
+        }
+        
+        def t(key, lang="zh"):
+            return FALLBACK_TRANSLATIONS.get(lang, {}).get(key, key)
 
 def render_auth_page():
     """Render the authentication page with i18n support."""
