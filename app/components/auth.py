@@ -191,26 +191,45 @@ def get_auth_handler():
 
 
 def render_auth_page():
-    """Render the authentication page."""
+    """Render the authentication page with i18n support."""
+    from components.i18n import t, get_language, LANGUAGES
     
-    st.markdown("""
+    # Language selector at top right
+    col1, col2, col3 = st.columns([2, 1, 1])
+    with col3:
+        if "language" not in st.session_state:
+            st.session_state.language = "zh"
+        
+        lang = st.selectbox(
+            "🌐",
+            list(LANGUAGES.keys()),
+            format_func=lambda x: LANGUAGES[x],
+            index=list(LANGUAGES.keys()).index(st.session_state.language),
+            key="auth_lang_selector",
+            label_visibility="collapsed"
+        )
+        st.session_state.language = lang
+    
+    lang = get_language()
+    
+    st.markdown(f"""
     <div style="text-align: center; padding: 2rem 0;">
-        <h1 style="font-size: 3rem;">🔐 用户登录</h1>
-        <p style="color: #94a3b8;">登录后可保存你的学习进度</p>
+        <h1 style="font-size: 3rem;">{t('auth_title', lang)}</h1>
+        <p style="color: #94a3b8;">{t('auth_subtitle', lang)}</p>
     </div>
     """, unsafe_allow_html=True)
     
     # Auth mode tabs
-    tab1, tab2 = st.tabs(["🔑 登录", "📝 注册"])
+    tab1, tab2 = st.tabs([t("auth_login", lang), t("auth_register", lang)])
     
     auth = get_auth_handler()
     
     with tab1:
         with st.form("login_form"):
-            email = st.text_input("📧 邮箱", placeholder="your@email.com")
-            password = st.text_input("🔒 密码", type="password", placeholder="输入密码")
+            email = st.text_input(t("auth_email", lang), placeholder=t("auth_email_placeholder", lang))
+            password = st.text_input(t("auth_password", lang), type="password", placeholder=t("auth_password_placeholder", lang))
             
-            submitted = st.form_submit_button("登录", use_container_width=True)
+            submitted = st.form_submit_button(t("auth_login_btn", lang), use_container_width=True)
             
             if submitted:
                 if email and password:
@@ -229,28 +248,34 @@ def render_auth_page():
                         except Exception as e:
                             pass  # Silently fail if gamification isn't available
                         
-                        st.success(message)
+                        st.success(t("auth_success_login", lang))
                         st.rerun()
                     else:
-                        st.error(message)
+                        # Map error messages to i18n keys
+                        if "不存在" in message or "not found" in message.lower():
+                            st.error(t("auth_error_user_not_found", lang))
+                        elif "密码错误" in message or "password" in message.lower():
+                            st.error(t("auth_error_wrong_password", lang))
+                        else:
+                            st.error(message)
                 else:
-                    st.error("请填写邮箱和密码")
+                    st.error(t("auth_error_empty", lang))
     
     with tab2:
         with st.form("register_form"):
-            new_email = st.text_input("📧 邮箱", placeholder="your@email.com", key="reg_email")
-            new_password = st.text_input("🔒 密码", type="password", placeholder="设置密码 (至少6位)", key="reg_pass")
-            confirm_password = st.text_input("🔒 确认密码", type="password", placeholder="再次输入密码", key="reg_confirm")
+            new_email = st.text_input(t("auth_email", lang), placeholder=t("auth_email_placeholder", lang), key="reg_email")
+            new_password = st.text_input(t("auth_password", lang), type="password", placeholder=t("auth_password_set", lang), key="reg_pass")
+            confirm_password = st.text_input(t("auth_confirm_password", lang), type="password", placeholder=t("auth_confirm_placeholder", lang), key="reg_confirm")
             
-            submitted = st.form_submit_button("注册", use_container_width=True)
+            submitted = st.form_submit_button(t("auth_register_btn", lang), use_container_width=True)
             
             if submitted:
                 if not new_email or not new_password:
-                    st.error("请填写所有字段")
+                    st.error(t("auth_error_all", lang))
                 elif len(new_password) < 6:
-                    st.error("密码至少6位")
+                    st.error(t("auth_error_password_short", lang))
                 elif new_password != confirm_password:
-                    st.error("两次密码不一致")
+                    st.error(t("auth_error_password_mismatch", lang))
                 else:
                     success, message = auth.sign_up(new_email, new_password)
                     
@@ -262,15 +287,19 @@ def render_auth_page():
                         except Exception as e:
                             pass
                         
-                        st.success(message)
+                        st.success(t("auth_success_register", lang))
                     else:
-                        st.error(message)
+                        # Map error messages to i18n keys
+                        if "已注册" in message or "exists" in message.lower():
+                            st.error(t("auth_error_user_exists", lang))
+                        else:
+                            st.error(message)
     
     # Guest mode option
     st.markdown("---")
-    st.markdown("<p style='text-align: center; color: #64748b;'>或者</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align: center; color: #64748b;'>{t('auth_or', lang)}</p>", unsafe_allow_html=True)
     
-    if st.button("👤 以访客身份继续", use_container_width=True):
+    if st.button(t("auth_guest", lang), use_container_width=True):
         st.session_state.authenticated = True
         st.session_state.user_email = "guest"
         st.session_state.is_guest = True
