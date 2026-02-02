@@ -192,8 +192,16 @@ def get_auth_handler():
 
 def render_auth_page():
     """Render the authentication page with i18n support."""
-    # Import i18n module - use relative import for same package
-    from .i18n import t, get_language, LANGUAGES
+    import sys
+    from pathlib import Path
+    
+    # Add parent directories to path for imports
+    app_dir = Path(__file__).parent.parent
+    if str(app_dir) not in sys.path:
+        sys.path.insert(0, str(app_dir))
+    
+    # Now import i18n
+    from components.i18n import t, get_language, LANGUAGES
     
     # Language selector at top right
     col1, col2, col3 = st.columns([2, 1, 1])
