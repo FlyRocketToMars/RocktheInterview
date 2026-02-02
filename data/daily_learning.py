@@ -9,9 +9,15 @@ from typing import Dict, List, Optional
 import random
 import hashlib
 
+# Try to import knowledge evolver for dynamic questions
+try:
+    from data.knowledge_evolver import knowledge_evolver
+    HAS_EVOLVER = True
+except ImportError:
+    HAS_EVOLVER = False
 
 class DailyLearningEngine:
-    """Generates smart, personalized daily learning plans."""
+    """Generates smart, personalized daily learning plans with dynamic evolution."""
     
     def __init__(self):
         self.data_dir = Path(__file__).parent
@@ -439,6 +445,33 @@ class DailyLearningEngine:
             "completed": False
         })
         task_id += 1
+
+        # 2.5: Inject Dynamic/Trending Question if available (Evolution Mechanism)
+        if HAS_EVOLVER:
+            try:
+                trending_questions = knowledge_evolver.get_latest_questions(limit=3)
+                # Filter out seen questions
+                seen_ids = progress.get("completed_questions", []) + progress.get("completed_topics", [])
+                new_trending = [q for q in trending_questions if q.get("source") not in seen_ids]
+                
+                if new_trending:
+                    trend_q = new_trending[0]
+                    tasks.append({
+                        "id": task_id,
+                        "type": "trending",
+                        "icon": "🔥",
+                        "title": f"技术前沿: {trend_q.get('topic', 'New Tech')}",
+                        "description": f"源自最新论文/博客: {trend_q.get('title')}",
+                        "duration_min": 15,
+                        "time_slot": "午休后",
+                        "priority": "medium",
+                        "content": trend_q,  # Store full content
+                        "completed": False
+                    })
+                    task_id += 1
+            except Exception as e:
+                pass # Fail silently on dynamic fetch
+
         
         # 3. ML System Design (Always included for MLE)
         sd_mins = 45

@@ -218,6 +218,14 @@ def render_task_card(user_id: str, date: str, task: dict):
             with st.expander("✍️ 回顾提示"):
                 for prompt in task.get("prompts", []):
                     st.text_input(prompt, key=f"review_{task['id']}_{prompt[:10]}")
+        
+        elif task_type == "trending":
+            content = task.get("content", {})
+            with st.expander("🔥 前沿知识点详解"):
+                st.markdown(f"**知识来源:** {content.get('source', '')}")
+                st.markdown(f"**核心问题:** {content.get('title', '')}")
+                st.info(content.get('description', ''))
+                st.markdown("*此题目由系统根据最新技术动态自动生成*")
 
 
 def render_setup_wizard(user_id: str, is_edit: bool = False):
