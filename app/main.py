@@ -451,6 +451,7 @@ def main():
             t("nav_mock", lang),
             t("nav_jobs", lang),
             t("nav_resources", lang),
+            t("nav_papers", lang),
             t("nav_community", lang),
             t("nav_profile", lang),
             t("nav_notifications", lang),
@@ -728,15 +729,19 @@ def main():
         from components.tech_resources import render_tech_resources
         render_tech_resources()
     
-    elif page_index == 11:  # Community
+    elif page_index == 11:  # Papers
+        from components.paper_reading import render_paper_reading
+        render_paper_reading()
+    
+    elif page_index == 12:  # Community
         from components.community_qa import render_community_qa
         render_community_qa()
     
-    elif page_index == 12:  # Profile
+    elif page_index == 13:  # Profile
         from components.user_profile import render_user_profile
         render_user_profile()
     
-    elif page_index == 13:  # Notifications
+    elif page_index == 14:  # Notifications
         from components.notification_settings import render_notification_settings
         render_notification_settings()
 

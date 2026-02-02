@@ -1,0 +1,155 @@
+{
+    "papers": {
+        "sample_paper_1": {
+            "id": "sample_paper_1",
+            "title": "Attention Is All You Need",
+            "url": "https://arxiv.org/abs/1706.03762",
+            "abstract": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms...",
+            "authors": [
+                "Vaswani et al."
+            ],
+            "source": "arXiv",
+            "added_at": "2026-01-01T00:00:00",
+            "added_by": "system",
+            "annotations": [
+                {
+                    "id": "ann_001",
+                    "user_id": "demo_user",
+                    "type": "insight",
+                    "content": "Self-attention的核心思想是让序列中的每个位置都能直接关注到其他所有位置，避免了RNN的顺序依赖",
+                    "section": "方法",
+                    "created_at": "2026-01-15T10:00:00",
+                    "upvotes": 5,
+                    "upvoted_by": [],
+                    "replies": []
+                },
+                {
+                    "id": "ann_002",
+                    "user_id": "ml_researcher",
+                    "type": "question",
+                    "content": "为什么要用multi-head attention而不是single head？",
+                    "section": "方法",
+                    "created_at": "2026-01-16T14:30:00",
+                    "upvotes": 3,
+                    "upvoted_by": [],
+                    "replies": []
+                }
+            ],
+            "discussions": [
+                {
+                    "id": "disc_001",
+                    "user_id": "transformer_fan",
+                    "content": "这篇论文彻底改变了NLP领域，现在几乎所有的大模型都是基于Transformer架构的",
+                    "created_at": "2026-01-20T09:00:00",
+                    "parent_id": null,
+                    "upvotes": 10,
+                    "upvoted_by": [],
+                    "replies": [
+                        {
+                            "id": "reply_001",
+                            "user_id": "llm_expert",
+                            "content": "确实！从BERT到GPT到LLaMA，全都是Transformer的变体",
+                            "created_at": "2026-01-20T10:30:00",
+                            "upvotes": 5,
+                            "upvoted_by": []
+                        }
+                    ]
+                }
+            ],
+            "tags": [
+                "Transformer",
+                "Attention",
+                "NLP",
+                "必读经典"
+            ],
+            "reading_status": {},
+            "key_takeaways": [
+                {
+                    "id": "take_001",
+                    "user_id": "ml_student",
+                    "content": "Transformer用self-attention完全替代了RNN，实现了并行计算，大大加速了训练",
+                    "created_at": "2026-01-18T16:00:00",
+                    "upvotes": 8
+                },
+                {
+                    "id": "take_002",
+                    "user_id": "ai_researcher",
+                    "content": "Positional Encoding是让Transformer理解序列顺序的关键",
+                    "created_at": "2026-01-19T11:00:00",
+                    "upvotes": 6
+                }
+            ],
+            "difficulty": "medium",
+            "relevance_score": 10,
+            "upvotes": 25
+        },
+        "sample_paper_2": {
+            "id": "sample_paper_2",
+            "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+            "url": "https://arxiv.org/abs/2005.11401",
+            "abstract": "Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited...",
+            "authors": [
+                "Lewis et al."
+            ],
+            "source": "arXiv",
+            "added_at": "2026-01-05T00:00:00",
+            "added_by": "system",
+            "annotations": [
+                {
+                    "id": "ann_003",
+                    "user_id": "rag_expert",
+                    "type": "highlight",
+                    "content": "RAG的核心创新是将检索器和生成器端到端联合训练",
+                    "section": "方法",
+                    "created_at": "2026-01-22T15:00:00",
+                    "upvotes": 7,
+                    "upvoted_by": [],
+                    "replies": []
+                }
+            ],
+            "discussions": [
+                {
+                    "id": "disc_002",
+                    "user_id": "llm_engineer",
+                    "content": "现在几乎所有企业级LLM应用都在用RAG，面试必问！",
+                    "created_at": "2026-01-25T10:00:00",
+                    "parent_id": null,
+                    "upvotes": 15,
+                    "upvoted_by": [],
+                    "replies": []
+                }
+            ],
+            "tags": [
+                "RAG",
+                "LLM",
+                "Retrieval",
+                "面试热点"
+            ],
+            "reading_status": {},
+            "key_takeaways": [
+                {
+                    "id": "take_003",
+                    "user_id": "interview_prep",
+                    "content": "RAG = Retrieval + Generation，先检索相关文档，再生成回答，解决LLM幻觉问题",
+                    "created_at": "2026-01-26T09:00:00",
+                    "upvotes": 12
+                }
+            ],
+            "difficulty": "medium",
+            "relevance_score": 10,
+            "upvotes": 20
+        }
+    },
+    "stats": {
+        "total_annotations": 3,
+        "total_discussions": 2,
+        "active_users": [
+            "demo_user",
+            "ml_researcher",
+            "transformer_fan",
+            "llm_expert",
+            "rag_expert",
+            "llm_engineer"
+        ]
+    }
+}
