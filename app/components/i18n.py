@@ -17,6 +17,7 @@ TRANSLATIONS = {
     "zh": {
         # Navigation
         "nav_home": "🏠 首页",
+        "nav_daily": "☀️ 今日学习",
         "nav_resume": "📄 输入简历",
         "nav_target": "🎯 选择目标",
         "nav_jd": "📋 输入JD",
@@ -172,6 +173,7 @@ TRANSLATIONS = {
     "en": {
         # Navigation
         "nav_home": "🏠 Home",
+        "nav_daily": "☀️ Today",
         "nav_resume": "📄 Resume",
         "nav_target": "🎯 Target",
         "nav_jd": "📋 Job Description",

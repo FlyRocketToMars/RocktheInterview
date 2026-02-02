@@ -441,6 +441,7 @@ def main():
         # Build navigation options based on language
         nav_options = [
             t("nav_home", lang),
+            t("nav_daily", lang),
             t("nav_resume", lang),
             t("nav_target", lang),
             t("nav_jd", lang),
@@ -537,7 +538,11 @@ def main():
                  use_container_width=True, 
                  on_click=start_prep)
     
-    elif page_index == 1:  # Resume
+    elif page_index == 1:  # Daily Dashboard - TODAY'S STUDY PLAN
+        from components.daily_dashboard import render_daily_dashboard
+        render_daily_dashboard()
+    
+    elif page_index == 2:  # Resume
         st.markdown(f"## {t('resume_title', lang)}")
         st.markdown(t("resume_hint", lang))
         
@@ -583,7 +588,7 @@ def main():
             st.error(t("resume_error", lang))
             del st.session_state.extract_error
     
-    elif page_index == 2:  # Target
+    elif page_index == 3:  # Target
         st.markdown(f"## {t('target_title', lang)}")
         
         companies_data = st.session_state.companies.get("companies", [])
@@ -632,7 +637,7 @@ def main():
             st.session_state.current_step = 3
             st.rerun()
     
-    elif page_index == 3:  # JD
+    elif page_index == 4:  # JD
         st.markdown(f"## {t('jd_title', lang)}")
         
         # URL Input
@@ -668,7 +673,7 @@ def main():
             else:
                 st.error(t("jd_error", lang))
     
-    elif page_index == 4:  # Gap Analysis
+    elif page_index == 5:  # Gap Analysis
         st.markdown(f"## {t('analysis_title', lang)}")
         
         resume_skills = set(st.session_state.user_profile.get("extracted_skills", []))
@@ -705,43 +710,43 @@ def main():
                 st.session_state.current_step = 5
                 st.rerun()
     
-    elif page_index == 5:  # Study Plan - Dynamic Learning Planner
+    elif page_index == 6:  # Study Plan - Dynamic Learning Planner
         from components.learning_plan import render_learning_plan
         render_learning_plan()
     
-    elif page_index == 6:  # Interview Trends
+    elif page_index == 7:  # Interview Trends
         from components.interview_trends import render_interview_trends
         render_interview_trends()
     
-    elif page_index == 7:  # Interview Questions
+    elif page_index == 8:  # Interview Questions
         from components.interview_questions import render_interview_questions
         render_interview_questions()
     
-    elif page_index == 8:  # Mock Interview
+    elif page_index == 9:  # Mock Interview
         from components.mock_interview import render_mock_interview
         render_mock_interview()
     
-    elif page_index == 9:  # Job Match
+    elif page_index == 10:  # Job Match
         from components.job_matching import render_job_matching
         render_job_matching()
     
-    elif page_index == 10:  # Resources
+    elif page_index == 11:  # Resources
         from components.tech_resources import render_tech_resources
         render_tech_resources()
     
-    elif page_index == 11:  # Papers
+    elif page_index == 12:  # Papers
         from components.paper_reading import render_paper_reading
         render_paper_reading()
     
-    elif page_index == 12:  # Community
+    elif page_index == 13:  # Community
         from components.community_qa import render_community_qa
         render_community_qa()
     
-    elif page_index == 13:  # Profile
+    elif page_index == 14:  # Profile
         from components.user_profile import render_user_profile
         render_user_profile()
     
-    elif page_index == 14:  # Notifications
+    elif page_index == 15:  # Notifications
         from components.notification_settings import render_notification_settings
         render_notification_settings()
 
