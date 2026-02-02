@@ -192,7 +192,10 @@ def get_auth_handler():
 
 def render_auth_page():
     """Render the authentication page with i18n support."""
-    from components.i18n import t, get_language, LANGUAGES
+    try:
+        from components.i18n import t, get_language, LANGUAGES
+    except ImportError:
+        from app.components.i18n import t, get_language, LANGUAGES
     
     # Language selector at top right
     col1, col2, col3 = st.columns([2, 1, 1])
