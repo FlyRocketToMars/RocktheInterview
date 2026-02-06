@@ -8,12 +8,44 @@ class KnowledgeEvolver:
     """
     Core engine that evolves the question bank by extracting knowledge 
     from new papers, blogs, and technical resources.
+    Integrates with Alex Xu's System Design blog and other tech sources.
     """
     
     def __init__(self):
         self.data_dir = Path(__file__).parent
         self.bank_file = self.data_dir / "dynamic_question_bank.json"
         self._ensure_bank_file()
+        
+        # Try to import blog fetcher
+        try:
+            from data.blog_fetcher import blog_fetcher
+            self.blog_fetcher = blog_fetcher
+            self.has_blog_fetcher = True
+        except ImportError:
+            self.has_blog_fetcher = False
+    
+    def sync_from_blogs(self) -> int:
+        """
+        Sync latest blog posts and generate questions.
+        Returns number of new questions generated.
+        """
+        if not self.has_blog_fetcher:
+            return 0
+        
+        try:
+            # Get latest posts from all sources
+            all_posts = self.blog_fetcher.get_latest_posts()
+            new_count = 0
+            
+            for source_key, posts in all_posts.items():
+                for post in posts:
+                    questions = self.process_content_source("blog", post)
+                    new_count += len(questions)
+            
+            return new_count
+        except Exception as e:
+            print(f"Error syncing blogs: {e}")
+            return 0
         
     def _ensure_bank_file(self):
         if not self.bank_file.exists():
@@ -49,24 +81,34 @@ class KnowledgeEvolver:
             
         generated_questions = []
         
-        # 1. Analyze content and extract topics (Simulated NLP)
+        # 1. Analyze content and extract topics
         title = item.get('title', '')
         abstract = item.get('abstract', '') or item.get('summary', '')
+        source_name = item.get('source_name', '') or item.get('source', '')
+        content_type = item.get('type', '')
         
-        # 2. Generate Theory Questions based on keywords
-        if "LLM" in title or "Transformer" in title or "Language Model" in title:
-            q = self._generate_llm_question(title, abstract)
+        # 2. Special handling for Alex Xu / System Design blogs
+        if 'alex' in source_name.lower() or 'bytebytego' in source_name.lower() or content_type == 'system_design':
+            q = self._generate_alex_xu_question(title, abstract, source_name)
             if q: generated_questions.append(q)
+        
+        # 3. Handle ML/AI research blogs
+        elif content_type in ['ml_research', 'ml_systems', 'llm']:
+            if "LLM" in title or "Transformer" in title or "Language Model" in title:
+                q = self._generate_llm_question(title, abstract)
+                if q: generated_questions.append(q)
+            elif "Recommendation" in title or "Ranking" in title or "Personalization" in title:
+                q = self._generate_sys_design_question(title, abstract)
+                if q: generated_questions.append(q)
+            elif "Diffusion" in title or "Generative" in title:
+                q = self._generate_diffusion_question(title, abstract)
+                if q: generated_questions.append(q)
+            else:
+                # Generic ML question
+                q = self._generate_ml_question(title, abstract, source_name)
+                if q: generated_questions.append(q)
             
-        elif "Recommendation" in title or "Ranking" in title:
-            q = self._generate_sys_design_question(title, abstract)
-            if q: generated_questions.append(q)
-            
-        elif "Diffusion" in title or "Generative" in title:
-            q = self._generate_diffusion_question(title, abstract)
-            if q: generated_questions.append(q)
-            
-        # 3. Save to bank
+        # 4. Save to bank
         if generated_questions:
             for q in generated_questions:
                 category = q.get("type", "theory")
@@ -80,6 +122,52 @@ class KnowledgeEvolver:
             self._save_bank(data)
             
         return generated_questions
+
+    def _generate_alex_xu_question(self, title: str, abstract: str, source: str) -> Dict:
+        """Generate a system design question from Alex Xu's blog."""
+        # Extract the system being designed
+        system_name = title
+        
+        # Common Alex Xu patterns
+        if "Design" in title:
+            system_name = title.replace("Design", "").replace("a", "").strip()
+        
+        return {
+            "id": f"dyn_alex_{int(datetime.now().timestamp())}",
+            "type": "system_design",
+            "topic": "System Design (Alex Xu)",
+            "title": f"系统设计: {system_name}",
+            "description": f"""
+基于 Alex Xu 的博客文章 '{title}'，设计一个 {system_name} 系统。
+
+重点考虑:
+1. 需求分析 (QPS, DAU, Storage)
+2. API 设计
+3. 数据模型 (Database Schema)
+4. 高层架构 (Components, Data Flow)
+5. 深入设计 (Caching, Sharding, Replication)
+6. 扩展性与优化
+
+参考: {abstract[:200] if abstract else '详见原文'}
+            """.strip(),
+            "source": f"{source} - {title}",
+            "is_new": True,
+            "added_at": datetime.now().isoformat(),
+            "difficulty": "medium"
+        }
+    
+    def _generate_ml_question(self, title: str, abstract: str, source: str) -> Dict:
+        """Generate a general ML question from blog/paper."""
+        return {
+            "id": f"dyn_ml_{int(datetime.now().timestamp())}",
+            "type": "theory",
+            "topic": "ML Engineering",
+            "title": f"解读: {title}",
+            "description": f"基于 {source} 的文章 '{title}'，解释其核心技术点和工程实践。\n\n{abstract[:300] if abstract else ''}",
+            "source": f"{source} - {title}",
+            "is_new": True,
+            "added_at": datetime.now().isoformat()
+        }
 
     def _generate_llm_question(self, title: str, abstract: str) -> Dict:
         """Generate an LLM theory question from content."""
