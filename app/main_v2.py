@@ -193,9 +193,10 @@ def render_todays_missions(user_email: str):
     # Generate missions from AI Coach
     missions = ai_coach.generate_daily_missions(user_email, user_profile)
     
-    for mission in missions:
+    for idx, mission in enumerate(missions):
         completed_class = "completed" if mission.get("completed") else ""
-        checkbox_key = f"mission_{mission['id']}"
+        # Use index + type for unique key to avoid duplicates
+        checkbox_key = f"mission_{idx}_{mission.get('type', 'task')}"
         
         col1, col2 = st.columns([0.05, 0.95])
         

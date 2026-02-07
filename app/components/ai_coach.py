@@ -81,6 +81,7 @@ class AICoach:
         2. One from target company's focus
         3. One trending/new topic
         """
+        import time
         missions = []
         
         # Analyze what user needs most
@@ -97,11 +98,19 @@ class AICoach:
         else:
             missions.append(self._generate_coding_mission())
         
+        time.sleep(0.001)  # Ensure unique timestamps
+        
         # Mission 2: Company-specific
         missions.append(self._generate_company_mission(target_company))
         
+        time.sleep(0.001)
+        
         # Mission 3: Trending or new content
         missions.append(self._generate_trending_mission())
+        
+        # Assign unique IDs based on timestamp
+        for idx, mission in enumerate(missions):
+            mission['id'] = f"{int(time.time() * 1000)}_{idx}"
         
         return missions[:3]  # Ensure max 3 missions
     
