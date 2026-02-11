@@ -915,6 +915,12 @@
                 "- **Forward Pass (Inference):** Weights (W) + Activations (A).",
                 "- **Backward Pass + Adam Update:** (W + A) + Gradients (dW) + Momentum (m) + Variance (v).",
                 "",
+                "**Example (FP32 Comparison):**",
+                "- Assume **A = 100MB** and **W = 10MB**.",
+                "- **Forward Pass:** 110MB.",
+                "- **Backward Pass:** 100MB (A) + 10MB (W) + 10MB (dW) + 10MB (m) + 10MB (v) + workspace buffers.",
+                "- **Total:** $\\approx$ 150MB+ (Without 2nd-order states, this would only be 120MB).",
+                "",
                 "**Conclusion:** The 3x rule of thumb often accounts for the fact that for every parameter (W), 2nd-order optimizers require multiple additional buffers (G, m, v) to be resident in memory simultaneously."
             ],
             "follow_ups": [
@@ -930,7 +936,7 @@
                 "training"
             ],
             "common_mistakes": [
-                "Not able to identify it's coming from 2nd-order optimizer",
+                "Not able to identify it's coming from 2nd-order optimizer"
             ],
             "year": 2024
         },
