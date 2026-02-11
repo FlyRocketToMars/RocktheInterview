@@ -898,52 +898,45 @@
             "year": 2024
         },
         {
-            "id": "fund_005",
-            "company": "Apple",
+            "id": "ml_fund_006",
+            "company": "Amazon",
             "role": "MLE",
-            "level": "L4/E4",
+            "level": "L5/E5",
             "round": "ml_theory",
-            "domain": "fundamentals",
-            "question": "Compare different optimization algorithms: SGD, Adam, AdaGrad. When to use each?",
+            "domain": "ml_ops",
+            "question": "Explain why backward pass usually needs 3x memory than forward pass?",
             "answer": [
-                "**SGD (Stochastic Gradient Descent)**:",
-                "- Basic: w = w - lr * gradient",
-                "- + Momentum: Adds velocity term",
-                "- Pros: Good generalization, simple",
-                "- Cons: Sensitive to learning rate",
-                "- Use: Final training, well-tuned settings",
+                "**Why Backward Pass Needs More Memory:**",
+                "- **Activation Caching:** To calculate gradients, the backward pass must store intermediate activations (A) from the forward pass.",
+                "- **Gradient Storage:** Memory must be allocated for the gradients of the weights (dW).",
+                "- **2nd-Order Optimizer States:** When using optimizers like Adam, the system must also store 'Momentum' and 'Variance' (2nd-order states). These buffers stay in memory alongside the gradients.",
                 "",
-                "**AdaGrad**:",
-                "- Adapts learning rate per parameter",
-                "- Pros: Good for sparse features",
-                "- Cons: Learning rate decays too fast",
-                "- Use: NLP with sparse embeddings",
+                "**Memory Calculation (Weights + Adam Optimizer):**",
+                "- **Forward Pass (Inference):** Weights (W) + Activations (A).",
+                "- **Backward Pass + Adam Update:** (W + A) + Gradients (dW) + Momentum (m) + Variance (v).",
                 "",
-                "**Adam (Adaptive Moment Estimation)**:",
-                "- Combines momentum + adaptive LR",
-                "- First moment (mean) + second moment (variance)",
-                "- Pros: Fast convergence, robust",
-                "- Cons: May not generalize as well as SGD",
-                "- Use: Default choice, especially early training",
+                "**Example (FP32 Comparison):**",
+                "- Assume **A = 100MB** and **W = 10MB**.",
+                "- **Forward Pass:** 110MB.",
+                "- **Backward Pass:** 100MB (A) + 10MB (W) + 10MB (dW) + 10MB (m) + 10MB (v) + workspace buffers.",
+                "- **Total:** $\\approx$ 150MB+ (Without 2nd-order states, this would only be 120MB).",
                 "",
-                "**AdamW**: Adam with decoupled weight decay (recommended)"
+                "**Conclusion:** The 3x rule of thumb often accounts for the fact that for every parameter (W), 2nd-order optimizers require multiple additional buffers (G, m, v) to be resident in memory simultaneously."
             ],
             "follow_ups": [
-                "Why does SGD generalize better?",
-                "Explain learning rate scheduling"
+                "Explain activation caching?",
+                "Explain activation recomputatiion"
             ],
-            "difficulty": "medium",
+            "difficulty": "hard",
             "frequency": 4,
             "importance": 4,
             "tags": [
                 "optimization",
-                "sgd",
                 "adam",
                 "training"
             ],
             "common_mistakes": [
-                "Not explaining adaptive LR",
-                "Missing momentum explanation"
+                "Not able to identify it's coming from 2nd-order optimizer",
             ],
             "year": 2024
         },
@@ -1038,6 +1031,56 @@
                 "Blaming others",
                 "Not showing ownership",
                 "Missing learnings"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "fund_005",
+            "company": "Apple",
+            "role": "MLE",
+            "level": "L4/E4",
+            "round": "ml_theory",
+            "domain": "fundamentals",
+            "question": "Compare different optimization algorithms: SGD, Adam, AdaGrad. When to use each?",
+            "answer": [
+                "**SGD (Stochastic Gradient Descent)**:",
+                "- Basic: w = w - lr * gradient",
+                "- + Momentum: Adds velocity term",
+                "- Pros: Good generalization, simple",
+                "- Cons: Sensitive to learning rate",
+                "- Use: Final training, well-tuned settings",
+                "",
+                "**AdaGrad**:",
+                "- Adapts learning rate per parameter",
+                "- Pros: Good for sparse features",
+                "- Cons: Learning rate decays too fast",
+                "- Use: NLP with sparse embeddings",
+                "",
+                "**Adam (Adaptive Moment Estimation)**:",
+                "- Combines momentum + adaptive LR",
+                "- First moment (mean) + second moment (variance)",
+                "- Pros: Fast convergence, robust",
+                "- Cons: May not generalize as well as SGD",
+                "- Use: Default choice, especially early training",
+                "",
+                "**AdamW**: Adam with decoupled weight decay (recommended)"
+            ],
+            "follow_ups": [
+                "Why does SGD generalize better?",
+                "Explain learning rate scheduling"
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "optimization",
+                "sgd",
+                "adam",
+                "training"
+            ],
+            "common_mistakes": [
+                "Not explaining adaptive LR",
+                "Missing momentum explanation"
             ],
             "year": 2024
         }
