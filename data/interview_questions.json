@@ -843,6 +843,40 @@
             "year": 2024
         },
         {
+            "id": "coding_004",
+            "company": "LinkedIn",
+            "role": "MLE",
+            "level": "L5/E5",
+            "round": "ml_coding",
+            "domain": "fundamentals",
+            "question": "There are n houses on a 1D axis at positions [x1, x2, ..., xn]. You have to find a point on the axis to install a router such that the sum of the distances from the router to all the houses is minimized. The distance between xi and xj is defined as sqrt((xi - xj)^2). Write code to find the point.",
+            "answer": [
+                "```python",
+                "def find_min_point(arr):",
+                "    return sum(arr) / len(arr)",
+                "",
+                "```"
+            ],
+            "follow_ups": [
+                "Why this is the optimal point the mean of the array? Can you prove it?",
+                "Now, what if the distance is defined as |xi - xj|? How would you find the optimal point?",
+                "Back to L2 distance, if you have 2 routers, how would you find the optimal points?"
+            ],
+            "difficulty": "hard",
+            "frequency": 4,
+            "importance": 5,
+            "tags": [
+                "coding",
+                "statistics",
+                "optimization"
+            ],
+            "common_mistakes": [
+                "Not able to find the optimal point",
+                "Not able to prove it's the optimal point"
+            ],
+            "year": 2025
+        },
+        {
             "id": "exp_002",
             "company": "Netflix",
             "role": "MLE",
