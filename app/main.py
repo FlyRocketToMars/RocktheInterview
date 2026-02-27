@@ -357,27 +357,6 @@ def render_progress_steps():
     st.progress(progress)
 
 
-def render_stats():
-    """Render quick stats"""
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        st.metric("📄 简历技能", len(st.session_state.user_profile.get("extracted_skills", [])))
-    
-    with col2:
-        st.metric("🎯 目标公司", st.session_state.target.get("company") or "未选择")
-    
-    with col3:
-        gaps = st.session_state.analysis.get("gaps", [])
-        st.metric("🔴 技能Gap", len(gaps))
-    
-    with col4:
-        plan = st.session_state.analysis.get("study_plan", [])
-        completed = sum(1 for item in plan if item.get("completed", False))
-        total = len(plan) if plan else 0
-        st.metric("✅ 学习进度", f"{completed}/{total}")
-
-
 def main():
     """Main application entry point"""
     init_session_state()
@@ -458,7 +437,44 @@ def main():
         
         st.markdown("---")
         st.markdown(f"### {t('sidebar_stats', lang)}")
-        render_stats()
+        
+        from data.daily_learning import daily_learning
+        user_data = daily_learning.get_user_profile(user_email)
+        if user_data and "profile" in user_data:
+            profile = user_data["profile"]
+            progress = user_data.get("progress", {})
+            company = profile.get("target_company", "N/A")
+            role = profile.get("target_role", "")
+            level = profile.get("target_level", "")
+            streak = progress.get("streak_days", 0)
+            mins = progress.get("total_study_minutes", 0)
+            
+            st.markdown(f"""
+            <div style="background: #1e293b; padding: 12px; border-radius: 12px; border-left: 4px solid #3b82f6; margin-bottom: 12px;">
+                <p style="margin: 0; color: #94a3b8; font-size: 0.8rem;">🎯 Target / 目标定位</p>
+                <p style="margin: 4px 0 0 0; color: #f8fafc; font-weight: bold; font-size: 1.1rem;">
+                    {company} <span style="font-size: 0.9rem; color: #94a3b8; font-weight: normal;">| {role}</span>
+                </p>
+                <p style="margin: 2px 0 0 0; color: #64748b; font-size: 0.8rem;">{level}</p>
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <div style="flex: 1; background: #1e293b; padding: 12px; border-radius: 12px; border-left: 4px solid #f59e0b;">
+                    <p style="margin: 0; color: #94a3b8; font-size: 0.75rem;">🔥 Streak</p>
+                    <p style="margin: 4px 0 0 0; color: #f8fafc; font-weight: bold; font-size: 1rem;">
+                        {streak} Days
+                    </p>
+                </div>
+                <div style="flex: 1; background: #1e293b; padding: 12px; border-radius: 12px; border-left: 4px solid #10b981;">
+                    <p style="margin: 0; color: #94a3b8; font-size: 0.75rem;">⏱️ Study</p>
+                    <p style="margin: 4px 0 0 0; color: #f8fafc; font-weight: bold; font-size: 1rem;">
+                        {mins // 60} h
+                    </p>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.info("🎯 Please go to 'Target & Setup' to set your goal.")
         
         st.markdown("---")
         st.markdown(f"""
