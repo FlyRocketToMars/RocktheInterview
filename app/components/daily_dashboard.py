@@ -18,14 +18,25 @@ def render_daily_dashboard():
     
     user_id = st.session_state.get("user_email", "guest")
     
-    # Check if user has set up their profile
+    # Check if user has set up their profile or study plan
     user_data = daily_learning.get_user_profile(user_id)
+    from data.learning_planner import learning_planner
+    plan_data = learning_planner.get_user_plan(user_id)
     
-    if not user_data:
+    if not user_data and not plan_data:
         render_setup_wizard(user_id)
         return
         
-    user_profile = user_data.get("profile", {})
+    user_profile = user_data.get("profile", {}) if user_data else {}
+    # Synthesize dummy profile from study plan if missing
+    if not user_profile and plan_data:
+        user_profile = {
+            "target_company": "Any",
+            "target_role": plan_data.get("target_role", "SDE/MLE"),
+            "interview_date": plan_data.get("end_date", (datetime.now() + timedelta(days=30)).isoformat()),
+            "daily_hours": plan_data.get("daily_hours", 2),
+            "weak_areas": []
+        }
     
     # AI Generation
     with st.spinner("🤖 AI Coach 正在生成今日简报..."):
