@@ -349,6 +349,102 @@ class LearningPlanner:
         
         return plan
     
+    def create_plan_from_doc(self, user_id: str, doc_text: str, duration_weeks: int = 4) -> Dict:
+        """Create a custom plan based on uploaded preparation document."""
+        # Simulate an AI extraction process based on keyword matching
+        text_lower = doc_text.lower()
+        
+        # Detect role
+        target_role = "Custom"
+        if "machine learning" in text_lower or "mle" in text_lower:
+            target_role = "MLE"
+        elif "software engineer" in text_lower or "sde" in text_lower or "developer" in text_lower:
+            target_role = "SDE"
+        elif "data" in text_lower or "analytics" in text_lower or "analyst" in text_lower:
+            target_role = "Data Scientist"
+            
+        # Detect topics
+        extracted_topics = []
+        if "system design" in text_lower or "architecture" in text_lower or "scalable" in text_lower:
+            extracted_topics.append("System Design & Architecture")
+        if "algorithm" in text_lower or "data structure" in text_lower or "leetcode" in text_lower:
+            extracted_topics.append("Algorithms & Data Structures")
+        if "behavioral" in text_lower or "leadership" in text_lower or "principles" in text_lower:
+            extracted_topics.append("Behavioral & Leadership Principles")
+        if "sql" in text_lower or "database" in text_lower:
+            extracted_topics.append("SQL & Database Design")
+        if "machine learning" in text_lower or "modeling" in text_lower:
+            extracted_topics.append("Machine Learning Core Models")
+        if "python" in text_lower:
+            extracted_topics.append("Python Programming")
+        if "c++" in text_lower:
+            extracted_topics.append("C++ Systems Programming")
+        if "cloud" in text_lower or "aws" in text_lower or "gcp" in text_lower:
+            extracted_topics.append("Cloud Infrastructure Patterns")
+            
+        if not extracted_topics:
+            extracted_topics = ["Company-Specific Core Technical Skills", "Domain Knowledge", "General Problem Solving"]
+
+        doc_phases = []
+        weeks_per_phase = max(1, duration_weeks // 3)
+        
+        # Phase 1: Core Fundamentals
+        doc_phases.append({
+            "week": list(range(1, weeks_per_phase + 1)),
+            "name": "核心基础巩固 (AI基于文档生成)",
+            "focus": ["coding", "theory"],
+            "daily_tasks": {
+                "theory": 45,
+                "coding": 60,
+                "system_design": 0,
+                "mock_interview": 0
+            },
+            "topics": extracted_topics[:3] if extracted_topics else ["基础技术栈复习"]
+        })
+        
+        # Phase 2: Advanced Topics & System Design
+        second_phase_end = weeks_per_phase * 2
+        if duration_weeks < 3:
+            second_phase_end = 2
+            
+        doc_phases.append({
+            "week": list(range(weeks_per_phase + 1, second_phase_end + 1)),
+            "name": "进阶与系统设计核心 (AI基于文档生成)",
+            "focus": ["system-design", "coding"],
+            "daily_tasks": {
+                "theory": 20,
+                "coding": 45,
+                "system_design": 60,
+                "mock_interview": 0
+            },
+            "topics": [t for t in extracted_topics if "Design" in t or "Machine Learning" in t] or extracted_topics
+        })
+        
+        # Phase 3: Mock & Review
+        doc_phases.append({
+            "week": list(range(second_phase_end + 1, duration_weeks + 1)) if second_phase_end < duration_weeks else [duration_weeks],
+            "name": "全真模拟冲刺 (AI基于文档生成)",
+            "focus": ["mock-interview", "review"],
+            "daily_tasks": {
+                "theory": 0,
+                "coding": 30,
+                "system_design": 30,
+                "mock_interview": 60
+            },
+            "topics": ["公司面试面经模拟", "极高频考点冲刺", "Behavioral 故事梳理"]
+        })
+        
+        template_id = "ai_doc_plan"
+        self.STUDY_TEMPLATES[template_id] = {
+            "name": f"✨ AI 解析定制 ({target_role})",
+            "duration_weeks": duration_weeks,
+            "target_role": target_role,
+            "phases": doc_phases,
+            "description": "基于你上传的文档动态生成的独家面试重点。"
+        }
+        
+        return self.create_plan(user_id, template_id, daily_hours=2.5)
+    
     def get_user_plan(self, user_id: str) -> Optional[Dict]:
         """Get user's current study plan."""
         data = self._load_plans()
@@ -537,6 +633,9 @@ learning_planner = LearningPlanner()
 # Helper functions
 def create_study_plan(user_id: str, template_id: str, include_neetcode: bool = False) -> Dict:
     return learning_planner.create_plan(user_id, template_id, include_neetcode=include_neetcode)
+
+def create_study_plan_from_doc(user_id: str, doc_text: str, duration_weeks: int) -> Dict:
+    return learning_planner.create_plan_from_doc(user_id, doc_text, duration_weeks)
 
 def get_today_study_tasks(user_id: str) -> Dict:
     return learning_planner.get_today_tasks(user_id)

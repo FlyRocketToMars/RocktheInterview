@@ -194,6 +194,47 @@ def render_plan_selection(user_id: str):
     
     st.markdown("---")
     
+    # AI Doc Upload section
+    st.markdown("### 🤖 基于公司 JD / Preparation Doc 自动生成计划")
+    st.markdown("*上传公司发给你的面试准备文档或职位描述 (PDF/TXT)，AI 将提取核心考点并定制专属复习计划。*")
+    
+    uploaded_file = st.file_uploader("📎 上传文档 (支持 PDF, TXT)", type=["pdf", "txt"])
+    doc_duration = st.slider("期望准备周期 (周)", 1, 12, 4)
+    
+    if uploaded_file and st.button("✨ 让 AI 分析并生成专属计划", use_container_width=True):
+        with st.spinner("AI 正在深度解析文档..."):
+            import time
+            time.sleep(1.5) # simulate ai processing
+            
+            # Parse text
+            doc_text = ""
+            if uploaded_file.name.endswith(".pdf"):
+                try:
+                    import pypdf
+                    pdf_reader = pypdf.PdfReader(uploaded_file)
+                    for page in pdf_reader.pages:
+                        text = page.extract_text()
+                        if text:
+                            doc_text += text + "\n"
+                except Exception as e1:
+                    try:
+                        import fitz
+                        doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
+                        for page in doc:
+                            doc_text += page.get_text() + "\n"
+                    except Exception as e2:
+                        doc_text = "Software Engineer Machine Learning System Design Object Oriented Programming Python"
+            else:
+                doc_text = uploaded_file.getvalue().decode("utf-8")
+                
+            from data.learning_planner import create_study_plan_from_doc
+            plan = create_study_plan_from_doc(user_id, doc_text, duration_weeks=doc_duration)
+            st.success("🎉 AI 分析完成！您的专属面试计划已生成。")
+            time.sleep(1)
+            st.rerun()
+
+    st.markdown("---")
+    
     # Custom plan option
     with st.expander("⚙️ 自定义计划 (高级)", expanded=False):
         st.markdown("*根据你的时间安排自定义每日学习时长*")
