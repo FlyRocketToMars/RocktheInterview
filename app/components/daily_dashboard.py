@@ -10,36 +10,47 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from data.daily_learning import daily_learning
+from components.ai_coach import ai_coach
 
 
 def render_daily_dashboard():
-    """Render the daily learning dashboard."""
+    """Render the daily learning dashboard using AI Coach."""
     
     user_id = st.session_state.get("user_email", "guest")
     
     # Check if user has set up their profile
-    user_profile = daily_learning.get_user_profile(user_id)
+    user_data = daily_learning.get_user_profile(user_id)
     
-    if not user_profile:
+    if not user_data:
         render_setup_wizard(user_id)
         return
+        
+    user_profile = user_data.get("profile", {})
     
-    # Get today's plan
-    today = datetime.now().strftime("%Y-%m-%d")
-    plan = daily_learning.generate_daily_plan(user_id, today)
+    # AI Generation
+    with st.spinner("🤖 AI Coach 正在生成今日简报..."):
+        briefing = ai_coach.generate_daily_briefing(user_id, user_profile)
+        missions = ai_coach.generate_daily_missions(user_id, user_profile)
     
-    # Header with motivation
+    # Header with AI Greeting
     st.markdown(f"""
     <div style="background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%); 
                 padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem; text-align: center;">
         <h1 style="margin: 0; font-size: 2rem;">
-            ☀️ 今日学习计划
+            {briefing.get('greeting', '☀️ 今日学习计划')}
         </h1>
         <p style="color: #94a3b8; margin: 0.5rem 0 0 0; font-size: 1.1rem;">
-            {plan.get('motivation', '')}
+            {briefing.get('motivation', '')}
         </p>
     </div>
     """, unsafe_allow_html=True)
+    
+    # AI Insight Alert
+    if briefing.get('ai_insight'):
+        st.info(f"💡 **AI 诊断**: {briefing['ai_insight']}")
+        
+    if briefing.get('new_content_alert'):
+        st.warning(f"🔔 **新内容推送**: {briefing['new_content_alert']}")
     
     # Stats row
     col1, col2, col3, col4 = st.columns(4)
@@ -47,15 +58,15 @@ def render_daily_dashboard():
     with col1:
         st.markdown(f"""
         <div style="background: #1e293b; padding: 1rem; border-radius: 12px; text-align: center;">
-            <p style="color: #64748b; margin: 0; font-size: 0.8rem;">阶段</p>
+            <p style="color: #64748b; margin: 0; font-size: 0.8rem;">今日重点</p>
             <p style="color: #60a5fa; margin: 0; font-size: 1.1rem; font-weight: 600;">
-                {plan.get('phase_name', '')}
+                {briefing.get('focus_today', '综合')}
             </p>
         </div>
         """, unsafe_allow_html=True)
     
     with col2:
-        days_left = plan.get('days_left')
+        days_left = briefing.get('days_left')
         color = "#22c55e" if days_left and days_left > 14 else "#eab308" if days_left and days_left > 7 else "#ef4444"
         st.markdown(f"""
         <div style="background: #1e293b; padding: 1rem; border-radius: 12px; text-align: center;">
@@ -67,9 +78,9 @@ def render_daily_dashboard():
         """, unsafe_allow_html=True)
     
     with col3:
-        completed = sum(1 for t in plan.get('tasks', []) if t.get('completed'))
-        total = len(plan.get('tasks', []))
-        progress_pct = int(completed / total * 100) if total > 0 else 0
+        # We check session state for checked missions simply to display progress
+        completed = sum(1 for m in missions if st.session_state.get(f"mission_{m['id']}", False))
+        total = len(missions)
         st.markdown(f"""
         <div style="background: #1e293b; padding: 1rem; border-radius: 12px; text-align: center;">
             <p style="color: #64748b; margin: 0; font-size: 0.8rem;">今日进度</p>
@@ -84,29 +95,20 @@ def render_daily_dashboard():
         <div style="background: #1e293b; padding: 1rem; border-radius: 12px; text-align: center;">
             <p style="color: #64748b; margin: 0; font-size: 0.8rem;">目标公司</p>
             <p style="color: #f472b6; margin: 0; font-size: 1.1rem; font-weight: 600;">
-                {plan.get('target_company', 'N/A')}
+                {briefing.get('target_company', 'N/A')}
             </p>
         </div>
         """, unsafe_allow_html=True)
     
     st.markdown("---")
     
-    # Focus for today
-    st.markdown(f"""
-    <div style="background: rgba(99, 102, 241, 0.1); padding: 1rem; border-radius: 12px; 
-                border: 1px solid rgba(99, 102, 241, 0.3); margin-bottom: 1rem;">
-        <p style="margin: 0; color: #a5b4fc;">
-            🎯 <strong>今日重点:</strong> {plan.get('focus', '')}
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    
     # Tasks
-    st.markdown("### 📋 今日任务")
-    st.caption("按顺序完成，每完成一项就打勾！")
+    st.markdown("### 🎯 Today's Missions")
+    st.caption("AI 根据你的弱点和目标公司为你定制的专属今日任务。")
     
-    for task in plan.get("tasks", []):
-        render_task_card(user_id, today, task)
+    today = datetime.now().strftime("%Y-%m-%d")
+    for mission in missions:
+        render_mission_card(user_id, today, mission)
     
     # Quick actions
     st.markdown("---")
@@ -126,11 +128,14 @@ def render_daily_dashboard():
         render_setup_wizard(user_id, is_edit=True)
 
 
-def render_task_card(user_id: str, date: str, task: dict):
-    """Render a single task card."""
+def render_mission_card(user_id: str, date: str, mission: dict):
+    """Render a single AI mission card."""
     
-    is_completed = task.get("completed", False)
-    priority = task.get("priority", "medium")
+    # We will use session state for now to track completion of UI-generated AI missions
+    state_key = f"mission_{mission['id']}"
+    is_completed = st.session_state.get(state_key, False)
+    
+    priority = mission.get("priority", "medium")
     
     priority_colors = {
         "high": "#ef4444",
@@ -145,18 +150,16 @@ def render_task_card(user_id: str, date: str, task: dict):
         col1, col2, col3 = st.columns([0.5, 5, 1])
         
         with col1:
-            # Checkbox - using session state to track
-            checkbox_key = f"task_{date}_{task['id']}"
+            # Checkbox - checking it updates session state
             checked = st.checkbox(
                 "",
                 value=is_completed,
-                key=checkbox_key,
+                key=f"chk_{state_key}",
                 label_visibility="collapsed"
             )
             
-            # If just checked
-            if checked and not is_completed:
-                daily_learning.complete_task(user_id, date, task["id"])
+            if checked != is_completed:
+                st.session_state[state_key] = checked
                 st.rerun()
         
         with col2:
@@ -165,14 +168,14 @@ def render_task_card(user_id: str, date: str, task: dict):
                         border-left: 4px solid {border_color}; 
                         opacity: {'0.6' if is_completed else '1'};">
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <span style="font-size: 1.5rem;">{task.get('icon', '📌')}</span>
+                    <span style="font-size: 1.5rem;">{mission.get('icon', '📌')}</span>
                     <div>
                         <p style="margin: 0; color: #f1f5f9; font-weight: 600; 
                                   text-decoration: {'line-through' if is_completed else 'none'};">
-                            {task.get('title', '')}
+                            {mission.get('title', '')}
                         </p>
                         <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">
-                            {task.get('description', '')}
+                            {mission.get('description', '')}
                         </p>
                     </div>
                 </div>
@@ -182,50 +185,26 @@ def render_task_card(user_id: str, date: str, task: dict):
         with col3:
             st.markdown(f"""
             <div style="text-align: center; padding: 0.5rem;">
-                <p style="margin: 0; color: #64748b; font-size: 0.75rem;">{task.get('time_slot', '')}</p>
-                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">{task.get('duration_min', 0)}分钟</p>
+                <p style="margin: 0; color: #64748b; font-size: 0.75rem;">Duration</p>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">{mission.get('duration', 'N/A')}</p>
             </div>
             """, unsafe_allow_html=True)
         
-        # Expandable details
-        task_type = task.get("type", "")
+        # Details expander based on mission type/content
+        if mission.get("type") == "coding" and "content" in mission:
+            with st.expander("📝 题目详情"):
+                st.markdown(f"**题目:** {mission['content'].get('question', '')}")
+                if "focus" in mission["content"]:
+                    st.caption(f"重点解析: {mission['content']['focus']}")
         
-        if task_type == "coding" and task.get("questions"):
-            with st.expander("📝 查看题目"):
-                for q in task.get("questions", []):
-                    diff_color = {"Easy": "#22c55e", "Medium": "#eab308", "Hard": "#ef4444"}.get(q.get("difficulty", ""), "#94a3b8")
-                    st.markdown(f"""
-                    <div style="background: #334155; padding: 0.5rem; border-radius: 8px; margin-bottom: 0.5rem;">
-                        <span style="color: {diff_color}; font-size: 0.75rem;">[{q.get('difficulty', '')}]</span>
-                        <span style="color: #f1f5f9;">{q.get('title', '')}</span>
-                        <span style="color: #64748b; font-size: 0.75rem;"> - {q.get('source', '')}</span>
-                    </div>
-                    """, unsafe_allow_html=True)
+        elif mission.get("type") == "reading" and "content" in mission:
+            with st.expander("📖 阅读材料"):
+                st.markdown(f"**主题:** {mission['content'].get('topic', '')}")
         
-        elif task_type == "system_design" and task.get("steps"):
-            with st.expander("📐 设计步骤"):
-                for step in task.get("steps", []):
-                    st.markdown(f"- {step}")
-        
-        elif task_type == "behavioral":
-            with st.expander("❓ 题目 & STAR 框架"):
-                st.markdown(f"**问题:** {task.get('question', '')}")
-                st.markdown("**回答框架:**")
-                for tip in task.get("tips", []):
-                    st.markdown(f"- {tip}")
-        
-        elif task_type == "review" and task.get("prompts"):
-            with st.expander("✍️ 回顾提示"):
-                for prompt in task.get("prompts", []):
-                    st.text_input(prompt, key=f"review_{task['id']}_{prompt[:10]}")
-        
-        elif task_type == "trending":
-            content = task.get("content", {})
-            with st.expander("🔥 前沿知识点详解"):
-                st.markdown(f"**知识来源:** {content.get('source', '')}")
-                st.markdown(f"**核心问题:** {content.get('title', '')}")
-                st.info(content.get('description', ''))
-                st.markdown("*此题目由系统根据最新技术动态自动生成*")
+        elif mission.get("type") == "trending" and "content" in mission:
+             with st.expander("🔥 前沿知识点"):
+                st.markdown(f"**核心问题:** {mission['content'].get('title', '')}")
+                st.info(mission['content'].get('description', ''))
 
 
 def render_setup_wizard(user_id: str, is_edit: bool = False):
