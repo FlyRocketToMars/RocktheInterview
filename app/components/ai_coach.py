@@ -82,6 +82,43 @@ class AICoach:
         3. One trending/new topic
         """
         import time
+        from data.learning_planner import learning_planner
+        
+        # 1. First check if user has an active, formal study plan
+        plan_data = learning_planner.get_user_plan(user_id)
+        if plan_data and plan_data.get("status") == "active":
+            # Sync missions from the study plan to keep both tabs consistent!
+            today_tasks = learning_planner.get_today_tasks(user_id)
+            missions = []
+            
+            for idx, task in enumerate(today_tasks.get("tasks", [])):
+                focus = task.get("topic", "")
+                
+                # Convert plan task into mission format
+                mission = {
+                    "id": f"plan_{task['type']}_{idx}",
+                    "type": "coding" if task['type'] == "coding" else "reading" if task['type'] == "theory" else "trending",
+                    "title": f"[{task['name']}] {focus}",
+                    "description": task.get("suggested_activity", ""),
+                    "duration": f"{task.get('duration_minutes', 0)} min",
+                    "priority": "high",
+                    "icon": task.get("icon", "📝"),
+                    "completed": False
+                }
+                
+                # Expand details based on type
+                if task['type'] == "coding":
+                    mission["content"] = {"question": f"Focus on {focus}", "focus": "Time Complexity and Edge Cases"}
+                elif task['type'] == "theory":
+                    mission["content"] = {"topic": f"Read about {focus}"}
+                elif task['type'] in ["system_design", "mock_interview"]:
+                    mission["content"] = {"title": focus, "description": task.get("suggested_activity", "Practice and record yourself.")}
+                
+                missions.append(mission)
+            
+            return missions
+        
+        # 2. Add unstructured daily generated missions as fallback
         missions = []
         
         # Analyze what user needs most

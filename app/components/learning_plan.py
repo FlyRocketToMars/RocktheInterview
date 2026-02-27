@@ -165,8 +165,11 @@ def render_plan_selection(user_id: str):
     </div>
     """, unsafe_allow_html=True)
     
-    templates = get_plan_templates()
+    st.markdown("### 🧩 附加模块")
+    inc_neetcode = st.checkbox("附加 Neetcode 250 高频算法练习 (强化代码能力)", value=True)
+    st.markdown("---")
     
+    templates = get_plan_templates()
     cols = st.columns(len(templates))
     
     for i, template in enumerate(templates):
@@ -185,7 +188,7 @@ def render_plan_selection(user_id: str):
             
             if st.button(f"选择此计划", key=f"select_{template['id']}", 
                         use_container_width=True):
-                create_study_plan(user_id, template['id'])
+                create_study_plan(user_id, template['id'], include_neetcode=inc_neetcode)
                 st.success(f"🎉 已创建 {template['name']}！")
                 st.rerun()
     

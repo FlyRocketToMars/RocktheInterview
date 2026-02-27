@@ -304,13 +304,25 @@ class LearningPlanner:
     
     def create_plan(self, user_id: str, template_id: str, 
                     start_date: Optional[datetime] = None,
-                    daily_hours: float = 2.0) -> Dict:
+                    daily_hours: float = 2.0,
+                    include_neetcode: bool = False) -> Dict:
         """Create a new study plan for a user."""
         if template_id not in self.STUDY_TEMPLATES:
             raise ValueError(f"Unknown template: {template_id}")
         
-        template = self.STUDY_TEMPLATES[template_id]
+        import copy
+        template = copy.deepcopy(self.STUDY_TEMPLATES[template_id])
         start = start_date or datetime.now()
+        
+        # Inject Neetcode modules if requested
+        if include_neetcode:
+            template["name"] += " (+Neetcode)"
+            for phase in template["phases"]:
+                if "coding" not in phase["focus"]:
+                    phase["focus"].append("coding")
+                if phase["daily_tasks"].get("coding", 0) < 45:
+                    phase["daily_tasks"]["coding"] += 45
+                phase["topics"].extend(["Neetcode 高频算法: 数组与哈希/双指针", "Neetcode 树与图算法", "Neetcode DP与系统设计"])
         
         plan = {
             "id": f"{user_id}_{template_id}_{start.strftime('%Y%m%d')}",
@@ -523,8 +535,8 @@ learning_planner = LearningPlanner()
 
 
 # Helper functions
-def create_study_plan(user_id: str, template_id: str) -> Dict:
-    return learning_planner.create_plan(user_id, template_id)
+def create_study_plan(user_id: str, template_id: str, include_neetcode: bool = False) -> Dict:
+    return learning_planner.create_plan(user_id, template_id, include_neetcode=include_neetcode)
 
 def get_today_study_tasks(user_id: str) -> Dict:
     return learning_planner.get_today_tasks(user_id)
