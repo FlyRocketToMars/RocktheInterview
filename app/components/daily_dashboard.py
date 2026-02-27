@@ -23,8 +23,9 @@ def render_daily_dashboard():
     from data.learning_planner import learning_planner
     plan_data = learning_planner.get_user_plan(user_id)
     
-    if not user_data and not plan_data:
-        render_setup_wizard(user_id)
+    if not plan_data or plan_data.get("status") != "active":
+        from components.learning_plan import render_plan_selection
+        render_plan_selection(user_id)
         return
         
     user_profile = user_data.get("profile", {}) if user_data else {}
@@ -126,7 +127,7 @@ def render_daily_dashboard():
     
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("⚙️ 修改学习计划", use_container_width=True):
+        if st.button("⚙️ 重设/选择其他学习计划", use_container_width=True):
             st.session_state.show_setup = True
             st.rerun()
     
@@ -136,7 +137,8 @@ def render_daily_dashboard():
     
     # Show setup wizard if requested
     if st.session_state.get("show_setup"):
-        render_setup_wizard(user_id, is_edit=True)
+        from components.learning_plan import render_plan_selection
+        render_plan_selection(user_id)
 
 
 def render_mission_card(user_id: str, date: str, mission: dict):
@@ -218,98 +220,9 @@ def render_mission_card(user_id: str, date: str, mission: dict):
                 st.info(mission['content'].get('description', ''))
 
 
-def render_setup_wizard(user_id: str, is_edit: bool = False):
-    """Render the setup wizard for new users."""
-    
-    st.markdown("## 🎯 设置你的面试目标")
-    st.markdown("*告诉我们你的目标，系统会为你定制每日学习计划*")
-    
-    with st.form("setup_form"):
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            target_company = st.selectbox(
-                "🏢 目标公司",
-                options=["Google", "Meta", "Amazon", "Microsoft", "OpenAI", "TikTok", 
-                         "Snap", "Stripe", "Uber", "Airbnb", "Netflix", "LinkedIn", "Apple", "NVIDIA", "其他"],
-                index=0
-            )
-            
-            target_role = st.selectbox(
-                "💼 目标职位",
-                options=["MLE", "SDE", "DS", "Research Scientist"],
-                index=0
-            )
-            
-            target_level = st.selectbox(
-                "📊 目标级别",
-                options=["L3/E3 (Junior)", "L4/E4 (Mid)", "L5/E5 (Senior)", "L6/E6 (Staff)", "L7+ (Principal+)"],
-                index=2
-            )
-        
-        with col2:
-            interview_date = st.date_input(
-                "📅 面试日期",
-                value=datetime.now() + timedelta(days=30),
-                min_value=datetime.now(),
-                help="如果还不确定，选一个大概的日期"
-            )
-            
-            daily_hours = st.slider(
-                "⏰ 每天可学习时间 (小时)",
-                min_value=1,
-                max_value=8,
-                value=2,
-                help="包括刷题、复习、模拟面试等"
-            )
-        
-        st.markdown("### 🎯 你的薄弱环节")
-        st.caption("选择你需要重点加强的方向 (可多选)")
-        
-        weak_areas = []
-        weak_col1, weak_col2, weak_col3, weak_col4 = st.columns(4)
-        
-        with weak_col1:
-            if st.checkbox("🤖 LLM/GenAI", value=True):
-                weak_areas.append("LLM")
-        with weak_col2:
-            if st.checkbox("🏗️ 系统设计"):
-                weak_areas.append("System Design")
-        with weak_col3:
-            if st.checkbox("💻 算法编程"):
-                weak_areas.append("Coding")
-        with weak_col4:
-            if st.checkbox("🗣️ 行为面试"):
-                weak_areas.append("Behavioral")
-        
-        preferred_style = st.radio(
-            "📚 学习风格偏好",
-            options=["balanced", "intensive", "relaxed"],
-            format_func=lambda x: {
-                "balanced": "⚖️ 平衡型 - 每个方向都练",
-                "intensive": "🔥 强化型 - 集中突破薄弱项",
-                "relaxed": "🧘 舒适型 - 按自己节奏来"
-            }[x],
-            horizontal=True
-        )
-        
-        submitted = st.form_submit_button("✅ 开始我的面试准备", use_container_width=True)
-        
-        if submitted:
-            daily_learning.setup_user_profile(user_id, {
-                "target_company": target_company,
-                "target_role": target_role,
-                "target_level": target_level.split()[0],  # Get L5 from "L5/E5 (Senior)"
-                "interview_date": interview_date.strftime("%Y-%m-%d"),
-                "daily_hours": daily_hours,
-                "weak_areas": weak_areas,
-                "preferred_style": preferred_style
-            })
-            
-            st.success("🎉 设置完成！正在生成你的专属学习计划...")
-            st.session_state.show_setup = False
-            st.rerun()
-
+def render_setup_wizard_deprecated(user_id: str, is_edit: bool = False):
+    from components.learning_plan import render_plan_selection
+    render_plan_selection(user_id)
 
 def show_stats(user_id: str):
     """Show learning statistics."""
