@@ -192,6 +192,13 @@ def render_user_profile():
     tab1, tab2, tab3 = st.tabs(["📊 我的资料", "🏆 排行榜", "🎯 成就进度"])
     
     with tab1:
+        col_l, col_r = st.columns([5, 1])
+        with col_r:
+            if st.button("🚪 退出登录 (Logout)", use_container_width=True):
+                from components.auth import logout
+                logout()
+                st.rerun()
+                
         profile = get_profile(username)
         render_profile_card(profile)
         

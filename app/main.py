@@ -15,7 +15,7 @@ st.set_page_config(
     page_title="RocktheInterview",
     page_icon="🎸",
     layout="wide",
-    initial_sidebar_state="collapsed"  # Better for mobile - user can expand
+    initial_sidebar_state="expanded"
 )
 
 # Custom CSS for premium dark theme
