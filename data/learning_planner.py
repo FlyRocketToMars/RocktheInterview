@@ -173,6 +173,69 @@ class LearningPlanner:
                     ]
                 }
             ]
+        },
+        "sde_12week_neetcode": {
+            "name": "SDE Neetcode 250 狂飙计划",
+            "duration_weeks": 12,
+            "target_role": "SDE",
+            "phases": [
+                {
+                    "week": [1, 2, 3, 4],
+                    "name": "数据结构与基础算法",
+                    "focus": ["coding"],
+                    "daily_tasks": {
+                        "theory": 20,
+                        "coding": 90,
+                        "system_design": 0,
+                        "mock_interview": 0
+                    },
+                    "topics": [
+                        "Arrays & Hashing",
+                        "Two Pointers",
+                        "Sliding Window",
+                        "Stack",
+                        "Binary Search",
+                        "Linked List"
+                    ]
+                },
+                {
+                    "week": [5, 6, 7, 8],
+                    "name": "进阶结构与树图",
+                    "focus": ["coding"],
+                    "daily_tasks": {
+                        "theory": 20,
+                        "coding": 90,
+                        "system_design": 0,
+                        "mock_interview": 10
+                    },
+                    "topics": [
+                        "Trees & Tries",
+                        "Heap / Priority Queue",
+                        "Backtracking",
+                        "Graphs",
+                        "Advanced Graphs"
+                    ]
+                },
+                {
+                    "week": [9, 10, 11, 12],
+                    "name": "动态规划与系统设计",
+                    "focus": ["coding", "system-design"],
+                    "daily_tasks": {
+                        "theory": 0,
+                        "coding": 90,
+                        "system_design": 45,
+                        "mock_interview": 30
+                    },
+                    "topics": [
+                        "1D Dynamic Programming",
+                        "2D Dynamic Programming",
+                        "Greedy",
+                        "Math & Geometry",
+                        "Bit Manipulation",
+                        "System Design Primer"
+                    ]
+                }
+            ]
         }
     }
     
@@ -192,10 +255,10 @@ class LearningPlanner:
             "name": "编程练习",
             "icon": "💻",
             "activities": [
-                "LeetCode 算法题",
+                "Neetcode 面试原题",
+                "LeetCode 每日一题",
                 "ML 算法实现",
-                "模型训练代码",
-                "数据处理练习"
+                "Bug Debugging 练习"
             ]
         },
         "system_design": {
