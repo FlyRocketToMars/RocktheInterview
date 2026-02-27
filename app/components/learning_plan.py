@@ -106,29 +106,33 @@ def render_learning_plan():
 
     col1, col2, col3, col4 = st.columns(4)
     
+    def go_to_questions():
+        st.session_state.nav_selection = t("nav_questions", lang)
+        
+    def go_to_community():
+        st.session_state.nav_selection = t("nav_community", lang)
+        
+    def go_to_mock():
+        st.session_state.nav_selection = t("nav_mock", lang)
+        
+    def switch_plan():
+        # Clear current plan
+        data = learning_planner._load_plans()
+        if user_id in data["plans"]:
+            del data["plans"][user_id]
+            learning_planner._save_plans(data)
+    
     with col1:
-        if st.button("📝 刷题", use_container_width=True):
-            st.session_state.nav_selection = t("nav_questions", lang)
-            st.rerun()
+        st.button("📝 刷题", use_container_width=True, on_click=go_to_questions)
     
     with col2:
-        if st.button("📰 阅读", use_container_width=True):
-            st.session_state.nav_selection = t("nav_community", lang)
-            st.rerun()
+        st.button("📰 阅读", use_container_width=True, on_click=go_to_community)
     
     with col3:
-        if st.button("🎤 模拟", use_container_width=True):
-            st.session_state.nav_selection = t("nav_mock", lang)
-            st.rerun()
+        st.button("🎤 模拟", use_container_width=True, on_click=go_to_mock)
     
     with col4:
-        if st.button("🔄 换计划", use_container_width=True):
-            # Clear current plan
-            data = learning_planner._load_plans()
-            if user_id in data["plans"]:
-                del data["plans"][user_id]
-                learning_planner._save_plans(data)
-            st.rerun()
+        st.button("🔄 换计划", use_container_width=True, on_click=switch_plan)
     
     # Week overview
     with st.expander("📊 本周计划概览", expanded=False):

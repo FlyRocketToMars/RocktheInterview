@@ -17,6 +17,8 @@ if str(app_dir) not in sys.path:
 from components.auth import check_authentication, render_auth_page, logout, get_current_user
 from components.i18n import LANGUAGES
 from components.ai_coach import ai_coach
+from components.progress_tracker import render_progress_page as render_progress_tracker
+from components.user_progress import progress_manager
 
 # Page config
 st.set_page_config(
@@ -202,6 +204,15 @@ def render_todays_missions(user_email: str):
         
         with col1:
             completed = st.checkbox("", key=checkbox_key, value=mission.get("completed", False))
+            
+            # Save completion to database
+            if completed and not mission.get("completed"):
+                progress_manager.mark_task_complete(
+                    user_email,
+                    mission.get('id', f'task_{idx}'),
+                    mission.get('type', 'general'),
+                    int(mission.get('duration', '30 min').split()[0])
+                )
         
         with col2:
             st.markdown(f"""
@@ -302,20 +313,16 @@ def render_today_page(user_email: str):
 
 def render_progress_page(user_email: str):
     """Detailed progress tracking page."""
-    st.markdown("## 📊 Progress Tracking")
-    
-    st.info("🚧 Deep progress analytics coming soon!")
-    
-    # TODO: Implement
-    # - Knowledge graph visualization
-    # - Weak points heatmap
-    # - Historical performance
-    # - Comparison with peers
+    render_progress_tracker(user_email)
 
 
 def render_settings_page(user_email: str):
     """Settings and profile page."""
     st.markdown("## ⚙️ Settings")
+    
+    # Load current user data
+    user_data = progress_manager.get_user_progress(user_email)
+    current_profile = user_data.get("profile", {})
     
     with st.form("profile_settings"):
         st.markdown("### 🎯 Interview Goals")
@@ -325,36 +332,61 @@ def render_settings_page(user_email: str):
         with col1:
             target_company = st.selectbox(
                 "Target Company",
-                ["Google", "Meta", "OpenAI", "Amazon", "Microsoft", "Netflix"]
+                ["Google", "Meta", "OpenAI", "Amazon", "Microsoft", "Netflix", "Apple", "Uber"],
+                index=["Google", "Meta", "OpenAI", "Amazon", "Microsoft", "Netflix", "Apple", "Uber"].index(
+                    current_profile.get("target_company", "Google")
+                )
             )
             target_role = st.selectbox(
                 "Target Role",
-                ["MLE", "SWE", "Research Scientist", "Data Scientist"]
+                ["MLE", "SWE", "Research Scientist", "Data Scientist", "Applied Scientist"],
+                index=["MLE", "SWE", "Research Scientist", "Data Scientist", "Applied Scientist"].index(
+                    current_profile.get("target_role", "MLE")
+                )
             )
         
         with col2:
+            # Parse current interview date
+            current_date = None
+            if current_profile.get("interview_date"):
+                try:
+                    current_date = datetime.fromisoformat(current_profile["interview_date"]).date()
+                except:
+                    current_date = datetime.now().date() + timedelta(days=45)
+            else:
+                current_date = datetime.now().date() + timedelta(days=45)
+            
             interview_date = st.date_input(
                 "Interview Date",
-                value=datetime.now() + timedelta(days=45)
+                value=current_date
             )
             daily_hours = st.slider(
                 "Daily Study Hours",
                 min_value=1,
                 max_value=8,
-                value=3
+                value=current_profile.get("daily_hours", 3)
             )
         
         st.markdown("### 🎯 Focus Areas")
         weak_areas = st.multiselect(
             "What do you want to focus on?",
             ["Coding", "System Design", "ML Theory", "Behavioral", "LLM/GenAI"],
-            default=["System Design", "ML Theory"]
+            default=current_profile.get("weak_areas", ["System Design", "ML Theory"])
         )
         
         submitted = st.form_submit_button("💾 Save Settings", use_container_width=True)
         
         if submitted:
+            # Save to database
+            progress_manager.update_profile(user_email, {
+                "target_company": target_company,
+                "target_role": target_role,
+                "interview_date": interview_date.isoformat(),
+                "daily_hours": daily_hours,
+                "weak_areas": weak_areas
+            })
             st.success("✅ Settings saved!")
+            st.rerun()
 
 
 def main():
