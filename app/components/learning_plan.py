@@ -100,21 +100,25 @@ def render_learning_plan():
     # Quick actions
     st.markdown("### ⚡ 快捷操作")
     
+    # Need to get current language
+    from components.i18n import t
+    lang = st.session_state.get("language", "zh")
+
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
         if st.button("📝 刷题", use_container_width=True):
-            st.session_state.nav_selection = "🎯 题库练习"
+            st.session_state.nav_selection = t("nav_questions", lang)
             st.rerun()
     
     with col2:
         if st.button("📰 阅读", use_container_width=True):
-            st.session_state.nav_selection = "📖 技术资源"
+            st.session_state.nav_selection = t("nav_community", lang)
             st.rerun()
     
     with col3:
         if st.button("🎤 模拟", use_container_width=True):
-            st.session_state.nav_selection = "🎤 AI模拟面试"
+            st.session_state.nav_selection = t("nav_mock", lang)
             st.rerun()
     
     with col4:
