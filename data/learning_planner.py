@@ -477,6 +477,17 @@ class LearningPlanner:
         daily_tasks = current_phase["daily_tasks"]
         topics = current_phase["topics"]
         
+        import hashlib
+        today_str = datetime.now().strftime("%Y-%m-%d")
+        
+        # We need to make random choices stable for a given user on a given day
+        # so that the Dashboard and Study Plan tabs always show the exact same assignments.
+        def stable_choice(items, salt=""):
+            if not items: return ""
+            seed_str = f"{user_id}_{today_str}_{salt}"
+            idx = int(hashlib.md5(seed_str.encode()).hexdigest(), 16) % len(items)
+            return items[idx]
+        
         for task_type, minutes in daily_tasks.items():
             if minutes > 0:
                 task_info = self.TASK_TYPES.get(task_type, {})
@@ -487,8 +498,8 @@ class LearningPlanner:
                     "name": task_info.get("name", task_type),
                     "icon": task_info.get("icon", "📝"),
                     "duration_minutes": minutes,
-                    "suggested_activity": random.choice(activities) if activities else "",
-                    "topic": random.choice(topics) if topics else "",
+                    "suggested_activity": stable_choice(activities, f"act_{task_type}"),
+                    "topic": stable_choice(topics, f"top_{task_type}"),
                     "completed": False
                 })
         
