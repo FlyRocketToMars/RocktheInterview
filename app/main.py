@@ -443,15 +443,10 @@ def main():
             t("nav_home", lang),
             t("nav_daily", lang),
             t("nav_setup", lang),
-            t("nav_trends", lang),
             t("nav_questions", lang),
             t("nav_mock", lang),
-            t("nav_jobs", lang),
-            t("nav_resources", lang),
-            t("nav_papers", lang),
             t("nav_community", lang),
             t("nav_profile", lang),
-            t("nav_notifications", lang),
         ]
         
         page = st.radio(
@@ -711,41 +706,61 @@ def main():
             from components.learning_plan import render_learning_plan
             render_learning_plan()
 
-    elif page_index == 3:  # Interview Trends
-        from components.interview_trends import render_interview_trends
-        render_interview_trends()
+    elif page_index == 3:  # 🎯 题库练习 (Includes Trends, Questions, Jobs)
+        question_tabs = st.tabs([
+            t("nav_questions", lang), 
+            t("nav_trends", lang),
+            t("nav_jobs", lang)
+        ])
+        
+        with question_tabs[0]:
+            from components.interview_questions import render_interview_questions
+            render_interview_questions()
+            
+        with question_tabs[1]:
+            from components.interview_trends import render_interview_trends
+            render_interview_trends()
+            
+        with question_tabs[2]:
+            from components.job_matching import render_job_matching
+            render_job_matching()
     
-    elif page_index == 4:  # Interview Questions
-        from components.interview_questions import render_interview_questions
-        render_interview_questions()
-    
-    elif page_index == 5:  # Mock Interview
+    elif page_index == 4:  # 🎤 AI模拟面试
         from components.mock_interview import render_mock_interview
         render_mock_interview()
     
-    elif page_index == 6:  # Job Match
-        from components.job_matching import render_job_matching
-        render_job_matching()
+    elif page_index == 5:  # 💬 社区与资源 (Includes Community, Resources, Papers)
+        community_tabs = st.tabs([
+            t("nav_community", lang),
+            t("nav_resources", lang),
+            t("nav_papers", lang)
+        ])
+        
+        with community_tabs[0]:
+            from components.community_qa import render_community_qa
+            render_community_qa()
+            
+        with community_tabs[1]:
+            from components.tech_resources import render_tech_resources
+            render_tech_resources()
+            
+        with community_tabs[2]:
+            from components.paper_reading import render_paper_reading
+            render_paper_reading()
     
-    elif page_index == 7:  # Resources
-        from components.tech_resources import render_tech_resources
-        render_tech_resources()
-    
-    elif page_index == 8:  # Papers
-        from components.paper_reading import render_paper_reading
-        render_paper_reading()
-    
-    elif page_index == 9:  # Community
-        from components.community_qa import render_community_qa
-        render_community_qa()
-    
-    elif page_index == 10:  # Profile
-        from components.user_profile import render_user_profile
-        render_user_profile()
-    
-    elif page_index == 11:  # Notifications
-        from components.notification_settings import render_notification_settings
-        render_notification_settings()
+    elif page_index == 6:  # 👤 个人中心与设置 (Includes Profile, Notifications)
+        profile_tabs = st.tabs([
+            t("nav_profile", lang),
+            t("nav_notifications", lang)
+        ])
+        
+        with profile_tabs[0]:
+            from components.user_profile import render_user_profile
+            render_user_profile()
+            
+        with profile_tabs[1]:
+            from components.notification_settings import render_notification_settings
+            render_notification_settings()
 
 
 if __name__ == "__main__":
