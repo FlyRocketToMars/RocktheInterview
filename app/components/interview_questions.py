@@ -416,9 +416,51 @@ def render_interview_questions():
                 tags_str = " ".join([f"`{tag}`" for tag in q.get("tags", [])])
                 st.markdown(f"**🏷️ 标签**: {tags_str}")
             
-            # ========== Community Answers Section ==========
+            # ========== Review Progress Section ==========
             st.markdown("---")
             question_id = get_question_id(q)
+            
+            # Simple Review UI
+            st.markdown("### 📈 复习记录")
+            user_id = st.session_state.get("user_email", "guest")
+            
+            # Try to get existing mastery level
+            try:
+                from data.review_records import get_review_stats, record_question_review
+                user_reviews = get_review_stats(user_id)
+                q_record = user_reviews.get("details", {}).get(question_id, {})
+                mastery = q_record.get("mastery_score", 0)
+                
+                if mastery >= 80:
+                    status_text = "🟢 已掌握"
+                elif mastery >= 40:
+                    status_text = "🟡 需复习"
+                elif q_record.get("history"):
+                    status_text = "🔴 不熟练"
+                else:
+                    status_text = "⚪ 未复习"
+                    
+                st.caption(f"当前熟练度: {status_text} (Score: {mastery})")
+                
+                col_a, col_b, col_c = st.columns(3)
+                q_title = q.get('question', '')[:50]
+                if col_a.button("🟢 简单 (掌握)", key=f"rev_e_{question_id}"):
+                    record_question_review(user_id, question_id, "easy", q_title)
+                    st.success("已标记为需要较少复习！")
+                    st.rerun()
+                if col_b.button("🟡 中等 (复习)", key=f"rev_m_{question_id}"):
+                    record_question_review(user_id, question_id, "medium", q_title)
+                    st.warning("已添加进待复习列表！")
+                    st.rerun()
+                if col_c.button("🔴 困难 (重刷)", key=f"rev_h_{question_id}"):
+                    record_question_review(user_id, question_id, "hard", q_title)
+                    st.error("已标记为重点难点！")
+                    st.rerun()
+            except ImportError:
+                pass
+            
+            # ========== Community Answers Section ==========
+            st.markdown("---")
             qa_data = load_question_answers(question_id)
             num_answers = len(qa_data.get("answers", []))
             
