@@ -1,0 +1,293 @@
+{
+    "metadata": {
+        "version": "1.0",
+        "last_updated": "2026-02-27",
+        "total_questions": 15,
+        "sources": [
+            "Neetcode 250/150",
+            "Leetcode"
+        ],
+        "disclaimer": "Classical algorithmic questions from Neetcode 250."
+    },
+    "categories": {
+        "rounds": [
+            "coding"
+        ],
+        "domains": [
+            "arrays",
+            "two_pointers",
+            "sliding_window",
+            "stack",
+            "binary_search",
+            "linked_list",
+            "trees",
+            "tries",
+            "heap",
+            "backtracking",
+            "graphs",
+            "dp"
+        ],
+        "levels": [
+            "L3/E3",
+            "L4/E4",
+            "L5/E5"
+        ]
+    },
+    "questions": [
+        {
+            "id": "nc_001",
+            "company": "General",
+            "role": "SDE",
+            "level": "L3/E3",
+            "round": "coding",
+            "domain": "arrays",
+            "question": "Two Sum: Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
+            "answer": "```python\ndef twoSum(nums, target):\n    prevMap = {} # val : index\n    for i, n in enumerate(nums):\n        diff = target - n\n        if diff in prevMap:\n            return [prevMap[diff], i]\n        prevMap[n] = i\n    return []\n```\n**Complexity**: Time O(n), Space O(n)",
+            "follow_ups": [
+                "Can we do it in less than O(n) space if the array is sorted?"
+            ],
+            "difficulty": "easy",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "neetcode",
+                "arrays",
+                "hash-map"
+            ],
+            "common_mistakes": [
+                "Using brute force O(n^2)",
+                "Returning values instead of indices"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nc_002",
+            "company": "General",
+            "role": "SDE",
+            "level": "L4/E4",
+            "round": "coding",
+            "domain": "sliding_window",
+            "question": "Longest Substring Without Repeating Characters: Given a string s, find the length of the longest substring without repeating characters.",
+            "answer": "```python\ndef lengthOfLongestSubstring(s: str) -> int:\n    charSet = set()\n    l = 0\n    res = 0\n    for r in range(len(s)):\n        while s[r] in charSet:\n            charSet.remove(s[l])\n            l += 1\n        charSet.add(s[r])\n        res = max(res, r - l + 1)\n    return res\n```\n**Complexity**: Time O(n), Space O(n)",
+            "follow_ups": [
+                "Can you solve it in exactly O(n) time using a HashMap?"
+            ],
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "neetcode",
+                "sliding-window",
+                "strings"
+            ],
+            "common_mistakes": [
+                "Not updating the left pointer correctly"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nc_003",
+            "company": "General",
+            "role": "SDE",
+            "level": "L4/E4",
+            "round": "coding",
+            "domain": "two_pointers",
+            "question": "Container With Most Water: You are given an integer array height of length n. Find two lines that together with the x-axis form a container, such that the container contains the most water.",
+            "answer": "```python\ndef maxArea(height) -> int:\n    res = 0\n    l, r = 0, len(height) - 1\n    while l < r:\n        area = (r - l) * min(height[l], height[r])\n        res = max(res, area)\n        if height[l] < height[r]:\n            l += 1\n        else:\n            r -= 1\n    return res\n```\n**Complexity**: Time O(n), Space O(1)",
+            "follow_ups": [
+                "Prove why moving the smaller pointer is always optimal."
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "neetcode",
+                "two-pointers",
+                "greedy"
+            ],
+            "common_mistakes": [
+                "Moving the larger pointer"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nc_004",
+            "company": "General",
+            "role": "SDE",
+            "level": "L4/E4",
+            "round": "coding",
+            "domain": "trees",
+            "question": "Invert Binary Tree: Given the root of a binary tree, invert the tree, and return its root.",
+            "answer": "```python\ndef invertTree(root):\n    if not root:\n        return None\n    # swap the children\n    root.left, root.right = root.right, root.left\n    # recursively invert subtrees\n    invertTree(root.left)\n    invertTree(root.right)\n    return root\n```\n**Complexity**: Time O(n), Space O(h)",
+            "follow_ups": [
+                "Can you do it iteratively? (BFS/DFS)"
+            ],
+            "difficulty": "easy",
+            "frequency": 5,
+            "importance": 4,
+            "tags": [
+                "neetcode",
+                "trees",
+                "dfs"
+            ],
+            "common_mistakes": [
+                "Forgetting base case",
+                "Only assigning one child incorrectly"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nc_005",
+            "company": "General",
+            "role": "SDE",
+            "level": "L5/E5",
+            "round": "coding",
+            "domain": "backtracking",
+            "question": "N-Queens: The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.",
+            "answer": "```python\ndef solveNQueens(n: int):\n    col = set()\n    posDiag = set() # (r + c)\n    negDiag = set() # (r - c)\n    res = []\n    board = [['.'] * n for _ in range(n)]\n\n    def backtrack(r):\n        if r == n:\n            copy = [''.join(row) for row in board]\n            res.append(copy)\n            return\n        for c in range(n):\n            if c in col or (r + c) in posDiag or (r - c) in negDiag:\n                continue\n            col.add(c)\n            posDiag.add(r + c)\n            negDiag.add(r - c)\n            board[r][c] = 'Q'\n            \n            backtrack(r + 1)\n            \n            col.remove(c)\n            posDiag.remove(r + c)\n            negDiag.remove(r - c)\n            board[r][c] = '.'\n\n    backtrack(0)\n    return res\n```",
+            "follow_ups": [
+                "What is the Time Complexity? O(N!)"
+            ],
+            "difficulty": "hard",
+            "frequency": 3,
+            "importance": 4,
+            "tags": [
+                "neetcode",
+                "backtracking"
+            ],
+            "common_mistakes": [
+                "Miscalculating diagonal coordinates"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nc_006",
+            "company": "General",
+            "role": "SDE",
+            "level": "L4/E4",
+            "round": "coding",
+            "domain": "graphs",
+            "question": "Number of Islands: Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.",
+            "answer": "```python\ndef numIslands(grid) -> int:\n    if not grid:\n        return 0\n    rows, cols = len(grid), len(grid[0])\n    visited = set()\n    islands = 0\n\n    def bfs(r, c):\n        q = collections.deque()\n        visited.add((r, c))\n        q.append((r, c))\n        while q:\n            row, col = q.popleft()\n            directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]\n            for dr, dc in directions:\n                r, c = row + dr, col + dc\n                if (r in range(rows) and c in range(cols) and\n                    grid[r][c] == '1' and (r, c) not in visited):\n                    q.append((r, c))\n                    visited.add((r, c))\n\n    for r in range(rows):\n        for c in range(cols):\n            if grid[r][c] == '1' and (r, c) not in visited:\n                bfs(r, c)\n                islands += 1\n    return islands\n```",
+            "follow_ups": [
+                "How does DFS compare to BFS here?",
+                "Can you modify the grid in-place to save O(N) space?"
+            ],
+            "difficulty": "medium",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "neetcode",
+                "graphs",
+                "bfs",
+                "dfs"
+            ],
+            "common_mistakes": [
+                "Exceeding time limit by not passing sets globally",
+                "Index out of bounds"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nc_007",
+            "company": "General",
+            "role": "SDE",
+            "level": "L4/E4",
+            "round": "coding",
+            "domain": "dp",
+            "question": "Climbing Stairs: You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?",
+            "answer": "```python\ndef climbStairs(n: int) -> int:\n    one, two = 1, 1\n    for i in range(n - 1):\n        temp = one\n        one = one + two\n        two = temp\n    return one\n```\n**Complexity**: Time O(n), Space O(1)",
+            "follow_ups": [
+                "If you can climb up to k steps at a time, what is the complexity?"
+            ],
+            "difficulty": "easy",
+            "frequency": 4,
+            "importance": 4,
+            "tags": [
+                "neetcode",
+                "dp",
+                "fibonacci"
+            ],
+            "common_mistakes": [
+                "Using recursion without memoization causing O(2^n) time"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nc_008",
+            "company": "General",
+            "role": "SDE",
+            "level": "L4/E4",
+            "round": "coding",
+            "domain": "linked_list",
+            "question": "Reverse Linked List: Given the head of a singly linked list, reverse the list, and return the reversed list.",
+            "answer": "```python\ndef reverseList(head):\n    prev, curr = None, head\n    while curr:\n        nxt = curr.next\n        curr.next = prev\n        prev = curr\n        curr = nxt\n    return prev\n```\n**Complexity**: Time O(n), Space O(1)",
+            "follow_ups": [
+                "Can you do it recursively?"
+            ],
+            "difficulty": "easy",
+            "frequency": 5,
+            "importance": 5,
+            "tags": [
+                "neetcode",
+                "linked_list",
+                "pointers"
+            ],
+            "common_mistakes": [
+                "Losing reference to the next node by not storing it in 'nxt'"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nc_009",
+            "company": "General",
+            "role": "SDE",
+            "level": "L4/E4",
+            "round": "coding",
+            "domain": "heap",
+            "question": "Kth Largest Element in an Array: Given an integer array nums and an integer k, return the kth largest element in the array.",
+            "answer": "```python\nimport heapq\n\ndef findKthLargest(nums, k: int) -> int:\n    heap = nums[:k]\n    heapq.heapify(heap)\n    for num in nums[k:]:\n        if num > heap[0]:\n            heapq.heappushpop(heap, num)\n    return heap[0]\n```\n**Complexity**: Time O(n log k), Space O(k)",
+            "follow_ups": [
+                "Can you solve it in O(N) average time using QuickSelect?"
+            ],
+            "difficulty": "medium",
+            "frequency": 4,
+            "importance": 5,
+            "tags": [
+                "neetcode",
+                "heap",
+                "quickselect"
+            ],
+            "common_mistakes": [
+                "Sorting the entire array instead O(N log N)"
+            ],
+            "year": 2024
+        },
+        {
+            "id": "nc_010",
+            "company": "General",
+            "role": "SDE",
+            "level": "L5/E5",
+            "round": "coding",
+            "domain": "graphs",
+            "question": "Clone Graph: Given a reference of a node in a connected undirected graph. Return a deep copy (clone) of the graph.",
+            "answer": "```python\ndef cloneGraph(node):\n    oldToNew = {}\n    \n    def dfs(node):\n        if node in oldToNew:\n            return oldToNew[node]\n        copy = Node(node.val)\n        oldToNew[node] = copy\n        for nei in node.neighbors:\n            copy.neighbors.append(dfs(nei))\n        return copy\n        \n    return dfs(node) if node else None\n```",
+            "follow_ups": [
+                "Can you use BFS instead of DFS?"
+            ],
+            "difficulty": "medium",
+            "frequency": 3,
+            "importance": 4,
+            "tags": [
+                "neetcode",
+                "graphs",
+                "dfs",
+                "hash-map"
+            ],
+            "common_mistakes": [
+                "Infinite loops on cyclic graphs by not caching properly"
+            ],
+            "year": 2024
+        }
+    ]
+}

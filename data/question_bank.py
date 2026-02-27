@@ -39,6 +39,13 @@ class QuestionBank:
             with open(llm_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 self.questions.extend(data.get("questions", []))
+                
+        # Load Neetcode algorithms questions
+        neetcode_file = self.data_dir / "questions_neetcode.json"
+        if neetcode_file.exists():
+            with open(neetcode_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                self.questions.extend(data.get("questions", []))
         
         # Deduplicate by ID
         seen_ids = set()
