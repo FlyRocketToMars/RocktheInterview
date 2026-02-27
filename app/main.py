@@ -442,11 +442,7 @@ def main():
         nav_options = [
             t("nav_home", lang),
             t("nav_daily", lang),
-            t("nav_resume", lang),
-            t("nav_target", lang),
-            t("nav_jd", lang),
-            t("nav_analysis", lang),
-            t("nav_plan", lang),
+            t("nav_setup", lang),
             t("nav_trends", lang),
             t("nav_questions", lang),
             t("nav_mock", lang),
@@ -531,7 +527,7 @@ def main():
         st.markdown(f"### {t('home_quickstart', lang)}")
         
         def start_prep():
-            st.session_state.nav_selection = t("nav_resume", lang)
+            st.session_state.nav_selection = t("nav_setup", lang)
             st.session_state.current_step = 1
             
         st.button(t("home_start_btn", lang), 
@@ -542,211 +538,206 @@ def main():
         from components.daily_dashboard import render_daily_dashboard
         render_daily_dashboard()
     
-    elif page_index == 2:  # Resume
-        st.markdown(f"## {t('resume_title', lang)}")
-        st.markdown(t("resume_hint", lang))
+    elif page_index == 2:  # Target & Setup (Consolidated)
+        # Tabbed interface for Target and Setup
+        setup_tabs = st.tabs(["📄 Resume", "🎯 Target", "📋 JD", "📊 Analysis", "📚 Plan"])
         
-        # File uploader
-        uploaded_file = st.file_uploader("📥 Upload Resume (PDF)", type="pdf")
-        
-        if uploaded_file is not None:
-            from components.utils import parse_pdf
-            with st.spinner("Parsing PDF..."):
-                pdf_text = parse_pdf(uploaded_file.getvalue())
-                if pdf_text and not pdf_text.startswith("Error"):
-                     st.session_state.user_profile["resume_text"] = pdf_text
-                     st.success("PDF loaded successfully! You can edit the text below if needed.")
-                else:
-                    st.error(f"Failed to parse PDF: {pdf_text}")
-        
-        resume_text = st.text_area(
-            t("resume_label", lang),
-            value=st.session_state.user_profile.get("resume_text", ""),
-            height=400,
-            placeholder=t("resume_placeholder", lang)
-        )
-        
-        def extract_and_navigate():
-            if resume_text.strip():
-                st.session_state.user_profile["resume_text"] = resume_text
-                from components.skill_extractor import extract_skills
-                extracted = extract_skills(resume_text, st.session_state.skills_taxonomy)
-                st.session_state.user_profile["extracted_skills"] = extracted
-                st.session_state.current_step = 2
-                st.session_state.nav_selection = t("nav_target", lang)
-                st.session_state.extract_success = len(extracted)
-            else:
-                st.session_state.extract_error = True
-        
-        st.button(t("resume_extract_btn", lang), use_container_width=True, on_click=extract_and_navigate)
-        
-        # Show success/error messages
-        if st.session_state.get("extract_success"):
-            st.success(t("resume_success", lang).format(st.session_state.extract_success))
-            del st.session_state.extract_success
-        if st.session_state.get("extract_error"):
-            st.error(t("resume_error", lang))
-            del st.session_state.extract_error
-    
-    elif page_index == 3:  # Target
-        st.markdown(f"## {t('target_title', lang)}")
-        
-        companies_data = st.session_state.companies.get("companies", [])
-        role_descriptions = st.session_state.companies.get("role_descriptions", {})
-        company_names = [c["name"] for c in companies_data]
-        
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            company = st.selectbox(t("target_company", lang), company_names)
-        
-        # Get selected company data
-        selected_company = next((c for c in companies_data if c["name"] == company), None)
-        
-        with col2:
-            # Get available roles for selected company
-            available_roles = list(selected_company.get("roles", {}).keys()) if selected_company else []
-            role = st.selectbox(t("target_role", lang), available_roles, 
-                              format_func=lambda x: f"{x} - {role_descriptions.get(x, x)}")
-        
-        with col3:
-            # Get levels for selected role
-            role_data = selected_company.get("roles", {}).get(role, {}) if selected_company else {}
-            levels = role_data.get("levels", [])
-            level = st.selectbox(t("target_level", lang), levels)
-        
-        if selected_company and role and role_data:
-            st.markdown(f"### {t('target_rounds', lang)}")
-            for round_info in role_data.get("interview_rounds", []):
-                focus_text = ', '.join(round_info['focus'])
-                st.markdown(f"""
-                <div class="card">
-                    <strong>Round {round_info['round']}: {round_info['name']}</strong>
-                    <br>
-                    <span style="color: #94a3b8;">
-                        ⏱️ {round_info['duration_min']} {t('target_duration', lang)} | 
-                        🎯 {focus_text}
-                    </span>
-                </div>
-                """, unsafe_allow_html=True)
-        
-        if st.button(t("target_confirm_btn", lang), use_container_width=True):
-            st.session_state.target["company"] = company
-            st.session_state.target["role"] = role
-            st.session_state.target["level"] = level
-            st.session_state.current_step = 3
-            st.rerun()
-    
-    elif page_index == 4:  # JD
-        st.markdown(f"## {t('jd_title', lang)}")
-        
-        # URL Input
-        jd_url = st.text_input("🔗 Import from URL", placeholder="https://www.linkedin.com/jobs/...")
-        
-        if st.button("Fetch URL"):
-            if jd_url:
-                from components.utils import fetch_url_content
-                with st.spinner("Fetching content..."):
-                    fetched_text = fetch_url_content(jd_url)
-                    if not fetched_text.startswith("Error"):
-                        st.session_state.target["jd_text"] = fetched_text
-                        st.success("Content fetched successfully!")
-                    else:
-                        st.error(fetched_text)
-        
-        jd_text = st.text_area(
-            t("jd_label", lang),
-            value=st.session_state.target.get("jd_text", ""),
-            height=400,
-            placeholder=t("jd_placeholder", lang)
-        )
-        
-        if st.button(t("jd_analyze_btn", lang), use_container_width=True):
-            if jd_text.strip():
-                st.session_state.target["jd_text"] = jd_text
-                from components.skill_extractor import extract_skills
-                jd_skills = extract_skills(jd_text, st.session_state.skills_taxonomy)
-                st.session_state.target["jd_skills"] = jd_skills
-                st.session_state.current_step = 4
-                st.success(t("jd_success", lang).format(len(jd_skills)))
-                st.rerun()
-            else:
-                st.error(t("jd_error", lang))
-    
-    elif page_index == 5:  # Gap Analysis
-        st.markdown(f"## {t('analysis_title', lang)}")
-        
-        resume_skills = set(st.session_state.user_profile.get("extracted_skills", []))
-        jd_skills = set(st.session_state.target.get("jd_skills", []))
-        
-        if not resume_skills or not jd_skills:
-            st.warning(t("analysis_warning", lang))
-        else:
-            gaps = jd_skills - resume_skills
-            strengths = resume_skills & jd_skills
-            extra = resume_skills - jd_skills
+        with setup_tabs[0]: # Resume
+            st.markdown(f"## {t('resume_title', lang)}")
+            st.markdown(t("resume_hint", lang))
             
-            st.session_state.analysis["gaps"] = list(gaps)
-            st.session_state.analysis["strengths"] = list(strengths)
+            # File uploader
+            uploaded_file = st.file_uploader("📥 Upload Resume (PDF)", type="pdf")
+            
+            if uploaded_file is not None:
+                from components.utils import parse_pdf
+                with st.spinner("Parsing PDF..."):
+                    pdf_text = parse_pdf(uploaded_file.getvalue())
+                    if pdf_text and not pdf_text.startswith("Error"):
+                         st.session_state.user_profile["resume_text"] = pdf_text
+                         st.success("PDF loaded successfully! You can edit the text below if needed.")
+                    else:
+                        st.error(f"Failed to parse PDF: {pdf_text}")
+            
+            resume_text = st.text_area(
+                t("resume_label", lang),
+                value=st.session_state.user_profile.get("resume_text", ""),
+                height=400,
+                placeholder=t("resume_placeholder", lang)
+            )
+            
+            def extract_skills_only():
+                if resume_text.strip():
+                    st.session_state.user_profile["resume_text"] = resume_text
+                    from components.skill_extractor import extract_skills
+                    extracted = extract_skills(resume_text, st.session_state.skills_taxonomy)
+                    st.session_state.user_profile["extracted_skills"] = extracted
+                    st.session_state.extract_success = len(extracted)
+                else:
+                    st.session_state.extract_error = True
+            
+            st.button(t("resume_extract_btn", lang), use_container_width=True, on_click=extract_skills_only)
+            
+            # Show success/error messages
+            if st.session_state.get("extract_success"):
+                st.success(t("resume_success", lang).format(st.session_state.extract_success))
+                del st.session_state.extract_success
+            if st.session_state.get("extract_error"):
+                st.error(t("resume_error", lang))
+                del st.session_state.extract_error
+
+        with setup_tabs[1]: # Target
+            st.markdown(f"## {t('target_title', lang)}")
+            
+            companies_data = st.session_state.companies.get("companies", [])
+            role_descriptions = st.session_state.companies.get("role_descriptions", {})
+            company_names = [c["name"] for c in companies_data]
             
             col1, col2, col3 = st.columns(3)
             
             with col1:
-                st.markdown(f"### {t('analysis_gaps', lang)}")
-                for skill in sorted(gaps):
-                    st.markdown(f"- {skill}")
+                company = st.selectbox(t("target_company", lang), company_names)
+            
+            # Get selected company data
+            selected_company = next((c for c in companies_data if c["name"] == company), None)
             
             with col2:
-                st.markdown(f"### {t('analysis_strengths', lang)}")
-                for skill in sorted(strengths):
-                    st.markdown(f"- ✅ {skill}")
+                # Get available roles for selected company
+                available_roles = list(selected_company.get("roles", {}).keys()) if selected_company else []
+                role = st.selectbox(t("target_role", lang), available_roles, 
+                                  format_func=lambda x: f"{x} - {role_descriptions.get(x, x)}")
             
             with col3:
-                st.markdown(f"### {t('analysis_extra', lang)}")
-                for skill in sorted(extra):
-                    st.markdown(f"- {skill}")
+                # Get levels for selected role
+                role_data = selected_company.get("roles", {}).get(role, {}) if selected_company else {}
+                levels = role_data.get("levels", [])
+                level = st.selectbox(t("target_level", lang), levels)
             
-            if st.button(t("analysis_generate_btn", lang), use_container_width=True):
-                st.session_state.current_step = 5
-                st.rerun()
-    
-    elif page_index == 6:  # Study Plan - Dynamic Learning Planner
-        from components.learning_plan import render_learning_plan
-        render_learning_plan()
-    
-    elif page_index == 7:  # Interview Trends
+            if selected_company and role and role_data:
+                st.markdown(f"### {t('target_rounds', lang)}")
+                for round_info in role_data.get("interview_rounds", []):
+                    focus_text = ', '.join(round_info['focus'])
+                    st.markdown(f"""
+                    <div class="card">
+                        <strong>Round {round_info['round']}: {round_info['name']}</strong>
+                        <br>
+                        <span style="color: #94a3b8;">
+                            ⏱️ {round_info['duration_min']} {t('target_duration', lang)} | 
+                            🎯 {focus_text}
+                        </span>
+                    </div>
+                    """, unsafe_allow_html=True)
+            
+            if st.button(t("target_confirm_btn", lang), use_container_width=True):
+                st.session_state.target["company"] = company
+                st.session_state.target["role"] = role
+                st.session_state.target["level"] = level
+                st.success("Target Confirmed!")
+
+        with setup_tabs[2]: # JD
+            st.markdown(f"## {t('jd_title', lang)}")
+            
+            # URL Input
+            jd_url = st.text_input("🔗 Import from URL", placeholder="https://www.linkedin.com/jobs/...")
+            
+            if st.button("Fetch URL"):
+                if jd_url:
+                    from components.utils import fetch_url_content
+                    with st.spinner("Fetching content..."):
+                        fetched_text = fetch_url_content(jd_url)
+                        if not fetched_text.startswith("Error"):
+                            st.session_state.target["jd_text"] = fetched_text
+                            st.success("Content fetched successfully!")
+                        else:
+                            st.error(fetched_text)
+            
+            jd_text = st.text_area(
+                t("jd_label", lang),
+                value=st.session_state.target.get("jd_text", ""),
+                height=400,
+                placeholder=t("jd_placeholder", lang)
+            )
+            
+            if st.button(t("jd_analyze_btn", lang), use_container_width=True):
+                if jd_text.strip():
+                    st.session_state.target["jd_text"] = jd_text
+                    from components.skill_extractor import extract_skills
+                    jd_skills = extract_skills(jd_text, st.session_state.skills_taxonomy)
+                    st.session_state.target["jd_skills"] = jd_skills
+                    st.success(t("jd_success", lang).format(len(jd_skills)))
+                else:
+                    st.error(t("jd_error", lang))
+
+        with setup_tabs[3]: # Analysis
+            st.markdown(f"## {t('analysis_title', lang)}")
+            
+            resume_skills = set(st.session_state.user_profile.get("extracted_skills", []))
+            jd_skills = set(st.session_state.target.get("jd_skills", []))
+            
+            if not resume_skills or not jd_skills:
+                st.warning(t("analysis_warning", lang))
+            else:
+                gaps = jd_skills - resume_skills
+                strengths = resume_skills & jd_skills
+                extra = resume_skills - jd_skills
+                
+                st.session_state.analysis["gaps"] = list(gaps)
+                st.session_state.analysis["strengths"] = list(strengths)
+                
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    st.markdown(f"### {t('analysis_gaps', lang)}")
+                    for skill in sorted(gaps):
+                        st.markdown(f"- {skill}")
+                
+                with col2:
+                    st.markdown(f"### {t('analysis_strengths', lang)}")
+                    for skill in sorted(strengths):
+                        st.markdown(f"- ✅ {skill}")
+                
+                with col3:
+                    st.markdown(f"### {t('analysis_extra', lang)}")
+                    for skill in sorted(extra):
+                        st.markdown(f"- {skill}")
+
+        with setup_tabs[4]: # Plan
+            from components.learning_plan import render_learning_plan
+            render_learning_plan()
+
+    elif page_index == 3:  # Interview Trends
         from components.interview_trends import render_interview_trends
         render_interview_trends()
     
-    elif page_index == 8:  # Interview Questions
+    elif page_index == 4:  # Interview Questions
         from components.interview_questions import render_interview_questions
         render_interview_questions()
     
-    elif page_index == 9:  # Mock Interview
+    elif page_index == 5:  # Mock Interview
         from components.mock_interview import render_mock_interview
         render_mock_interview()
     
-    elif page_index == 10:  # Job Match
+    elif page_index == 6:  # Job Match
         from components.job_matching import render_job_matching
         render_job_matching()
     
-    elif page_index == 11:  # Resources
+    elif page_index == 7:  # Resources
         from components.tech_resources import render_tech_resources
         render_tech_resources()
     
-    elif page_index == 12:  # Papers
+    elif page_index == 8:  # Papers
         from components.paper_reading import render_paper_reading
         render_paper_reading()
     
-    elif page_index == 13:  # Community
+    elif page_index == 9:  # Community
         from components.community_qa import render_community_qa
         render_community_qa()
     
-    elif page_index == 14:  # Profile
+    elif page_index == 10:  # Profile
         from components.user_profile import render_user_profile
         render_user_profile()
     
-    elif page_index == 15:  # Notifications
+    elif page_index == 11:  # Notifications
         from components.notification_settings import render_notification_settings
         render_notification_settings()
 
