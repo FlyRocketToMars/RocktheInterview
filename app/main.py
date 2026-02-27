@@ -540,7 +540,13 @@ def main():
     
     elif page_index == 2:  # Target & Setup (Consolidated)
         # Tabbed interface for Target and Setup
-        setup_tabs = st.tabs(["📄 Resume", "🎯 Target", "📋 JD", "📊 Analysis", "📚 Plan"])
+        setup_tabs = st.tabs([
+            t("nav_resume", lang), 
+            t("nav_target", lang), 
+            t("nav_jd", lang), 
+            t("nav_analysis", lang), 
+            t("nav_plan", lang)
+        ])
         
         with setup_tabs[0]: # Resume
             st.markdown(f"## {t('resume_title', lang)}")
