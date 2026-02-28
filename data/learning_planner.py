@@ -355,8 +355,9 @@ class LearningPlanner:
         text_lower = doc_text.lower()
         
         # Detect role
-        target_role = "Custom"
-        if "machine learning" in text_lower or "mle" in text_lower:
+        # Detect role
+        target_role = "Custom Role"
+        if "machine learning" in text_lower or "mle" in text_lower or "ai" in text_lower:
             target_role = "MLE"
         elif "software engineer" in text_lower or "sde" in text_lower or "developer" in text_lower:
             target_role = "SDE"
@@ -365,22 +366,24 @@ class LearningPlanner:
             
         # Detect topics
         extracted_topics = []
-        if "system design" in text_lower or "architecture" in text_lower or "scalable" in text_lower:
-            extracted_topics.append("System Design & Architecture")
+        if "ai" in text_lower or "llm" in text_lower or "genai" in text_lower or "generative" in text_lower or "agent" in text_lower or "rag" in text_lower:
+            extracted_topics.append("AI Coding & Large Language Models (LLM / RAG / Agents)")
+        if "system design" in text_lower or "architecture" in text_lower or "scalable" in text_lower or "distributed" in text_lower:
+            extracted_topics.append("System Design & Distributed Architecture")
         if "algorithm" in text_lower or "data structure" in text_lower or "leetcode" in text_lower:
             extracted_topics.append("Algorithms & Data Structures")
         if "behavioral" in text_lower or "leadership" in text_lower or "principles" in text_lower:
             extracted_topics.append("Behavioral & Leadership Principles")
         if "sql" in text_lower or "database" in text_lower:
             extracted_topics.append("SQL & Database Design")
-        if "machine learning" in text_lower or "modeling" in text_lower:
-            extracted_topics.append("Machine Learning Core Models")
+        if "machine learning" in text_lower or "modeling" in text_lower or "pytorch" in text_lower or "tensorflow" in text_lower:
+            extracted_topics.append("Machine Learning Core Models & Frameworks")
         if "python" in text_lower:
             extracted_topics.append("Python Programming")
         if "c++" in text_lower:
             extracted_topics.append("C++ Systems Programming")
-        if "cloud" in text_lower or "aws" in text_lower or "gcp" in text_lower:
-            extracted_topics.append("Cloud Infrastructure Patterns")
+        if "cloud" in text_lower or "aws" in text_lower or "gcp" in text_lower or "azure" in text_lower or "docker" in text_lower or "kubernetes" in text_lower:
+            extracted_topics.append("Cloud Infrastructure Patterns & Deployment")
             
         if not extracted_topics:
             extracted_topics = ["Company-Specific Core Technical Skills", "Domain Knowledge", "General Problem Solving"]
