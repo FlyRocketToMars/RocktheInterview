@@ -5,9 +5,14 @@ Generates personalized daily study plans based on user goals and progress
 import json
 from pathlib import Path
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional
 import random
-
+import hashlib
+from typing import Dict, List, Optional
+try:
+    from data.supabase_client import learning_store, is_supabase_configured
+    HAS_SUPABASE = True
+except ImportError:
+    HAS_SUPABASE = False
 
 class LearningPlanner:
     """Generates and manages personalized learning plans."""
@@ -285,22 +290,28 @@ class LearningPlanner:
     
     def __init__(self):
         self.plans_file = Path(__file__).parent / "user_study_plans.json"
-        self._ensure_file()
+        
+        self.use_supabase = HAS_SUPABASE and is_supabase_configured()
+        if not self.use_supabase:
+            self._ensure_file()
     
     def _ensure_file(self):
         if not self.plans_file.exists():
             self.plans_file.write_text('{"plans": {}}', encoding='utf-8')
     
     def _load_plans(self) -> Dict:
-        try:
-            with open(self.plans_file, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except:
-            return {"plans": {}}
-    
+        if not self.use_supabase:
+            try:
+                with open(self.plans_file, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except:
+                return {"plans": {}}
+        return {"plans": {}} # If supabase, operations are per-user, this is just fallback.
+
     def _save_plans(self, data: Dict):
-        with open(self.plans_file, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
+        if not self.use_supabase:
+            with open(self.plans_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
     
     def create_plan(self, user_id: str, template_id: str, 
                     start_date: Optional[datetime] = None,
@@ -342,10 +353,13 @@ class LearningPlanner:
             "status": "active"
         }
         
-        # Save to file
-        data = self._load_plans()
-        data["plans"][user_id] = plan
-        self._save_plans(data)
+        # Save to file or Supabase
+        if self.use_supabase:
+            learning_store.save_user_plan(plan)
+        else:
+            data = self._load_plans()
+            data["plans"][user_id] = plan
+            self._save_plans(data)
         
         return plan
     
@@ -450,6 +464,11 @@ class LearningPlanner:
     
     def get_user_plan(self, user_id: str) -> Optional[Dict]:
         """Get user's current study plan."""
+        if self.use_supabase:
+            plan = learning_store.get_user_plans(user_id)
+            if plan: return plan
+            
+        # Fallback to local
         data = self._load_plans()
         return data["plans"].get(user_id)
     
@@ -586,9 +605,12 @@ class LearningPlanner:
             plan["completed_days"] = len(plan["daily_logs"])
         
         # Save
-        data = self._load_plans()
-        data["plans"][user_id] = plan
-        self._save_plans(data)
+        if self.use_supabase:
+            learning_store.save_user_plan(plan)
+        else:
+            data = self._load_plans()
+            data["plans"][user_id] = plan
+            self._save_plans(data)
         
         return True
     

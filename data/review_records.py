@@ -2,6 +2,11 @@ import json
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
+try:
+    from data.supabase_client import learning_store, is_supabase_configured
+    HAS_SUPABASE = True
+except ImportError:
+    HAS_SUPABASE = False
 
 class ReviewRecords:
     """Manages user review history and spaced repetition data for questions."""
@@ -9,7 +14,9 @@ class ReviewRecords:
     def __init__(self):
         self.data_dir = Path(__file__).parent
         self.records_file = self.data_dir / "review_records.json"
-        self._ensure_file()
+        self.use_supabase = HAS_SUPABASE and is_supabase_configured()
+        if not self.use_supabase:
+            self._ensure_file()
         
     def _ensure_file(self):
         if not self.records_file.exists():
@@ -17,23 +24,30 @@ class ReviewRecords:
                 json.dump({"reviews": {}}, f, ensure_ascii=False)
                 
     def _load_data(self) -> Dict:
-        try:
-            with open(self.records_file, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return {"reviews": {}}
+        if not self.use_supabase:
+            try:
+                with open(self.records_file, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                return {"reviews": {}}
+        return {"reviews": {}}
             
     def _save_data(self, data: Dict):
-        with open(self.records_file, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+        if not self.use_supabase:
+            with open(self.records_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
             
     def record_review(self, user_id: str, question_id: str, score: str, question_title: str) -> bool:
         """
         Record a review attempt.
         score can be: "easy", "medium", "hard"
         """
-        data = self._load_data()
-        reviews = data.get("reviews", {})
+        if self.use_supabase:
+            user_records = learning_store.get_review_records(user_id) or {}
+            reviews = {user_id: user_records}
+        else:
+            data = self._load_data()
+            reviews = data.get("reviews", {})
         
         if user_id not in reviews:
             reviews[user_id] = {}
@@ -69,12 +83,17 @@ class ReviewRecords:
         record["question_title"] = question_title
         
         # Save back
-        data["reviews"] = reviews
-        self._save_data(data)
+        if self.use_supabase:
+            learning_store.save_review_records(user_id, reviews[user_id])
+        else:
+            data["reviews"] = reviews
+            self._save_data(data)
         return True
         
     def get_user_reviews(self, user_id: str) -> Dict:
         """Get all reviewed questions for a user."""
+        if self.use_supabase:
+            return learning_store.get_review_records(user_id) or {}
         data = self._load_data()
         return data.get("reviews", {}).get(user_id, {})
 

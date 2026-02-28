@@ -198,3 +198,93 @@ community_store = SupabaseCommunityStore()
 def is_supabase_configured() -> bool:
     """Check if Supabase is properly configured."""
     return user_store.is_available
+
+class SupabaseLearningStore:
+    """Learning data storage using Supabase."""
+    
+    def __init__(self):
+        self.client = get_supabase_client()
+        self.table_plans = "learning_plans"
+        self.table_profiles = "daily_learning_profiles"
+        self.table_reviews = "review_records"
+    
+    @property
+    def is_available(self) -> bool:
+        return self.client is not None
+
+    def _safe_execute(self, query):
+        try:
+            return query.execute()
+        except Exception as e:
+            print(f"Supabase Execution Error: {e}")
+            return None
+
+    # Learning Plans
+    def get_user_plans(self, user_id: str) -> Optional[Dict]:
+        if not self.is_available: return None
+        res = self._safe_execute(self.client.table(self.table_plans).select("*").eq("user_id", user_id).eq("status", "active"))
+        if res and res.data:
+            return res.data[0]
+        return None
+
+    def save_user_plan(self, plan: Dict) -> bool:
+        if not self.is_available: return False
+        res = self._safe_execute(self.client.table(self.table_plans).select("id").eq("id", plan["id"]))
+        if res and res.data:
+            self._safe_execute(self.client.table(self.table_plans).update(plan).eq("id", plan["id"]))
+        else:
+            self._safe_execute(self.client.table(self.table_plans).insert(plan))
+        return True
+
+    # Daily Learning Profiles
+    def get_daily_profile(self, user_id: str) -> Optional[Dict]:
+        if not self.is_available: return None
+        res = self._safe_execute(self.client.table(self.table_profiles).select("*").eq("user_id", user_id))
+        if res and res.data:
+            data = res.data[0]
+            return {
+                "profile": data.get("profile_data", {}),
+                "progress": data.get("progress_data", {}),
+                "daily_plans": data.get("daily_plans", {})
+            }
+        return None
+
+    def save_daily_profile(self, user_id: str, profile_data: Dict, progress_data: Dict, daily_plans: Dict) -> bool:
+        if not self.is_available: return False
+        payload = {
+            "user_id": user_id,
+            "profile_data": profile_data,
+            "progress_data": progress_data,
+            "daily_plans": daily_plans,
+            "updated_at": datetime.now().isoformat()
+        }
+        res = self._safe_execute(self.client.table(self.table_profiles).select("user_id").eq("user_id", user_id))
+        if res and res.data:
+            self._safe_execute(self.client.table(self.table_profiles).update(payload).eq("user_id", user_id))
+        else:
+            self._safe_execute(self.client.table(self.table_profiles).insert(payload))
+        return True
+
+    # Review Records
+    def get_review_records(self, user_id: str) -> Optional[Dict]:
+        if not self.is_available: return None
+        res = self._safe_execute(self.client.table(self.table_reviews).select("*").eq("user_id", user_id))
+        if res and res.data:
+            return res.data[0].get("records_data", {})
+        return None
+
+    def save_review_records(self, user_id: str, records_data: Dict) -> bool:
+        if not self.is_available: return False
+        payload = {
+            "user_id": user_id,
+            "records_data": records_data,
+            "updated_at": datetime.now().isoformat()
+        }
+        res = self._safe_execute(self.client.table(self.table_reviews).select("user_id").eq("user_id", user_id))
+        if res and res.data:
+            self._safe_execute(self.client.table(self.table_reviews).update(payload).eq("user_id", user_id))
+        else:
+            self._safe_execute(self.client.table(self.table_reviews).insert(payload))
+        return True
+
+learning_store = SupabaseLearningStore()

@@ -16,13 +16,22 @@ try:
 except ImportError:
     HAS_EVOLVER = False
 
+try:
+    from data.supabase_client import learning_store, is_supabase_configured
+    HAS_SUPABASE = True
+except ImportError:
+    HAS_SUPABASE = False
+
 class DailyLearningEngine:
     """Generates smart, personalized daily learning plans with dynamic evolution."""
     
     def __init__(self):
         self.data_dir = Path(__file__).parent
         self.user_daily_file = self.data_dir / "user_daily_plans.json"
-        self._ensure_data_file()
+        self.use_supabase = HAS_SUPABASE and is_supabase_configured()
+        
+        if not self.use_supabase:
+            self._ensure_data_file()
         
         # Load question bank
         try:
@@ -36,21 +45,43 @@ class DailyLearningEngine:
             self._save_data({"users": {}})
     
     def _load_data(self) -> Dict:
-        try:
-            with open(self.user_daily_file, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except:
-            return {"users": {}}
+        if not self.use_supabase:
+            try:
+                with open(self.user_daily_file, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except:
+                return {"users": {}}
+        return {"users": {}}
     
     def _save_data(self, data: Dict):
-        with open(self.user_daily_file, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+        if not self.use_supabase:
+            with open(self.user_daily_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+
+    def _get_user_data(self, user_id: str) -> Optional[Dict]:
+        if self.use_supabase:
+            return learning_store.get_daily_profile(user_id)
+        data = self._load_data()
+        return data["users"].get(user_id)
+
+    def _save_user_data(self, user_id: str, user_data: Dict):
+        if self.use_supabase:
+            learning_store.save_daily_profile(
+                user_id,
+                user_data.get("profile", {}),
+                user_data.get("progress", {}),
+                user_data.get("daily_plans", {})
+            )
+        else:
+            data = self._load_data()
+            if "users" not in data:
+                data["users"] = {}
+            data["users"][user_id] = user_data
+            self._save_data(data)
     
     def setup_user_profile(self, user_id: str, profile: Dict) -> bool:
         """Setup or update user learning profile."""
-        data = self._load_data()
-        
-        data["users"][user_id] = {
+        user_data = {
             "profile": {
                 "target_company": profile.get("target_company", "Google"),
                 "target_role": profile.get("target_role", "MLE"),
@@ -71,14 +102,13 @@ class DailyLearningEngine:
             },
             "daily_plans": {}
         }
-        
-        self._save_data(data)
+        self._save_user_data(user_id, user_data)
         return True
     
     def get_user_profile(self, user_id: str) -> Optional[Dict]:
         """Get user's learning profile."""
-        data = self._load_data()
-        return data["users"].get(user_id)
+        user_data = self._get_user_data(user_id)
+        return {"profile": user_data["profile"], "progress": user_data["progress"]} if user_data else None
     
     def generate_daily_plan(self, user_id: str, date: str = None) -> Dict:
         """Generate a personalized daily learning plan."""
@@ -86,8 +116,7 @@ class DailyLearningEngine:
         if date is None:
             date = datetime.now().strftime("%Y-%m-%d")
         
-        data = self._load_data()
-        user_data = data["users"].get(user_id)
+        user_data = self._get_user_data(user_id)
         
         if not user_data:
             return self._generate_default_plan(date)
@@ -109,7 +138,7 @@ class DailyLearningEngine:
         if "daily_plans" not in user_data:
             user_data["daily_plans"] = {}
         user_data["daily_plans"][date] = plan
-        self._save_data(data)
+        self._save_user_data(user_id, user_data)
         
         return plan
     
@@ -556,12 +585,10 @@ class DailyLearningEngine:
     
     def complete_task(self, user_id: str, date: str, task_id: int) -> bool:
         """Mark a task as completed."""
-        data = self._load_data()
+        user_data = self._get_user_data(user_id)
         
-        if user_id not in data["users"]:
+        if not user_data:
             return False
-        
-        user_data = data["users"][user_id]
         
         if date not in user_data.get("daily_plans", {}):
             return False
@@ -592,7 +619,7 @@ class DailyLearningEngine:
                     if title and title not in user_data["progress"]["completed_topics"]:
                          user_data["progress"]["completed_topics"].append(title)
                 
-                self._save_data(data)
+                self._save_user_data(user_id, user_data)
                 return True
         
         return False
