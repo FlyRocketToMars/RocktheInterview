@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+import sys
+sys.path.append(str(Path(__file__).parent.parent))
+
 from data.supabase_client import is_supabase_configured, learning_store
 
 def run_migration():
