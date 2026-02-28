@@ -77,6 +77,16 @@ def render_learning_plan():
     # Today's tasks
     st.markdown("### 📋 今日任务")
     
+    # Define navigation callbacks
+    def go_to_questions():
+        st.session_state.nav_selection = t("nav_questions", lang)
+        
+    def go_to_community():
+        st.session_state.nav_selection = t("nav_community", lang)
+        
+    def go_to_mock():
+        st.session_state.nav_selection = t("nav_mock", lang)
+
     for i, task in enumerate(today_tasks['tasks']):
         task_key = f"task_{task['type']}_{i}"
         
@@ -101,13 +111,9 @@ def render_learning_plan():
                         st.rerun()
                     
                     if task['type'] in ('coding', 'system_design'):
-                        if st.button("▶️ 立即练习", key=f"go_{task_key}"):
-                            st.session_state.nav_selection = t("nav_questions", lang)
-                            st.rerun()
+                        st.button("▶️ 立即练习", key=f"go_{task_key}", on_click=go_to_questions)
                     elif task['type'] == 'mock_interview':
-                        if st.button("▶️ 开始模拟", key=f"go_{task_key}"):
-                            st.session_state.nav_selection = t("nav_mock", lang)
-                            st.rerun()
+                        st.button("▶️ 开始模拟", key=f"go_{task_key}", on_click=go_to_mock)
                 else:
                     st.success("已完成 ✅")
         
@@ -117,15 +123,6 @@ def render_learning_plan():
     st.markdown("### ⚡ 快捷操作")
 
     col1, col2, col3, col4 = st.columns(4)
-    
-    def go_to_questions():
-        st.session_state.nav_selection = t("nav_questions", lang)
-        
-    def go_to_community():
-        st.session_state.nav_selection = t("nav_community", lang)
-        
-    def go_to_mock():
-        st.session_state.nav_selection = t("nav_mock", lang)
         
     def switch_plan():
         # Clear current plan
