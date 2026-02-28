@@ -545,20 +545,32 @@ def render_neetcode_tracker():
     st.markdown("### 💻 Neetcode 算法高频 250")
     st.markdown("*精选互联网大厂最常考的 250 道算法题，分门别类，针对性刷题。*")
     
-    # Mock data for Neetcode categories
-    categories = [
-        {"name": "Arrays & Hashing", "total": 9, "completed": 2},
-        {"name": "Two Pointers", "total": 5, "completed": 0},
-        {"name": "Sliding Window", "total": 6, "completed": 0},
-        {"name": "Stack", "total": 7, "completed": 0},
-        {"name": "Binary Search", "total": 7, "completed": 0},
-        {"name": "Linked List", "total": 11, "completed": 0},
-        {"name": "Trees", "total": 15, "completed": 0}
-    ]
-    
+    # Load data for Neetcode categories
+    nc_file = Path(__file__).parent.parent.parent / "data" / "neetcode_questions.json"
+    categories = []
+    if nc_file.exists():
+        with open(nc_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            categories = data.get("categories", [])
+            
+    # Load user progress
+    try:
+        from components.auth import get_current_user
+        from data.daily_learning import daily_learning
+        user_email = get_current_user()
+        profile_data = None
+        if user_email:
+            profile_data = daily_learning.get_user_profile(user_email)
+        completed_set = set()
+        if profile_data and "progress" in profile_data:
+            completed_set = set(profile_data["progress"].get("completed_questions", []))
+    except Exception as e:
+        completed_set = set()
+        user_email = None
+
     # Top progress bar
-    total_q = sum(c["total"] for c in categories)
-    completed_q = sum(c["completed"] for c in categories)
+    total_q = sum(len(c.get("questions", [])) for c in categories)
+    completed_q = sum(1 for c in categories for q in c.get("questions", []) if q["id"] in completed_set)
     progress_pct = int((completed_q / total_q) * 100) if total_q > 0 else 0
     
     st.markdown(f"**整体进度: {completed_q} / {total_q} ({progress_pct}%)**")
@@ -568,21 +580,42 @@ def render_neetcode_tracker():
     col1, col2 = st.columns(2)
     
     for i, cat in enumerate(categories):
+        cat_total = len(cat.get("questions", []))
+        cat_completed = sum(1 for q in cat.get("questions", []) if q["id"] in completed_set)
+        
         with (col1 if i % 2 == 0 else col2):
-            with st.expander(f"📁 {cat['name']} ({cat['completed']}/{cat['total']})"):
-                st.markdown("*题单持续同步中...*")
-                
-                # Mock a few questions for Arrays
-                if cat["name"] == "Arrays & Hashing":
-                    st.checkbox("🟢 Two Sum (LeetCode 1)", value=True, disabled=True, key=f"nc_cb_{i}_1")
-                    st.checkbox("🟡 Group Anagrams (LeetCode 49)", value=True, disabled=True, key=f"nc_cb_{i}_2")
-                    st.checkbox("🟡 Valid Sudoku (LeetCode 36)", value=False, key=f"nc_cb_{i}_3")
-                else:
-                    st.checkbox(f"🔴 Hard Problem (Mock)", value=False, key=f"nc_cb_{i}_1")
-                    st.checkbox(f"🟡 Medium Problem (Mock)", value=False, key=f"nc_cb_{i}_2")
-                
-                if st.button(f"🔗 前往 Leetcode", key=f"nc_link_{i}"):
-                    st.success("即将跳转...")
+            with st.expander(f"📁 {cat['name']} ({cat_completed}/{cat_total})", expanded=(i == 0)):
+                for q in cat.get("questions", []):
+                    # Checkbox
+                    is_done = q["id"] in completed_set
+                    
+                    diff_color = {"easy": "🟢", "medium": "🟡", "hard": "🔴"}.get(q.get("difficulty", "easy"), "⚪")
+                    
+                    def toggle_completion(qid=q["id"]):
+                        if not user_email:
+                            st.error("请先登录！")
+                            return
+                        # reload profile_data to avoid stale state
+                        try:
+                            from data.daily_learning import daily_learning
+                            pd = daily_learning.get_user_profile(user_email)
+                            if pd and "progress" in pd:
+                                current_completed = pd["progress"].get("completed_questions", [])
+                                if qid in current_completed:
+                                    current_completed.remove(qid)
+                                else:
+                                    current_completed.append(qid)
+                                pd["progress"]["completed_questions"] = current_completed
+                                daily_learning._save_user_data(user_email, pd)
+                        except Exception as e:
+                            st.error(f"Save failed: {e}")
+
+                    # Render link + checkbox
+                    cols = st.columns([1, 8])
+                    with cols[0]:
+                        st.checkbox("", value=is_done, key=f"cb_{q['id']}", on_change=toggle_completion, kwargs={"qid": q["id"]})
+                    with cols[1]:
+                        st.markdown(f"[{diff_color} {q['name']}]({q['url']})")
 
 
 def render_interview_questions():
