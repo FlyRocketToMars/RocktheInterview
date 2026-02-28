@@ -668,6 +668,25 @@ def main():
                         else:
                             st.error(fetched_text)
             
+            # File Upload
+            st.markdown("---")
+            uploaded_jd = st.file_uploader("📎 Upload Job Description (PDF/TXT)", type=["pdf", "txt"])
+            
+            if uploaded_jd is not None:
+                if uploaded_jd.name.endswith(".pdf"):
+                    from components.utils import parse_pdf
+                    with st.spinner("Parsing PDF..."):
+                        pdf_text = parse_pdf(uploaded_jd.getvalue())
+                        if pdf_text and not pdf_text.startswith("Error"):
+                             st.session_state.target["jd_text"] = pdf_text
+                             st.success("PDF loaded successfully! You can edit the text below if needed.")
+                        else:
+                            st.error(f"Failed to parse PDF: {pdf_text}")
+                elif uploaded_jd.name.endswith(".txt"):
+                    text_content = uploaded_jd.getvalue().decode("utf-8")
+                    st.session_state.target["jd_text"] = text_content
+                    st.success("Text file loaded successfully!")
+            
             jd_text = st.text_area(
                 t("jd_label", lang),
                 value=st.session_state.target.get("jd_text", ""),
