@@ -244,10 +244,42 @@ def render_interview_questions():
     rounds_list = categories.get("rounds", [])
     levels_list = categories.get("levels", [])
     
+    # Get user target company for default selection
+    try:
+        from components.auth import get_current_user
+        from data.daily_learning import daily_learning
+        user_email = get_current_user()
+        user_target = "全部"
+        user_level = "全部"
+        if user_email:
+            profile_data = daily_learning.get_user_profile(user_email)
+            if profile_data and "profile" in profile_data:
+                user_target = profile_data["profile"].get("target_company", "全部")
+                user_level = profile_data["profile"].get("target_level", "全部")
+    except:
+        user_target = "全部"
+        user_level = "全部"
+        
+    company_options = ["全部"] + companies_list
+    default_company_index = 0
+    if user_target in company_options:
+        default_company_index = company_options.index(user_target)
+        
+    level_options = ["全部"] + levels_list
+    default_level_index = 0
+    
+    # Try to match the user's exact level strings, e.g., "L5" with "L5/Senior"
+    if user_level != "全部":
+        for i, lvl in enumerate(level_options):
+            if str(lvl).lower().startswith(str(user_level).lower()):
+                default_level_index = i
+                break
+    
     with col1:
         selected_company = st.selectbox(
             "🏢 目标公司",
-            ["全部"] + companies_list,
+            company_options,
+            index=default_company_index,
             key="filter_company_v2"
         )
         
@@ -288,7 +320,8 @@ def render_interview_questions():
         
         selected_level = st.selectbox(
             "📊 目标级别",
-            ["全部"] + levels_list,
+            level_options,
+            index=default_level_index,
             key="filter_level"
         )
     
