@@ -70,6 +70,10 @@ def render_learning_plan():
     # Motivational quote
     st.info(f"💡 {today_tasks['motivational_quote']}")
     
+    # Grab translations for navigation
+    from components.i18n import t
+    lang = st.session_state.get("language", "zh")
+
     # Today's tasks
     st.markdown("### 📋 今日任务")
     
@@ -90,19 +94,27 @@ def render_learning_plan():
                     st.markdown(f"📎 主题: {task['topic']}")
             
             with col3:
-                if st.button("✅ 完成", key=task_key):
-                    mark_task_complete(user_id, task['type'])
-                    st.success("打卡成功！")
-                    st.rerun()
+                if not task.get('completed', False):
+                    if st.button("✅ 完成打卡", key=f"done_{task_key}"):
+                        mark_task_complete(user_id, task['type'])
+                        st.success("打卡成功！")
+                        st.rerun()
+                    
+                    if task['type'] in ('coding', 'system_design'):
+                        if st.button("▶️ 立即练习", key=f"go_{task_key}"):
+                            st.session_state.nav_selection = t("nav_questions", lang)
+                            st.rerun()
+                    elif task['type'] == 'mock_interview':
+                        if st.button("▶️ 开始模拟", key=f"go_{task_key}"):
+                            st.session_state.nav_selection = t("nav_mock", lang)
+                            st.rerun()
+                else:
+                    st.success("已完成 ✅")
         
         st.markdown("---")
     
     # Quick actions
     st.markdown("### ⚡ 快捷操作")
-    
-    # Need to get current language
-    from components.i18n import t
-    lang = st.session_state.get("language", "zh")
 
     col1, col2, col3, col4 = st.columns(4)
     
@@ -228,7 +240,7 @@ def render_plan_selection(user_id: str):
                 doc_text = uploaded_file.getvalue().decode("utf-8")
                 
             from data.learning_planner import create_study_plan_from_doc
-            plan = create_study_plan_from_doc(user_id, doc_text, duration_weeks=doc_duration)
+            plan = create_study_plan_from_doc(user_id, doc_text, duration_weeks=doc_duration, include_neetcode=inc_neetcode)
             st.success("🎉 AI 分析完成！您的专属面试计划已生成。")
             time.sleep(1)
             st.rerun()

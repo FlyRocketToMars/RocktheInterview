@@ -363,7 +363,7 @@ class LearningPlanner:
         
         return plan
     
-    def create_plan_from_doc(self, user_id: str, doc_text: str, duration_weeks: int = 4) -> Dict:
+    def create_plan_from_doc(self, user_id: str, doc_text: str, duration_weeks: int = 4, include_neetcode: bool = False) -> Dict:
         """Create a custom plan based on uploaded preparation document."""
         # Simulate an AI extraction process based on keyword matching
         text_lower = doc_text.lower()
@@ -460,7 +460,7 @@ class LearningPlanner:
             "description": "基于你上传的文档动态生成的独家面试重点。"
         }
         
-        return self.create_plan(user_id, template_id, daily_hours=2.5)
+        return self.create_plan(user_id, template_id, daily_hours=2.5, include_neetcode=include_neetcode)
     
     def get_user_plan(self, user_id: str) -> Optional[Dict]:
         """Get user's current study plan."""
@@ -670,8 +670,8 @@ learning_planner = LearningPlanner()
 def create_study_plan(user_id: str, template_id: str, include_neetcode: bool = False) -> Dict:
     return learning_planner.create_plan(user_id, template_id, include_neetcode=include_neetcode)
 
-def create_study_plan_from_doc(user_id: str, doc_text: str, duration_weeks: int) -> Dict:
-    return learning_planner.create_plan_from_doc(user_id, doc_text, duration_weeks)
+def create_study_plan_from_doc(user_id: str, doc_text: str, duration_weeks: int, include_neetcode: bool = False) -> Dict:
+    return learning_planner.create_plan_from_doc(user_id, doc_text, duration_weeks, include_neetcode)
 
 def get_today_study_tasks(user_id: str) -> Dict:
     return learning_planner.get_today_tasks(user_id)
