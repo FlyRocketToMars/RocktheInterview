@@ -6,9 +6,16 @@ from datetime import datetime
 
 # Target sources: Reddit JSON APIs for public data
 SOURCES = [
-    "https://www.reddit.com/r/cscareerquestions/search.json?q=MLE+interview+experience&restrict_sr=1&sort=new",
-    "https://www.reddit.com/r/MachineLearning/search.json?q=interview+questions&restrict_sr=1&sort=new"
+    {"url": "https://www.reddit.com/r/cscareerquestions/search.json?q=MLE+interview+experience&restrict_sr=1&sort=new", "source": "Reddit (cscareerquestions)"},
+    {"url": "https://www.reddit.com/r/MachineLearning/search.json?q=interview+questions&restrict_sr=1&sort=new", "source": "Reddit (MachineLearning)"},
+    {"url": "https://www.reddit.com/r/dataengineering/search.json?q=interview+questions&restrict_sr=1&sort=new", "source": "Reddit (dataengineering)"},
+    {"url": "https://www.reddit.com/r/csMajors/search.json?q=MLE+interview&restrict_sr=1&sort=new", "source": "Reddit (csMajors)"}
 ]
+
+# Note: In a production environment, you would add logic for:
+# - Glassdoor via unofficial APIs / Playwright
+# - 1point3acres (一亩三分地) via Selenium / Playwright (requires complex auth/captcha handling)
+# - Blind via unofficial APIs
 
 COMPANIES = [
     "Google", "Meta", "Amazon", "Apple", "Netflix", 
@@ -34,7 +41,8 @@ def scrape_questions():
                       'Chrome/91.0.4472.124 Safari/537.36'
     }
     
-    for url in SOURCES:
+    for source_info in SOURCES:
+        url = source_info["url"]
         try:
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
@@ -55,9 +63,10 @@ def scrape_questions():
                         # Only grab substantive posts
                         if len(selftext) > 200:
                             company = extract_company(title + " " + selftext)
+                            source_name = source_info["source"]
                             
                             question_id = f"auto_{str(uuid.uuid4())[:8]}"
-                            snippet = selftext[:600] + "...\n\n[View Full Source on Reddit]"
+                            snippet = selftext[:600] + f"...\n\n[View Full Source on {source_name}]"
                             
                             question_entry = {
                                 "id": question_id,
@@ -66,13 +75,13 @@ def scrape_questions():
                                 "level": "Unknown",
                                 "round": "behavioral" if "behavioral" in text_lower else "ml_theory",
                                 "domain": "fundamentals",
-                                "question": f"[Auto-Scraped] {title}",
+                                "question": f"[{source_name}] {title}",
                                 "answer": [snippet, f"Source Author: u/{author}"],
                                 "follow_ups": [],
                                 "difficulty": "medium",
                                 "frequency": 1,
                                 "importance": 3,
-                                "tags": ["community-scraped", "reddit", author],
+                                "tags": ["community-scraped", source_name, author],
                                 "common_mistakes": [],
                                 "year": datetime.now().year
                             }
