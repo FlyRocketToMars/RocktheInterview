@@ -541,9 +541,9 @@ def render_mle_questions():
 
 
 def render_neetcode_tracker():
-    """Render the Neetcode 250 coding practice tracker."""
-    st.markdown("### 💻 Neetcode 算法高频 250")
-    st.markdown("*精选互联网大厂最常考的 250 道算法题，分门别类，针对性刷题。*")
+    """Render the Neetcode 150 coding practice tracker."""
+    st.markdown("### 💻 Neetcode 算法高频 150")
+    st.markdown("*精选互联网大厂最常考的 150 道算法题，分门别类，针对性刷题。*")
     
     # Load data for Neetcode categories
     nc_file = Path(__file__).parent.parent.parent / "data" / "neetcode_questions.json"
