@@ -170,8 +170,8 @@ def load_interview_questions() -> Dict:
     return {"questions": [], "metadata": {}, "categories": {}}
 
 
-def render_interview_questions():
-    """Render the interview questions browser page."""
+def render_mle_questions():
+    """Render the MLE interview questions browser."""
     
     # Custom CSS
     st.markdown("""
@@ -538,3 +538,61 @@ def render_interview_questions():
         - **ByteDance**: 推荐/排序系统 + Coding
         - **OpenAI**: LLM 理论 + 系统设计
         """)
+
+
+def render_neetcode_tracker():
+    """Render the Neetcode 250 coding practice tracker."""
+    st.markdown("### 💻 Neetcode 算法高频 250")
+    st.markdown("*精选互联网大厂最常考的 250 道算法题，分门别类，针对性刷题。*")
+    
+    # Mock data for Neetcode categories
+    categories = [
+        {"name": "Arrays & Hashing", "total": 9, "completed": 2},
+        {"name": "Two Pointers", "total": 5, "completed": 0},
+        {"name": "Sliding Window", "total": 6, "completed": 0},
+        {"name": "Stack", "total": 7, "completed": 0},
+        {"name": "Binary Search", "total": 7, "completed": 0},
+        {"name": "Linked List", "total": 11, "completed": 0},
+        {"name": "Trees", "total": 15, "completed": 0}
+    ]
+    
+    # Top progress bar
+    total_q = sum(c["total"] for c in categories)
+    completed_q = sum(c["completed"] for c in categories)
+    progress_pct = int((completed_q / total_q) * 100) if total_q > 0 else 0
+    
+    st.markdown(f"**整体进度: {completed_q} / {total_q} ({progress_pct}%)**")
+    st.progress(progress_pct / 100.0)
+    st.markdown("---")
+    
+    col1, col2 = st.columns(2)
+    
+    for i, cat in enumerate(categories):
+        with (col1 if i % 2 == 0 else col2):
+            with st.expander(f"📁 {cat['name']} ({cat['completed']}/{cat['total']})"):
+                st.markdown("*题单持续同步中...*")
+                
+                # Mock a few questions for Arrays
+                if cat["name"] == "Arrays & Hashing":
+                    st.checkbox("🟢 Two Sum (LeetCode 1)", value=True, disabled=True, key=f"nc_cb_{i}_1")
+                    st.checkbox("🟡 Group Anagrams (LeetCode 49)", value=True, disabled=True, key=f"nc_cb_{i}_2")
+                    st.checkbox("🟡 Valid Sudoku (LeetCode 36)", value=False, key=f"nc_cb_{i}_3")
+                else:
+                    st.checkbox(f"🔴 Hard Problem (Mock)", value=False, key=f"nc_cb_{i}_1")
+                    st.checkbox(f"🟡 Medium Problem (Mock)", value=False, key=f"nc_cb_{i}_2")
+                
+                if st.button(f"🔗 前往 Leetcode", key=f"nc_link_{i}"):
+                    st.success("即将跳转...")
+
+
+def render_interview_questions():
+    """Main entry for Interview Questions module."""
+    st.markdown("## 📚 面试题库大厅")
+    
+    tab1, tab2 = st.tabs(["🧠 MLE 专业系统设计题库", "💻 算法代码区 (Neetcode)"])
+    
+    with tab1:
+        render_mle_questions()
+        
+    with tab2:
+        render_neetcode_tracker()

@@ -81,9 +81,14 @@ class DailyLearningEngine:
     
     def setup_user_profile(self, user_id: str, profile: Dict) -> bool:
         """Setup or update user learning profile."""
+        existing_data = self._get_user_data(user_id) or {}
+        existing_progress = existing_data.get("progress", {})
+        existing_daily_plans = existing_data.get("daily_plans", {})
+        
         user_data = {
             "profile": {
                 "target_company": profile.get("target_company", "Google"),
+                "target_companies": profile.get("target_companies", [profile.get("target_company", "Google")]),
                 "target_role": profile.get("target_role", "MLE"),
                 "target_level": profile.get("target_level", "L5"),
                 "interview_date": profile.get("interview_date", ""),
@@ -94,13 +99,13 @@ class DailyLearningEngine:
                 "setup_at": datetime.now().isoformat()
             },
             "progress": {
-                "completed_questions": [],
-                "completed_topics": [],
-                "streak_days": 0,
-                "last_study_date": None,
-                "total_study_minutes": 0
+                "completed_questions": existing_progress.get("completed_questions", []),
+                "completed_topics": existing_progress.get("completed_topics", []),
+                "streak_days": existing_progress.get("streak_days", 0),
+                "last_study_date": existing_progress.get("last_study_date", None),
+                "total_study_minutes": existing_progress.get("total_study_minutes", 0)
             },
-            "daily_plans": {}
+            "daily_plans": existing_daily_plans
         }
         self._save_user_data(user_id, user_data)
         return True

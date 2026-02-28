@@ -613,10 +613,11 @@ def main():
             col1, col2, col3 = st.columns(3)
             
             with col1:
-                company = st.selectbox(t("target_company", lang), company_names)
+                companies = st.multiselect(t("target_company", lang), company_names, default=[company_names[0]] if company_names else None)
             
-            # Get selected company data
-            selected_company = next((c for c in companies_data if c["name"] == company), None)
+            # Get selected company data (use first selected for previewing roles/levels)
+            selected_company_name = companies[0] if companies else None
+            selected_company = next((c for c in companies_data if c["name"] == selected_company_name), None)
             
             with col2:
                 # Get available roles for selected company
@@ -646,9 +647,26 @@ def main():
                     """, unsafe_allow_html=True)
             
             if st.button(t("target_confirm_btn", lang), use_container_width=True):
-                st.session_state.target["company"] = company
+                st.session_state.target["companies"] = companies
+                if companies:
+                    st.session_state.target["company"] = companies[0]
+                else:
+                    st.session_state.target["company"] = "全部"
                 st.session_state.target["role"] = role
                 st.session_state.target["level"] = level
+                
+                # Fetch profile and update
+                from components.auth import get_current_user
+                from data.daily_learning import daily_learning
+                user_email = get_current_user()
+                if user_email:
+                    daily_learning.setup_user_profile(user_email, {
+                        "target_companies": companies,
+                        "target_company": companies[0] if companies else "全部",
+                        "target_role": role,
+                        "target_level": level,
+                    })
+                
                 st.success("Target Confirmed!")
 
         with setup_tabs[2]: # JD
