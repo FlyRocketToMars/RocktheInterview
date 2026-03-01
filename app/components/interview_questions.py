@@ -276,11 +276,11 @@ def render_mle_questions():
                 break
     
     with col1:
-        selected_company = st.selectbox(
+        selected_companies = st.multiselect(
             "🏢 目标公司",
             company_options,
-            index=default_company_index,
-            key="filter_company_v2"
+            default=[company_options[default_company_index]] if company_options else ["全部"],
+            key="filter_companies_v2"
         )
         
         selected_domain = st.selectbox(
@@ -346,8 +346,8 @@ def render_mle_questions():
     
     # Apply filters
     filtered = questions
-    if selected_company != "全部":
-        filtered = [q for q in filtered if q.get("company") == selected_company]
+    if "全部" not in selected_companies and selected_companies:
+        filtered = [q for q in filtered if q.get("company") in selected_companies]
     if selected_domain != "全部":
         filtered = [q for q in filtered if q.get("domain") == selected_domain]
     if selected_round != "全部":
@@ -369,7 +369,23 @@ def render_mle_questions():
     # Sort by frequency then importance
     filtered = sorted(filtered, key=lambda x: (x.get("frequency", 0), x.get("importance", 0)), reverse=True)
     
-    for i, q in enumerate(filtered):
+    # Pagination Setup
+    questions_per_page = 10
+    total_pages = max(1, (len(filtered) - 1) // questions_per_page + 1)
+    
+    if "mle_questions_page" not in st.session_state:
+        st.session_state.mle_questions_page = 1
+        
+    if st.session_state.mle_questions_page > total_pages:
+        st.session_state.mle_questions_page = 1
+        
+    current_page = st.session_state.mle_questions_page
+    start_idx = (current_page - 1) * questions_per_page
+    end_idx = start_idx + questions_per_page
+    
+    current_page_questions = filtered[start_idx:end_idx]
+    
+    for i, q in enumerate(current_page_questions):
         # Question header with badges
         freq = q.get("frequency", 0)
         freq_badge = "🔥" * min(freq, 5)
@@ -499,7 +515,25 @@ def render_mle_questions():
             
             with st.expander(f"💬 社区回答 ({num_answers})", expanded=False):
                 render_community_answers(question_id, q.get("question", ""))
-    
+                
+    # Render Pagination Controls
+    if total_pages > 1:
+        st.markdown("---")
+        c1, c2, c3 = st.columns([1, 2, 1])
+        
+        with c1:
+            if st.button("⬅️ 上一页", disabled=(current_page == 1), use_container_width=True):
+                st.session_state.mle_questions_page -= 1
+                st.rerun()
+                
+        with c2:
+            st.markdown(f"<div style='text-align: center; padding-top: 8px;'>第 <b>{current_page}</b> 页 / 共 <b>{total_pages}</b> 页</div>", unsafe_allow_html=True)
+            
+        with c3:
+            if st.button("下一页 ➡️", disabled=(current_page == total_pages), use_container_width=True):
+                st.session_state.mle_questions_page += 1
+                st.rerun()
+                
     st.markdown("---")
     
     # ============ Learning Path Suggestion ============
