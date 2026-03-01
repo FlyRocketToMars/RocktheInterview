@@ -1,101 +1,206 @@
 import json
 import uuid
-import requests
+import os
+import time
 from pathlib import Path
 from datetime import datetime
+from playwright.sync_api import sync_playwright
+import openai
 
-# Target sources: Reddit JSON APIs for public data
-SOURCES = [
-    {"url": "https://www.reddit.com/r/cscareerquestions/search.json?q=MLE+interview+experience&restrict_sr=1&sort=new", "source": "Reddit (cscareerquestions)"},
-    {"url": "https://www.reddit.com/r/MachineLearning/search.json?q=interview+questions&restrict_sr=1&sort=new", "source": "Reddit (MachineLearning)"},
-    {"url": "https://www.reddit.com/r/dataengineering/search.json?q=interview+questions&restrict_sr=1&sort=new", "source": "Reddit (dataengineering)"},
-    {"url": "https://www.reddit.com/r/csMajors/search.json?q=MLE+interview&restrict_sr=1&sort=new", "source": "Reddit (csMajors)"}
+# Set up your OpenAI API key as an environment variable (or hardcode here for local testing)
+# os.environ["OPENAI_API_KEY"] = "your_openai_api_key_here"
+openai.api_key = os.getenv("OPENAI_API_KEY", "")
+
+# Target URLs for Playwright
+# We'll simulate fetching from a public forum using headless Chromium.
+# For production 1point3acres/Blind or gated sites, you would inject tokens or cookies here.
+TARGET_URLS = [
+    {"url": "https://old.reddit.com/r/cscareerquestions/search?q=MLE+interview+experience&restrict_sr=on&sort=new", "source": "Reddit (cscareerquestions)"},
+    {"url": "https://old.reddit.com/r/MachineLearning/search?q=interview+questions&restrict_sr=on&sort=new", "source": "Reddit (MachineLearning)"}
+    # Future additions (requires authentication/cookies handled manually):
+    # {"url": "https://www.1point3acres.com/bbs/forum-145-1.html", "source": "1point3acres"}
+    # {"url": "https://www.teamblind.com/topics/Interviews", "source": "Blind"}
 ]
 
-# Note: In a production environment, you would add logic for:
-# - Glassdoor via unofficial APIs / Playwright
-# - 1point3acres (一亩三分地) via Selenium / Playwright (requires complex auth/captcha handling)
-# - Blind via unofficial APIs
+def parse_slang_and_structure_with_llm(raw_text, source_name, author="anonymous"):
+    """
+    Uses an LLM to deeply understand unstructured text, translate Chinese slang 
+    ("狗家" -> Google, "麻" -> Amazon, "脸/meta" -> Meta), and format it into our strict JSON schema.
+    """
+    if not openai.api_key:
+        # Fallback if no LLM key is configured
+        print("No OPENAI_API_KEY found. Falling back to simple heuristic extraction.")
+        return simple_fallback_extraction(raw_text, source_name, author)
 
-COMPANIES = [
-    "Google", "Meta", "Amazon", "Apple", "Netflix", 
-    "Snap", "ByteDance", "Tiktok", "OpenAI", 
-    "Anthropic", "Tesla", "Nvidia", "Microsoft"
-]
+    system_prompt = """
+    You are an expert technical interviewer and data extractor. You are analyzing community forum posts (often containing Chinese/English slang) about technical interviews.
+    Your job is to extract the details and return them EXCLUSIVELY as a valid JSON object matching the exact schema below. Do not output markdown, do not output reasoning, only the JSON. 
+    
+    Slang mapping:
+    - 狗家 / 狗厂 -> Google
+    - 麻厂 / 亚麻 -> Amazon
+    - 脸 / 脸家 -> Meta
+    - 软 / 巨硬 -> Microsoft
+    - 字节 / 抖 -> ByteDance
+    - 果 / 苹果 -> Apple
+    - O家 -> OpenAI
+    - 虾皮 -> Shopee
+    
+    Target Schema:
+    {
+      "company": "Company Name (Standardized)",
+      "role": "MLE or SWE etc",
+      "level": "L3, L4, L5, E4, E5, Staff, etc (or 'Unknown')",
+      "round": "phone_screen, coding, ml_coding, ml_theory, system_design, ml_system_design, behavioral",
+      "domain": "fundamentals, deep_learning, nlp, cv, recsys, ranking, llm, mlops, or experimentation",
+      "question": "A concise, technical summary of the actual interview question(s) asked",
+      "answer": [
+        "Provide a technical, structured answer/guide based on best practices for this question (3-5 succinct points). Do NOT just copy the user's rant if it's wrong.",
+        "Include the original snippet context at the end."
+      ],
+      "follow_ups": ["Likely follow-up question 1", "Likely follow-up question 2"],
+      "difficulty": "easy, medium, or hard",
+      "tags": ["extracted_tag_1", "extracted_tag_2"]
+    }
+    """
+    
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4o-mini", # or gpt-3.5-turbo if 4o-mini is unavailable
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": f"Extract the interview data from the following post:\n\n{raw_text}"}
+            ],
+            temperature=0.2
+        )
+        result_content = response.choices[0].message.content.strip()
+        
+        # Clean up if the LLM wraps it in markdown code blocks
+        if result_content.startswith("```json"):
+            result_content = result_content[7:]
+        if result_content.endswith("```"):
+            result_content = result_content[:-3]
+            
+        json_data = json.loads(result_content.strip())
+        
+        # Hydrate necessary metadata
+        json_data["id"] = f"auto_llm_{str(uuid.uuid4())[:8]}"
+        json_data["tags"] = json_data.get("tags", []) + ["llm-processed", source_name, author]
+        json_data["frequency"] = 1
+        json_data["importance"] = 4
+        json_data["common_mistakes"] = []
+        json_data["year"] = datetime.now().year
+        
+        return json_data
+        
+    except Exception as e:
+        print(f"LLM Parsing failed: {e}")
+        return simple_fallback_extraction(raw_text, source_name, author)
 
-def extract_company(text):
-    """Simple extraction to guess company from text."""
-    for company in COMPANIES:
-        if company.lower() in text.lower():
-            return "ByteDance" if company.lower() == "tiktok" else company
-    return "Community"
+def simple_fallback_extraction(raw_text, source_name, author):
+    """Fallback if LLM API fails or isn't set."""
+    company = "Community"
+    companies = ["Google", "Meta", "Amazon", "Apple", "Netflix", "Snap", "ByteDance", "OpenAI"]
+    for c in companies:
+        if c.lower() in raw_text.lower():
+            company = c
+            break
+            
+    snippet = raw_text[:600] + f"...\n\n[View Full Source on {source_name}]"
+    
+    return {
+        "id": f"auto_{str(uuid.uuid4())[:8]}",
+        "company": company,
+        "role": "MLE",
+        "level": "Unknown",
+        "round": "ml_theory",
+        "domain": "fundamentals",
+        "question": f"[{source_name}] Community Question",
+        "answer": [snippet, f"Source Author: {author}"],
+        "follow_ups": [],
+        "difficulty": "medium",
+        "frequency": 1,
+        "importance": 3,
+        "tags": ["community-scraped", source_name, author],
+        "common_mistakes": [],
+        "year": datetime.now().year
+    }
 
-def scrape_questions():
-    """Fetch new interview questions from community forums."""
+def scrape_with_playwright():
+    """Use Playwright to render JS-heavy pages or evade basic HTTP blocks."""
     new_questions = []
     
-    # Needs a generic user-agent to bypass basic Reddit JSON blocks
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                      'AppleWebKit/537.36 (KHTML, like Gecko) '
-                      'Chrome/91.0.4472.124 Safari/537.36'
-    }
-    
-    for source_info in SOURCES:
-        url = source_info["url"]
-        try:
-            response = requests.get(url, headers=headers)
-            if response.status_code == 200:
-                data = response.json()
-                posts = data.get('data', {}).get('children', [])
-                
-                # Process the top recent relevant results
-                for post in posts[:15]: 
-                    post_data = post.get('data', {})
-                    title = post_data.get('title', '')
-                    selftext = post_data.get('selftext', '')
-                    author = post_data.get('author', 'anonymous')
-                    
-                    text_lower = title.lower() + " " + selftext.lower()
-                    # Filter for MLE/AI related interviews
-                    if 'interview' in text_lower and ('mle' in text_lower or 'machine learning' in text_lower or 'ai' in text_lower):
-                        
-                        # Only grab substantive posts
-                        if len(selftext) > 200:
-                            company = extract_company(title + " " + selftext)
-                            source_name = source_info["source"]
-                            
-                            question_id = f"auto_{str(uuid.uuid4())[:8]}"
-                            snippet = selftext[:600] + f"...\n\n[View Full Source on {source_name}]"
-                            
-                            question_entry = {
-                                "id": question_id,
-                                "company": company,
-                                "role": "MLE",
-                                "level": "Unknown",
-                                "round": "behavioral" if "behavioral" in text_lower else "ml_theory",
-                                "domain": "fundamentals",
-                                "question": f"[{source_name}] {title}",
-                                "answer": [snippet, f"Source Author: u/{author}"],
-                                "follow_ups": [],
-                                "difficulty": "medium",
-                                "frequency": 1,
-                                "importance": 3,
-                                "tags": ["community-scraped", source_name, author],
-                                "common_mistakes": [],
-                                "year": datetime.now().year
-                            }
-                            new_questions.append(question_entry)
-            else:
-                print(f"Failed to fetch {url}: {response.status_code}")
-        except Exception as e:
-            print(f"Error scraping {url}: {e}")
+    with sync_playwright() as p:
+        # We start Chromium in headless mode
+        browser = p.chromium.launch(headless=True)
+        # Using a convincing desktop viewport and locale
+        context = browser.new_context(
+            user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+            viewport={'width': 1280, 'height': 800},
+            locale='en-US'
+        )
+        
+        page = context.new_page()
+        
+        for source_info in TARGET_URLS:
+            url = source_info["url"]
+            source_name = source_info["source"]
+            print(f"Navigating to {url}...")
             
+            try:
+                page.goto(url, wait_until="domcontentloaded", timeout=15000)
+                # Wait for the search results (specific to old.reddit layout for stability)
+                page.wait_for_selector('.search-result', timeout=5000)
+                
+                # Extract all search result posts
+                posts = page.query_selector_all('.search-result')
+                
+                for post in posts[:5]:  # Just grab top 5 latest to save LLM tokens/runtime
+                    title_elem = post.query_selector('.search-title')
+                    if not title_elem: continue
+                    
+                    title = title_elem.inner_text()
+                    author_elem = post.query_selector('.author')
+                    author = author_elem.inner_text() if author_elem else "anonymous"
+                    
+                    # For a real implementation, we would click into the post to get the full body.
+                    # Here we might just grab the snippet, but let's emulate clicking.
+                    post_link = title_elem.get_attribute('href')
+                    if not post_link: continue
+                    
+                    post_page = context.new_page()
+                    try:
+                        post_page.goto(post_link, wait_until="domcontentloaded", timeout=10000)
+                        # old.reddit body content
+                        body_elem = post_page.query_selector('.usertext-body .md')
+                        selftext = body_elem.inner_text() if body_elem else ""
+                    except Exception as e:
+                        print(f"Failed to load full post for: {title} - {e}")
+                        selftext = ""
+                    finally:
+                        post_page.close()
+                    
+                    # If it's a substantive post
+                    if len(selftext) > 200:
+                        raw_combined = f"TITLE: {title}\n\nBODY:\n{selftext}"
+                        print(f"Sending to LLM: '{title}'")
+                        
+                        structured_data = parse_slang_and_structure_with_llm(raw_combined, source_name, author)
+                        if structured_data:
+                            new_questions.append(structured_data)
+                            
+                time.sleep(2) # be polite between subreddits
+                
+            except Exception as e:
+                print(f"Playwright error on {url}: {e}")
+                
+        browser.close()
+        
     return new_questions
 
 def update_json_file(new_questions):
     if not new_questions:
-        print("No new questions found today.")
+        print("No new LLM-processed questions generated today.")
         return
         
     json_path = Path(__file__).parent.parent / "data" / "interview_questions.json"
@@ -107,15 +212,15 @@ def update_json_file(new_questions):
         # Fallback
         data = {"categories": {}, "metadata": {}, "questions": []}
         
-    # Prevent exact duplicates by title/question
+    # Prevent exact duplicates by relying on the generated question text
     existing_titles = set(q['question'] for q in data.get('questions', []))
     
     added_count = 0
     for nq in new_questions:
-        if nq['question'] not in existing_titles:
-            # Insert Auto-scraped at the beginning for visibility
+        # The LLM outputs a standard question text; if we already have it, skip
+        if nq.get('question', '') not in existing_titles:
             data['questions'].insert(0, nq)
-            existing_titles.add(nq['question'])
+            existing_titles.add(nq.get('question', ''))
             added_count += 1
             
     if added_count > 0:
@@ -125,12 +230,12 @@ def update_json_file(new_questions):
             
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
-        print(f"Successfully added {added_count} new questions.")
+        print(f"Successfully integrated {added_count} new AI-formatted questions into the database.")
     else:
-        print("No new unique questions to add.")
+        print("No new unique LLM questions to add.")
 
 if __name__ == "__main__":
-    print("Starting daily interview question scraper...")
-    new_qs = scrape_questions()
-    update_json_file(new_qs)
-    print("Scraping complete.")
+    print("Starting Playwright + LLM scraper engine...")
+    extracted_qs = scrape_with_playwright()
+    update_json_file(extracted_qs)
+    print("AI Extraction Pipeline complete.")
