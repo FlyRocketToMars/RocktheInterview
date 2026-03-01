@@ -213,6 +213,9 @@ def render_mle_questions():
         st.warning("题库暂无数据")
         return
         
+    metadata = data.get("metadata", {})
+    categories = data.get("categories", {})
+        
     # Get user profile setting for targeting
     try:
         from components.auth import get_current_user
