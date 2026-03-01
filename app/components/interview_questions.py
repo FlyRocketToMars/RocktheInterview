@@ -83,7 +83,7 @@ def get_question_id(question: Dict) -> str:
     return hashlib.md5(content.encode()).hexdigest()[:12]
 
 
-def render_community_answers(question_id: str, question_text: str):
+def render_community_answers(question_id: str, question_text: str, context_key: str = ""):
     """Render community answers section for a question."""
     
     # Load existing answers
@@ -105,13 +105,13 @@ def render_community_answers(question_id: str, question_text: str):
                     downvotes = ans.get("downvotes", 0)
                     score = upvotes - downvotes
                     
-                    if st.button("👍", key=f"up_{question_id}_{ans['id']}"):
+                    if st.button("👍", key=f"up_{context_key}_{question_id}_{ans['id']}"):
                         vote_answer(question_id, ans["id"], True)
                         st.rerun()
                     
                     st.markdown(f"**{score}**")
                     
-                    if st.button("👎", key=f"down_{question_id}_{ans['id']}"):
+                    if st.button("👎", key=f"down_{context_key}_{question_id}_{ans['id']}"):
                         vote_answer(question_id, ans["id"], False)
                         st.rerun()
                 
@@ -128,19 +128,19 @@ def render_community_answers(question_id: str, question_text: str):
     # Add answer form
     st.markdown("### ✍️ 我来回答")
     
-    with st.form(f"answer_form_{question_id}"):
+    with st.form(f"answer_form_{context_key}_{question_id}"):
         user_answer = st.text_area(
             "你的回答",
             height=150,
             placeholder="分享你的解题思路、面试经验或补充内容...",
-            key=f"answer_input_{question_id}"
+            key=f"answer_input_{context_key}_{question_id}"
         )
         
         col1, col2 = st.columns(2)
         with col1:
-            author_name = st.text_input("你的昵称", value=st.session_state.get("username", ""), key=f"author_{question_id}")
+            author_name = st.text_input("你的昵称", value=st.session_state.get("username", ""), key=f"author_{context_key}_{question_id}")
         with col2:
-            anonymous = st.checkbox("匿名提交", key=f"anon_{question_id}")
+            anonymous = st.checkbox("匿名提交", key=f"anon_{context_key}_{question_id}")
         
         submitted = st.form_submit_button("📝 提交回答", type="primary")
         
@@ -660,7 +660,7 @@ def render_question_list(questions_list, page_key="page"):
             num_answers = len(qa_data.get("answers", []))
             
             with st.expander(f"💬 社区讨论/笔记 ({num_answers})", expanded=False):
-                render_community_answers(question_id, q.get("question", ""))
+                render_community_answers(question_id, q.get("question", ""), context_key=page_key)
         
     # Render Pagination Controls
     if total_pages > 1:
