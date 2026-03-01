@@ -272,16 +272,39 @@ def render_mle_questions():
         else:
             st.success(f"已自动为你过滤并锁定 **{', '.join(user_targets)}** (级别: {user_level}) 的核心考察点！")
             targeted_qs = [q for q in questions if q.get("company") in user_targets]
-            # If no exact match found, gracefully fallback to general high quality questions
             if not targeted_qs:
                 st.warning("目前题库中暂无你所选定公司的专属原题。已为你回退显示通用大厂面经。")
                 targeted_qs = [q for q in questions if "community-scraped" not in q.get("tags", [])]
                 
-        # Only show high frequency/importance for targeted if there are many
-        if len(targeted_qs) > 10:
-            targeted_qs = sorted(targeted_qs, key=lambda x: (x.get("frequency", 0), x.get("importance", 0)), reverse=True)
-            
-        render_question_list(targeted_qs, page_key="targeted_page")
+        # Sort by frequency
+        targeted_qs = sorted(targeted_qs, key=lambda x: (x.get("frequency", 0), x.get("importance", 0)), reverse=True)
+        
+        # ---- Sub-tabs by category ----
+        CATEGORY_MAP = {
+            "📗 ML 基础": lambda q: q.get("domain") == "fundamentals" and q.get("round") != "ml_coding",
+            "🔮 深度学习": lambda q: q.get("domain") == "deep_learning" and q.get("round") != "ml_coding",
+            "🏗️ ML 系统设计": lambda q: q.get("round") == "ml_system_design",
+            "🎯 推荐/排序": lambda q: q.get("domain") in ("recsys", "ranking") and q.get("round") != "ml_system_design",
+            "📝 NLP": lambda q: q.get("domain") == "nlp",
+            "👁️ CV": lambda q: q.get("domain") == "cv",
+            "🤖 LLM": lambda q: q.get("domain") == "llm",
+            "⚙️ MLOps/数据": lambda q: q.get("domain") in ("mlops", "ml_ops", "experimentation"),
+            "💻 ML Coding": lambda q: q.get("round") == "ml_coding",
+            "🗣️ Behavioral": lambda q: q.get("round") == "behavioral",
+            "📚 全部": lambda q: True,
+        }
+        
+        sub_tab_names = list(CATEGORY_MAP.keys())
+        sub_tabs = st.tabs(sub_tab_names)
+        
+        for sub_tab, (cat_name, filter_fn) in zip(sub_tabs, CATEGORY_MAP.items()):
+            with sub_tab:
+                cat_qs = [q for q in targeted_qs if filter_fn(q)]
+                if cat_qs:
+                    st.caption(f"共 {len(cat_qs)} 道题")
+                    render_question_list(cat_qs, page_key=f"target_{cat_name}")
+                else:
+                    st.info(f"「{cat_name}」分类下暂无题目")
 
     # ============ TAB 2: MARKET INTEL ============
     with tab2:
