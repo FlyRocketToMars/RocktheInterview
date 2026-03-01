@@ -237,15 +237,6 @@ def render_mle_questions():
         user_targets = ["全部"]
         user_level = "全部"
 
-    st.markdown("---")
-    
-    # ============ 🗂️ 核心架构：三大战区 Tabs ============
-    tab1, tab2, tab3 = st.tabs([
-        "🎯 锁定目标 (Targeted)", 
-        "🌐 面经雷达 (Market Intel)", 
-        "💻 算法手撕 (Code Mastery)"
-    ])
-    
     # ============ Stats Dashboard ============
     col1, col2, col3, col4 = st.columns(4)
     
@@ -263,6 +254,14 @@ def render_mle_questions():
     
     st.markdown(f"*🕐 更新时间: {metadata.get('last_updated', 'N/A')}*")
     st.markdown("---")
+    
+    # ============ 🗂️ 四大战区 Tabs ============
+    tab1, tab2, tab3, tab4 = st.tabs([
+        "🎯 锁定目标 (Targeted)", 
+        "🌐 面经雷达 (Market Intel)", 
+        "💻 算法手撕 (Code Mastery)",
+        "✏️ 我的题库 (My Questions)"
+    ])
     
     # ============ TAB 1: TARGETED PREP ============
     with tab1:
