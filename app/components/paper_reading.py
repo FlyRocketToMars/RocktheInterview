@@ -162,12 +162,12 @@ def render_trending_papers():
             if filtered:
                 st.markdown(f"**共 {len(filtered)} 篇论文**")
                 for paper in filtered:
-                    render_paper_card(paper)
+                    render_paper_card(paper, ctx=topic_name)
             else:
                 st.info(f"「{topic_name}」分类下暂无论文，去「最新论文」或「添加论文」里补充吧！")
 
 
-def render_paper_card(paper: dict, show_full: bool = False):
+def render_paper_card(paper: dict, show_full: bool = False, ctx: str = ""):
     """Render a paper card with annotations."""
     
     with st.container():
@@ -194,10 +194,10 @@ def render_paper_card(paper: dict, show_full: bool = False):
         
         # Expandable details
         with st.expander("📖 查看详情与讨论"):
-            render_paper_detail(paper)
+            render_paper_detail(paper, ctx=ctx)
 
 
-def render_paper_detail(paper: dict):
+def render_paper_detail(paper: dict, ctx: str = ""):
     """Render detailed paper view with annotations."""
     
     paper_id = paper.get("id", "")
@@ -241,16 +241,16 @@ def render_paper_detail(paper: dict):
             options=list(status_options.keys()),
             format_func=lambda x: status_options[x],
             index=list(status_options.keys()).index(current_status) if current_status in status_options else 0,
-            key=f"status_{paper_id}"
+            key=f"status_{ctx}_{paper_id}"
         )
         
-        if st.button("更新", key=f"update_status_{paper_id}"):
+        if st.button("更新", key=f"update_status_{ctx}_{paper_id}"):
             paper_annotations.update_reading_status(paper_id, user_id, selected_status)
             st.success("已更新！")
             st.rerun()
         
         # Upvote
-        if st.button(f"👍 推荐 ({paper.get('upvotes', 0)})", key=f"upvote_{paper_id}"):
+        if st.button(f"👍 推荐 ({paper.get('upvotes', 0)})", key=f"upvote_{ctx}_{paper_id}"):
             paper_annotations.upvote_paper(paper_id, user_id)
             st.rerun()
     
@@ -260,16 +260,16 @@ def render_paper_detail(paper: dict):
     detail_tabs = st.tabs(["💡 核心要点", "📝 注释笔记", "💬 交流讨论"])
     
     with detail_tabs[0]:
-        render_key_takeaways(paper, paper_id, user_id)
+        render_key_takeaways(paper, paper_id, user_id, ctx=ctx)
     
     with detail_tabs[1]:
-        render_annotations(paper, paper_id, user_id)
+        render_annotations(paper, paper_id, user_id, ctx=ctx)
     
     with detail_tabs[2]:
-        render_discussions(paper, paper_id, user_id)
+        render_discussions(paper, paper_id, user_id, ctx=ctx)
 
 
-def render_key_takeaways(paper: dict, paper_id: str, user_id: str):
+def render_key_takeaways(paper: dict, paper_id: str, user_id: str, ctx: str = ""):
     """Render key takeaways section."""
     
     st.markdown("### 💡 大家的核心收获")
@@ -290,11 +290,11 @@ def render_key_takeaways(paper: dict, paper_id: str, user_id: str):
         st.info("还没有人分享要点，来添加第一个吧！")
     
     # Add new takeaway
-    with st.form(f"takeaway_form_{paper_id}"):
+    with st.form(f"takeaway_form_{ctx}_{paper_id}"):
         new_takeaway = st.text_area(
             "分享你的核心收获",
             placeholder="读完这篇论文，我最大的收获是...",
-            key=f"new_takeaway_{paper_id}"
+            key=f"new_takeaway_{ctx}_{paper_id}"
         )
         
         if st.form_submit_button("💡 分享"):
@@ -306,7 +306,7 @@ def render_key_takeaways(paper: dict, paper_id: str, user_id: str):
                 st.warning("请输入内容")
 
 
-def render_annotations(paper: dict, paper_id: str, user_id: str):
+def render_annotations(paper: dict, paper_id: str, user_id: str, ctx: str = ""):
     """Render annotations section."""
     
     st.markdown("### 📝 注释与笔记")
@@ -326,7 +326,7 @@ def render_annotations(paper: dict, paper_id: str, user_id: str):
         "筛选类型",
         options=list(ann_types.keys()),
         format_func=lambda x: ann_types[x],
-        key=f"filter_{paper_id}"
+        key=f"filter_{ctx}_{paper_id}"
     )
     
     filtered = annotations if filter_type == "all" else [a for a in annotations if a.get("type") == filter_type]
@@ -353,7 +353,7 @@ def render_annotations(paper: dict, paper_id: str, user_id: str):
     # Add new annotation
     st.markdown("#### ✏️ 添加注释")
     
-    with st.form(f"annotation_form_{paper_id}"):
+    with st.form(f"annotation_form_{ctx}_{paper_id}"):
         col1, col2 = st.columns(2)
         
         with col1:
@@ -361,20 +361,20 @@ def render_annotations(paper: dict, paper_id: str, user_id: str):
                 "类型",
                 options=["note", "highlight", "question", "insight"],
                 format_func=lambda x: ann_types[x],
-                key=f"ann_type_{paper_id}"
+                key=f"ann_type_{ctx}_{paper_id}"
             )
         
         with col2:
             section = st.selectbox(
                 "章节",
                 options=["全文", "摘要", "方法", "实验", "结论", "其他"],
-                key=f"section_{paper_id}"
+                key=f"section_{ctx}_{paper_id}"
             )
         
         content = st.text_area(
             "内容",
             placeholder="写下你的笔记、问题或见解...",
-            key=f"ann_content_{paper_id}"
+            key=f"ann_content_{ctx}_{paper_id}"
         )
         
         if st.form_submit_button("📝 添加注释"):
@@ -390,7 +390,7 @@ def render_annotations(paper: dict, paper_id: str, user_id: str):
                 st.warning("请输入内容")
 
 
-def render_discussions(paper: dict, paper_id: str, user_id: str):
+def render_discussions(paper: dict, paper_id: str, user_id: str, ctx: str = ""):
     """Render discussions section."""
     
     st.markdown("### 💬 交流讨论")
@@ -429,11 +429,11 @@ def render_discussions(paper: dict, paper_id: str, user_id: str):
         st.info("还没有讨论，开始第一个话题吧！")
     
     # Add new discussion
-    with st.form(f"discussion_form_{paper_id}"):
+    with st.form(f"discussion_form_{ctx}_{paper_id}"):
         new_comment = st.text_area(
             "发表评论",
             placeholder="分享你的观点、提问或回答他人的问题...",
-            key=f"new_disc_{paper_id}"
+            key=f"new_disc_{ctx}_{paper_id}"
         )
         
         if st.form_submit_button("💬 发表"):
