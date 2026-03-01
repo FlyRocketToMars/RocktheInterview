@@ -554,7 +554,7 @@ def render_question_list(questions_list, page_key="page"):
             expanded=i < 2
         ):
             # Meta info row
-            col1, col2, col3, col4 = st.columns(4)
+            col1, col2, col3, col4, col5 = st.columns(5)
             with col1:
                 st.markdown(f"🏢 **{q.get('company', '')}**")
             with col2:
@@ -563,6 +563,9 @@ def render_question_list(questions_list, page_key="page"):
                 st.markdown(f"{domain_icon} **{q.get('domain', '').replace('_', ' ').title()}**")
             with col4:
                 st.markdown(f"🔥 高频度: **{freq}/5**")
+            with col5:
+                added_date = q.get("created_at", "")[:10] or str(q.get("year", ""))
+                st.markdown(f"📅 **{added_date}**")
             
             st.markdown("---")
             
