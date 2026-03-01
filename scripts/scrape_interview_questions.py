@@ -5,11 +5,12 @@ import time
 from pathlib import Path
 from datetime import datetime
 from playwright.sync_api import sync_playwright
-import openai
+import google.generativeai as genai
 
-# Set up your OpenAI API key as an environment variable (or hardcode here for local testing)
-# os.environ["OPENAI_API_KEY"] = "your_openai_api_key_here"
-openai.api_key = os.getenv("OPENAI_API_KEY", "")
+# Set up your Gemini API key as an environment variable (or hardcode here for local testing)
+api_key = os.getenv("GEMINI_API_KEY", "")
+if api_key:
+    genai.configure(api_key=api_key)
 
 # Target URLs for Playwright
 # We'll simulate fetching from a public forum using headless Chromium.
@@ -27,9 +28,9 @@ def parse_slang_and_structure_with_llm(raw_text, source_name, author="anonymous"
     Uses an LLM to deeply understand unstructured text, translate Chinese slang 
     ("狗家" -> Google, "麻" -> Amazon, "脸/meta" -> Meta), and format it into our strict JSON schema.
     """
-    if not openai.api_key:
+    if not api_key:
         # Fallback if no LLM key is configured
-        print("No OPENAI_API_KEY found. Falling back to simple heuristic extraction.")
+        print("No GEMINI_API_KEY found. Falling back to simple heuristic extraction.")
         return simple_fallback_extraction(raw_text, source_name, author)
 
     system_prompt = """
@@ -65,15 +66,16 @@ def parse_slang_and_structure_with_llm(raw_text, source_name, author="anonymous"
     """
     
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4o-mini", # or gpt-3.5-turbo if 4o-mini is unavailable
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Extract the interview data from the following post:\n\n{raw_text}"}
-            ],
-            temperature=0.2
+        model = genai.GenerativeModel('gemini-2.5-flash')
+        full_prompt = f"{system_prompt}\n\nTask:\nExtract the interview data from the following post:\n\n{raw_text}"
+        
+        response = model.generate_content(
+            full_prompt,
+            generation_config=genai.GenerationConfig(
+                temperature=0.2,
+            )
         )
-        result_content = response.choices[0].message.content.strip()
+        result_content = response.text.strip()
         
         # Clean up if the LLM wraps it in markdown code blocks
         if result_content.startswith("```json"):
