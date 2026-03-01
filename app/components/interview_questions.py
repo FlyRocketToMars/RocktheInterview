@@ -301,6 +301,75 @@ def render_mle_questions():
     # ============ TAB 3: NEETCODE ============
     with tab3:
         render_neetcode_tracker()
+        
+    # ============ TAB 4: USER SUBMITTED ============
+    with tab4:
+        st.markdown("### ✏️ 我的自定义题库")
+        st.markdown("*你可以在这里添加自己收集到的面经题目，系统会自动标记为「用户自创」。*")
+        
+        # Show existing user-submitted questions
+        user_qs = [q for q in questions if "user-submitted" in q.get("tags", [])]
+        if user_qs:
+            st.markdown(f"**你已添加 {len(user_qs)} 道自创题目**")
+            render_question_list(user_qs, page_key="user_submitted_page")
+        
+        st.markdown("---")
+        st.markdown("#### ➕ 添加新题目")
+        
+        with st.form("add_user_question_form", clear_on_submit=True):
+            new_question = st.text_area("📝 题目内容", placeholder="例如：Explain the difference between batch normalization and layer normalization...")
+            new_answer = st.text_area("💡 参考答案（可选，留空后续补充）", placeholder="你的答案或笔记...")
+            
+            fc1, fc2, fc3 = st.columns(3)
+            with fc1:
+                new_company = st.text_input("🏢 公司", value="Community", placeholder="e.g. Google, Meta...")
+            with fc2:
+                new_domain = st.selectbox("🧠 领域", ["fundamentals", "deep_learning", "nlp", "cv", "recsys", "ranking", "llm", "mlops", "experimentation"])
+            with fc3:
+                new_difficulty = st.selectbox("⭐ 难度", ["easy", "medium", "hard"])
+            
+            fc4, fc5 = st.columns(2)
+            with fc4:
+                new_round = st.selectbox("📋 轮次", ["ml_theory", "ml_coding", "phone_screen", "coding", "ml_system_design", "system_design", "behavioral"])
+            with fc5:
+                new_freq = st.slider("🔥 高频度", 1, 5, 3)
+            
+            submitted = st.form_submit_button("🚀 提交题目", use_container_width=True)
+            
+            if submitted and new_question.strip():
+                import uuid as _uuid
+                new_entry = {
+                    "id": f"user_{str(_uuid.uuid4())[:8]}",
+                    "company": new_company.strip() or "Community",
+                    "role": "MLE",
+                    "level": "L4/L5",
+                    "round": new_round,
+                    "domain": new_domain,
+                    "question": new_question.strip(),
+                    "answer": new_answer.strip() if new_answer.strip() else "ℹ️ 答案待补充",
+                    "follow_ups": [],
+                    "difficulty": new_difficulty,
+                    "frequency": new_freq,
+                    "importance": new_freq,
+                    "tags": ["user-submitted", new_domain],
+                    "common_mistakes": [],
+                    "year": datetime.now().year
+                }
+                
+                # Save to JSON
+                questions_file = Path(__file__).parent.parent.parent / "data" / "interview_questions.json"
+                file_data = load_interview_questions()
+                file_data["questions"].append(new_entry)
+                if "metadata" in file_data:
+                    file_data["metadata"]["total_questions"] = len(file_data["questions"])
+                    file_data["metadata"]["last_updated"] = datetime.now().strftime("%Y-%m-%d")
+                with open(questions_file, "w", encoding="utf-8") as f:
+                    json.dump(file_data, f, indent=4, ensure_ascii=False)
+                    
+                st.success("🎉 题目已成功添加到你的自定义题库！")
+                st.rerun()
+            elif submitted:
+                st.warning("题目内容不能为空哦！")
     
     st.markdown("---")
     
