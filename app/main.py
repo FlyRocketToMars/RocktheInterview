@@ -786,7 +786,8 @@ def main():
         community_tabs = st.tabs([
             t("nav_community", lang),
             t("nav_resources", lang),
-            t("nav_papers", lang)
+            t("nav_papers", lang),
+            "📖 故事库"
         ])
         
         with community_tabs[0]:
@@ -800,6 +801,10 @@ def main():
         with community_tabs[2]:
             from components.paper_reading import render_paper_reading
             render_paper_reading()
+        
+        with community_tabs[3]:
+            from components.story_bank import render_story_bank
+            render_story_bank()
     
     elif page_index == 6:  # 👤 个人中心与设置 (Includes Profile, Notifications)
         profile_tabs = st.tabs([

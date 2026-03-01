@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from data.paper_annotations import paper_annotations
 from data.papers_fetcher import get_hot_papers, papers_aggregator
+from data.user_paper_notes import user_paper_notes
 
 
 def render_paper_reading():
@@ -257,7 +258,7 @@ def render_paper_detail(paper: dict, ctx: str = ""):
     st.markdown("---")
     
     # Tabs for annotations and discussions
-    detail_tabs = st.tabs(["💡 核心要点", "📝 注释笔记", "💬 交流讨论"])
+    detail_tabs = st.tabs(["💡 核心要点", "📝 注释笔记", "💬 交流讨论", "📓 我的笔记"])
     
     with detail_tabs[0]:
         render_key_takeaways(paper, paper_id, user_id, ctx=ctx)
@@ -267,6 +268,9 @@ def render_paper_detail(paper: dict, ctx: str = ""):
     
     with detail_tabs[2]:
         render_discussions(paper, paper_id, user_id, ctx=ctx)
+    
+    with detail_tabs[3]:
+        render_my_paper_notes(paper, paper_id, user_id, ctx=ctx)
 
 
 def render_key_takeaways(paper: dict, paper_id: str, user_id: str, ctx: str = ""):
@@ -443,6 +447,76 @@ def render_discussions(paper: dict, paper_id: str, user_id: str, ctx: str = ""):
                 st.rerun()
             else:
                 st.warning("请输入内容")
+
+
+def render_my_paper_notes(paper: dict, paper_id: str, user_id: str, ctx: str = ""):
+    """Render per-user private notes section for a paper."""
+    
+    st.markdown("### 📓 我的私人笔记")
+    st.caption("你的笔记仅自己可见，保存在你的个人数据库中。")
+    
+    # Show existing notes
+    notes = user_paper_notes.get_notes_for_paper(user_id, paper_id)
+    
+    if notes:
+        for i, note in enumerate(notes):
+            note_type_icons = {
+                "note": "📝", "summary": "📋", "question": "❓", 
+                "insight": "💡", "key_takeaway": "⭐"
+            }
+            icon = note_type_icons.get(note.get("note_type", "note"), "📝")
+            
+            st.markdown(f"""
+            <div style="background: #1a1a2e; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem;
+                        border-left: 3px solid #e94560;">
+                <p style="margin: 0; color: #94a3b8; font-size: 0.8rem;">
+                    {icon} {note.get('note_type', 'note').upper()} | 📂 {note.get('section', '全文')} | 
+                    🕐 {note.get('created_at', '')[:16]}
+                </p>
+                <p style="margin: 0.5rem 0; color: #f1f5f9;">{note.get('content', '')}</p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        st.success(f"共 {len(notes)} 条笔记")
+    else:
+        st.info("还没有笔记，读论文时随时记录你的想法吧！")
+    
+    # Add new note form
+    with st.form(f"my_note_form_{ctx}_{paper_id}"):
+        col1, col2 = st.columns(2)
+        with col1:
+            note_type = st.selectbox("类型", [
+                ("note", "📝 笔记"), ("summary", "📋 总结"), 
+                ("question", "❓ 疑问"), ("insight", "💡 洞见"), 
+                ("key_takeaway", "⭐ 核心收获")
+            ], format_func=lambda x: x[1], key=f"note_type_{ctx}_{paper_id}")
+        with col2:
+            section = st.selectbox("章节", [
+                "全文", "摘要/Abstract", "方法/Method", "实验/Experiments", 
+                "结论/Conclusion", "Related Work", "其他"
+            ], key=f"note_section_{ctx}_{paper_id}")
+        
+        note_content = st.text_area(
+            "笔记内容",
+            placeholder="记录你的理解、疑问、灵感...\n\n例如：这篇论文的核心创新点在于...",
+            height=120,
+            key=f"note_content_{ctx}_{paper_id}"
+        )
+        
+        if st.form_submit_button("💾 保存笔记", type="primary"):
+            if note_content.strip():
+                user_paper_notes.save_note(
+                    user_id=user_id,
+                    paper_id=paper_id,
+                    paper_title=paper.get("title", ""),
+                    content=note_content,
+                    note_type=note_type[0],
+                    section=section
+                )
+                st.success("笔记已保存！✨")
+                st.rerun()
+            else:
+                st.warning("请输入笔记内容")
 
 
 def render_my_reading_list():

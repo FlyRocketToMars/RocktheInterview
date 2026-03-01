@@ -176,13 +176,18 @@ def render_mission_card(user_id: str, date: str, mission: dict):
                 st.rerun()
         
         with col2:
+            link_html = ""
+            if mission.get("link"):
+                link_label = mission.get("link_label", "🔗 开始")
+                link_html = f'<a href="{mission["link"]}" target="_blank" style="color: #60a5fa; font-size: 0.8rem; text-decoration: none;">{link_label} →</a>'
+            
             st.markdown(f"""
             <div style="background: {bg_color}; padding: 1rem; border-radius: 12px; 
                         border-left: 4px solid {border_color}; 
                         opacity: {'0.6' if is_completed else '1'};">
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <span style="font-size: 1.5rem;">{mission.get('icon', '📌')}</span>
-                    <div>
+                    <div style="flex: 1;">
                         <p style="margin: 0; color: #f1f5f9; font-weight: 600; 
                                   text-decoration: {'line-through' if is_completed else 'none'};">
                             {mission.get('title', '')}
@@ -190,6 +195,7 @@ def render_mission_card(user_id: str, date: str, mission: dict):
                         <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">
                             {mission.get('description', '')}
                         </p>
+                        {f'<p style="margin: 0.25rem 0 0 0;">{link_html}</p>' if link_html else ''}
                     </div>
                 </div>
             </div>

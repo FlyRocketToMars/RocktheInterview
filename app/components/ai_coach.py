@@ -269,16 +269,16 @@ class AICoach:
     def _generate_theory_mission(self, weak_areas: List[str]) -> Dict:
         """Generate ML theory mission."""
         topics = [
-            "Bias-Variance Tradeoff",
-            "Regularization (L1 vs L2)",
-            "Gradient Descent Variants",
-            "Evaluation Metrics (AUC, F1)",
-            "Loss Functions",
-            "Backpropagation",
-            "Attention Mechanism"
+            ("Bias-Variance Tradeoff", "fundamentals"),
+            ("Regularization (L1 vs L2)", "fundamentals"),
+            ("Gradient Descent Variants", "fundamentals"),
+            ("Evaluation Metrics (AUC, F1)", "fundamentals"),
+            ("Loss Functions", "fundamentals"),
+            ("Backpropagation", "deep_learning"),
+            ("Attention Mechanism", "deep_learning")
         ]
         
-        topic = random.choice(topics)
+        topic, domain = random.choice(topics)
         
         return {
             "id": 1,
@@ -288,21 +288,23 @@ class AICoach:
             "description": "Understand the math, draw diagrams, explain tradeoffs",
             "duration": "30 min",
             "priority": "high",
-            "completed": False
+            "completed": False,
+            "link": f"https://www.google.com/search?q={topic.replace(' ', '+')}+machine+learning+interview",
+            "link_label": "📚 去题库复习"
         }
     
     def _generate_system_design_mission(self, company: str) -> Dict:
         """Generate system design mission."""
         systems = {
-            "Google": ["YouTube Recommendation", "Google Search Ranking", "Gmail Spam Detection"],
-            "Meta": ["News Feed Ranking", "Instagram Explore", "Ads CTR Prediction"],
-            "Netflix": ["Movie Recommendation", "Content Personalization"],
-            "Amazon": ["Product Recommendation", "Search Relevance"],
-            "OpenAI": ["LLM Serving System", "RAG System"]
+            "Google": [("YouTube Recommendation", "youtube+recommendation+system+design"), ("Google Search Ranking", "google+search+ranking+system+design"), ("Gmail Spam Detection", "gmail+spam+detection+ML+system")],
+            "Meta": [("News Feed Ranking", "facebook+news+feed+ranking+system+design"), ("Instagram Explore", "instagram+explore+recommendation"), ("Ads CTR Prediction", "ads+ctr+prediction+system+design")],
+            "Netflix": [("Movie Recommendation", "netflix+recommendation+system+design"), ("Content Personalization", "netflix+personalization")],
+            "Amazon": [("Product Recommendation", "amazon+product+recommendation+system"), ("Search Relevance", "amazon+search+relevance+ranking")],
+            "OpenAI": [("LLM Serving System", "llm+serving+system+design+vllm"), ("RAG System", "rag+retrieval+augmented+generation+system+design")]
         }
         
         company_systems = systems.get(company, systems["Google"])
-        system = random.choice(company_systems)
+        system, search_q = random.choice(company_systems)
         
         return {
             "id": 2,
@@ -312,7 +314,9 @@ class AICoach:
             "description": "Design end-to-end: data → model → serving → scaling",
             "duration": "45 min",
             "priority": "high",
-            "completed": False
+            "completed": False,
+            "link": f"https://www.google.com/search?q={search_q}",
+            "link_label": "📝 查看设计框架"
         }
     
     def _generate_coding_mission(self) -> Dict:
@@ -321,7 +325,11 @@ class AICoach:
             {"name": "LRU Cache", "number": 146, "topic": "Design"},
             {"name": "Merge K Sorted Lists", "number": 23, "topic": "Heap"},
             {"name": "Binary Tree Level Order", "number": 102, "topic": "Tree"},
-            {"name": "Longest Increasing Subsequence", "number": 300, "topic": "DP"}
+            {"name": "Longest Increasing Subsequence", "number": 300, "topic": "DP"},
+            {"name": "Two Sum", "number": 1, "topic": "Hash Table"},
+            {"name": "Median of Two Sorted Arrays", "number": 4, "topic": "Binary Search"},
+            {"name": "Valid Parentheses", "number": 20, "topic": "Stack"},
+            {"name": "Trapping Rain Water", "number": 42, "topic": "Two Pointers"},
         ]
         
         problem = random.choice(problems)
@@ -334,7 +342,9 @@ class AICoach:
             "description": f"Focus on {problem['topic']} patterns and edge cases",
             "duration": "30 min",
             "priority": "medium",
-            "completed": False
+            "completed": False,
+            "link": f"https://leetcode.com/problems/{problem['name'].lower().replace(' ', '-')}/",
+            "link_label": "💻 去 LeetCode 做题"
         }
     
     def _generate_company_mission(self, company: str) -> Dict:
