@@ -763,7 +763,8 @@ def main():
         question_tabs = st.tabs([
             t("nav_questions", lang), 
             t("nav_trends", lang),
-            t("nav_jobs", lang)
+            t("nav_jobs", lang),
+            "📄 简历分析"
         ])
         
         with question_tabs[0]:
@@ -777,6 +778,10 @@ def main():
         with question_tabs[2]:
             from components.job_matching import render_job_matching
             render_job_matching()
+        
+        with question_tabs[3]:
+            from components.resume_analyzer import render_resume_analyzer
+            render_resume_analyzer()
     
     elif page_index == 4:  # 🎤 AI模拟面试
         from components.mock_interview import render_mock_interview
