@@ -56,7 +56,7 @@ def render_paper_reading():
 
 
 def render_trending_papers():
-    """Render trending/popular papers."""
+    """Render trending/popular papers organized by hot research topics."""
     
     papers = paper_annotations.get_all_papers()
     
@@ -69,9 +69,102 @@ def render_trending_papers():
     
     if search_query:
         papers = paper_annotations.search_papers(search_query)
+        st.caption(f"搜索结果: {len(papers)} 篇")
+        for paper in papers:
+            render_paper_card(paper)
+        return
     
-    for paper in papers:
-        render_paper_card(paper)
+    # ============ Topic-based sub-tabs ============
+    TOPIC_CATEGORIES = {
+        "🔥 全部": {
+            "keywords": [],  # show all
+            "desc": "所有已添加的论文"
+        },
+        "🤖 LLM/大模型": {
+            "keywords": ["llm", "large language", "gpt", "gemini", "claude", "llama", "mistral", "chatgpt",
+                        "language model", "instruction tuning", "rlhf", "dpo", "alignment", "in-context learning",
+                        "chain of thought", "cot", "reasoning", "scaling law", "pre-train", "fine-tun"],
+            "desc": "大语言模型训练、对齐、推理、Scaling Laws"
+        },
+        "🔍 RAG/检索增强": {
+            "keywords": ["rag", "retrieval", "retrieval-augmented", "vector database", "embedding",
+                        "dense retrieval", "knowledge base", "chunking", "re-rank", "semantic search"],
+            "desc": "RAG 架构、向量检索、知识库增强生成"
+        },
+        "🕹️ AI Agent": {
+            "keywords": ["agent", "tool use", "function calling", "multi-agent", "autonomous",
+                        "planning", "react", "reflexion", "self-refine", "agentic", "orchestrat"],
+            "desc": "AI 智能体、多Agent系统、工具调用、自主规划"
+        },
+        "🎨 多模态": {
+            "keywords": ["multimodal", "vision language", "vlm", "image generation", "diffusion",
+                        "text-to-image", "text-to-video", "sora", "dall-e", "stable diffusion",
+                        "clip", "visual", "video understanding"],
+            "desc": "多模态模型、图文理解、视觉生成"
+        },
+        "🏗️ ML 系统/Infra": {
+            "keywords": ["system design", "inference", "serving", "mlops", "distributed",
+                        "quantization", "pruning", "distillation", "efficient", "vllm", "tensorrt",
+                        "deployment", "latency", "throughput", "batch", "speculative decoding"],
+            "desc": "模型部署、推理加速、量化蒸馏、MLOps"
+        },
+        "🎯 推荐/排序": {
+            "keywords": ["recommendation", "ranking", "ctr", "click-through", "collaborative filtering",
+                        "two-tower", "deep learning recommendation", "user engagement",
+                        "recsys", "personalization", "cold start", "explore exploit"],
+            "desc": "推荐系统、搜索排序、广告预测、个性化"
+        },
+        "📝 NLP 经典": {
+            "keywords": ["nlp", "transformer", "bert", "attention", "text classification",
+                        "named entity", "sentiment", "summarization", "translation", "tokeniz",
+                        "word2vec", "sequence", "encoder", "decoder"],
+            "desc": "NLP 基础、Transformer、文本分类、序列建模"
+        },
+        "👁️ CV 视觉": {
+            "keywords": ["computer vision", "object detection", "segmentation", "image classification",
+                        "cnn", "resnet", "vit", "yolo", "gan", "3d", "point cloud",
+                        "depth estimation", "pose", "face"],
+            "desc": "目标检测、图像分割、视觉Transformer"
+        },
+        "🧪 强化学习": {
+            "keywords": ["reinforcement learning", "reward model", "ppo", "rl", "policy gradient",
+                        "q-learning", "exploration", "online learning", "bandit"],
+            "desc": "强化学习、策略优化、奖励建模"
+        },
+        "📊 数据/评估": {
+            "keywords": ["benchmark", "evaluation", "dataset", "data quality", "synthetic data",
+                        "annotation", "leaderboard", "contamination", "bias", "fairness",
+                        "safety", "red team", "toxicity", "hallucination"],
+            "desc": "基准评测、数据集构建、安全性、幻觉检测"
+        },
+    }
+    
+    def match_topic(paper, keywords):
+        """Check if a paper matches topic keywords."""
+        if not keywords:  # "全部"
+            return True
+        text = (paper.get("title", "") + " " + paper.get("abstract", "") + " " + 
+                " ".join(paper.get("tags", []))).lower()
+        return any(kw in text for kw in keywords)
+    
+    sub_tab_names = list(TOPIC_CATEGORIES.keys())
+    sub_tabs = st.tabs(sub_tab_names)
+    
+    for sub_tab, (topic_name, topic_info) in zip(sub_tabs, TOPIC_CATEGORIES.items()):
+        with sub_tab:
+            st.caption(f"*{topic_info['desc']}*")
+            
+            if topic_name == "🔥 全部":
+                filtered = papers
+            else:
+                filtered = [p for p in papers if match_topic(p, topic_info["keywords"])]
+            
+            if filtered:
+                st.markdown(f"**共 {len(filtered)} 篇论文**")
+                for paper in filtered:
+                    render_paper_card(paper)
+            else:
+                st.info(f"「{topic_name}」分类下暂无论文，去「最新论文」或「添加论文」里补充吧！")
 
 
 def render_paper_card(paper: dict, show_full: bool = False):
@@ -438,7 +531,15 @@ def render_add_paper():
         url = st.text_input("论文链接 *", placeholder="https://arxiv.org/abs/...")
         abstract = st.text_area("摘要", placeholder="论文摘要...", max_chars=1000)
         authors = st.text_input("作者", placeholder="用逗号分隔: Author1, Author2")
-        tags = st.text_input("标签", placeholder="用逗号分隔: LLM, Transformer, NLP")
+        
+        col_t1, col_t2 = st.columns(2)
+        with col_t1:
+            topic = st.selectbox("🏷️ 研究方向", [
+                "LLM", "RAG", "AI Agent", "Multimodal", "ML System", 
+                "RecSys", "NLP", "CV", "RL", "Benchmark", "Other"
+            ])
+        with col_t2:
+            tags = st.text_input("额外标签", placeholder="用逗号分隔: Transformer, RLHF")
         
         difficulty = st.select_slider(
             "难度",
@@ -449,14 +550,16 @@ def render_add_paper():
         
         if st.form_submit_button("➕ 添加论文"):
             if title and url:
+                all_tags = [topic] + [t.strip() for t in tags.split(",") if t.strip()]
                 paper_id = paper_annotations.add_paper({
                     "title": title,
                     "url": url,
                     "abstract": abstract,
                     "authors": [a.strip() for a in authors.split(",") if a.strip()],
-                    "tags": [t.strip() for t in tags.split(",") if t.strip()],
+                    "tags": all_tags,
                     "difficulty": difficulty,
                     "source": "User Added",
+                    "category": topic,
                     "added_by": st.session_state.get("user_email", "guest")
                 })
                 st.success(f"✅ 论文已添加！ID: {paper_id}")
