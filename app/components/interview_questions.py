@@ -208,12 +208,40 @@ def render_mle_questions():
     # Load data
     data = load_interview_questions()
     questions = data.get("questions", [])
-    metadata = data.get("metadata", {})
-    categories = data.get("categories", {})
     
     if not questions:
         st.warning("题库暂无数据")
         return
+        
+    # Get user profile setting for targeting
+    try:
+        from components.auth import get_current_user
+        from data.daily_learning import daily_learning
+        user_email = get_current_user()
+        user_targets = ["全部"]
+        user_level = "全部"
+        if user_email:
+            profile_data = daily_learning.get_user_profile(user_email)
+            if profile_data and "profile" in profile_data:
+                # Handle both string (old) and list (new) formats for target_company
+                tc = profile_data["profile"].get("target_company")
+                if isinstance(tc, list):
+                    user_targets = tc
+                elif isinstance(tc, str):
+                    user_targets = [tc]
+                user_level = profile_data["profile"].get("target_level", "全部")
+    except:
+        user_targets = ["全部"]
+        user_level = "全部"
+
+    st.markdown("---")
+    
+    # ============ 🗂️ 核心架构：三大战区 Tabs ============
+    tab1, tab2, tab3 = st.tabs([
+        "🎯 锁定目标 (Targeted)", 
+        "🌐 面经雷达 (Market Intel)", 
+        "💻 算法手撕 (Code Mastery)"
+    ])
     
     # ============ Stats Dashboard ============
     col1, col2, col3, col4 = st.columns(4)
@@ -233,307 +261,44 @@ def render_mle_questions():
     st.markdown(f"*🕐 更新时间: {metadata.get('last_updated', 'N/A')}*")
     st.markdown("---")
     
-    # ============ Filters ============
-    st.markdown("### 🔍 智能筛选")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    # Get unique values
-    companies_list = sorted(set(q.get("company", "") for q in questions))
-    domains_list = categories.get("domains", [])
-    rounds_list = categories.get("rounds", [])
-    levels_list = categories.get("levels", [])
-    
-    # Get user target company for default selection
-    try:
-        from components.auth import get_current_user
-        from data.daily_learning import daily_learning
-        user_email = get_current_user()
-        user_target = "全部"
-        user_level = "全部"
-        if user_email:
-            profile_data = daily_learning.get_user_profile(user_email)
-            if profile_data and "profile" in profile_data:
-                user_target = profile_data["profile"].get("target_company", "全部")
-                user_level = profile_data["profile"].get("target_level", "全部")
-    except:
-        user_target = "全部"
-        user_level = "全部"
-        
-    company_options = ["全部"] + companies_list
-    default_company_index = 0
-    if user_target in company_options:
-        default_company_index = company_options.index(user_target)
-        
-    level_options = ["全部"] + levels_list
-    default_level_index = 0
-    
-    # Try to match the user's exact level strings, e.g., "L5" with "L5/Senior"
-    if user_level != "全部":
-        for i, lvl in enumerate(level_options):
-            if str(lvl).lower().startswith(str(user_level).lower()):
-                default_level_index = i
-                break
-    
-    with col1:
-        selected_companies = st.multiselect(
-            "🏢 目标公司",
-            company_options,
-            default=[company_options[default_company_index]] if company_options else ["全部"],
-            key="filter_companies_v2"
-        )
-        
-        selected_domain = st.selectbox(
-            "🧠 知识领域",
-            ["全部"] + domains_list,
-            format_func=lambda x: {
-                "全部": "全部领域",
-                "fundamentals": "📗 ML 基础",
-                "deep_learning": "🔮 深度学习",
-                "nlp": "📝 NLP",
-                "cv": "👁️ 计算机视觉",
-                "recsys": "🎯 推荐系统",
-                "ranking": "📈 搜索排序",
-                "llm": "🤖 大语言模型",
-                "mlops": "⚙️ MLOps",
-                "experimentation": "🧪 实验平台"
-            }.get(x, x),
-            key="filter_domain"
-        )
-    
-    with col2:
-        selected_round = st.selectbox(
-            "📋 面试轮次",
-            ["全部"] + rounds_list,
-            format_func=lambda x: {
-                "全部": "全部轮次",
-                "phone_screen": "📞 Phone Screen",
-                "coding": "💻 Coding",
-                "ml_coding": "🐍 ML Coding",
-                "ml_theory": "📖 ML 理论",
-                "ml_system_design": "🏗️ ML 系统设计",
-                "system_design": "🌐 通用系统设计",
-                "behavioral": "🗣️ 行为面试"
-            }.get(x, x),
-            key="filter_round_v2"
-        )
-        
-        selected_level = st.selectbox(
-            "📊 目标级别",
-            level_options,
-            index=default_level_index,
-            key="filter_level"
-        )
-    
-    with col3:
-        selected_difficulty = st.selectbox(
-            "⭐ 难度",
-            ["全部", "easy", "medium", "hard"],
-            format_func=lambda x: {
-                "全部": "全部难度",
-                "easy": "🟢 Easy (入门)",
-                "medium": "🟡 Medium (标准)",
-                "hard": "🔴 Hard (挑战)"
-            }.get(x, x),
-            key="filter_difficulty_v2"
-        )
-        
-        min_frequency = st.slider(
-            "🔥 最低高频度",
-            min_value=1, max_value=5, value=1,
-            help="筛选高频题目 (5=必考)"
-        )
-    
-    # Apply filters
-    filtered = questions
-    if "全部" not in selected_companies and selected_companies:
-        filtered = [q for q in filtered if q.get("company") in selected_companies]
-    if selected_domain != "全部":
-        filtered = [q for q in filtered if q.get("domain") == selected_domain]
-    if selected_round != "全部":
-        filtered = [q for q in filtered if q.get("round") == selected_round]
-    if selected_level != "全部":
-        filtered = [q for q in filtered if q.get("level") == selected_level]
-    if selected_difficulty != "全部":
-        filtered = [q for q in filtered if q.get("difficulty") == selected_difficulty]
-    filtered = [q for q in filtered if q.get("frequency", 0) >= min_frequency]
-    
-    st.markdown(f"**筛选结果: {len(filtered)} 道题目**")
-    st.markdown("---")
-    
-    # ============ Questions List ============
-    if not filtered:
-        st.info("没有符合条件的题目，请调整筛选条件")
-        return
-    
-    # Sort by frequency then importance
-    filtered = sorted(filtered, key=lambda x: (x.get("frequency", 0), x.get("importance", 0)), reverse=True)
-    
-    # Pagination Setup
-    questions_per_page = 10
-    total_pages = max(1, (len(filtered) - 1) // questions_per_page + 1)
-    
-    if "mle_questions_page" not in st.session_state:
-        st.session_state.mle_questions_page = 1
-        
-    if st.session_state.mle_questions_page > total_pages:
-        st.session_state.mle_questions_page = 1
-        
-    current_page = st.session_state.mle_questions_page
-    start_idx = (current_page - 1) * questions_per_page
-    end_idx = start_idx + questions_per_page
-    
-    current_page_questions = filtered[start_idx:end_idx]
-    
-    for i, q in enumerate(current_page_questions):
-        # Question header with badges
-        freq = q.get("frequency", 0)
-        freq_badge = "🔥" * min(freq, 5)
-        
-        difficulty_colors = {"easy": "🟢", "medium": "🟡", "hard": "🔴"}
-        diff_icon = difficulty_colors.get(q.get("difficulty", ""), "⚪")
-        
-        domain_icons = {
-            "fundamentals": "📗", "deep_learning": "🔮", "nlp": "📝",
-            "cv": "👁️", "recsys": "🎯", "ranking": "📈",
-            "llm": "🤖", "mlops": "⚙️", "experimentation": "🧪"
-        }
-        domain_icon = domain_icons.get(q.get("domain", ""), "📚")
-        
-        with st.expander(
-            f"{freq_badge} {diff_icon} **{q.get('question', '')[:70]}{'...' if len(q.get('question', '')) > 70 else ''}**",
-            expanded=i < 2
-        ):
-            # Meta info row
-            col1, col2, col3, col4 = st.columns(4)
-            with col1:
-                st.markdown(f"🏢 **{q.get('company', '')}**")
-            with col2:
-                st.markdown(f"📊 **{q.get('level', '')}**")
-            with col3:
-                st.markdown(f"{domain_icon} **{q.get('domain', '').replace('_', ' ').title()}**")
-            with col4:
-                st.markdown(f"🔥 高频度: **{freq}/5**")
-            
-            st.markdown("---")
-            
-            # Full question
-            st.markdown("### 📝 题目")
-            st.markdown(q.get("question", ""))
-            
-            # Round type
-            round_names = {
-                "phone_screen": "📞 Phone Screen",
-                "coding": "💻 Coding",
-                "ml_coding": "🐍 ML Coding 实现",
-                "ml_theory": "📖 ML 理论深度",
-                "ml_system_design": "🏗️ ML 系统设计",
-                "system_design": "🌐 通用系统设计",
-                "behavioral": "🗣️ 行为面试"
-            }
-            st.markdown(f"**轮次**: {round_names.get(q.get('round', ''), q.get('round', ''))}")
-            
-            # Answer
-            st.markdown("### 💡 参考答案")
-            answer = q.get("answer", "")
-            if isinstance(answer, list):
-                if len(answer) > 0 and answer[0].startswith("```python") and answer[-1].endswith("```"):
-                    answer = "\n".join(answer[1:-1])
-                    st.code(answer, language="python")
-                else:
-                    answer = "\n".join(answer)
-                    st.markdown(answer)
-            elif answer.startswith("```"):
-                st.code(answer.replace("```python", "").replace("```", ""), language="python")
-            else:
-                st.markdown(answer)
-            
-            # Follow-ups
-            if q.get("follow_ups"):
-                st.markdown("### 🔄 常见追问")
-                for fu in q.get("follow_ups", []):
-                    st.markdown(f"- {fu}")
-            
-            # Common mistakes
-            if q.get("common_mistakes"):
-                st.markdown("### ⚠️ 常见错误")
-                for cm in q.get("common_mistakes", []):
-                    st.error(f"❌ {cm}")
-            
-            # Tags
-            if q.get("tags"):
-                tags_str = " ".join([f"`{tag}`" for tag in q.get("tags", [])])
-                st.markdown(f"**🏷️ 标签**: {tags_str}")
-            
-            # ========== Review Progress Section ==========
-            st.markdown("---")
-            question_id = get_question_id(q)
-            
-            # Simple Review UI
-            st.markdown("### 📈 复习记录")
-            user_id = st.session_state.get("user_email", "guest")
-            
-            # Try to get existing mastery level
-            try:
-                from data.review_records import get_review_stats, record_question_review
-                user_reviews = get_review_stats(user_id)
-                q_record = user_reviews.get("details", {}).get(question_id, {})
-                mastery = q_record.get("mastery_score", 0)
+    # ============ TAB 1: TARGETED PREP ============
+    with tab1:
+        st.markdown("### 🎯 专属靶向锁定")
+        if "全部" in user_targets:
+            st.info("你尚未在「目标与能力评估」中设置具体的目标公司。目前显示全库高频精选原题。")
+            targeted_qs = [q for q in questions if "community-scraped" not in q.get("tags", [])]
+        else:
+            st.success(f"已自动为你过滤并锁定 **{', '.join(user_targets)}** (级别: {user_level}) 的核心考察点！")
+            targeted_qs = [q for q in questions if q.get("company") in user_targets]
+            # If no exact match found, gracefully fallback to general high quality questions
+            if not targeted_qs:
+                st.warning("目前题库中暂无你所选定公司的专属原题。已为你回退显示通用大厂面经。")
+                targeted_qs = [q for q in questions if "community-scraped" not in q.get("tags", [])]
                 
-                if mastery >= 80:
-                    status_text = "🟢 已掌握"
-                elif mastery >= 40:
-                    status_text = "🟡 需复习"
-                elif q_record.get("history"):
-                    status_text = "🔴 不熟练"
-                else:
-                    status_text = "⚪ 未复习"
-                    
-                st.caption(f"当前熟练度: {status_text} (Score: {mastery})")
-                
-                col_a, col_b, col_c = st.columns(3)
-                q_title = q.get('question', '')[:50]
-                if col_a.button("🟢 简单 (掌握)", key=f"rev_e_{question_id}"):
-                    record_question_review(user_id, question_id, "easy", q_title)
-                    st.success("已标记为需要较少复习！")
-                    st.rerun()
-                if col_b.button("🟡 中等 (复习)", key=f"rev_m_{question_id}"):
-                    record_question_review(user_id, question_id, "medium", q_title)
-                    st.warning("已添加进待复习列表！")
-                    st.rerun()
-                if col_c.button("🔴 困难 (重刷)", key=f"rev_h_{question_id}"):
-                    record_question_review(user_id, question_id, "hard", q_title)
-                    st.error("已标记为重点难点！")
-                    st.rerun()
-            except ImportError:
-                pass
+        # Only show high frequency/importance for targeted if there are many
+        if len(targeted_qs) > 10:
+            targeted_qs = sorted(targeted_qs, key=lambda x: (x.get("frequency", 0), x.get("importance", 0)), reverse=True)
             
-            # ========== Community Answers Section ==========
-            st.markdown("---")
-            qa_data = load_question_answers(question_id)
-            num_answers = len(qa_data.get("answers", []))
-            
-            with st.expander(f"💬 社区回答 ({num_answers})", expanded=False):
-                render_community_answers(question_id, q.get("question", ""))
-                
-    # Render Pagination Controls
-    if total_pages > 1:
-        st.markdown("---")
-        c1, c2, c3 = st.columns([1, 2, 1])
+        render_question_list(targeted_qs, page_key="targeted_page")
+
+    # ============ TAB 2: MARKET INTEL ============
+    with tab2:
+        st.markdown("### 🌐 全网最新面经雷达")
+        st.markdown("*每天从 Reddit, 一亩三分地等社区自动为您抓取并由 AI 解析的最新面经动向。不要留有信息差！*")
         
-        with c1:
-            if st.button("⬅️ 上一页", disabled=(current_page == 1), use_container_width=True):
-                st.session_state.mle_questions_page -= 1
-                st.rerun()
-                
-        with c2:
-            st.markdown(f"<div style='text-align: center; padding-top: 8px;'>第 <b>{current_page}</b> 页 / 共 <b>{total_pages}</b> 页</div>", unsafe_allow_html=True)
-            
-        with c3:
-            if st.button("下一页 ➡️", disabled=(current_page == total_pages), use_container_width=True):
-                st.session_state.mle_questions_page += 1
-                st.rerun()
-                
+        # Filter only auto-scraped questions
+        scraped_qs = [q for q in questions if "community-scraped" in q.get("tags", [])]
+        
+        if not scraped_qs:
+            st.info("爬虫机器人正在努力搜集中，目前暂无社区面经数据。")
+        else:
+            # Sort by newest first (assuming appended at front means newer)
+            render_question_list(scraped_qs, page_key="market_intel_page")
+
+    # ============ TAB 3: NEETCODE ============
+    with tab3:
+        render_neetcode_tracker()
+    
     st.markdown("---")
     
     # ============ Learning Path Suggestion ============
