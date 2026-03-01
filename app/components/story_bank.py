@@ -6,6 +6,7 @@ Uses STAR format (Situation, Task, Action, Result).
 import streamlit as st
 import sys
 from pathlib import Path
+from typing import Dict
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
@@ -305,5 +306,3 @@ def render_bq_matcher(user_id: str):
     """, unsafe_allow_html=True)
 
 
-# Need this for type hints in _render_story_card
-from typing import Dict
