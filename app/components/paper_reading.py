@@ -543,6 +543,7 @@ def render_my_reading_list():
 
 def render_latest_papers():
     """Render latest papers from arXiv etc."""
+    import json, hashlib
     
     st.markdown("### 🆕 最新热门论文")
     st.caption("从 arXiv, Hugging Face 等平台获取")
@@ -552,46 +553,89 @@ def render_latest_papers():
             papers_aggregator.get_latest_papers(force_refresh=True)
             st.success("已更新！")
     
+    # Load papers from BOTH sources
+    all_papers = []
+    
+    # 1. Try hot_papers.json (from GitHub Action / manual scrape)
+    hot_papers_file = Path(__file__).parent.parent.parent / "data" / "hot_papers.json"
+    if hot_papers_file.exists():
+        try:
+            hp_data = json.loads(hot_papers_file.read_text(encoding="utf-8"))
+            for p in hp_data.get("papers", []):
+                all_papers.append({
+                    "title": p.get("title", ""),
+                    "url": p.get("url", ""),
+                    "abstract": p.get("abstract", ""),
+                    "authors": p.get("authors", []),
+                    "source": p.get("source", ""),
+                    "published": p.get("published", ""),
+                    "category": ", ".join(p.get("topics", [])) or p.get("source", ""),
+                })
+        except:
+            pass
+    
+    # 2. Also try legacy cache
     try:
         hot_papers = get_hot_papers()
-        top_papers = hot_papers.get("top_papers", [])
+        for p in hot_papers.get("top_papers", []):
+            all_papers.append(p)
+    except:
+        pass
+    
+    # Deduplicate by title
+    seen_titles = set()
+    unique_papers = []
+    for p in all_papers:
+        title_key = p.get("title", "").strip().lower()[:60]
+        if title_key and title_key not in seen_titles:
+            seen_titles.add(title_key)
+            unique_papers.append(p)
+    
+    if unique_papers:
+        st.success(f"共 {len(unique_papers)} 篇最新论文")
         
-        if top_papers:
-            for paper in top_papers[:15]:
-                with st.container():
-                    col1, col2 = st.columns([4, 1])
+        for idx, paper in enumerate(unique_papers[:30]):
+            # Use hash of full URL + index for unique key
+            url_hash = hashlib.md5(f"{paper.get('url', '')}{idx}".encode()).hexdigest()[:8]
+            
+            with st.container():
+                col1, col2 = st.columns([4, 1])
+                
+                with col1:
+                    title = paper.get('title', '')[:120]
+                    pub_date = paper.get('published', '')[:10]
+                    source = paper.get('source', '')
+                    category = paper.get('category', '')
+                    url = paper.get('url', '')
                     
-                    with col1:
-                        st.markdown(f"""
-                        <div style="background: #1e293b; padding: 0.75rem; border-radius: 8px;">
-                            <p style="margin: 0; color: #f1f5f9; font-weight: 500;">
-                                {paper.get('title', '')[:100]}
-                            </p>
-                            <p style="margin: 0.25rem 0 0 0; color: #64748b; font-size: 0.8rem;">
-                                {paper.get('source', '')} | {paper.get('published', '')[:10]} | 
-                                {paper.get('category', '')}
-                            </p>
-                        </div>
-                        """, unsafe_allow_html=True)
+                    title_html = f'<a href="{url}" target="_blank" style="color: #60a5fa; text-decoration: none;">{title}</a>' if url else title
                     
-                    with col2:
-                        if st.button("➕ 添加", key=f"add_{paper.get('url', '')[:20]}"):
-                            paper_id = paper_annotations.add_paper({
-                                "title": paper.get("title", ""),
-                                "url": paper.get("url", ""),
-                                "abstract": paper.get("abstract", ""),
-                                "authors": paper.get("authors", []),
-                                "source": paper.get("source", ""),
-                                "tags": [paper.get("category", "ML")],
-                                "added_by": st.session_state.get("user_email", "guest")
-                            })
-                            st.success(f"已添加到阅读列表！")
-                            st.rerun()
-        else:
-            st.info("没有获取到论文，点击刷新按钮获取")
-    except Exception as e:
-        st.error(f"获取论文失败: {e}")
-        st.info("请点击刷新按钮重试")
+                    st.markdown(f"""
+                    <div style="background: #1e293b; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.25rem;">
+                        <p style="margin: 0; color: #f1f5f9; font-weight: 500;">
+                            {title_html}
+                        </p>
+                        <p style="margin: 0.25rem 0 0 0; color: #64748b; font-size: 0.8rem;">
+                            📅 {pub_date} | 📂 {source} | 🏷️ {category}
+                        </p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with col2:
+                    if st.button("➕ 添加", key=f"add_{url_hash}"):
+                        paper_id = paper_annotations.add_paper({
+                            "title": paper.get("title", ""),
+                            "url": paper.get("url", ""),
+                            "abstract": paper.get("abstract", ""),
+                            "authors": paper.get("authors", []),
+                            "source": paper.get("source", ""),
+                            "tags": [paper.get("category", "ML")],
+                            "added_by": st.session_state.get("user_email", "guest")
+                        })
+                        st.success(f"已添加到阅读列表！")
+                        st.rerun()
+    else:
+        st.info("没有获取到论文，点击刷新按钮获取")
 
 
 def render_add_paper():
