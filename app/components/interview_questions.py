@@ -656,6 +656,27 @@ def render_question_list(questions_list, page_key="page"):
                     st.rerun()
             except ImportError:
                 pass
+            
+            # ============ Personal Notes ============
+            st.markdown("### 📝 我的笔记")
+            try:
+                from data.user_question_notes import get_note, save_note
+                existing_note = get_note(user_id, question_id)
+                
+                with st.form(f"note_form_{page_key}_{question_id}"):
+                    note_text = st.text_area(
+                        "记录你的思路、易错点、要点...",
+                        value=existing_note,
+                        height=100,
+                        placeholder="例: 这题要注意 bias-variance 之间的关系，常见追问是如何用数学推导...",
+                        key=f"note_input_{page_key}_{question_id}"
+                    )
+                    if st.form_submit_button("💾 保存笔记"):
+                        save_note(user_id, question_id, note_text)
+                        st.success("✅ 笔记已保存！")
+                        st.rerun()
+            except ImportError:
+                pass
                 
             # Community
             st.markdown("---")
