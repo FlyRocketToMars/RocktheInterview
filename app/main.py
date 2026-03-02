@@ -759,11 +759,12 @@ def main():
             from components.learning_plan import render_learning_plan
             render_learning_plan()
 
-    elif page_index == 3:  # 🎯 题库练习 (Includes Trends, Questions, Jobs)
+    elif page_index == 3:  # 🎯 题库练习
+        st.markdown("## 🎯 面试准备中心")
         question_tabs = st.tabs([
-            t("nav_questions", lang), 
-            t("nav_trends", lang),
-            t("nav_jobs", lang),
+            "📚 面试题库", 
+            "📈 行业趋势",
+            "💼 职位匹配",
             "📄 简历分析"
         ])
         
