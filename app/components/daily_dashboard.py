@@ -122,6 +122,107 @@ def render_daily_dashboard():
     for mission in missions:
         render_mission_card(user_id, today, mission)
     
+    # ============ Daily Journal & AI Reflection ============
+    st.markdown("---")
+    st.markdown("### 📔 今日学习日记 & AI 回顾")
+    st.caption("记录今天学了什么，AI 帮你回顾并建议明天的计划。")
+    
+    journal_key = f"journal_{user_id}_{today}"
+    
+    # Load existing journal
+    import json
+    journal_file = Path(__file__).parent.parent.parent / "data" / "daily_journals.json"
+    if not journal_file.exists():
+        journal_file.write_text('{}', encoding='utf-8')
+    
+    try:
+        all_journals = json.loads(journal_file.read_text(encoding='utf-8'))
+    except:
+        all_journals = {}
+    
+    user_journals = all_journals.get(user_id, {})
+    today_journal = user_journals.get(today, {})
+    
+    # Journal input
+    with st.form(f"daily_journal_form_{today}"):
+        st.markdown("#### ✏️ 今天你学了什么？")
+        
+        col_j1, col_j2 = st.columns(2)
+        with col_j1:
+            topics_learned = st.text_area(
+                "📚 学习内容",
+                value=today_journal.get("topics", ""),
+                height=80,
+                placeholder="例: 复习了 Transformer 注意力机制，做了 LeetCode 146 LRU Cache..."
+            )
+        with col_j2:
+            difficulties = st.text_area(
+                "❓ 遇到的困难/不确定的点",
+                value=today_journal.get("difficulties", ""),
+                height=80,
+                placeholder="例: 不太理解 multi-head attention 的维度变化，A/B testing 的 power analysis..."
+            )
+        
+        mood = st.select_slider(
+            "今天的学习状态",
+            options=["😫 很差", "😐 一般", "🙂 还行", "😄 不错", "🔥 超棒"],
+            value=today_journal.get("mood", "🙂 还行"),
+            key=f"mood_{today}"
+        )
+        
+        hours = st.slider("今天学习了多少小时？", 0.0, 8.0, 
+                          float(today_journal.get("hours", 0.0)), 0.5, key=f"hours_{today}")
+        
+        save_journal = st.form_submit_button("💾 保存日记", type="primary")
+        
+        if save_journal:
+            today_journal = {
+                "topics": topics_learned,
+                "difficulties": difficulties,
+                "mood": mood,
+                "hours": hours,
+                "saved_at": datetime.now().isoformat()
+            }
+            if user_id not in all_journals:
+                all_journals[user_id] = {}
+            all_journals[user_id][today] = today_journal
+            journal_file.write_text(json.dumps(all_journals, indent=2, ensure_ascii=False), encoding='utf-8')
+            st.success("✅ 今日日记已保存！")
+            st.rerun()
+    
+    # AI Reflection button
+    if today_journal.get("topics"):
+        if st.button("🤖 AI 帮我回顾 & 规划明天", type="primary", use_container_width=True):
+            with st.spinner("AI Coach 正在分析你的学习记录..."):
+                ai_feedback = _get_ai_reflection(today_journal, user_profile, user_journals)
+                st.session_state[f"ai_reflection_{today}"] = ai_feedback
+        
+        # Display AI feedback
+        ai_feedback = st.session_state.get(f"ai_reflection_{today}")
+        if ai_feedback:
+            st.markdown(f"""
+            <div style="background: linear-gradient(135deg, #1e3a5f, #2d1b4e); padding: 1.25rem; 
+                        border-radius: 12px; margin-top: 0.75rem;">
+                <p style="margin: 0 0 0.5rem 0; color: #60a5fa; font-weight: 600;">🤖 AI Coach 反馈</p>
+                <div style="color: #e2e8f0; font-size: 0.9rem; line-height: 1.6;">
+                    {ai_feedback}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+    
+    # Show recent journal entries
+    past_entries = [(d, j) for d, j in sorted(user_journals.items(), reverse=True) if d != today]
+    if past_entries:
+        with st.expander(f"📅 历史日记 ({len(past_entries)} 天)"):
+            for date_str, entry in past_entries[:7]:
+                st.markdown(f"""
+                <div style="background: #1e293b; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <p style="margin: 0; color: #60a5fa; font-weight: 600;">📅 {date_str} | {entry.get('mood', '')} | ⏱️ {entry.get('hours', 0)}h</p>
+                    <p style="margin: 0.25rem 0; color: #e2e8f0; font-size: 0.85rem;">📚 {entry.get('topics', '无记录')[:100]}</p>
+                    {f'<p style="margin: 0; color: #fca5a5; font-size: 0.8rem;">❓ {entry.get("difficulties", "")[:80]}</p>' if entry.get('difficulties') else ''}
+                </div>
+                """, unsafe_allow_html=True)
+    
     # Quick actions
     st.markdown("---")
     
@@ -224,6 +325,86 @@ def render_mission_card(user_id: str, date: str, mission: dict):
              with st.expander("🔥 前沿知识点"):
                 st.markdown(f"**核心问题:** {mission['content'].get('title', '')}")
                 st.info(mission['content'].get('description', ''))
+
+
+def _get_ai_reflection(today_journal: dict, user_profile: dict, user_journals: dict) -> str:
+    """Use AI to reflect on today's learning and suggest tomorrow's plan."""
+    import os
+    try:
+        import google.generativeai as genai
+        api_key = os.environ.get("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY", "")
+        if not api_key:
+            return _fallback_reflection(today_journal)
+        
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel("gemini-2.0-flash")
+        
+        # Build context from recent journals
+        recent_days = sorted(user_journals.items(), reverse=True)[:5]
+        history_text = ""
+        for d, j in recent_days:
+            history_text += f"- {d}: 学习了{j.get('topics','?')}, 状态:{j.get('mood','?')}, {j.get('hours',0)}h\n"
+        
+        prompt = f"""你是一位温暖又专业的面试準备教练。请根据学员今天的学习日记给出反馈和明日计划。
+
+学员背景:
+- 目标公司: {user_profile.get('target_company', '未设置')}
+- 目标角色: {user_profile.get('target_role', 'MLE')}
+
+今日日记:
+- 学习内容: {today_journal.get('topics', '未填写')}
+- 遇到困难: {today_journal.get('difficulties', '无')}
+- 学习状态: {today_journal.get('mood', '一般')}
+- 学习时长: {today_journal.get('hours', 0)} 小时
+
+最近学习记录:
+{history_text or '无历史记录'}
+
+请用以下格式回复 (用中文, 简洁有力, 总共不超过 300 字):
+
+✅ **今日表现**: (对今天学习的肯定和客观评价)
+
+💡 **关于你的困难**: (针对学员提到的困难给出具体建议或解题思路)
+
+📋 **明日建议计划**:
+1. (基于今天的薄弱点，建议明天做什么)
+2. (补充练习)
+3. (复习巩固)
+
+💪 **鼓励**: (一句激励的话)
+"""
+        
+        response = model.generate_content(prompt)
+        # Convert markdown to HTML-safe
+        text = response.text.replace("\n", "<br>")
+        return text
+    except Exception as e:
+        return _fallback_reflection(today_journal)
+
+
+def _fallback_reflection(today_journal: dict) -> str:
+    """Fallback reflection when AI is not available."""
+    hours = today_journal.get("hours", 0)
+    topics = today_journal.get("topics", "")
+    
+    feedback = "✅ <b>今日表现</b>: "
+    if hours >= 3:
+        feedback += f"太厉害了！今天学习了 {hours} 小时，保持这个节奏！<br><br>"
+    elif hours >= 1:
+        feedback += f"不错，{hours}小时的练习正在积累实力。<br><br>"
+    else:
+        feedback += "每一步都算数。明天可以试着多投入一点时间。<br><br>"
+    
+    if today_journal.get("difficulties"):
+        feedback += f"💡 <b>关于你的困难</b>: 建议把不确定的点记下来，明天专门花 30 分钟研究一下。可以在题库里搜索相关topic做几道练习题。<br><br>"
+    
+    feedback += "📋 <b>明日建议</b>:<br>"
+    feedback += "1. 复习今天的重点内容（间隔重复效果最佳）<br>"
+    feedback += "2. 做 1-2 道相关的面试题<br>"
+    feedback += "3. 花 20 分钟浏览最新论文<br><br>"
+    feedback += "💪 <b>坚持就是胜利，你离 Offer 越来越近了！</b>"
+    
+    return feedback
 
 
 def render_setup_wizard_deprecated(user_id: str, is_edit: bool = False):
