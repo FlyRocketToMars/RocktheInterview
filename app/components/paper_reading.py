@@ -561,7 +561,9 @@ def render_latest_papers():
     if hot_papers_file.exists():
         try:
             hp_data = json.loads(hot_papers_file.read_text(encoding="utf-8"))
-            for p in hp_data.get("papers", []):
+            # Support both key formats: 'papers' and 'top_papers'
+            raw_papers = hp_data.get("papers", []) or hp_data.get("top_papers", [])
+            for p in raw_papers:
                 all_papers.append({
                     "title": p.get("title", ""),
                     "url": p.get("url", ""),
@@ -569,7 +571,7 @@ def render_latest_papers():
                     "authors": p.get("authors", []),
                     "source": p.get("source", ""),
                     "published": p.get("published", ""),
-                    "category": ", ".join(p.get("topics", [])) or p.get("source", ""),
+                    "category": ", ".join(p.get("topics", [])) or p.get("category", "") or p.get("source", ""),
                 })
         except:
             pass
