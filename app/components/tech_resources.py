@@ -90,20 +90,27 @@ def render_tech_resources():
                 articles = blog_aggregator.get_by_topic(selected_topic)
             
             if articles:
-                for article in articles[:20]:
+                for idx_art, article in enumerate(articles[:20]):
+                    import re, hashlib
+                    # Sanitize summary - strip HTML tags
+                    raw_summary = article.get('summary', '')
+                    clean_summary = re.sub(r'<[^>]+>', '', raw_summary)[:150]
+                    
+                    art_hash = hashlib.md5(f"{article.get('url','')}{idx_art}".encode()).hexdigest()[:8]
+                    
                     with st.container():
                         st.markdown(f"""
                         <div style="padding: 1rem; border-radius: 8px; background: #1e293b; margin-bottom: 0.5rem;">
                             <h4 style="margin: 0;">
-                                <a href="{article.get('url')}" target="_blank" style="color: #60a5fa; text-decoration: none;">
-                                    {article.get('title')}
+                                <a href="{article.get('url', '#')}" target="_blank" style="color: #60a5fa; text-decoration: none;">
+                                    {article.get('title', 'Untitled')}
                                 </a>
                             </h4>
                             <p style="color: #94a3b8; font-size: 0.9rem; margin: 0.5rem 0;">
-                                {article.get('summary', '')}
+                                {clean_summary}
                             </p>
                             <p style="color: #64748b; font-size: 0.8rem; margin: 0;">
-                                📝 {article.get('source_name')} · {article.get('published', '')[:10]}
+                                📝 {article.get('source_name', '')} · {article.get('published', '')[:10]}
                             </p>
                         </div>
                         """, unsafe_allow_html=True)
