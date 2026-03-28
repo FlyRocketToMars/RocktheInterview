@@ -1,6 +1,160 @@
 {
   "top_papers": [
     {
+      "title": "MemMA: Coordinating the Memory Cycle through Multi-Agent Reasoning and In-Situ Self-Evolution",
+      "url": "https://huggingface.co/papers/2603.18718",
+      "abstract": "Memory-augmented LLM agents maintain external memory banks to support long-horizon interaction, yet most existing systems treat construction, retrieval, and utilization as isolated subroutines. This creates two coupled challenges: strategic blindness on the forward path of the memory cycle, where construction and retrieval are driven by local heuristics rather than explicit strategic reasoning, and sparse, delayed supervision on the backward path, where downstream failures rarely translate into ",
+      "authors": [
+        "Minhua Lin",
+        "Zhiwei Zhang",
+        "Hanqing Lu",
+        "Hui Liu",
+        "Xianfeng Tang"
+      ],
+      "published": "2026-03-19",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Calibri: Enhancing Diffusion Transformers via Parameter-Efficient Calibration",
+      "url": "https://huggingface.co/papers/2603.24800",
+      "abstract": "In this paper, we uncover the hidden potential of Diffusion Transformers (DiTs) to significantly enhance generative tasks. Through an in-depth analysis of the denoising process, we demonstrate that introducing a single learned scaling parameter can significantly improve the performance of DiT blocks. Building on this insight, we propose Calibri, a parameter-efficient approach that optimally calibrates DiT components to elevate generative quality. Calibri frames DiT calibration as a black-box rew",
+      "authors": [
+        "Danil Tokhchukov",
+        "Aysel Mirzoeva",
+        "Andrey Kuznetsov",
+        "Konstantin Sobolev"
+      ],
+      "published": "2026-03-25",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 44
+    },
+    {
+      "title": "AVControl: Efficient Framework for Training Audio-Visual Controls",
+      "url": "https://huggingface.co/papers/2603.24793",
+      "abstract": "Controlling video and audio generation requires diverse modalities, from depth and pose to camera trajectories and audio transformations, yet existing approaches either train a single monolithic model for a fixed set of controls or introduce costly architectural changes for each new modality. We introduce AVControl, a lightweight, extendable framework built on LTX-2, a joint audio-visual foundation model, where each control modality is trained as a separate LoRA on a parallel canvas that provide",
+      "authors": [
+        "Matan Ben-Yosef",
+        "Tavi Halperin",
+        "Naomi Ken Korem",
+        "Mohammad Salama",
+        "Harel Cain"
+      ],
+      "published": "2026-03-25",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 12
+    },
+    {
+      "title": "IQuest-Coder-V1 Technical Report",
+      "url": "https://huggingface.co/papers/2603.16733",
+      "abstract": "In this report, we introduce the IQuest-Coder-V1 series-(7B/14B/40B/40B-Loop), a new family of code large language models (LLMs). Moving beyond static code representations, we propose the code-flow multi-stage training paradigm, which captures the dynamic evolution of software logic through different phases of the pipeline. Our models are developed through the evolutionary pipeline, starting with the initial pre-training consisting of code facts, repository, and completion data. Following that, ",
+      "authors": [
+        "Jian Yang",
+        "Wei Zhang",
+        "Shawn Guo",
+        "Zhengmao Ye",
+        "Lin Jing"
+      ],
+      "published": "2026-03-17",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
+      "title": "Nudging Hidden States: Training-Free Model Steering for Chain-of-Thought Reasoning in Large Audio-Language Models",
+      "url": "https://huggingface.co/papers/2603.14636",
+      "abstract": "Chain-of-thought (CoT) prompting has been extended to large audio-language models (LALMs) to elicit reasoning, yet enhancing its effectiveness without training remains challenging. We study inference-time model steering as a training-free approach to improve LALM reasoning. We introduce three strategies using diverse information sources and evaluate them across four LALMs and four benchmarks. Results show general accuracy gains up to 4.4% over CoT prompting. Notably, we identify a cross-modal tr",
+      "authors": [
+        "Lok-Lam Ieong",
+        "Chia-Chien Chen",
+        "Chih-Kai Yang",
+        "Yu-Han Huang",
+        "An-Yu Cheng"
+      ],
+      "published": "2026-03-15",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
+      "title": "PMT: Plain Mask Transformer for Image and Video Segmentation with Frozen Vision Encoders",
+      "url": "https://huggingface.co/papers/2603.25398",
+      "abstract": "Vision Foundation Models (VFMs) pre-trained at scale enable a single frozen encoder to serve multiple downstream tasks simultaneously. Recent VFM-based encoder-only models for image and video segmentation, such as EoMT and VidEoMT, achieve competitive accuracy with remarkably low latency, yet they require finetuning the encoder, sacrificing the multi-task encoder sharing that makes VFMs practically attractive for large-scale deployment. To reconcile encoder-only simplicity and speed with frozen ",
+      "authors": [
+        "Niccolò Cavagnero",
+        "Narges Norouzi",
+        "Gijs Dubbelman",
+        "Daan de Geus"
+      ],
+      "published": "2026-03-26",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Pixel-level Scene Understanding in One Token: Visual States Need What-is-Where Composition",
+      "url": "https://huggingface.co/papers/2603.13904",
+      "abstract": "For robotic agents operating in dynamic environments, learning visual state representations from streaming video observations is essential for sequential decision making. Recent self-supervised learning methods have shown strong transferability across vision tasks, but they do not explicitly address what a good visual state should encode. We argue that effective visual states must capture what-is-where by jointly encoding the semantic identities of scene elements and their spatial locations, ena",
+      "authors": [
+        "Seokmin Lee",
+        "Yunghee Lee",
+        "Byeonghyun Pak",
+        "Byeongju Woo"
+      ],
+      "published": "2026-03-14",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Can MLLMs Read Students' Minds? Unpacking Multimodal Error Analysis in Handwritten Math",
+      "url": "https://huggingface.co/papers/2603.24961",
+      "abstract": "Assessing student handwritten scratchwork is crucial for personalized educational feedback but presents unique challenges due to diverse handwriting, complex layouts, and varied problem-solving approaches. Existing educational NLP primarily focuses on textual responses and neglects the complexity and multimodality inherent in authentic handwritten scratchwork. Current multimodal large language models (MLLMs) excel at visual reasoning but typically adopt an \"examinee perspective\", prioritizing ge",
+      "authors": [
+        "Dingjie Song",
+        "Tianlong Xu",
+        "Yi-Fan Zhang",
+        "Hang Li",
+        "Zhiling Yan"
+      ],
+      "published": "2026-03-26",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Reaching Beyond the Mode: RL for Distributional Reasoning in Language Models",
+      "url": "https://huggingface.co/papers/2603.24844",
+      "abstract": "Given a question, a language model (LM) implicitly encodes a distribution over possible answers. In practice, post-training procedures for LMs often collapse this distribution onto a single dominant mode. While this is generally not a problem for benchmark-style evaluations that assume one correct answer, many real-world tasks inherently involve multiple valid answers or irreducible uncertainty. Examples include medical diagnosis, ambiguous question answering, and settings with incomplete inform",
+      "authors": [
+        "Isha Puri",
+        "Mehul Damani",
+        "Idan Shenfeld",
+        "Marzyeh Ghassemi",
+        "Jacob Andreas"
+      ],
+      "published": "2026-03-25",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "WAFT-Stereo: Warping-Alone Field Transforms for Stereo Matching",
+      "url": "https://huggingface.co/papers/2603.24836",
+      "abstract": "We introduce WAFT-Stereo, a simple and effective warping-based method for stereo matching. WAFT-Stereo demonstrates that cost volumes, a common design used in many leading methods, are not necessary for strong performance and can be replaced by warping with improved efficiency. WAFT-Stereo ranks first on ETH3D, KITTI and Middlebury public benchmarks, reducing the zero-shot error by 81% on ETH3D benchmark, while being 1.8-6.7x faster than competitive methods. Code and model weights are available ",
+      "authors": [
+        "Yihan Wang",
+        "Jia Deng"
+      ],
+      "published": "2026-03-25",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
       "title": "6Bit-Diffusion: Inference-Time Mixed-Precision Quantization for Video Diffusion Models",
       "url": "https://huggingface.co/papers/2603.18742",
       "abstract": "Diffusion transformers have demonstrated remarkable capabilities in generating videos. However, their practical deployment is severely constrained by high memory usage and computational cost. Post-Training Quantization provides a practical way to reduce memory usage and boost computation speed. Existing quantization methods typically apply a static bit-width allocation, overlooking the quantization difficulty of activations across diffusion timesteps, leading to a suboptimal trade-off between ef",
@@ -7265,164 +7419,8 @@
       "source": "arXiv",
       "category": "Information Retrieval / RecSys",
       "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "LLM-Enhanced Semantic Data Integration of Electronic Component Qualifications in the Aerospace Domain",
-      "url": "http://arxiv.org/abs/2603.20094v1",
-      "abstract": "Large manufacturing companies face challenges in information retrieval due to data silos maintained by different departments, leading to inconsistencies and misalignment across databases. This paper presents an experience in integrating and retrieving qualification data for electronic components used in satellite board design. Due to data silos, designers cannot immediately determine the qualification status of individual components. However, this process is critical during the planning phase, w",
-      "authors": [
-        "Antonio De Santis",
-        "Marco Balduini",
-        "Matteo Belcao",
-        "Andrea Proia",
-        "Marco Brambilla"
-      ],
-      "published": "2026-03-20",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "Pitfalls in Evaluating Interpretability Agents",
-      "url": "http://arxiv.org/abs/2603.20101v1",
-      "abstract": "Automated interpretability systems aim to reduce the need for human labor and scale analysis to increasingly large models and diverse tasks. Recent efforts toward this goal leverage large language models (LLMs) at increasing levels of autonomy, ranging from fixed one-shot workflows to fully autonomous interpretability agents. This shift creates a corresponding need to scale evaluation approaches to keep pace with both the volume and complexity of generated explanations. We investigate this chall",
-      "authors": [
-        "Tal Haklay",
-        "Nikhil Prakash",
-        "Sana Pandey",
-        "Antonio Torralba",
-        "Aaron Mueller"
-      ],
-      "published": "2026-03-20",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "Demonstration of Adapt4Me: An Uncertainty-Aware Authoring Environment for Personalizing Automatic Speech Recognition to Non-normative Speech",
-      "url": "http://arxiv.org/abs/2603.20112v1",
-      "abstract": "Personalizing Automatic Speech Recognition (ASR) for non-normative speech remains challenging because data collection is labor-intensive and model training is technically complex. To address these limitations, we propose Adapt4Me, a web-based decentralized environment that operationalizes Bayesian active learning to enable end-to-end personalization without expert supervision. The app exposes data selection, adaptation, and validation to lay users through a three-stage human-in-the-loop workflow",
-      "authors": [
-        "Niclas Pokel",
-        "Yiming Zhao",
-        "Pehuén Moure",
-        "Yingqiang Gao",
-        "Roman Böhringer"
-      ],
-      "published": "2026-03-20",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "Evolving Jailbreaks: Automated Multi-Objective Long-Tail Attacks on Large Language Models",
-      "url": "http://arxiv.org/abs/2603.20122v1",
-      "abstract": "Large Language Models (LLMs) have been widely deployed, especially through free Web-based applications that expose them to diverse user-generated inputs, including those from long-tail distributions such as low-resource languages and encrypted private data. This open-ended exposure increases the risk of jailbreak attacks that undermine model safety alignment. While recent studies have shown that leveraging long-tail distributions can facilitate such jailbreaks, existing approaches largely rely o",
-      "authors": [
-        "Wenjing Hong",
-        "Zhonghua Rong",
-        "Li Wang",
-        "Feng Chang",
-        "Jian Zhu"
-      ],
-      "published": "2026-03-20",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "An Agentic Multi-Agent Architecture for Cybersecurity Risk Management",
-      "url": "http://arxiv.org/abs/2603.20131v1",
-      "abstract": "Getting a real cybersecurity risk assessment for a small organization is expensive -- a NIST CSF-aligned engagement runs $15,000 on the low end, takes weeks, and depends on practitioners who are genuinely scarce. Most small companies skip it entirely. We built a six-agent AI system where each agent handles one analytical stage: profiling the organization, mapping assets, analyzing threats, evaluating controls, scoring risks, and generating recommendations. Agents share a persistent context that ",
-      "authors": [
-        "Ravish Gupta",
-        "Saket Kumar",
-        "Shreeya Sharma",
-        "Maulik Dang",
-        "Abhishek Aggarwal"
-      ],
-      "published": "2026-03-20",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "Design-OS: A Specification-Driven Framework for Engineering System Design with a Control-Systems Design Case",
-      "url": "http://arxiv.org/abs/2603.20151v1",
-      "abstract": "Engineering system design -- whether mechatronic, control, or embedded -- often proceeds in an ad hoc manner, with requirements left implicit and traceability from intent to parameters largely absent. Existing specification-driven and systematic design methods mostly target software, and AI-assisted tools tend to enter the workflow at solution generation rather than at problem framing. Human--AI collaboration in the design of physical systems remains underexplored. This paper presents Design-OS,",
-      "authors": [
-        "H. Sinan Bank",
-        "Daniel R. Herber",
-        "Thomas H. Bradley"
-      ],
-      "published": "2026-03-20",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "The Robot's Inner Critic: Self-Refinement of Social Behaviors through VLM-based Replanning",
-      "url": "http://arxiv.org/abs/2603.20164v1",
-      "abstract": "Conventional robot social behavior generation has been limited in flexibility and autonomy, relying on predefined motions or human feedback. This study proposes CRISP (Critique-and-Replan for Interactive Social Presence), an autonomous framework where a robot critiques and replans its own actions by leveraging a Vision-Language Model (VLM) as a `human-like social critic.' CRISP integrates (1) extraction of movable joints and constraints by analyzing the robot's description file (e.g., MJCF), (2)",
-      "authors": [
-        "Jiyu Lim",
-        "Youngwoo Yoon",
-        "Kwanghyun Park"
-      ],
-      "published": "2026-03-20",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "Learning Dynamic Belief Graphs for Theory-of-mind Reasoning",
-      "url": "http://arxiv.org/abs/2603.20170v1",
-      "abstract": "Theory of Mind (ToM) reasoning with Large Language Models (LLMs) requires inferring how people's implicit, evolving beliefs shape what they seek and how they act under uncertainty -- especially in high-stakes settings such as disaster response, emergency medicine, and human-in-the-loop autonomy. Prior approaches either prompt LLMs directly or use latent-state models that treat beliefs as static and independent, often producing incoherent mental models over time and weak reasoning in dynamic cont",
-      "authors": [
-        "Ruxiao Chen",
-        "Xilei Zhao",
-        "Thomas J. Cova",
-        "Frank A. Drews",
-        "Susu Xu"
-      ],
-      "published": "2026-03-20",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "Improving Generalization on Cybersecurity Tasks with Multi-Modal Contrastive Learning",
-      "url": "http://arxiv.org/abs/2603.20181v1",
-      "abstract": "The use of ML in cybersecurity has long been impaired by generalization issues: Models that work well in controlled scenarios fail to maintain performance in production. The root cause often lies in ML algorithms learning superficial patterns (shortcuts) rather than underlying cybersecurity concepts. We investigate contrastive multi-modal learning as a first step towards improving ML performance in cybersecurity tasks. We aim at transferring knowledge from data-rich modalities, such as text, to ",
-      "authors": [
-        "Jianan Huang",
-        "Rodolfo V. Valentim",
-        "Luca Vassio",
-        "Matteo Boffa",
-        "Marco Mellia"
-      ],
-      "published": "2026-03-20",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "A Unified Platform and Quality Assurance Framework for 3D Ultrasound Reconstruction with Robotic, Optical, and Electromagnetic Tracking",
-      "url": "http://arxiv.org/abs/2603.20077v1",
-      "abstract": "Three-dimensional (3D) Ultrasound (US) can facilitate diagnosis, treatment planning, and image-guided therapy. However, current studies rarely provide a comprehensive evaluation of volumetric accuracy and reproducibility, highlighting the need for robust Quality Assurance (QA) frameworks, particularly for tracked 3D US reconstruction using freehand or robotic acquisition. This study presents a QA framework for 3D US reconstruction and a flexible open source platform for tracked US research. A cu",
-      "authors": [
-        "Lewis Howell",
-        "Manisha Waterston",
-        "Tze Min Wah",
-        "James H. Chandler",
-        "James R. McLaughlan"
-      ],
-      "published": "2026-03-20",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
     }
   ],
-  "last_updated": "2026-03-27T07:39:04.329701",
+  "last_updated": "2026-03-28T07:28:08.009232",
   "total": 500
 }
