@@ -1,6 +1,95 @@
 {
   "top_papers": [
     {
+      "title": "AnomalyVFM -- Transforming Vision Foundation Models into Zero-Shot Anomaly Detectors",
+      "url": "https://huggingface.co/papers/2601.20524",
+      "abstract": "Zero-shot anomaly detection aims to detect and localise abnormal regions in the image without access to any in-domain training images. While recent approaches leverage vision-language models (VLMs), such as CLIP, to transfer high-level concept knowledge, methods based on purely vision foundation models (VFMs), like DINOv2, have lagged behind in performance. We argue that this gap stems from two practical issues: (i) limited diversity in existing auxiliary anomaly detection datasets and (ii) over",
+      "authors": [
+        "Matic Fučka",
+        "Vitjan Zavrtanik",
+        "Danijel Skočaj"
+      ],
+      "published": "2026-04-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Small Vision-Language Models are Smart Compressors for Long Video Understanding",
+      "url": "https://huggingface.co/papers/2604.08120",
+      "abstract": "Adapting Multimodal Large Language Models (MLLMs) for hour-long videos is bottlenecked by context limits. Dense visual streams saturate token budgets and exacerbate the lost-in-the-middle phenomenon. Existing heuristics, like sparse sampling or uniform pooling, blindly sacrifice fidelity by discarding decisive moments and wasting bandwidth on irrelevant backgrounds. We propose Tempo, an efficient query-aware framework compressing long videos for downstream understanding. Tempo leverages a Small ",
+      "authors": [
+        "Junjie Fei",
+        "Jun Chen",
+        "Zechun Liu",
+        "Yunyang Xiong",
+        "Chong Zhou"
+      ],
+      "published": "2026-04-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 5
+    },
+    {
+      "title": "CylinderDepth: Cylindrical Spatial Attention for Multi-View Consistent Self-Supervised Surround Depth Estimation",
+      "url": "https://huggingface.co/papers/2511.16428",
+      "abstract": "Self-supervised surround-view depth estimation enables dense, low-cost 3D perception with a 360° field of view from multiple minimally overlapping images. Yet, most existing methods suffer from depth estimates that are inconsistent across overlapping images. To address this limitation, we propose a novel geometry-guided method for calibrated, time-synchronized multi-camera rigs that predicts dense metric depth. Our approach targets two main sources of inconsistency: the limited receptive field i",
+      "authors": [
+        "Samer Abualhanud",
+        "Christian Grannemann",
+        "Max Mehltretter"
+      ],
+      "published": "2026-04-08",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
+      "title": "Training a Student Expert via Semi-Supervised Foundation Model Distillation",
+      "url": "https://huggingface.co/papers/2604.03841",
+      "abstract": "Foundation models deliver strong perception but are often too computationally heavy to deploy, and adapting them typically requires costly annotations. We introduce a semi-supervised knowledge distillation (SSKD) framework that compresses pre-trained vision foundation models (VFMs) into compact experts using limited labeled and abundant unlabeled data, and instantiate it for instance segmentation where per-pixel labels are particularly expensive. The framework unfolds in three stages: (1) domain",
+      "authors": [
+        "Pardis Taghavi",
+        "Tian Liu",
+        "Renjie Li",
+        "Reza Langari",
+        "Zhengzhong Tu"
+      ],
+      "published": "2026-04-04",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "The Master Key Hypothesis: Unlocking Cross-Model Capability Transfer via Linear Subspace Alignment",
+      "url": "https://huggingface.co/papers/2604.06377",
+      "abstract": "We investigate whether post-trained capabilities can be transferred across models without retraining, with a focus on transfer across different model scales. We propose the Master Key Hypothesis, which states that model capabilities correspond to directions in a low-dimensional latent subspace that induce specific behaviors and are transferable across models through linear alignment. Based on this hypothesis, we introduce UNLOCK, a training-free and label-free framework that extracts a capabilit",
+      "authors": [
+        "Rishab Balasubramanian",
+        "Pin-Jie Lin",
+        "Rituraj Sharma",
+        "Anjie Fang",
+        "Fardin Abdi"
+      ],
+      "published": "2026-04-07",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "QEIL v2: Heterogeneous Computing for Edge Intelligence via Roofline-Derived Pareto-Optimal Energy Modeling and Multi-Objective Orchestration",
+      "url": "https://huggingface.co/papers/2602.06057",
+      "abstract": "Deploying large language models (LLMs) on heterogeneous edge devices demands frameworks that jointly optimize energy efficiency, inference quality, and reliability. Our prior QEIL v1 (Kumar & Jha, 2026) achieved 4.82x IPW improvement but relied on static efficiency factors, greedy optimization, and unverified candidate selection. QEIL v2 replaces every static heuristic with physics-grounded, runtime-adaptive models. We introduce three device-workload metrics: DASI (roofline-derived compute utili",
+      "authors": [
+        "Satyam Kumar",
+        "Saurabh Jha"
+      ],
+      "published": "2026-04-05",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
       "title": "DMax: Aggressive Parallel Decoding for dLLMs",
       "url": "https://huggingface.co/papers/2604.08302",
       "abstract": "We present DMax, a new paradigm for efficient diffusion language models (dLLMs). It mitigates error accumulation in parallel decoding, enabling aggressive decoding parallelism while preserving generation quality. Unlike conventional masked dLLMs that decode through a binary mask-to-token transition, DMax reformulates decoding as a progressive self-refinement from mask embeddings to token embeddings. At the core of our approach is On-Policy Uniform Training, a novel training strategy that efficie",
@@ -7351,100 +7440,8 @@
       "source": "HuggingFace Daily",
       "category": "AI/ML (Trending)",
       "upvotes": 20
-    },
-    {
-      "title": "MultiGen: Level-Design for Editable Multiplayer Worlds in Diffusion Game Engines",
-      "url": "https://huggingface.co/papers/2603.06679",
-      "abstract": "Video world models have shown immense promise for interactive simulation and entertainment, but current systems still struggle with two important aspects of interactivity: user control over the environment for reproducible, editable experiences, and shared inference where players hold influence over a common world. To address these limitations, we introduce an explicit external memory into the system, a persistent state operating independent of the model's context window, that is continually upd",
-      "authors": [
-        "Ryan Po",
-        "David Junhao Zhang",
-        "Amir Hertz",
-        "Gordon Wetzstein",
-        "Neal Wadhwa"
-      ],
-      "published": "2026-03-30",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 0
-    },
-    {
-      "title": "CORAL: Towards Autonomous Multi-Agent Evolution for Open-Ended Discovery",
-      "url": "https://huggingface.co/papers/2604.01658",
-      "abstract": "Large language model (LLM)-based evolution is a promising approach for open-ended discovery, where progress requires sustained search and knowledge accumulation. Existing methods still rely heavily on fixed heuristics and hard-coded exploration rules, which limit the autonomy of LLM agents. We present CORAL, the first framework for autonomous multi-agent evolution on open-ended problems. CORAL replaces rigid control with long-running agents that explore, reflect, and collaborate through shared p",
-      "authors": [
-        "Ao Qu",
-        "Han Zheng",
-        "Zijian Zhou",
-        "Yihao Yan",
-        "Yihong Tang"
-      ],
-      "published": "2026-04-02",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 27
-    },
-    {
-      "title": "Forecasting Supply Chain Disruptions with Foresight Learning",
-      "url": "https://huggingface.co/papers/2604.01298",
-      "abstract": "Anticipating supply chain disruptions before they materialize is a core challenge for firms and policymakers alike. A key difficulty is learning to reason reliably about infrequent, high-impact events from noisy and unstructured inputs - a setting where general-purpose models struggle without task-specific adaptation. We introduce an end-to-end framework that trains LLMs to produce calibrated probabilistic forecasts using realized disruption outcomes as supervision. The resulting model substanti",
-      "authors": [
-        "Benjamin Turtel",
-        "Paul Wilczewski",
-        "Kris Skotheim"
-      ],
-      "published": "2026-04-01",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 4
-    },
-    {
-      "title": "An Empirical Recipe for Universal Phone Recognition",
-      "url": "https://huggingface.co/papers/2603.29042",
-      "abstract": "Phone recognition (PR) is a key enabler of multilingual and low-resource speech processing tasks, yet robust performance remains elusive. Highly performant English-focused models do not generalize across languages, while multilingual models underutilize pretrained representations. It also remains unclear how data scale, architecture, and training objective contribute to multilingual PR. We present PhoneticXEUS -- trained on large-scale multilingual data and achieving state-of-the-art performance",
-      "authors": [
-        "Shikhar Bharadwaj",
-        "Chin-Jou Li",
-        "Kwanghee Choi",
-        "Eunjung Yeo",
-        "William Chen"
-      ],
-      "published": "2026-03-30",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 0
-    },
-    {
-      "title": "Signals: Trajectory Sampling and Triage for Agentic Interactions",
-      "url": "https://huggingface.co/papers/2604.00356",
-      "abstract": "Agentic applications based on large language models increasingly rely on multi-step interaction loops involving planning, action execution, and environment feedback. While such systems are now deployed at scale, improving them post-deployment remains challenging. Agent trajectories are voluminous and non-deterministic, and reviewing each one, whether through human review or auxiliary LLMs, is slow and cost-prohibitive. We propose a lightweight, signal-based framework for triaging agentic interac",
-      "authors": [
-        "Shuguang Chen",
-        "Adil Hafeez",
-        "Salman Paracha"
-      ],
-      "published": "2026-04-01",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 1
-    },
-    {
-      "title": "LOME: Learning Human-Object Manipulation with Action-Conditioned Egocentric World Model",
-      "url": "https://huggingface.co/papers/2603.27449",
-      "abstract": "Learning human-object manipulation presents significant challenges due to its fine-grained and contact-rich nature of the motions involved. Traditional physics-based animation requires extensive modeling and manual setup, and more importantly, it neither generalizes well across diverse object morphologies nor scales effectively to real-world environment. To address these limitations, we introduce LOME, an egocentric world model that can generate realistic human-object interactions as videos cond",
-      "authors": [
-        "Quankai Gao",
-        "Jiawei Yang",
-        "Qiangeng Xu",
-        "Le Chen",
-        "Yue Wang"
-      ],
-      "published": "2026-03-28",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 0
     }
   ],
-  "last_updated": "2026-04-10T08:05:29.448992",
+  "last_updated": "2026-04-11T07:32:17.273345",
   "total": 500
 }
