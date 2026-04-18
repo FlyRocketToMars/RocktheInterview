@@ -1,6 +1,78 @@
 {
   "top_papers": [
     {
+      "title": "Representations Before Pixels: Semantics-Guided Hierarchical Video Prediction",
+      "url": "https://huggingface.co/papers/2604.11707",
+      "abstract": "Accurate future video prediction requires both high visual fidelity and consistent scene semantics, particularly in complex dynamic environments such as autonomous driving. We present Re2Pix, a hierarchical video prediction framework that decomposes forecasting into two stages: semantic representation prediction and representation-guided visual synthesis. Instead of directly predicting future RGB frames, our approach first forecasts future scene structure in the feature space of a frozen vision ",
+      "authors": [
+        "Efstathios Karypidis",
+        "Spyros Gidaris",
+        "Nikos Komodakis"
+      ],
+      "published": "2026-04-13",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 6
+    },
+    {
+      "title": "An Optimal Transport-driven Approach for Cultivating Latent Space in Online Incremental Learning",
+      "url": "https://huggingface.co/papers/2211.16780",
+      "abstract": "In online incremental learning, data continuously arrives with substantial distributional shifts, creating a significant challenge because previous samples have limited replay value when learning a new task. Prior research has typically relied on either a single adaptive centroid or multiple fixed centroids to represent each class in the latent space. However, such methods struggle when class data streams are inherently multimodal and require continual centroid updates. To overcome this, we intr",
+      "authors": [
+        "Quyen Tran",
+        "Hai Nguyen",
+        "Hoang Phan",
+        "Quan Dao",
+        "Linh Ngo"
+      ],
+      "published": "2026-04-16",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Three-Phase Transformer",
+      "url": "https://huggingface.co/papers/2604.14430",
+      "abstract": "We present Three-Phase Transformer (3PT), a residual-stream structural prior for decoder-only Transformers on a standard SwiGLU + RMSNorm + RoPE + GQA backbone. The hidden vector is partitioned into N equally-sized cyclic channels, each maintained by phase-respecting ops: a per-channel RMSNorm, a 2D Givens rotation between attention and FFN that rotates each channel by theta + i*(2*pi/N), and a head-count constraint aligning GQA heads with the partition. The architecture is a self-stabilizing eq",
+      "authors": [
+        "Mohammad R. Abu Ayyash"
+      ],
+      "published": "2026-04-15",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Beyond Prompts: Unconditional 3D Inversion for Out-of-Distribution Shapes",
+      "url": "https://huggingface.co/papers/2604.14914",
+      "abstract": "Text-driven inversion of generative models is a core paradigm for manipulating 2D or 3D content, unlocking numerous applications such as text-based editing, style transfer, or inverse problems. However, it relies on the assumption that generative models remain sensitive to natural language prompts. We demonstrate that for state-of-the-art native text-to-3D generative models, this assumption often collapses. We identify a critical failure mode where generation trajectories are drawn into latent `",
+      "authors": [
+        "Victoria Yue Chen",
+        "Emery Pierson",
+        "Léopold Maillard",
+        "Maks Ovsjanikov"
+      ],
+      "published": "2026-04-16",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "Reinforcement Learning via Value Gradient Flow",
+      "url": "https://huggingface.co/papers/2604.14265",
+      "abstract": "We study behavior-regularized reinforcement learning (RL), where regularization toward a reference distribution (the dataset in offline RL or the base model in LLM RL finetuning) is essential to prevent value over-optimization caused by erroneous out-of-distribution extrapolation. Existing methods either rely on reparameterized policy gradient, which are difficult to scale to large generative models, or on reject sampling, which can be overly conservative when attempting to move beyond the behav",
+      "authors": [
+        "Haoran Xu",
+        "Kaiwen Hu",
+        "Somayeh Sojoudi",
+        "Amy Zhang"
+      ],
+      "published": "2026-04-15",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
       "title": "Narrative-Driven Paper-to-Slide Generation via ArcDeck",
       "url": "https://huggingface.co/papers/2604.11969",
       "abstract": "We introduce ArcDeck, a multi-agent framework that formulates paper-to-slide generation as a structured narrative reconstruction task. Unlike existing methods that directly summarize raw text into slides, ArcDeck explicitly models the source paper's logical flow. It first parses the input to construct a discourse tree and establish a global commitment document, ensuring the high-level intent is preserved. These structural priors then guide an iterative multi-agent refinement process, where speci",
@@ -7367,86 +7439,8 @@
       "source": "arXiv",
       "category": "Computer Vision",
       "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Realizing Immersive Volumetric Video: A Multimodal Framework for 6-DoF VR Engagement",
-      "url": "http://arxiv.org/abs/2604.09473v1",
-      "abstract": "Fully immersive experiences that tightly integrate 6-DoF visual and auditory interaction are essential for virtual and augmented reality. While such experiences can be achieved through computer-generated content, constructing them directly from real-world captured videos remains largely unexplored. We introduce Immersive Volumetric Videos, a new volumetric media format designed to provide large 6-DoF interaction spaces, audiovisual feedback, and high-resolution, high-frame-rate dynamic content. ",
-      "authors": [
-        "Zhengxian Yang",
-        "Shengqi Wang",
-        "Shi Pan",
-        "Hongshuai Li",
-        "Haoxiang Wang"
-      ],
-      "published": "2026-04-10",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Incremental Semantics-Aided Meshing from LiDAR-Inertial Odometry and RGB Direct Label Transfer",
-      "url": "http://arxiv.org/abs/2604.09478v1",
-      "abstract": "Geometric high-fidelity mesh reconstruction from LiDAR-inertial scans remains challenging in large, complex indoor environments -- such as cultural buildings -- where point cloud sparsity, geometric drift, and fixed fusion parameters produce holes, over-smoothing, and spurious surfaces at structural boundaries. We propose a modular, incremental RGB+LiDAR pipeline that generates incremental semantics-aided high-quality meshes from indoor scans through scan frame-based direct label transfer. A vis",
-      "authors": [
-        "Muhammad Affan",
-        "Ville Lehtola",
-        "George Vosselman"
-      ],
-      "published": "2026-04-10",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Online3R: Online Learning for Consistent Sequential Reconstruction Based on Geometry Foundation Model",
-      "url": "http://arxiv.org/abs/2604.09480v1",
-      "abstract": "We present Online3R, a new sequential reconstruction framework that is capable of adapting to new scenes through online learning, effectively resolving inconsistency issues. Specifically, we introduce a set of learnable lightweight visual prompts into a pretrained, frozen geometry foundation model to capture the knowledge of new environments while preserving the fundamental capability of the foundation model for geometry prediction. To solve the problems of missing groundtruth and the requiremen",
-      "authors": [
-        "Shunkai Zhou",
-        "Zike Yan",
-        "Fei Xue",
-        "Dong Wu",
-        "Yuchen Deng"
-      ],
-      "published": "2026-04-10",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "VISOR: Agentic Visual Retrieval-Augmented Generation via Iterative Search and Over-horizon Reasoning",
-      "url": "http://arxiv.org/abs/2604.09508v1",
-      "abstract": "Visual Retrieval-Augmented Generation (VRAG) empowers Vision-Language Models to retrieve and reason over visually rich documents. To tackle complex queries requiring multi-step reasoning, agentic VRAG systems interleave reasoning with iterative retrieval.. However, existing agentic VRAG faces two critical bottlenecks. (1) Visual Evidence Sparsity: key evidence is scattered across pages yet processed in isolation, hindering cross-page reasoning; moreover, fine-grained intra-image evidence often r",
-      "authors": [
-        "Yucheng Shen",
-        "Jiulong Wu",
-        "Jizhou Huang",
-        "Dawei Yin",
-        "Lingyong Yan"
-      ],
-      "published": "2026-04-10",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "RIRF: Reasoning Image Restoration Framework",
-      "url": "http://arxiv.org/abs/2604.09511v1",
-      "abstract": "Universal image restoration (UIR) aims to recover clean images from diverse and unknown degradations using a unified model. Existing UIR methods primarily focus on pixel reconstruction and often lack explicit diagnostic reasoning over degradation composition, severity, and scene semantics prior to restoration. We propose Reason and Restore (R\\&R), a novel framework that integrates structured Chain-of-Thought (CoT) reasoning into the image restoration pipeline. R\\&R introduces an explicit reasone",
-      "authors": [
-        "Wending Yan",
-        "Rongkai Zhang",
-        "Kaihua Tang",
-        "Yu Cheng",
-        "Qiankun Liu"
-      ],
-      "published": "2026-04-10",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
     }
   ],
-  "last_updated": "2026-04-17T08:10:12.185817",
+  "last_updated": "2026-04-18T07:39:21.561403",
   "total": 500
 }
