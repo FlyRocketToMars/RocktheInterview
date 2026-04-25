@@ -1,6 +1,94 @@
 {
   "top_papers": [
     {
+      "title": "PersonalAI: A Systematic Comparison of Knowledge Graph Storage and Retrieval Approaches for Personalized LLM agents",
+      "url": "https://huggingface.co/papers/2506.17001",
+      "abstract": "Personalizing language models by effectively incorporating user interaction history remains a central challenge in the development of adaptive AI systems. While large language models (LLMs), combined with Retrieval-Augmented Generation (RAG), have improved factual accuracy, they often lack structured memory and fail to scale in complex, long-term interactions. To address this, we propose a flexible external memory framework based on a knowledge graph that is constructed and updated automatically",
+      "authors": [
+        "Mikhail Menschikov",
+        "Dmitry Evseev",
+        "Victoria Dochkina",
+        "Ruslan Kostoev",
+        "Ilia Perepechkin"
+      ],
+      "published": "2026-04-12",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Encoder-Free Human Motion Understanding via Structured Motion Descriptions",
+      "url": "https://huggingface.co/papers/2604.21668",
+      "abstract": "The world knowledge and reasoning capabilities of text-based large language models (LLMs) are advancing rapidly, yet current approaches to human motion understanding, including motion question answering and captioning, have not fully exploited these capabilities. Existing LLM-based methods typically learn motion-language alignment through dedicated encoders that project motion features into the LLM's embedding space, remaining constrained by cross-modal representation and alignment. Inspired by ",
+      "authors": [
+        "Yao Zhang",
+        "Zhuchenyang Liu",
+        "Thomas Ploetz",
+        "Yu Xiao"
+      ],
+      "published": "2026-04-23",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "LLaTiSA: Towards Difficulty-Stratified Time Series Reasoning from Visual Perception to Semantics",
+      "url": "https://huggingface.co/papers/2604.17295",
+      "abstract": "Comprehensive understanding of time series remains a significant challenge for Large Language Models (LLMs). Current research is hindered by fragmented task definitions and benchmarks with inherent ambiguities, precluding rigorous evaluation and the development of unified Time Series Reasoning Models(TSRMs). To bridge this gap, we formalize Time Series Reasoning (TSR) via a four-level taxonomy of increasing cognitive complexity. We introduce HiTSR, a hierarchical time series reasoning dataset co",
+      "authors": [
+        "Yueyang Ding",
+        "HaoPeng Zhang",
+        "Rui Dai",
+        "Yi Wang",
+        "Tianyu Zong"
+      ],
+      "published": "2026-04-19",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 78
+    },
+    {
+      "title": "Coevolving Representations in Joint Image-Feature Diffusion",
+      "url": "https://huggingface.co/papers/2604.17492",
+      "abstract": "Joint image-feature generative modeling has recently emerged as an effective strategy for improving diffusion training by coupling low-level VAE latents with high-level semantic features extracted from pre-trained visual encoders. However, existing approaches rely on a fixed representation space, constructed independently of the generative objective and kept unchanged during training. We argue that the representation space guiding diffusion should itself adapt to the generative task. To this end",
+      "authors": [
+        "Theodoros Kouzelis",
+        "Spyros Gidaris",
+        "Nikos Komodakis"
+      ],
+      "published": "2026-04-19",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "3D-VCD: Hallucination Mitigation in 3D-LLM Embodied Agents through Visual Contrastive Decoding",
+      "url": "https://huggingface.co/papers/2604.08645",
+      "abstract": "Large multimodal models are increasingly used as the reasoning core of embodied agents operating in 3D environments, yet they remain prone to hallucinations that can produce unsafe and ungrounded decisions. Existing inference-time hallucination mitigation methods largely target 2D vision-language settings and do not transfer to embodied 3D reasoning, where failures arise from object presence, spatial layout, and geometric grounding rather than pixel-level inconsistencies. We introduce 3D-VCD, th",
+      "authors": [
+        "Makanjuola Ogunleye",
+        "Eman Abdelrahman",
+        "Ismini Lourentzou"
+      ],
+      "published": "2026-04-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
+      "title": "Temporally Extended Mixture-of-Experts Models",
+      "url": "https://huggingface.co/papers/2604.20156",
+      "abstract": "Mixture-of-Experts models, now popular for scaling capacity at fixed inference speed, switch experts at nearly every token. Once a model outgrows available GPU memory, this churn can render optimizations like offloading and pre-fetching ineffective. We make the case that the options framework in reinforcement learning is a perfect match to tackle this problem, and argue for temporally extended mixture-of-experts layers. Building on the option-critic framework with deliberation costs, we add a co",
+      "authors": [
+        "Zeyu Shen",
+        "Peter Henderson"
+      ],
+      "published": "2026-04-22",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
       "title": "Image Generators are Generalist Vision Learners",
       "url": "https://huggingface.co/papers/2604.20329",
       "abstract": "Recent works show that image and video generators exhibit zero-shot visual understanding behaviors, in a way reminiscent of how LLMs develop emergent capabilities of language understanding and reasoning from generative pretraining. While it has long been conjectured that the ability to create visual content implies an ability to understand it, there has been limited evidence that generative vision models have developed strong understanding capabilities. In this work, we demonstrate that image ge",
@@ -7350,92 +7438,8 @@
       "source": "arXiv",
       "category": "Computer Vision",
       "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "A Two-Stage, Object-Centric Deep Learning Framework for Robust Exam Cheating Detection",
-      "url": "http://arxiv.org/abs/2604.16234v1",
-      "abstract": "Academic integrity continues to face the persistent challenge of examination cheating. Traditional invigilation relies on human observation, which is inefficient, costly, and prone to errors at scale. Although some existing AI-powered monitoring systems have been deployed and trusted, many lack transparency or require multi-layered architectures to achieve the desired performance. To overcome these challenges, we propose an improvement over a simple two-stage framework for exam cheating detectio",
-      "authors": [
-        "Van-Truong Le",
-        "Le-Khanh Nguyen",
-        "Trong-Doanh Nguyen"
-      ],
-      "published": "2026-04-17",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "CollideNet: Hierarchical Multi-scale Video Representation Learning with Disentanglement for Time-To-Collision Forecasting",
-      "url": "http://arxiv.org/abs/2604.16240v1",
-      "abstract": "Time-to-Collision (TTC) forecasting is a critical task in collision prevention, requiring precise temporal prediction and comprehending both local and global patterns encapsulated in a video, both spatially and temporally. To address the multi-scale nature of video, we introduce a novel spatiotemporal hierarchical transformer-based architecture called CollideNet, specifically catered for effective TTC forecasting. In the spatial stream, CollideNet aggregates information for each video frame simu",
-      "authors": [
-        "Nishq Poorav Desai",
-        "Ali Etemad",
-        "Michael Greenspan"
-      ],
-      "published": "2026-04-17",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Find, Fix, Reason: Context Repair for Video Reasoning",
-      "url": "http://arxiv.org/abs/2604.16243v1",
-      "abstract": "Reinforcement learning has advanced video reasoning in large multi-modal models, yet dominant pipelines either rely on on-policy self-exploration, which plateaus at the model's knowledge boundary, or hybrid replay that mixes policies and demands careful regularization. Dynamic context methods zoom into focused evidence but often require curated pretraining and two-stage tuning, and their context remains bounded by a small model's capability. In contrast, larger models excel at instruction follow",
-      "authors": [
-        "Haojian Huang",
-        "Chuanyu Qin",
-        "Yinchuan Li",
-        "Yingcong Chen"
-      ],
-      "published": "2026-04-17",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Where Do Vision-Language Models Fail? World Scale Analysis for Image Geolocalization",
-      "url": "http://arxiv.org/abs/2604.16248v1",
-      "abstract": "Image geolocalization has traditionally been addressed through retrieval-based place recognition or geometry-based visual localization pipelines. Recent advances in Vision-Language Models (VLMs) have demonstrated strong zero-shot reasoning capabilities across multimodal tasks, yet their performance in geographic inference remains underexplored. In this work, we present a systematic evaluation of multiple state-of-the-art VLMs for country-level image geolocalization using ground-view imagery only",
-      "authors": [
-        "Siddhant Bharadwaj",
-        "Ashish Vashist",
-        "Fahimul Aleem",
-        "Shruti Vyas"
-      ],
-      "published": "2026-04-17",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Hero-Mamba: Mamba-based Dual Domain Learning for Underwater Image Enhancement",
-      "url": "http://arxiv.org/abs/2604.16266v1",
-      "abstract": "Underwater images often suffer from severe degradation, such as color distortion, low contrast, and blurred details, due to light absorption and scattering in water. While learning-based methods like CNNs and Transformers have shown promise, they face critical limitations: CNNs struggle to model the long-range dependencies needed for non-uniform degradation, and Transformers incur quadratic computational complexity, making them inefficient for high-resolution images. To address these challenges,",
-      "authors": [
-        "Tejeswar Pokuri",
-        "Shivarth Rai"
-      ],
-      "published": "2026-04-17",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Enhancing Hazy Wildlife Imagery: AnimalHaze3k and IncepDehazeGan",
-      "url": "http://arxiv.org/abs/2604.16284v1",
-      "abstract": "Atmospheric haze significantly degrades wildlife imagery, impeding computer vision applications critical for conservation, such as animal detection, tracking, and behavior analysis. To address this challenge, we introduce AnimalHaze3k a synthetic dataset comprising of 3,477 hazy images generated from 1,159 clear wildlife photographs through a physics-based pipeline. Our novel IncepDehazeGan architecture combines inception blocks with residual skip connections in a GAN framework, achieving state-",
-      "authors": [
-        "Shivarth Rai",
-        "Tejeswar Pokuri"
-      ],
-      "published": "2026-04-17",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
     }
   ],
-  "last_updated": "2026-04-24T08:28:46.556080",
+  "last_updated": "2026-04-25T07:50:21.051963",
   "total": 500
 }
