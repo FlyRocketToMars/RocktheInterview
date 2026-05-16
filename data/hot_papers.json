@@ -1,6 +1,127 @@
 {
   "top_papers": [
     {
+      "title": "STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?",
+      "url": "https://huggingface.co/papers/2605.06527",
+      "abstract": "Large Language Model (LLM) agents are increasingly expected to maintain coherent, long-term personalized memory, yet current benchmarks primarily measure static fact retrieval, overlooking the ability to revise stored beliefs when new evidence emerges. We identify a critical and underexplored failure mode, Implicit Conflict: a later observation invalidates an earlier memory without explicit negation, requiring contextual inference and commonsense reasoning to detect. To rigorously evaluate this ",
+      "authors": [
+        "Hanxiang Chao",
+        "Yihan Bai",
+        "Rui Sheng",
+        "Tianle Li",
+        "Yushi Sun"
+      ],
+      "published": "2026-05-07",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 37
+    },
+    {
+      "title": "ViMU: Benchmarking Video Metaphorical Understanding",
+      "url": "https://huggingface.co/papers/2605.14607",
+      "abstract": "Any new medium, once it emerges, is used for more than the transmission of overt content alone. The information it carries typically operates on two levels: one is the content directly presented, while the other is the subtext beneath it-the implicit ideas and intentions the creator seeks to convey through the medium. Likewise, since video technologies became widely adopted, video has served not only as a powerful tool for recording and communicating visual information, but also as a vehicle for",
+      "authors": [
+        "Qi Li",
+        "Xinchao Wang"
+      ],
+      "published": "2026-05-14",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 10
+    },
+    {
+      "title": "Learning to Communicate Locally for Large-Scale Multi-Agent Pathfinding",
+      "url": "https://huggingface.co/papers/2605.07637",
+      "abstract": "Multi-agent pathfinding (MAPF) is a widely used abstraction for multi-robot trajectory planning problems, where multiple homogeneous agents move simultaneously within a shared environment. Although solving MAPF optimally is NP-hard, scalable and efficient solvers are critical for real-world applications such as logistics and search-and-rescue. To this end, the research community has proposed various decentralized suboptimal MAPF solvers that leverage machine learning. Such methods frame MAPF (fr",
+      "authors": [
+        "Valeriy Vyaltsev",
+        "Alsu Sagirova",
+        "Anton Andreychuk",
+        "Oleg Bulichev",
+        "Yuri Kuratov"
+      ],
+      "published": "2026-05-12",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 16
+    },
+    {
+      "title": "Sat3DGen: Comprehensive Street-Level 3D Scene Generation from Single Satellite Image",
+      "url": "https://huggingface.co/papers/2605.14984",
+      "abstract": "Generating a street-level 3D scene from a single satellite image is a crucial yet challenging task. Current methods present a stark trade-off: geometry-colorization models achieve high geometric fidelity but are typically building-focused and lack semantic diversity. In contrast, proxy-based models use feed-forward image-to-3D frameworks to generate holistic scenes by jointly learning geometry and texture, a process that yields rich content but coarse and unstable geometry. We attribute these ge",
+      "authors": [
+        "Ming Qian",
+        "Zimin Xia",
+        "Changkun Liu",
+        "Shuailei Ma",
+        "Wen Wang"
+      ],
+      "published": "2026-05-14",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "PreScam: A Benchmark for Predicting Scam Progression from Early Conversations",
+      "url": "https://huggingface.co/papers/2605.12243",
+      "abstract": "Conversational scams, such as romance and investment scams, are emerging as a major form of online fraud. Unlike one-shot scam lures such as fake lottery or unpaid toll messages, they unfold through multi-turn conversations in which scammers gradually manipulate victims using evolving psychological techniques. However, existing research mainly focuses on static scam detection or synthetic scams, leaving open whether language models can understand how real-world scams progress over time. We intro",
+      "authors": [
+        "Weixiang Sun",
+        "Shang Ma",
+        "Yiyang Li",
+        "Tianyi Ma",
+        "Zehong Wang"
+      ],
+      "published": "2026-05-12",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Boosting Reinforcement Learning with Verifiable Rewards via Randomly Selected Few-Shot Guidance",
+      "url": "https://huggingface.co/papers/2605.15012",
+      "abstract": "Reinforcement Learning with Verifiable Rewards (RLVR) has achieved great success in developing Large Language Models (LLMs) with chain-of-thought rollouts for many tasks such as math and coding. Nevertheless, RLVR struggles with sample efficiency on difficult problems where correct rollouts are hard to generate. Prior works propose to address this issue via demonstration-guided RLVR, i.e., to conduct Supervised FineTuning (SFT) when RL fails; however, SFT often requires a lot of data, which can ",
+      "authors": [
+        "Kai Yan",
+        "Alexander G. Schwing",
+        "Yu-Xiong Wang"
+      ],
+      "published": "2026-05-14",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Long Context Pre-Training with Lighthouse Attention",
+      "url": "https://huggingface.co/papers/2605.06554",
+      "abstract": "Training causal transformers at extreme sequence lengths is bottlenecked by the quadratic time and memory of scaled dot-product attention (SDPA). In this work, we propose Lighthouse Attention, a training-only symmetrical selection-based hierarchical attention algorithm that wraps around ordinary SDPA and can be easily removed towards the end of the training. Our hierarchical selection is also gradient-free, which exempts us from dealing with a complicated and potentially inefficient backward pas",
+      "authors": [
+        "Bowen Peng",
+        "Subho Ghosh",
+        "Jeffrey Quesnelle"
+      ],
+      "published": "2026-05-07",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 16
+    },
+    {
+      "title": "WildTableBench: Benchmarking Multimodal Foundation Models on Table Understanding In the Wild",
+      "url": "https://huggingface.co/papers/2605.01018",
+      "abstract": "Using multimodal foundation models to analyze table images is a high-value yet challenging application in consumer and enterprise scenarios. Despite its importance, current evaluations rely largely on structured-text tables or clean rendered images, leaving the visual complexity of in-the-wild table images underexplored. Such images feature varied layouts and diverse domains that demand sophisticated structural perception and numerical reasoning. To bridge this gap, we introduce WildTableBench, ",
+      "authors": [
+        "Junzhe Huang",
+        "Xiaoxiao Sun",
+        "Yan Yang",
+        "Yuxuan Hou",
+        "Ruotian Zhang"
+      ],
+      "published": "2026-05-01",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 6
+    },
+    {
       "title": "Achieving Gold-Medal-Level Olympiad Reasoning via Simple and Unified Scaling",
       "url": "https://huggingface.co/papers/2605.13301",
       "abstract": "Recent progress in reasoning models has substantially advanced long-horizon mathematical and scientific problem solving, with several systems now reaching gold-medal-level performance on International Mathematical Olympiad (IMO) and International Physics Olympiad (IPhO) problems. In this paper, we introduce a simple and unified recipe for converting a post-trained reasoning backbone into a rigorous olympiad-level solver. The recipe first uses a reverse-perplexity curriculum for SFT to instill ri",
@@ -7389,129 +7510,8 @@
       "source": "arXiv",
       "category": "Information Retrieval / RecSys",
       "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "GATHER: Convergence-Centric Hyper-Entity Retrieval for Zero-Shot Cell-Type Annotation",
-      "url": "http://arxiv.org/abs/2605.06403v1",
-      "abstract": "Zero-shot single-cell cell-type annotation aims to determine a cell's type from a given set of expressed genes without any training. Existing knowledge-graph-based RAG approaches retrieve evidence by expanding from source entities and relying on iterative LLM reasoning. However, in this setting each query contains tens to hundreds of genes, where no single gene is decisive and the label emerges only from their collective co-occurrence. Such hyper-entity queries fundamentally challenge local, ent",
-      "authors": [
-        "Zhonghui Zhang",
-        "Feng Jiang",
-        "Shaowei Qin",
-        "Jiahao Zhao",
-        "Min Yang"
-      ],
-      "published": "2026-05-07",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "Light-FMP: Lightweight Feature and Model Pruning for Enhanced Deep Recommender Systems",
-      "url": "http://arxiv.org/abs/2605.06441v1",
-      "abstract": "Deep recommender systems (DRS) often face challenges in balancing computational efficiency and model accuracy, especially when handling high-dimensional input features. Existing methods either focus on improving accuracy while neglecting training efficiency or prioritize efficiency at the cost of suboptimal accuracy across tasks. We propose Light-FMP: Lightweight Feature and Model Pruning for Enhanced DRS, a lightweight framework that addresses the challenges through three key phases: \\textit{pr",
-      "authors": [
-        "Nghia Bui",
-        "Yue Ning",
-        "Lijing Wang"
-      ],
-      "published": "2026-05-07",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "KinDER: A Physical Reasoning Benchmark for Robot Learning and Planning",
-      "url": "https://huggingface.co/papers/2604.25788",
-      "abstract": "Robotic systems that interact with the physical world must reason about kinematic and dynamic constraints imposed by their own embodiment, their environment, and the task at hand. We introduce KinDER, a benchmark for Kinematic and Dynamic Embodied Reasoning that targets physical reasoning challenges arising in robot learning and planning. KinDER comprises 25 procedurally generated environments, a Gymnasium-compatible Python library with parameterized skills and demonstrations, and a standardized",
-      "authors": [
-        "Yixuan Huang",
-        "Bowen Li",
-        "Vaibhav Saxena",
-        "Yichao Liang",
-        "Utkarsh Aashu Mishra"
-      ],
-      "published": "2026-05-04",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 1
-    },
-    {
-      "title": "Turning Drift into Constraint: Robust Reasoning Alignment in Non-Stationary Environments",
-      "url": "https://huggingface.co/papers/2510.04142",
-      "abstract": "This paper identifies a critical yet underexplored challenge in reasoning alignment from multiple multi-modal large language models (MLLMs): In non-stationary environments, the diverse reasoning distributions of source models often evolve unpredictably, transmitting systematic biases and drift to the target model. To address this, we formulate multi-source reasoning alignment as a constraint satisfaction problem under concept drift theory. We propose Autonomous Preference Optimization (APO), a n",
-      "authors": [
-        "Xiaoyu Yang",
-        "En Yu",
-        "Wei Duan",
-        "Jie Lu"
-      ],
-      "published": "2026-05-02",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 1
-    },
-    {
-      "title": "A Foundation Model for Zero-Shot Logical Rule Induction",
-      "url": "https://huggingface.co/papers/2605.04916",
-      "abstract": "Inductive Logic Programming (ILP) learns interpretable logical rules from data. Existing methods are transductive: their learned parameters are bound to specific predicates and require retraining for each new task. We introduce Neural Rule Inducer (NRI), a pretrained model for zero-shot rule induction. Rather than encoding literal identities, NRI represents literals using domain-agnostic statistical properties such as class-conditional rates, entropy, and co-occurrence, which generalize across v",
-      "authors": [
-        "Yin Jun Phua"
-      ],
-      "published": "2026-05-06",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 1
-    },
-    {
-      "title": "XL-SafetyBench: A Country-Grounded Cross-Cultural Benchmark for LLM Safety and Cultural Sensitivity",
-      "url": "https://huggingface.co/papers/2605.05662",
-      "abstract": "Current LLM safety benchmarks are predominantly English-centric and often rely on translation, failing to capture country-specific harms. Moreover, they rarely evaluate a model's ability to detect culturally embedded sensitivities as distinct from universal harms. We introduce XL-SafetyBench. a suite of 5,500 test cases across 10 country-language pairs, comprising a Jailbreak Benchmark of country-grounded adversarial prompts and a Cultural Benchmark where local sensitivities are embedded within ",
-      "authors": [
-        "Dasol Choi",
-        "Eugenia Kim",
-        "Jaewon Noh",
-        "Sang Seo",
-        "Eunmi Kim"
-      ],
-      "published": "2026-05-07",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 3
-    },
-    {
-      "title": "The Granularity Axis: A Micro-to-Macro Latent Direction for Social Roles in Language Models",
-      "url": "https://huggingface.co/papers/2605.06196",
-      "abstract": "Large language models (LLMs) are routinely prompted to take on social roles ranging from individuals to institutions, yet it remains unclear whether their internal representations encode the granularity of such roles, from micro-level individual experience to macro-level organizational, institutional, or national reasoning. We show that they do. We define a contrast-based Granularity Axis as the difference between mean macro- and micro-role hidden states. In Qwen3-8B, this axis aligns with the p",
-      "authors": [
-        "Chonghan Qin",
-        "Xiachong Feng",
-        "Ziyun Song",
-        "Xiaocheng Feng",
-        "Jing Xiong"
-      ],
-      "published": "2026-05-07",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 2
-    },
-    {
-      "title": "Auto Research with Specialist Agents Develops Effective and Non-Trivial Training Recipes",
-      "url": "https://huggingface.co/papers/2605.05724",
-      "abstract": "We study auto research as a closed empirical loop driven by external measurement. Each submitted trial carries a hypothesis, an executable code edit, an evaluator-owned outcome, and feedback that shapes the next proposal. The output is not a generated paper or a single model checkpoint, but an auditable trajectory of proposals, code diffs, experiments, scores, and failure labels. We instantiate this loop with specialist agents that partition recipe surfaces and share measured lineage across tria",
-      "authors": [
-        "Jingjie Ning",
-        "Xiaochuan Li",
-        "Ji Zeng",
-        "Hao Kang",
-        "Chenyan Xiong"
-      ],
-      "published": "2026-05-07",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 9
     }
   ],
-  "last_updated": "2026-05-15T09:27:17.904988",
+  "last_updated": "2026-05-16T08:21:33.869343",
   "total": 500
 }
