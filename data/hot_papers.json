@@ -1,6 +1,182 @@
 {
   "top_papers": [
     {
+      "title": "Uniform Diffusion Models Revisited: Leave-One-Out Denoiser and Absorbing State Reformulation",
+      "url": "https://huggingface.co/papers/2605.22765",
+      "abstract": "Discrete diffusion models are often trained through clean-data prediction, but the prediction can be used in different ways to define the reverse dynamics. In Masked Diffusion Models (MDM) these choices largely coincide, whereas in Uniform Diffusion Models (UDM) they do not. We show that the standard plug-in bridge parameterization for UDM is not optimized by the denoising posterior, but by a leave-one-out posterior that predicts each clean token without using its own noisy observation. This ide",
+      "authors": [
+        "Samson Gourevitch",
+        "Yazid Janati",
+        "Dario Shariatian",
+        "Umut Simsekli",
+        "Eric Moulines"
+      ],
+      "published": "2026-05-21",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "EarlyTom: Early Token Compression Completes Fast Video Understanding",
+      "url": "https://huggingface.co/papers/2605.30010",
+      "abstract": "Video large language models (Video-LLMs) have demonstrated strong capabilities in video understanding tasks. However, their practical deployment is still hindered by the inefficiency introduced by processing massive amounts of visual tokens. Although recent approaches achieve extremely low token retention ratios while maintaining accuracy comparable to full-token baselines, most of them perform compression only at the late stage of prefilling, leaving the efficiency of the vision encoder unoptim",
+      "authors": [
+        "Hesong Wang",
+        "Xin Jin",
+        "Lu Lu",
+        "Chenhaowen Li",
+        "Jian Chen"
+      ],
+      "published": "2026-05-28",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 23
+    },
+    {
+      "title": "CoHyDE: Iterative Co-Training of LLM Rewriter & Dense Encoder for Tool Retrieval",
+      "url": "https://huggingface.co/papers/2605.29271",
+      "abstract": "Tool retrieval over large API catalogs is a core bottleneck for LLM agents: user queries arrive in colloquial, often underspecified language, while the catalog uses technical API vocabulary that no fixed encoder can bridge on its own. The two dominant training approaches, contrastive encoder fine-tuning and HyDE-style query expansion with a frozen LLM, address this problem from opposite ends and fail in complementary directions: the fine-tuned encoder excels when the query's surface form already",
+      "authors": [
+        "Vaishali Senthil",
+        "Ashutosh Hathidara",
+        "Sebastian Schreiber"
+      ],
+      "published": "2026-05-28",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Xetrieval: Mechanistically Explaining Dense Retrieval",
+      "url": "https://huggingface.co/papers/2605.29507",
+      "abstract": "Explaining why dense retrievers assign high relevance scores remains challenging because retrieval decisions are made through opaque high-dimensional embeddings. Existing explanations often focus on surface signals, such as lexical matches, token alignments, or post-hoc textual rationales, and thus provide limited insight into the latent factors that shape dense retrieval behavior at the embedding level. We propose Xetrieval, an embedding-level mechanistic framework for explaining dense retrieva",
+      "authors": [
+        "Zhixin Cai",
+        "Jun Bai",
+        "Yang Liu",
+        "Jiaqi Li",
+        "Yichi Zhang"
+      ],
+      "published": "2026-05-28",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 15
+    },
+    {
+      "title": "REPOT: Recoverable Program-of-Thought via Checkpoint Repair",
+      "url": "https://huggingface.co/papers/2605.30052",
+      "abstract": "One-shot Program-of-Thought (PoT) emits a Python program that prints a primitive-action plan; a single invalid action silently invalidates the trajectory. We introduce RePoT (Recoverable PoT): a deterministic verified replay that walks the plan through the environment to its first invalid transition, then one LLM call that resumes from the verified prefix. RePoT costs at most one extra LLM call on the ~14% of problems where PoT fails. RePoT beats PoT by +3 to +11pp across four closed-model confi",
+      "authors": [
+        "Parsa Mazaheri"
+      ],
+      "published": "2026-05-28",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "Multi-view Consistent 3D Gaussian Head Avatars 'without' Multi-view Generation",
+      "url": "https://huggingface.co/papers/2605.25220",
+      "abstract": "High-fidelity 3D Gaussian head avatar generation is critical for applications such as AR/VR, telepresence, and digital humans. Existing methods depend on multi-view datasets, 3D captures, or intermediate 2D view synthesis. In contrast, we learn both conditional and unconditional 3D head models from randomly sampled 2D images alone, without using multi-view data, 3D supervision, or intermediate view generation. We introduce MVCHead, a single-shot state space model that enforces multi-view consist",
+      "authors": [
+        "Aviral Chharia",
+        "Fernando De la Torre"
+      ],
+      "published": "2026-05-24",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Reducing Political Manipulation with Consistency Training",
+      "url": "https://huggingface.co/papers/2605.22771",
+      "abstract": "Large language models (LLMs) exhibit systematic political bias across a variety of sensitive contexts. We find that LLMs handle counterpart topics from opposing political sides asymmetrically. We refer to this phenomenon as covert political bias and identify 7 categories of techniques through which it operates. We propose two metrics for covert bias: Sentiment Consistency measures symmetry in rhetoric and framing across paired political prompts; Helpfulness Consistency measures symmetric depth a",
+      "authors": [
+        "Long Phan",
+        "Devin Kim",
+        "Alexander Pan",
+        "Alice Blair",
+        "Adam Khoja"
+      ],
+      "published": "2026-05-28",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
+      "title": "Convex Low-resource Accent-Robust Language Detection in Speech Recognition",
+      "url": "https://huggingface.co/papers/2605.23235",
+      "abstract": "Globalization and multiculturalism continue to produce increasingly diverse speech varieties. Yet current spoken dialogue systems frequently fail on under-represented dialects and accents, often misidentifying the input language and causing cascading failures in downstream dialogue tasks. Addressing this dialectal variance under low-resource constraints remains an open challenge, as standard fine-tuning is computationally expensive and prone to overfitting on high-dimensional speech data. We pro",
+      "authors": [
+        "Miria Feng",
+        "William Tan",
+        "Mert Pilanci"
+      ],
+      "published": "2026-05-22",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "PANDO: Efficient Multimodal AI Agents via Online Skill Distillation",
+      "url": "https://huggingface.co/papers/2605.24785",
+      "abstract": "Recent advances in multimodal web agents often rely on increased inference-time computation, including rollout search, verifier passes, offline skill discovery, and specialist model stacks. This raises a central question: can a web agent become more efficient as it accumulates experience, rather than more expensive? We first analyze trajectories from VisualWebArena and identify three recurring sources of inefficiency: repeat-action loops, hidden discovery costs, and low prompt-cache reuse. We th",
+      "authors": [
+        "Yubo Li",
+        "Yidi Miao",
+        "Yuntian Shen",
+        "Yuxin Liu"
+      ],
+      "published": "2026-05-26",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "CONF-KV: Confidence-Aware KV Cache Eviction with Mixed-Precision Storage for Long-Horizon LLM",
+      "url": "https://huggingface.co/papers/2605.24786",
+      "abstract": "Long-horizon LLM inference turns the key--value (KV) cache into the dominant GPU memory consumer and makes per-token attention increasingly expensive. Many common eviction policies use static recency windows or historical attention, leaving unused a signal computed on every decoding step: the model's current uncertainty. We introduce CONF-KV, a KV-cache manager that converts the next-token distribution into a scalar confidence score and uses it to choose the per-step cache budget, retaining more",
+      "authors": [
+        "Yubo Li",
+        "Yidi Miao"
+      ],
+      "published": "2026-05-24",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Why Far Looks Up: Probing Spatial Representation in Vision-Language Models",
+      "url": "https://huggingface.co/papers/2605.30161",
+      "abstract": "Vision-language models (VLMs) achieve strong performance on spatial reasoning benchmarks, yet it remains unclear whether this reflects structured 3D understanding or reliance on statistical shortcuts in natural images. We introduce a representation-level analysis framework that constructs minimal contrastive pairs to measure how spatial axes are organized and disentangled within VLM embeddings. Our analysis across multiple model families reveals a consistent vertical-distance entanglement: model",
+      "authors": [
+        "Cheolhong Min",
+        "Jaeyun Jung",
+        "Daeun Lee",
+        "Hyeonseong Jeon",
+        "Yu Su"
+      ],
+      "published": "2026-05-28",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 28
+    },
+    {
+      "title": "Reflective Prompt Tuning through Language Model Function-Calling",
+      "url": "https://huggingface.co/papers/2605.21781",
+      "abstract": "Large language models (LLMs) have become increasingly capable of following instructions and complex reasoning, making prompting a flexible interface for adapting models without parameter updates. Yet prompt design remains labor-intensive and highly sensitive to formatting, phrasing, and instruction order, motivating automated prompt optimization methods that reduce manual effort while preserving inference-time flexibility. However, existing methods often search over prompt candidates or use fixe",
+      "authors": [
+        "Farima Fatahi Bayat",
+        "Moin Aminnaseri",
+        "Pouya Pezeshkpour",
+        "Estevam Hruschka"
+      ],
+      "published": "2026-05-20",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
       "title": "minWM: A Full-Stack Open-Source Framework for Real-Time Interactive Video World Models",
       "url": "https://huggingface.co/papers/2605.30263",
       "abstract": "Recent video diffusion foundation models have achieved remarkable progress in high-quality video generation, yet turning them into real-time interactive video world models remains challenging. Interactive world models require controllable, causal, and low-latency rollout, which in practice demands a full pipeline spanning data construction, controllable fine-tuning, autoregressive training, few-step distillation, and streaming inference. In this work, we present minWM, a full-stack open-source f",
@@ -7306,189 +7482,8 @@
       "source": "arXiv",
       "category": "Statistical ML",
       "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Multiple Neural Operators Achieve Near-Optimal Rates for Multi-Task Learning",
-      "url": "http://arxiv.org/abs/2605.22724v1",
-      "abstract": "We study the approximation and statistical complexity of learning collections of operators in a shared multi-task setting, with a focus on the Multiple Neural Operators (MNO) architecture. For broad classes of Lipschitz multiple operator maps, we derive near-optimal upper bounds for approximation and statistical generalization. On the lower-bound side, we establish a curse of parametric complexity and prove corresponding minimax rates. Together, these results show that shared representations acr",
-      "authors": [
-        "Adrien Weihs",
-        "Hayden Schaeffer"
-      ],
-      "published": "2026-05-21",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Spreadsheet-RL: Advancing Large Language Model Agents on Realistic Spreadsheet Tasks via Reinforcement Learning",
-      "url": "https://huggingface.co/papers/2605.22642",
-      "abstract": "Spreadsheet systems (e.g., Microsoft Excel, Google Sheets) play a central role in modern data-centric workflows. As AI agents grow increasingly capable of automating complex tasks, such as controlling computers and generating presentations, building an AI-driven spreadsheet agent has emerged as a promising research direction. Most existing spreadsheet agents rely on specialized prompting over general-purpose LLMs; while this design has potentials on simple spreadsheet operations, it struggles to",
-      "authors": [
-        "Banghao Chi",
-        "Yining Xie",
-        "Mingyuan Wu",
-        "Jingcheng Yang",
-        "Jize Jiang"
-      ],
-      "published": "2026-05-21",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 22
-    },
-    {
-      "title": "TerminalWorld: Benchmarking Agents on Real-World Terminal Tasks",
-      "url": "https://huggingface.co/papers/2605.22535",
-      "abstract": "We introduce TerminalWorld, a scalable data engine that automatically reverse-engineers high-fidelity evaluation tasks from \"in-the-wild\" terminal recordings. Processing 80,870 terminal recordings, the engine yields a full benchmark of 1,530 validated tasks, spanning 18 real-world categories, ranging from short everyday operations to workflows exceeding 50 steps, and covering 1,280 unique commands. From these, we curate a Verified subset of 200 representative, manually reviewed tasks. Comprehens",
-      "authors": [
-        "Zhaoyang Chu",
-        "Jiarui Hu",
-        "Xingyu Jiang",
-        "Pengyu Zou",
-        "Han Li"
-      ],
-      "published": "2026-05-21",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 2
-    },
-    {
-      "title": "Bernini: Latent Semantic Planning for Video Diffusion",
-      "url": "https://huggingface.co/papers/2605.22344",
-      "abstract": "Multimodal large language models (MLLMs) and diffusion models have each reached remarkable maturity: MLLMs excel at reasoning over heterogeneous multimodal inputs with strong semantic grounding, while diffusion models synthesize images and videos with photorealistic fidelity. We argue that these two families can be unified through a simple division of labor: MLLMs perform semantic planning, while diffusion models render pixels from high-level semantic guidance and low-level visual features. Buil",
-      "authors": [
-        "Bernini Team",
-        "Chenchen Liu",
-        "Junyi Chen",
-        "Lei Li",
-        "Lu Chi"
-      ],
-      "published": "2026-05-21",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 3
-    },
-    {
-      "title": "π-Bench: Evaluating Proactive Personal Assistant Agents in Long-Horizon Workflows",
-      "url": "https://huggingface.co/papers/2605.14678",
-      "abstract": "The rise of personal assistant agents, e.g., OpenClaw, highlights the growing potential of large language models to support users across everyday life and work. A core challenge in these settings is proactive assistance, since users often begin with underspecified requests and leave important needs, constraints, or preferences unstated. However, existing benchmarks rarely evaluate whether agents can identify and act on such hidden intents before they are explicitly stated, especially in sustaine",
-      "authors": [
-        "Haoran Zhang",
-        "Luxin Xu",
-        "Zhilin Wang",
-        "Runquan Gui",
-        "Shunkai Zhang"
-      ],
-      "published": "2026-05-19",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 67
-    },
-    {
-      "title": "From Reasoning Chains to Verifiable Subproblems: Curriculum Reinforcement Learning Enables Credit Assignment for LLM Reasoning",
-      "url": "https://huggingface.co/papers/2605.22074",
-      "abstract": "Reinforcement learning from verifiable rewards (RLVR) has shown strong promise for LLM reasoning, but outcome-based RLVR remains inefficient on hard problems because correct final-answer rollouts are rare and sample-level credit assignment cannot use partial progress in failed attempts. We introduce SCRL (Subproblem Curriculum Reinforcement Learning), a curriculum RL framework that derives verifiable subproblems from reference reasoning chains and fixes the final subproblem as the original probl",
-      "authors": [
-        "Xitai Jiang",
-        "Zihan Tang",
-        "Wenze Lin",
-        "Yang Yue",
-        "Shenzhi Wang"
-      ],
-      "published": "2026-05-21",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 2
-    },
-    {
-      "title": "Same Architecture, Different Capacity: Optimizer-Induced Spectral Scaling Laws",
-      "url": "https://huggingface.co/papers/2605.21803",
-      "abstract": "Scaling laws have made language-model performance predictable from model size, data, and compute, but they typically treat the optimizer as a fixed training detail. We show that this assumption misses a fundamental axis of representation scaling: how effectively the optimizer converts added FFN width into utilized spectral capacity. Using eigenspectra of feed-forward network representations, measured through soft and hard spectral-ranks, we find that the same Transformer architecture realizes ma",
-      "authors": [
-        "Nandan Kumar Jha",
-        "Brandon Reagen"
-      ],
-      "published": "2026-05-20",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 1
-    },
-    {
-      "title": "Perception or Prejudice: Can MLLMs Go Beyond First Impressions of Personality?",
-      "url": "https://huggingface.co/papers/2605.22109",
-      "abstract": "Multimodal Large Language Models (MLLMs) are increasingly deployed in human-facing roles where personality perception is critical, yet existing benchmarks evaluate this capability solely on numerical Big Five score prediction, leaving open whether models truly perceive personality through behavioral understanding or merely prejudge through superficial pattern matching. We address this gap with three contributions. (i) A new task: we formalize Grounded Personality Reasoning (GPR), which requires ",
-      "authors": [
-        "Caixin Kang",
-        "Tianyu Yan",
-        "Sitong Gong",
-        "Mingfang Zhang",
-        "Liangyang Ouyang"
-      ],
-      "published": "2026-05-21",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 62
-    },
-    {
-      "title": "Maestro: Reinforcement Learning to Orchestrate Hierarchical Model-Skill Ensembles",
-      "url": "https://huggingface.co/papers/2605.22177",
-      "abstract": "The proliferation of large language models (LLMs) and modular skills has endowed autonomous agents with increasingly powerful capabilities. Existing frameworks typically rely on monolithic LLMs and fixed logic to interface with these skills. This gives rise to a critical bottleneck: different LLMs offer distinct advantages across diverse domains, yet current frameworks fail to exploit the complementary strengths of models and skills, thereby limiting their performance on downstream tasks. In thi",
-      "authors": [
-        "Jinyang Wu",
-        "Guocheng Zhai",
-        "Ruihan Jin",
-        "Yuhao Shen",
-        "Zhengxi Lu"
-      ],
-      "published": "2026-05-21",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 16
-    },
-    {
-      "title": "FlowLong: Inference-time Long Video Generation via Manifold-constrained Tweedie Matching",
-      "url": "https://huggingface.co/papers/2605.20910",
-      "abstract": "Extending the generation horizon of video diffusion models to long sequences remains a long-standing and important challenge. Existing training-free approaches fall into two categories: extensions of bidirectional models, which are tightly coupled to specific architectures and suffer from quality degradation over long horizons, and autoregressive models, which accumulate drift errors due to exposure bias and tend to produce repetitive motion patterns. To address these issues, we propose a novel ",
-      "authors": [
-        "Jangho Park",
-        "Geon Yeong Park",
-        "Gihyun Kwon",
-        "Jong Chul Ye"
-      ],
-      "published": "2026-05-20",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 21
-    },
-    {
-      "title": "Training Large Language Models to Predict Clinical Events",
-      "url": "https://huggingface.co/papers/2605.12817",
-      "abstract": "Longitudinal clinical notes contain rich evidence of how patients evolve over time, but converting this signal into training supervision for clinical prediction remains challenging. We extend Foresight Learning to clinical prediction by converting time-ordered MIMIC-III notes into examples consisting of past patient context, a natural-language question about a possible future event, and a label resolved from later documentation. This process yields 6,900 prediction examples from 702 admissions a",
-      "authors": [
-        "Benjamin Turtel",
-        "Paul Wilczewski",
-        "Kris Skotheim"
-      ],
-      "published": "2026-05-12",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 2
-    },
-    {
-      "title": "SceneAligner: 3D-Grounded Floorplan Localization in the Wild",
-      "url": "https://huggingface.co/papers/2605.22581",
-      "abstract": "Many public buildings provide floorplans with a \"you are here\" indicator to help visitors orient themselves. Floorplan localization seeks to computationally replicate this capability by determining where visual observations were captured within a floorplan. However, existing methods typically assume controlled small-scale environments and precise vectorized floorplans, limiting their ability to operate in large-scale buildings and rasterized floorplans. In this work, we present an approach for p",
-      "authors": [
-        "Junhyeong Cho",
-        "Ruojin Cai",
-        "Hadar Averbuch-Elor"
-      ],
-      "published": "2026-05-21",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 2
     }
   ],
-  "last_updated": "2026-05-29T10:28:26.080667",
+  "last_updated": "2026-05-30T08:42:41.779423",
   "total": 500
 }
