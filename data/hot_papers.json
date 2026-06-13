@@ -1,6 +1,141 @@
 {
   "top_papers": [
     {
+      "title": "A Stationary (and Therefore Compatible) Representation is All You Need",
+      "url": "https://huggingface.co/papers/2606.12488",
+      "abstract": "Learning compatible representations aims to learn feature representations that can be used interchangeably over time whenever a model undergoes updates. In this paper, we demonstrate that stationary representations learned by d-Simplex fixed classifiers imply compatibility as in its formal definition. This result establishes a foundation for future works and can be directly exploited in practical learning scenarios. We address the challenge of learning compatibility using d-Simplex fixed classif",
+      "authors": [
+        "Niccolò Biondi",
+        "Federico Pernici",
+        "Simone Ricci",
+        "Alberto Del Bimbo"
+      ],
+      "published": "2026-06-10",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "ToolSense: A Diagnostic Framework for Auditing Parametric Tool Knowledge in LLMs",
+      "url": "https://huggingface.co/papers/2606.12451",
+      "abstract": "Large language models deployed as agents over large tool catalogs face a critical tool-retrieval bottleneck. As embedding-based retrieval approaches rely on compact encoders that may under-capture specialized tool semantics, parametric tool retrieval addresses this by encoding each tool as a virtual token appended to the LLM vocabulary, fine-tuned in two stages (memorization then retrieval SFT) to use the LLM as a retriever, achieving strong performance on standard ToolBench retrieval benchmarks",
+      "authors": [
+        "Ashutosh Hathidara",
+        "Sai Shruthi Sistla",
+        "Sebastian Schreiber",
+        "Sahil Bansal"
+      ],
+      "published": "2026-06-04",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Risk Under Pressure: Compute-Aware Evaluation of Adversarial Robustness in Language Models",
+      "url": "https://huggingface.co/papers/2606.11409",
+      "abstract": "Adversarial robustness evaluations of large language models (LLMs) typically report attack success rate (ASR) under fixed query budgets, implicitly treating all attacks as equally costly. In practice, the computational expense of different attack strategies can vary by orders of magnitude. Consequently, ASR at a fixed budget can obscure the true effort required to jailbreak a model, thereby making it hard to determine whether an attack's cost justifies its payoff to the attacker. We propose a co",
+      "authors": [
+        "Malikeh Ehghaghi",
+        "Boglárka Ecsedi",
+        "Marsha Chechik",
+        "Colin Raffel"
+      ],
+      "published": "2026-06-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 8
+    },
+    {
+      "title": "The Cold-Start Safety Gap in LLM Agents",
+      "url": "https://huggingface.co/papers/2606.07867",
+      "abstract": "Are tool-calling LLM agents equally safe throughout a conversation? We discover they are not: agents are most vulnerable at the very start of a session and become substantially safer after a few regular agentic tasks -- a phenomenon we term the cold-start safety gap. To study this systematically, we introduce Safety Over Depth for Agents (SODA), a benchmark that controls how many regular agentic tasks the agent completes before encountering a safety threat, supporting up to 20 preceding tasks. E",
+      "authors": [
+        "Chung-En Sun",
+        "Linbo Liu",
+        "Tsui-Wei Weng"
+      ],
+      "published": "2026-06-05",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "WebChallenger: A Reliable and Efficient Generalist Web Agent",
+      "url": "https://huggingface.co/papers/2606.10423",
+      "abstract": "Autonomous web navigation remains challenging for LLM agents, and the strongest generalist systems rely on proprietary reasoning models whose inference cost is prohibitive for the repetitive tasks where such agents would be most useful. We argue this gap stems not from insufficient model capability but from agent architectures that fail to replicate three human cognitive advantages: selective attention to relevant page regions, persistent memory of website structure, and procedural fluency with ",
+      "authors": [
+        "Jayoo Hwang",
+        "Xiaowen Zhang",
+        "Vedant Padwal"
+      ],
+      "published": "2026-06-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Getting Better at Working With You: Compiling User Corrections into Runtime Enforcement for Coding Agents",
+      "url": "https://huggingface.co/papers/2606.13174",
+      "abstract": "Interactive LLM agents are becoming part of daily work, but they do not reliably become easier to work with over time: a correction remembered in one session may still be violated in the next. We study this gap between preference access and preference compliance. In tasks derived from anonymized real-user friction cases, Mem0 memory still leaves 57.5% of applicable preference checks violated. We introduce Test-time Rule Acquisition and Compiled Enforcement (TRACE), a drop-in skill-layer pipeline",
+      "authors": [
+        "Yujun Zhou",
+        "Kehan Guo",
+        "Haomin Zhuang",
+        "Xiangqi Wang",
+        "Yue Huang"
+      ],
+      "published": "2026-06-11",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "See What I See, Know What I Think: Dense Latent Communication Across Heterogeneous Agents",
+      "url": "https://huggingface.co/papers/2606.13594",
+      "abstract": "Multi-agent systems communicate mostly through text, paying a lossy and expensive decode and re-encode cost. KV-cache communication is a promising alternative, yet most prior work is homogeneous, using duplicate copies of the same model, and avoids the central challenge of cross-model latent alignment; existing heterogeneous methods are also restrictive, typically assuming shared input and using transferred caches mainly for steering. We study a more fundamental question: can heterogeneous agent",
+      "authors": [
+        "Siyi Chen",
+        "Xiaoyan Zhang",
+        "Meng Wu",
+        "Jonathan Tremblay",
+        "Valts Blukis"
+      ],
+      "published": "2026-06-11",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Rethinking Psychometric Evaluation of LLMs: When and Why Self-Reports Predict Behavior",
+      "url": "https://huggingface.co/papers/2606.12730",
+      "abstract": "Anticipating LLM behavioral tendencies from low-cost psychometric probes is critical for safe deployment, but only if self-reports (SR) reliably predict behavior. Recent work documented substantial SR-behavior dissociation in LLMs, but relied on broad personality traits (Big 5) that predict specific behaviors weakly, even in humans. Furthermore, the isolation of conversational sessions combined with weak context matching left open whether LLMs truly lack coherence or whether the conditions neede",
+      "authors": [
+        "Rafal Kocielnik",
+        "Pengrui Han",
+        "Peiyang Song",
+        "Myrl G. Marmarelis",
+        "Ramit Debnath"
+      ],
+      "published": "2026-06-10",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "On the Limits of LLM Adaptability: Impact of Model-Internalized Priors on Annotation Task Performance",
+      "url": "https://huggingface.co/papers/2606.00467",
+      "abstract": "Large Language Models (LLMs) are increasingly used for zero-shot annotation and LLM-as-a-judge tasks, yet their reliability hinges on how model-internalized priors interact with user-provided instructions. We investigate three dimensions of this interaction: (1) how an LLM's familiarity with data and task definitions affects performance, (2) the extent to which additional information in prompts can correct zero-shot errors (\"decision stickiness\"), and (3) model susceptibility to misaligned task ",
+      "authors": [
+        "Etienne Casanova",
+        "Rafal Kocielnik",
+        "R. Michael Alvarez"
+      ],
+      "published": "2026-05-30",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
       "title": "FORT-Searcher: Synthesizing Shortcut-Resistant Search Tasks for Training Deep Search Agents",
       "url": "https://huggingface.co/papers/2606.12087",
       "abstract": "Training deep search agents requires verifiable questions whose answers remain unavailable until sufficient evidence has been acquired through search. Existing synthesis methods often increase apparent difficulty by enriching graph structures, but structural complexity alone does not guarantee realized search difficulty: the intended search process can collapse through a cheaper identifying route. We formalize this gap with a shortcut-aware difficulty framework and identify four actionable short",
@@ -7353,139 +7488,8 @@
       "source": "arXiv",
       "category": "Statistical ML",
       "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Covariance Shrinkage via Stochastic Interpolation",
-      "url": "http://arxiv.org/abs/2606.07382v1",
-      "abstract": "We recast classical shrinkage of high-dimensional covariance estimators as empirical risk minimization over a parametric stochastic interpolant between a source and a target distribution. This formalism recovers known shrinkage estimators as special cases and reveals three distinct mechanisms for reducing statistical risk: (i) Scheduling: the interpolant schedule determines the class of admissible covariances, and hence the achievable risk. (ii) Flow maps and couplings: whereas naive constructio",
-      "authors": [
-        "Mathieu Chalvidal",
-        "Florentin Coeurdoux",
-        "Eric Vanden-Eijnden"
-      ],
-      "published": "2026-06-05",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Automatic, Debiased, and Invariant Counterfactual Generation under General Interventions",
-      "url": "http://arxiv.org/abs/2606.07399v1",
-      "abstract": "Generative models for counterfactual outcomes have great potential to support decision-making under complex interventions, but existing approaches are limited by unstable estimation, poor generalization across environments, and bias from nuisance model misspecification. We introduce ADIGen, a framework for automatic, debiased, and invariant counterfactual generation under general interventions, including high-dimensional interventions and outcomes. ADIGen combines Riesz regression to avoid unsta",
-      "authors": [
-        "Raphael C Kim",
-        "Jingsen Zhu",
-        "Ramin Zabih",
-        "Michele Santacatterina"
-      ],
-      "published": "2026-06-05",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Mind the Gap: Bridging Behavioral Silos with LLMs in Multi-Vertical Recommendations",
-      "url": "http://arxiv.org/abs/2606.06779v1",
-      "abstract": "In multi-vertical e-commerce platforms like DoorDash, relatively newer product verticals such as grocery and retail present a significant opportunity for personalization innovation. A key challenge lies in solving the \"cold start\" problem for users. This paper introduces a novel framework for enhancing recommendation quality by transferring knowledge from data-rich verticals (e.g., restaurants at DoorDash) to data-sparse ones. We leverage Large Language Models (LLMs) to perform generative infere",
-      "authors": [
-        "Nimesh Sinha",
-        "Raghav Saboo",
-        "Martin Wang",
-        "Sudeep Das"
-      ],
-      "published": "2026-06-04",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "TA-RAG: Tone-Aware Retrieval-Augmented Generation for Peer-Support Health Communication",
-      "url": "http://arxiv.org/abs/2606.06794v1",
-      "abstract": "Retrieval-augmented generation (RAG) successfully grounds large language model (LLM) outputs in trusted documents, but factual grounding alone is insufficient for sensitive peer-support health communication. In domains such as HIV peer support, responses must also be accessible, stigma-free, empathetic, and tailored to the recipient. This paper presents TA-RAG, a lightweight, prompt-based tone-aware RAG framework that embeds explicit tone control into a RAG pipeline without requiring model fine-",
-      "authors": [
-        "Yong-Bin Kang",
-        "Anthony McCosker"
-      ],
-      "published": "2026-06-05",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "Towards Retrieving Interaction Spaces for Agentic Search",
-      "url": "http://arxiv.org/abs/2606.06880v1",
-      "abstract": "Retrieval for search agents is still inherited from non-agentic information retrieval: a retriever ranks the corpus and the agent reads a small set of returned documents. Recent direct corpus interaction (DCI) work shows that agents can instead interact with the raw corpus through shell tools such as grep and file reads. But unbounded interaction does not scale: every broad shell command is a scan over the whole corpus, and latency degrades sharply as the corpus grows. We argue that the role of ",
-      "authors": [
-        "Shengyao Zhuang",
-        "Yuansheng Ni",
-        "Hengxin Fun",
-        "Jimmy Lin",
-        "Xueguang Ma"
-      ],
-      "published": "2026-06-05",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "DREAM: Dynamic Refinement of Early Assignment Mappings",
-      "url": "http://arxiv.org/abs/2606.06947v1",
-      "abstract": "Generative recommendation advances item retrieval by reformulating it as autoregressive generation of Semantic IDs (SIDs), compact token sequences that encode item semantics. While SIDs offer a strong semantic prior, current SID-based methods assign each item a single static identifier through offline tokenization before sufficient user feedback is observed. For cold-start items, this one-shot commitment produces poorly discriminative codes, generating misaligned paths that remain unrefined beca",
-      "authors": [
-        "Liwei Guan",
-        "Huanjie Wang",
-        "Hongwei Zhang",
-        "Linxun Chen",
-        "Zhaojie Liu"
-      ],
-      "published": "2026-06-05",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "SSRLive: Live Streaming Recommendation with Dynamic Semantic ID",
-      "url": "http://arxiv.org/abs/2606.06970v1",
-      "abstract": "Live streaming has emerged as one of the fastest-growing forms of online media, enabling instant content broadcasting and real-time engagement between users and streamers. Despite the effectiveness of existing recommendation algorithms in this domain, they often suffer from limited utilization of computational resources, with low FLOPs that hinder further performance enhancement. Generative recommendation techniques, which have gained traction in various industrial tasks, offer a promising avenu",
-      "authors": [
-        "Teng Shi",
-        "Zhaoheng Li",
-        "Yuanhang Qu",
-        "Yi Liu",
-        "Lixiang Lai"
-      ],
-      "published": "2026-06-05",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "Meaning in Order, Order in Meaning: Semantic R-precision for Keyphrase Evaluation",
-      "url": "http://arxiv.org/abs/2606.07057v1",
-      "abstract": "Evaluating the quality of automatically generated keyphrases remains a complex challenge. Traditional metrics either rely on exact lexical matching or consider semantic similarity while ignoring prediction ranking, both of which misalign with how humans judge informativeness and relevance. We introduce Semantic R-Precision (SemR-p), a novel evaluation metric that integrates semantic similarity into the rank-aware R-Precision framework. Designed from a human-centric perspective and inspired by In",
-      "authors": [
-        "Shamira Venturini",
-        "Steffen Kinkel"
-      ],
-      "published": "2026-06-05",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "Decision-Theoretic Stopping Rules for Document Screening",
-      "url": "http://arxiv.org/abs/2606.07071v1",
-      "abstract": "Deciding when to stop reviewing the results of a search is a common problem with multiple applications. Existing stopping rules developed within Technology-Assisted Review (TAR) aim to achieve a pre-specified recall target and do not take into account the reason for examining the results, potentially leading to sub-optimal recommendations. This paper applies decision theory to the problem and uses it to derive three practical stopping policies based on the Expected Value of Perfect Information. ",
-      "authors": [
-        "Aaron H. A. Fletcher",
-        "Mark Stevenson"
-      ],
-      "published": "2026-06-05",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
     }
   ],
-  "last_updated": "2026-06-12T10:46:05.593648",
+  "last_updated": "2026-06-13T09:41:23.883606",
   "total": 500
 }
