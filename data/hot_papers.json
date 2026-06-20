@@ -1,6 +1,79 @@
 {
   "top_papers": [
     {
+      "title": "Duration Aware Scheduling for ASR Serving Under Workload Drift",
+      "url": "https://huggingface.co/papers/2603.11273",
+      "abstract": "Scheduling policies in large-scale Automatic Speech Recognition (ASR) serving pipelines play a key role in determining end-to-end (E2E) latency. Yet, widely used serving engines rely on first-come-first-served (FCFS) scheduling, which ignores variability in request duration and leads to head-of-line blocking under workload drift. We show that audio duration is an accurate proxy for job processing time in ASR models such as Whisper, and use this insight to enable duration-aware scheduling. We int",
+      "authors": [
+        "Darshan Makwana",
+        "Yash Jogi",
+        "Harsh Kotta",
+        "Aayush Kubba"
+      ],
+      "published": "2026-03-11",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "The Data Manifold under the Microscope",
+      "url": "https://huggingface.co/papers/2606.15760",
+      "abstract": "A significant gap exists between theory and practice in deep learning. Generalization and approximation error bounds are often derived for simplified models or are too loose to be informative. Many rely on the manifold hypothesis and on geometric regularity such as intrinsic dimension, curvature, and reach. Progress requires insight into data-manifold geometry and suitable benchmarks, yet existing options are polarized: analytic manifolds with known geometry but limited applicability, or real-wo",
+      "authors": [
+        "Marios Koulakis",
+        "Constantin Seibold"
+      ],
+      "published": "2026-06-14",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Configurable Clinical Information Extraction with Agentic RAG: What Works, What Breaks, and Why",
+      "url": "https://huggingface.co/papers/2606.19602",
+      "abstract": "Patient contexts span hundreds of heterogeneous documents and thousands of structured data points, yet the document-level metadata that AI systems need for retrieval and triage is absent or incomplete. Standard retrieval-augmented generation fails on this data, mishandling temporal reasoning, cross-document dependencies, and missing metadata. We deploy ACIE (Agentic Clinical Information Extraction) at University Medicine Essen: an on-premise agentic RAG pipeline that reasons over complete patien",
+      "authors": [
+        "Osman Alperen Çinar-Koraş",
+        "Marie Bauer",
+        "Sameh Khattab",
+        "Merlin Engelke",
+        "Moon Kim"
+      ],
+      "published": "2026-06-17",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
+      "title": "LegalHalluLens: Typed Hallucination Auditing and Calibrated Multi-Agent Debate for Trustworthy Legal AI",
+      "url": "https://huggingface.co/papers/2606.18021",
+      "abstract": "AI systems deployed in legal workflows hallucinate at rates that aggregate metrics report at ~52%, but this average conceals where errors concentrate and in which direction they run, leaving compliance officers without an actionable signal for trustworthy deployment. We present LegalHalluLens, an auditing framework with three components: typed hallucination profiles across four legally-motivated claim categories (numeric, temporal, obligation/entitlement, factual) over CUAD (Hendrycks et al., 20",
+      "authors": [
+        "Lalit Yadav",
+        "Akshaj Gurugubelli"
+      ],
+      "published": "2026-06-16",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "ReSyn: A Generalized Recursive Regular Expression Synthesis Framework",
+      "url": "https://huggingface.co/papers/2603.24624",
+      "abstract": "Existing Programming-By-Example (PBE) systems often rely on simplified benchmarks that fail to capture the high structural complexity of real-world regexes, such as deeper nesting and frequent use of union operations. To overcome the resulting performance drop, we propose ReSyn, a synthesizer-agnostic divide-and-conquer framework that decomposes complex synthesis problem into manageable sub-problems. We also introduce Set2Regex, a parameter-efficient synthesizer capturing the permutation invaria",
+      "authors": [
+        "Seongmin Kim",
+        "Hyunjoon Cheon",
+        "Su-Hyeon Kim",
+        "Yo-Sub Han",
+        "Sang-Ki Ko"
+      ],
+      "published": "2026-06-13",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
       "title": "When Does Trajectory-Level Supervision Permit Efficient Offline Reinforcement Learning?",
       "url": "https://huggingface.co/papers/2606.18531",
       "abstract": "Offline reinforcement learning is typically analyzed under process-level reward supervision, yet many sequential decision datasets\n  record only trajectory-level outcomes. We develop a statistical theory for offline policy optimization from such outcome-level\n  supervision. We first study the canonical setting where the target remains the expected cumulative reward, but each offline trajectory\n  provides only a scalar label whose conditional mean is the cumulative return. We propose OPAC, a pess",
@@ -7321,78 +7394,8 @@
       "source": "arXiv",
       "category": "Statistical ML",
       "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Gradient boosting for extremes: sampling theory and application to insurance",
-      "url": "http://arxiv.org/abs/2606.14268v1",
-      "abstract": "We develop a statistical learning theory for gradient boosting applied to the estimation of covariate-dependent Generalized Pareto (GP) distributions in the context of Peaks-over-Threshold modeling. After an orthogonal reparametrization of the GP likelihood that diagonalizes its Fisher information matrix, we cast the estimation problem within the Empirical Risk Minimization (ERM) framework and derive non-asymptotic error bounds for the boosting estimator. Our analysis accounts for three distinct",
-      "authors": [
-        "Stéphane Lhaut",
-        "Olivier Lopez"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Operator Calculus for Population-Based Optimization: A Mean-Field Convergence Theory",
-      "url": "http://arxiv.org/abs/2606.14289v1",
-      "abstract": "Population-based and distributional optimization methods, from evolution strategies and consensus-based optimization to covariance-matrix adaptation and stochastic gradient methods viewed as distributional dynamics, are widely used for nonconvex or black-box problems, yet their convergence analyses remain fragmented across algorithm-specific techniques. We introduce an operator calculus in which a broad class of such methods, after choosing an appropriate state space and, where necessary, augmen",
-      "authors": [
-        "Pekka Malo",
-        "Lauri Viitasaari",
-        "Patrik Nummi",
-        "Antti Suominen",
-        "Ankur Sinha"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Nonlocal Bayesian Modeling of Continuous Spatio-Temporal Dynamics",
-      "url": "http://arxiv.org/abs/2606.14313v1",
-      "abstract": "Real-world spatio-temporal forecasting must handle irregular time points, spatially sparse observations, and the need for uncertainty quantification. This setting is often further compounded by nonlocal interactions (long-range spatial coupling). Modeling continuous-space, continuous-time nonlocal dynamics naturally leads to infinite-dimensional integro-differential equations (IDEs), making principled Bayesian inference intractable. We propose the NonLocal Bayesian Spatio-Temporal model (NLBST),",
-      "authors": [
-        "Jaeyeong Lee",
-        "Heeyoung Kim"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Local Coverage Governs Memorization in Diffusion Models",
-      "url": "http://arxiv.org/abs/2606.14390v1",
-      "abstract": "Memorization in diffusion models is often treated as a global property of the model or dataset. In practice, however, a single diffusion model can simultaneously generate both memorized and novel samples. Which training samples are most likely to be memorized? In this work, we show that memorization is governed by \\emph{local data coverage}. Leveraging the connection between diffusion models and kernel density estimation (KDE), we derive a theoretical criterion that predicts whether a point is m",
-      "authors": [
-        "Claudia Merger",
-        "Sebastian Goldt"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "A Deep Zero-Inflated Model of North Atlantic Right Whale Presence To Support Blue Economy Management in the U.S. East Coast",
-      "url": "http://arxiv.org/abs/2606.14403v1",
-      "abstract": "Effective modeling of endangered marine mammal species, such as the North Atlantic Right Whale, is critical for balancing marine conservation with the growing blue economy. Passive acoustic monitoring data collected by autonomous underwater vehicles provide new opportunities for localized marine species detection and oceanographic sensing, but introduce complex statistical challenges such as zero inflation, imperfect detection, and intricate dependence structures. In response, we propose the Dee",
-      "authors": [
-        "Jiaxiang Ji",
-        "Laura Nazzaro",
-        "Josh Kohut",
-        "Ahmed Aziz Ezzat"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
     }
   ],
-  "last_updated": "2026-06-19T11:01:41.970922",
+  "last_updated": "2026-06-20T09:47:35.330967",
   "total": 500
 }
