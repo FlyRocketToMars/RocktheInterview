@@ -1,6 +1,147 @@
 {
   "top_papers": [
     {
+      "title": "PerceptionDLM: Parallel Region Perception with Multimodal Diffusion Language Models",
+      "url": "https://huggingface.co/papers/2606.19534",
+      "abstract": "Multimodal large language models (MLLMs) have achieved remarkable progress in visual understanding tasks. However, most existing MLLMs rely on autoregressive generation, which limits their efficiency for perception tasks that require captioning multiple regions. In this work, we propose PerceptionDLM, a multimodal diffusion language model optimized for efficient parallel region perception. Built upon PerceptionDLM-Base, a strong foundational baseline that achieves state-of-the-art performance am",
+      "authors": [
+        "Yueyi Sun",
+        "Yuhao Wang",
+        "Jason Li",
+        "Ye Tian",
+        "Tao Zhang"
+      ],
+      "published": "2026-06-17",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 46
+    },
+    {
+      "title": "WorldLines: Benchmarking and Modeling Long-Horizon Stateful Embodied Agents",
+      "url": "https://huggingface.co/papers/2606.18847",
+      "abstract": "To assist humans over extended periods in real homes, embodied agents must remember user routines, world states, and past interactions. Existing long-term memory benchmarks mainly evaluate language-centric retrieval and question answering, while embodied benchmarks often focus on short-horizon task execution without testing long-term memory use in dynamic environments. We introduce WorldLines, a project-driven benchmark for long-horizon embodied household assistance. It constructs temporally ext",
+      "authors": [
+        "Yehang Zhang",
+        "Jianchong Su",
+        "Haojian Huang",
+        "Yifan Chang",
+        "Tianhao Zhou"
+      ],
+      "published": "2026-06-17",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "BrainG3N: A Dual-Purpose Tokenizer for Controllable 3D Brain MRI Generation",
+      "url": "https://huggingface.co/papers/2606.19651",
+      "abstract": "Three-dimensional (3D) brain MRI is central to clinical neurology and neuro-oncology, where generative models could augment under-represented cohorts, simulate disease trajectories, and support privacy-preserving data sharing. Latent diffusion has been the go-to solution for modeling imaging data, but it places two competing demands on the tokenizer: encoder embeddings must retain the clinical information that downstream tasks act on, and the decoder must reconstruct anatomically faithful volume",
+      "authors": [
+        "Max Van Puyvelde",
+        "Ibrahim Gulluk",
+        "Wim Van Criekinge",
+        "Olivier Gevaert"
+      ],
+      "published": "2026-06-17",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 5
+    },
+    {
+      "title": "GateMem: Benchmarking Memory Governance in Multi-Principal Shared-Memory Agents",
+      "url": "https://huggingface.co/papers/2606.18829",
+      "abstract": "Memory benchmarks for LLM agents largely assume single-user settings, leaving shared assistants for hospitals, workplaces, campuses, and households understudied. In these deployments, multiple principals write to a common memory pool and query it under different roles, scopes, and relationships, so memory quality requires governance as well as recall. We introduce GateMem, a benchmark for multi-principal shared-memory agents. GateMem jointly evaluates utility for legitimate long-horizon requests",
+      "authors": [
+        "Zhe Ren",
+        "Yibo Yang",
+        "Yimeng Chen",
+        "Zijun Zhao",
+        "Benshuo Fu"
+      ],
+      "published": "2026-06-17",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 7
+    },
+    {
+      "title": "Distilling Examples into Task Instructions: Enhanced In-Context Learning for Real-World B2B Conversations",
+      "url": "https://huggingface.co/papers/2606.15641",
+      "abstract": "In-context learning (ICL) is the standard method for low-resource classification, yet its efficacy in specialized domains remains largely unexplored. We address the challenge of classifying semantically complex, multi-party B2B conversations, where traditional ICL encounters significant limitations, especially as context length increases due to the concatenation of multiple few-shot examples. We introduce the Call Playbook dataset, featuring five classification tasks derived from real-world B2B ",
+      "authors": [
+        "Guy Rotman",
+        "Adi Kopilov",
+        "Danit Berger Zalmanson",
+        "Omri Allouche"
+      ],
+      "published": "2026-06-14",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "SpatialAvatar-0: High-Quality 4D Head Avatar with Multi-Stage Reconstruction",
+      "url": "https://huggingface.co/papers/2606.15659",
+      "abstract": "High-quality 4D head avatars from one or a few source portraits are central to telepresence, AR/VR, and digital-human interaction. 3D Gaussian Splatting (3DGS) has emerged as the dominant representation, with two complementary regimes (generalizable feed-forward predictors and per-subject refiners) maturing in parallel. However, existing feed-forward predictors are trained on a single dataset family with a hard-coded source count, inheriting the corresponding domain bias. Per-subject refiners re",
+      "authors": [
+        "Yiran Wang",
+        "Zeyu Zhang",
+        "Yuanming Li",
+        "Ziming Wang",
+        "Yang Zhao"
+      ],
+      "published": "2026-06-14",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
+      "title": "GeneralVLA-2: Geometry-Aware Reconstruction and Governed Memory for Robot Planning",
+      "url": "https://huggingface.co/papers/2606.17480",
+      "abstract": "Generalist vision-language-action systems need object-centric 3D evidence and reusable manipulation experience to plan reliable robot trajectories. GeneralVLA provides a hierarchical interface for converting language and RGB-D observations into 3D end-effector paths, but two bottlenecks remain. First, monocular SAM3D-style object reconstruction can hallucinate pose and unseen geometry, while manipulation benefits from stable object shape when calibrated multi-view observations are available. Sec",
+      "authors": [
+        "Haoyu Wang",
+        "Guoqing Ma",
+        "Zeyu Zhang",
+        "Yandong Guo",
+        "Boxin Shi"
+      ],
+      "published": "2026-06-16",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "Multi-Turn Reflective Masking Elicits Reasoning in Mask Diffusion Models",
+      "url": "https://huggingface.co/papers/2606.16700",
+      "abstract": "While reasoning on autoregressive (AR) models is often performed by chain-of-thought reasoning and reflection, their refinement of previous outputs still relies on fully sequential generation, even when only local edits are needed. In contrast, the masking mechanism in Mask Diffusion Models (MDMs) naturally supports explicit local edits on previous outputs, allowing selective refinement without discarding previous answers and generating another from scratch. While this property more closely alig",
+      "authors": [
+        "Yanming Zhang",
+        "Yihan Bian",
+        "Jingyuan Qi",
+        "Yuguang Yao",
+        "Lifu Huang"
+      ],
+      "published": "2026-06-15",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "MemSlides: A Hierarchical Memory Driven Agent Framework for Personalized Slide Generation with Multi-turn Local Revision",
+      "url": "https://huggingface.co/papers/2606.17162",
+      "abstract": "Personalized presentation generation requires more than conditioning on a current prompt or template: agents must preserve stable user preferences across tasks, retain newly introduced preferences and constraints during multi-turn revision, and carry out local edits reliably. We propose MemSlides, a hierarchical memory framework for personalized presentation agents that separates long-term memory from working memory and further divides long-term memory into user profile memory and tool memory. U",
+      "authors": [
+        "Ye Jin",
+        "Yangyang Xu",
+        "Jun Zhu",
+        "Yibo Yang"
+      ],
+      "published": "2026-06-15",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 5
+    },
+    {
       "title": "Duration Aware Scheduling for ASR Serving Under Workload Drift",
       "url": "https://huggingface.co/papers/2603.11273",
       "abstract": "Scheduling policies in large-scale Automatic Speech Recognition (ASR) serving pipelines play a key role in determining end-to-end (E2E) latency. Yet, widely used serving engines rely on first-come-first-served (FCFS) scheduling, which ignores variability in request duration and leads to head-of-line blocking under workload drift. We show that audio duration is an accurate proxy for job processing time in ASR models such as Whisper, and use this insight to enable duration-aware scheduling. We int",
@@ -7278,124 +7419,8 @@
       "source": "HuggingFace Daily",
       "category": "AI/ML (Trending)",
       "upvotes": 1
-    },
-    {
-      "title": "Approximating Whittle-Matern Fields over Discretized Manifolds",
-      "url": "http://arxiv.org/abs/2606.13827v1",
-      "abstract": "Markovian Whittle-Matérn fields have been convergently approximated by discrete Gauss Markov Random Fields (GMRFs) with sparse precision matrices using a Finite Element approximation of the two-parameter family, \\[ (κ^2 - Δ)^{α/2} u = \\mathcal{W}, \\;\\; κ\\in \\mathbb{R}, \\; α\\in \\mathbb{N}. \\] of SPDEs. Using recent developements in the analysis of Discrete Exterior Calculus (DEC), we present a different, yet closely related, convergent GMRF approximation to these Matérn fields over complete, boun",
-      "authors": [
-        "Srinivas Nambirajan"
-      ],
-      "published": "2026-06-11",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Controller-Augmented Hidden Markov Models: A Computational Framework for Constrained Sequential Inference",
-      "url": "http://arxiv.org/abs/2606.13850v1",
-      "abstract": "Hidden Markov models are foundational for sequential inference, but their Markovian assumption fails under pathwise constraints such as precedence requirements, visitation cardinalities, or monotonic state progression, which induce long-range dependencies that invalidate standard dynamic programming algorithms. To deal with this, we present Controller-Augmented Hidden Markov Models (CHMMs), a framework that compiles each constraint into a finite-state controller tracking the minimal sufficient h",
-      "authors": [
-        "Lekha Patel",
-        "Luis Damiano"
-      ],
-      "published": "2026-06-11",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Adaptive Nucleus Truncation for Long-Form Reasoning",
-      "url": "http://arxiv.org/abs/2606.13982v1",
-      "abstract": "Sampling plays an important role in long-form language-model reasoning. Over thousands of decoding steps, small changes in the candidate token set can compound into different reasoning trajectories, stability profiles, and final answers. Existing truncation methods such as top-$p$, min-$p$, and fixed top-$nσ$ sampling improve over unrestricted sampling, but they rely on fixed thresholds that cannot adapt to changes in entropy, task difficulty, training stage, or generation budget. We introduce A",
-      "authors": [
-        "Ousmane Amadou Dia"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "A General Framework for Decision Trees via Bregman Divergences",
-      "url": "http://arxiv.org/abs/2606.13984v1",
-      "abstract": "Decision trees are one of the fundamental tools in statistical learning due to their interpretability, flexibility, and their ability to adapt to nonlinear structures. Among them, the Classification and Regression Trees, introduced by Breiman, Friedman, Olshen, and Stone in 1984, became one of the most influential algorithms and remains one of the most widely used methods for classification and regression problems. On the other hand, Bregman divergences, introduced by Lev Bregman in 1967 in the ",
-      "authors": [
-        "Mathias Bourel"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Geometric Domain Adaptation via Optimal Transport for Linear Regression in R^2",
-      "url": "http://arxiv.org/abs/2606.14023v1",
-      "abstract": "Optimal Transport has become recently a powerful method for domain adaptation by aligning source and target distributions. We study a supervised domain adaptation problem where source and target domains are related by a rotation or a translation or a homothety in $\\mathbb{R}^2$. We prove that the optimal transport map recovers the underlying map when using a $p-$norm cost with $p \\geq 2$. Based on this insight, we develop a method combining $K-$means and optimal transport to estimate the underly",
-      "authors": [
-        "Brian Britos",
-        "Mathias Bourel"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Anytime-Valid Confirmation of Label-Shift Corrections",
-      "url": "http://arxiv.org/abs/2606.14028v1",
-      "abstract": "In small-batch scientific deployments, labeled target outcomes may be too scarce for reliable shift estimation even when unlabeled target inputs are available. We address the complementary setting where the practitioner has a pre-specified label-shift correction from domain knowledge and asks whether incoming labeled outcomes support it. We show that the per-observation likelihood ratio between a label-shift-corrected predictive and the source predictive is a conditional e-value, so its running ",
-      "authors": [
-        "Seungjin Choi"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Hybrid Uncertainty Sensitivity Analysis Based on the HSIC for High-Dimensional Responses with Aleatory--Epistemic Separation",
-      "url": "http://arxiv.org/abs/2606.14053v1",
-      "abstract": "Quantifying the influence of hybrid aleatory and epistemic uncertainties on high-dimensional system responses remains a major challenge in global sensitivity analysis (GSA). Existing Hilbert--Schmidt Independence Criterion (HSIC)-based approaches are primarily restricted to single-output settings and lack a rigorous decomposition of heterogeneous uncertainty sources and their interactions. To address this limitation, a novel double-space tensor-product RKHS framework is proposed for sensitivity ",
-      "authors": [
-        "Shijie Zhong",
-        "Jiangfeng Fu",
-        "Pengfei Wei"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Lyapunov-Based Sample Complexity Analysis for Weakly-Coupled MDPs",
-      "url": "http://arxiv.org/abs/2606.14095v1",
-      "abstract": "We study the sample complexity of learning in average-reward weakly-coupled Markov decision processes (WCMDPs) and Restless Bandits (RBs) under a generative model. Naive reduction to a tabular MDP leads to high complexity bounds as the state-action space is exponentially large in the number of arms $N$. By exploiting the weakly coupled structure, we show that near-optimal policies can be learned with sample and computational complexities that are polynomial in $N$. Specifically, we analyze the p",
-      "authors": [
-        "Tianhao Wu",
-        "Matthew Zurek",
-        "Weina Wang",
-        "Qiaomin Xie"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Temperature transferable Machine Learned Coarse Grained model for proteins",
-      "url": "http://arxiv.org/abs/2606.14111v1",
-      "abstract": "Coarse-grained (CG) molecular simulations offer an efficient alternative to atomistic molecular dynamics to study large and complex biological systems. The accuracy of CG simulations has been increased dramatically by the introduction of machine-learned coarse-grained (MLCG) models. However, these models are typically designed to be used at a single thermodynamic point, lack temperature transferability, and can not be used to predict temperature dependent quantities like the heat capacity. Here ",
-      "authors": [
-        "Jacopo Venturin",
-        "Cecilia Clementi"
-      ],
-      "published": "2026-06-12",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
     }
   ],
-  "last_updated": "2026-06-21T10:08:39.451415",
+  "last_updated": "2026-06-22T12:29:28.051205",
   "total": 500
 }
