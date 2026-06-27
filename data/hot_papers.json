@@ -1,6 +1,67 @@
 {
   "top_papers": [
     {
+      "title": "Running the Gauntlet: Re-evaluating the Capabilities of Agents Beyond Familiar Environments",
+      "url": "https://huggingface.co/papers/2606.14397",
+      "abstract": "As agentic systems continue to evolve and are widely deployed in real-world scenarios, there is a growing demand to faithfully evaluate their capabilities. However, current benchmarks are typically built on popular applications with relatively simple tasks and focus on a narrow set of capabilities while overlooking broader dimensions, resulting in saturated performance on modern agents and failing to probe their limitations. To this end, we introduce GauntletBench, a web-based benchmark for eval",
+      "authors": [
+        "Mykola Vysotskyi",
+        "Runqi Lin",
+        "Grzegorz Biziel",
+        "Michal Zakrzewski",
+        "Sebastian Montagna"
+      ],
+      "published": "2026-06-25",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 14
+    },
+    {
+      "title": "LISA: Likelihood Score Alignment for Visual-condition Controllable Generation",
+      "url": "https://huggingface.co/papers/2606.27192",
+      "abstract": "The prevalent dual-branch paradigm, i.e., training a side network to encode visual conditions and fusing its intermediate-layer features to a frozen pretrained main network, has shown remarkable success in visual-condition controllable generation. Despite its widespread adoption, the role of the side branch and its training efficiency remain underexplored. In this paper, we first revisit this mainstream paradigm through the lens of score-based generative modeling: 1) The main network preserves v",
+      "authors": [
+        "Yanghao Wang",
+        "Hongxu Chen",
+        "Jiazhen Liu",
+        "Zhenqi He",
+        "Rui Liu"
+      ],
+      "published": "2026-06-25",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 12
+    },
+    {
+      "title": "Information-Aware KV Cache Compression for Long Reasoning",
+      "url": "https://huggingface.co/papers/2606.26875",
+      "abstract": "Reasoning capability has advanced rapidly in large language models (LLMs), leading to an increasing size of key-value (KV) cache in both prefilling and decoding stages. Existing KV cache compression methods mainly rely on attention weights to estimate token importance. While attention effectively captures contextual relevance, it overlooks complementary information-theoretic signals related to predictive uncertainty and token informativeness. In this paper, we revisit token importance from a for",
+      "authors": [
+        "Jushi Kai",
+        "Zhuiri Xiao",
+        "Alexandra Birch",
+        "Zhouhan Lin"
+      ],
+      "published": "2026-06-25",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 9
+    },
+    {
+      "title": "ABACUS: Adapting Unified Foundation Model for Bridging Image Count Understanding and Generation",
+      "url": "https://huggingface.co/papers/2606.23835",
+      "abstract": "ABACUS is a unified vision-language model that handles object counting, crowd counting, referring-expression counting, and count-faithful image generation without any benchmark-specific training required. Our model is built on existing 3B-parameter unified foundation model and is adapted for object localization tasks using three key innovations: density-aware adaptive zooming with objectness maps for spatial grounding; a boundary-aware count policy via GRPO to eliminate crop-boundary errors; and",
+      "authors": [
+        "Anindya Mondal",
+        "Sauradip Nag",
+        "Anjan Dutta"
+      ],
+      "published": "2026-06-22",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
       "title": "ReNIO: Reweighting Negative Trajectory Importance for LLM On-Policy Distillation",
       "url": "https://huggingface.co/papers/2606.23104",
       "abstract": "On-policy distillation (OPD) improves LLM reasoning by training a student model on its own generated outputs, but standard OPD treats all student-generated outputs (SGOs) equally regardless of their informativeness. We observe a consistent asymmetry in controlled filtering experiments: in both OPD and on-policy self distillation (OPSD), training only on incorrect SGOs outperforms training only on correct ones. Our further analysis suggests that models trained on correct-only SGOs tend to generat",
@@ -7347,66 +7408,8 @@
       "source": "arXiv",
       "category": "Statistical ML",
       "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Machine Learning Integrated in Wavelet Shrinkage (MLShrink)",
-      "url": "http://arxiv.org/abs/2606.19580v1",
-      "abstract": "Data encountered in practice are frequently contaminated by additive noise, and wavelet shrinkage remains a fundamental tool for recovering underlying signals in nonparametric estimation. Classical procedures such as hard and soft thresholding decide whether to retain a wavelet coefficient almost entirely from its magnitude. Although effective in many settings, these rules can be too rigid for coefficients whose magnitudes fall in an intermediate region where the distinction between signal and n",
-      "authors": [
-        "Dixon Vimalajeewa",
-        "Vijini Lakmini",
-        "Brani Vidakovic"
-      ],
-      "published": "2026-06-17",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "A Solver-Free Training Method for Predict-then-Optimize",
-      "url": "http://arxiv.org/abs/2606.19587v1",
-      "abstract": "We propose a scalable method for training prediction (machine learning) models in the predict-then-optimize paradigm, where model outputs serve as coefficients for a subsequent linear optimization task. Directly minimizing the empirical decision regret is intractable for linear programming and combinatorial optimization since the decision mapping is piecewise constant, and the gradients are zero almost everywhere. While existing methods address this by smoothing the differentiation process, they",
-      "authors": [
-        "Beichen Wan",
-        "Mo Liu"
-      ],
-      "published": "2026-06-17",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Rigorous uncertainty quantification of probabilistic AI weather forecasts with conformal prediction",
-      "url": "http://arxiv.org/abs/2606.19642v1",
-      "abstract": "Probabilistic weather forecasting is undergoing rapid transformation with artificial intelligence (AI). In traditional numerical weather prediction, computing power can limit how well ensemble forecasts approximate the unknown statistical distribution of future states. AI models facilitate larger ensembles and are trained with probabilistic considerations, ideally leading to better uncertainty quantification. Forecasts from these state-of-the-art models are often considered well-calibrated. Howe",
-      "authors": [
-        "Anna Asch",
-        "Raphael Rossellini",
-        "Pedram Hassanzadeh",
-        "Rebecca Willett"
-      ],
-      "published": "2026-06-17",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Variational Consensus Monte Carlo for Bayesian Mixture",
-      "url": "http://arxiv.org/abs/2606.19643v1",
-      "abstract": "Motivated by the privacy, sensitivity and sharing limitations of health data, we present a comprehensive pipeline for inference of Bayesian mixture models within a federated learning setting, i.e. when data cannot be fully shared or pooled across compute nodes. We adopt a Consensus Monte Carlo (CMC) approach, in which an MCMC algorithm is run independently within each data silo to estimate local posterior distributions, which are then aggregated to approximate the posterior over the full data. T",
-      "authors": [
-        "Julie Fendler",
-        "Francesca L. Crowe",
-        "Tom Marshall",
-        "Sylvia Richardson",
-        "Paul D. W. Kirk"
-      ],
-      "published": "2026-06-17",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
     }
   ],
-  "last_updated": "2026-06-26T09:56:44.059844",
+  "last_updated": "2026-06-27T09:09:55.354984",
   "total": 500
 }
