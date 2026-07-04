@@ -1,6 +1,99 @@
 {
   "top_papers": [
     {
+      "title": "AGVBench: A Reliability-Oriented Benchmark of Data Augmentation for Vein Recognition",
+      "url": "https://huggingface.co/papers/2607.02271",
+      "abstract": "Vein recognition is a secure biometric technology often constrained by limited annotated data and imaging variations. While data augmentation mitigates this, strategies designed for natural images may disrupt the fine-grained topology and textures essential for identity discrimination. We present AGVBench, which evaluates 30 representative augmentation strategies on five public palm- and finger-vein datasets with seven backbone architectures, covering classic CNNs, vision transformers, and vein-",
+      "authors": [
+        "Haiyang Li",
+        "Yuming Fu",
+        "Qun Song",
+        "Hongchao Liao",
+        "Jing Chen"
+      ],
+      "published": "2026-07-02",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 13
+    },
+    {
+      "title": "Logit-Contribution Scoring Identifies Non-Literal Retrieval Heads",
+      "url": "https://huggingface.co/papers/2607.01002",
+      "abstract": "In long-context use, large language models frequently synthesize answers from the meaning of a relevant context span rather than literally copy-pasting them. Identifying which attention heads perform this synthesis matters for interpreting long-context model behavior. Yet existing detectors miss these heads by construction: they reward heads whose attended token matches the generated token, a literal-copy criterion that captures where a head reads but not what it writes through its output-value ",
+      "authors": [
+        "Aryo Pradipta Gema",
+        "Beatrice Alex",
+        "Pasquale Minervini"
+      ],
+      "published": "2026-07-01",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 12
+    },
+    {
+      "title": "DuoMem: Towards Capable On-Device Memory Agents via Dual-Space Distillation",
+      "url": "https://huggingface.co/papers/2606.29961",
+      "abstract": "Large Language Model (LLM)-based agents can solve complex procedural tasks by interacting with environments over multiple turns, but this ability typically depends on large models, long contexts, and repeated inference calls. This makes advanced memory-augmented agents difficult to deploy on resource-constrained devices. We introduce DuoMem, a dual-space distillation framework that transfers procedural problem-solving ability from a large teacher model to compact student models. DuoMem distils i",
+      "authors": [
+        "Peyman Hosseini",
+        "Ondrej Bohdal",
+        "Ahmed Alajrami",
+        "Andrea Maracani",
+        "Ignacio Castro"
+      ],
+      "published": "2026-06-29",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "WARP: Weight-Space Analysis for Recovering Training Data Portfolios",
+      "url": "https://huggingface.co/papers/2607.01686",
+      "abstract": "Foundation models are routinely released to the public, yet the data recipes used to train them -- such as domain mixture weights that determine how different sources are sampled -- are rarely disclosed. This creates an access asymmetry: researchers study the resulting models but lack visibility into the training distribution that produces them. Prior works for inferring training data, such as membership inference, detect at the level of individual samples and thus cannot characterize the global",
+      "authors": [
+        "Tzu-Heng Huang",
+        "Aditya Goyal",
+        "John Cooper",
+        "Frederic Sala"
+      ],
+      "published": "2026-07-02",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "Parameter-Efficient Quantum-Inspired Fast Weight Programmers for Traffic-Matrix Forecasting",
+      "url": "https://huggingface.co/papers/2606.27821",
+      "abstract": "Traffic matrices (TMs) capture network-wide origin-destination demand and are central to traffic engineering, yet accurate whole-matrix forecasting remains challenging when prediction must be performed under the memory, update, and training-budget constraints of online network control. This paper investigates whether compact quantum-inspired recurrent models can provide effective TM forecasts without relying on dedicated graph, transformer, or diffusion modules. We adapt gated quantum-inspired K",
+      "authors": [
+        "Kuo-Chung Peng",
+        "Jiun-Cheng Jiang",
+        "Chun-Hua Lin",
+        "Tai-Yue Li",
+        "Nan-Yow Chen"
+      ],
+      "published": "2026-06-26",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Scaling Laws for Grid-Based Approximate Nearest Neighbor Search in High Dimensions",
+      "url": "https://huggingface.co/papers/2607.01283",
+      "abstract": "Grid-based approaches to approximate nearest neighbor (ANN) search have been absent from modern scaling analyses. We present a systematic characterization of a multiprobe grid algorithm with respect to dataset size N and dimensionality d. Our experiments reveal a previously unreported d-scaling crossover on the GloVe embedding family, in which multiprobe grid search maintains an approximately constant dimensional scaling exponent while other graph-, tree-, and partitioning-based methods exhibit ",
+      "authors": [
+        "Matthew J Liu",
+        "Wei Hang Zheng",
+        "Vidhan Purohit",
+        "Siqi Xie",
+        "Chieh-En Li"
+      ],
+      "published": "2026-07-01",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
       "title": "PixelEyes: Decoupling Perception and Reasoning for Pinpoint Visual Evidence Seeking",
       "url": "https://huggingface.co/papers/2607.00115",
       "abstract": "This paper explores multi-turn visual reasoning and observes that MLLMs repeatedly fail to localize the target, leading to long, redundant trajectories. We attribute this failure to the entanglement of reasoning and perception within a single model, the MLLM reasons and localizes simultaneously, and inaccurate localization triggers additional reasoning turns that bloat the trajectory. To solve this problem, we propose PixelEyes, a multi-turn visual reasoning agent that explicitly decouples reaso",
@@ -7344,99 +7437,8 @@
       "source": "arXiv",
       "category": "NLP / Computation and Language",
       "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "Vision-Default, Prior-Override: Causal Mechanisms of Perception-Knowledge Conflict in Vision-Language Models",
-      "url": "http://arxiv.org/abs/2606.28273v1",
-      "abstract": "Vision-language models must reconcile visual evidence with memorized world knowledge when the two conflict. How they resolve this conflict shapes the reliability of multimodal systems, yet prior work characterizes it behaviorally without a component-level causal account. We combine activation patching across three granularities (residual stream, attention heads, and MLP sublayers) with model-component ablation studies and mechanistic analysis. Across three VLM families, we find that visual groun",
-      "authors": [
-        "Niclas Lietzow",
-        "Danielle Bitterman",
-        "Carsten Eickhoff",
-        "William Rudman",
-        "Michal Golovanevsky"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "Cognitive Episodes in LLM Reasoning Traces Enable Interpretable Human Item Difficulty Prediction",
-      "url": "http://arxiv.org/abs/2606.28186v1",
-      "abstract": "Predicting human item difficulty is central to educational assessment, where reliable estimates support fairness and effective test construction. Existing methods often depend on costly human calibration or item-level textual representations, providing limited evidence about the cognitive processes that make items difficult. We argue that difficulty should be viewed not only as a property of item text, but also as an observable consequence of the problem-solving burden an item induces. Large Rea",
-      "authors": [
-        "Chenguang Wang",
-        "Ming Li",
-        "Xinyue Zeng",
-        "Zhuochun Li",
-        "Hong Jiao"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "The Remittance Blueprint: Data-driven Intelligence for Sri Lanka",
-      "url": "http://arxiv.org/abs/2606.28190v1",
-      "abstract": "This study analyzes Sri Lankan migration and remittances over 32 years (1994-2025). Using a 384-month harmonized dataset, we apply exploratory data analysis, stationarity corrected time-series modeling (ADF, Johansen, VAR/VECM), and supervised learning. Results reveal remittance inflows are primarily driven by external macroeconomic variables, specifically exchange rate dynamics and global oil prices, rather than domestic indicators. Impulse response analysis confirms the asymmetric impact of cu",
-      "authors": [
-        "Dhinanjaya Fernando",
-        "Dinura Ginige",
-        "Kalana Lakshan",
-        "Chanupa Gurusinghe",
-        "Lasana Pahanga"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "COCOLogic-V2: Identifying Logical Inconsistencies via Truly Hard-Negatives",
-      "url": "http://arxiv.org/abs/2606.28194v1",
-      "abstract": "While interpretable models such as concept bottleneck models (CBMs) and program synthesis methods enable verification of model decisions, their evaluation is typically limited to simple tasks, leaving complex reasoning on real-world images largely unexplored. We introduce COCOLogic-V2, an object-centric dataset for visual inductive reasoning on real-world images covering a broad subset of first-order logic. By categorizing samples into positive variants, near-boundary (NB), and far-from-boundary",
-      "authors": [
-        "David Steinmann",
-        "Antonia Wüst",
-        "Kristian Kersting",
-        "Wolfgang Stammer"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Non-Linear Strategic Classification Made Practical",
-      "url": "http://arxiv.org/abs/2606.28204v1",
-      "abstract": "Algorithmic developments in Strategic Classification have been mostly limited to linear classifiers in settings where the best response has a closed-form solution or can be easily approximated. While some work has explored the role of non-linear classifiers in strategic settings, progress in this direction is impeded by the computational intractability of the strategic behaviour. Addressing this, we present a novel method for approximating the best response by exploiting Lagrangian duality. By r",
-      "authors": [
-        "Jack Geary",
-        "Boyan Gao",
-        "Henry Gouk"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Towards Value-Constrained Credit Assignment in Fully Delegated AI Cooperatives",
-      "url": "http://arxiv.org/abs/2606.28217v1",
-      "abstract": "We propose a framework for reward allocation in fully delegated AI cooperatives where humans are represented by agents that contribute data and participate in model updates under heterogeneous value constraints. The key idea is to credit only those updates that remain admissible after screening them against each principal's value profile. We formulate value-conditioned gradient filtering, online marginal contribution signals, and cumulative revenue settlement within a traversal learning (TL) sub",
-      "authors": [
-        "Young Yoon",
-        "Jimin Kim",
-        "Soyeon Park"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
     }
   ],
-  "last_updated": "2026-07-03T09:40:12.111375",
+  "last_updated": "2026-07-04T09:03:42.326871",
   "total": 500
 }
