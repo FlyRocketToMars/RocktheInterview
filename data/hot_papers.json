@@ -1,6 +1,99 @@
 {
   "top_papers": [
     {
+      "title": "The Mirage of Optimizing Training Policies: Monotonic Inference Policies as the Real Objective for LLM Reinforcement Learning",
+      "url": "https://huggingface.co/papers/2606.29526",
+      "abstract": "Reinforcement learning (RL) has gained growing attention in large language model (LLM) post-training, yet RL training remains fragile and can suffer from instability or collapse. One vital cause is training-inference mismatch: LLM adopts separate inference and training engines for generation efficiency and training precision, which in practice exhibits inconsistent probabilities for the same trajectories on training and inference sides, even with synchronized model parameters. This naturally ind",
+      "authors": [
+        "Jing Liang",
+        "Hongyao Tang",
+        "Yi Ma",
+        "Yancheng He",
+        "Weixun Wang"
+      ],
+      "published": "2026-06-28",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 47
+    },
+    {
+      "title": "AGE: Adaptive-masking for Graph Embedding in Graph Retrieval-Augmented Generation",
+      "url": "https://huggingface.co/papers/2607.00052",
+      "abstract": "GraphRAG is an extension of retrieval-augmented generation (RAG) that supports large language models (LLMs) by referring to graph-structured data as external knowledge. While this technique ideally captures intricate relationships, it often struggles with graph representations for LLMs, particularly for frozen LLMs, due to the misalignment between graph-based and text-based latent features. We tackle this issue by introducing the {\\it Adaptive-masking for Graph Embedding (AGE)}. AGE employs a Tr",
+      "authors": [
+        "Bao Long Nguyen Huu",
+        "Atsushi Hashimoto"
+      ],
+      "published": "2026-06-30",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "Securing the AI Agent: A Unified Framework for Multi-Layer Agent Red Teaming",
+      "url": "https://huggingface.co/papers/2606.31227",
+      "abstract": "The fast growth of open-source AI infrastructure, from model serving engines and agent platforms to the Model Context Protocol (MCP) ecosystem and the language models themselves, has outpaced the security tooling available to defend it. We present AI-Infra-Guard, an open-source framework that organizes AI red teaming around a single observation: the attack surface of an AI agent is stratified across layers (infrastructure, protocol/tool, agent behavior, and model), and no single detection paradi",
+      "authors": [
+        "Yong Yang",
+        "Xing Zheng",
+        "Huiyu Wu",
+        "Huangsheng Cheng",
+        "Xiaorong Shi"
+      ],
+      "published": "2026-06-30",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 6
+    },
+    {
+      "title": "VLA-Corrector: Lightweight Detect-and-Correct Inference for Adaptive Action Horizon",
+      "url": "https://huggingface.co/papers/2607.01804",
+      "abstract": "Vision-Language-Action (VLA) foundation models have recently achieved strong progress in embodied intelligence. To reduce policy-call frequency while preserving temporal coherence, most generative policies adopt an action chunk mechanism, executing multiple future actions in an open-loop manner under a fixed action horizon. However, this \"predict-then-blindly-execute\" paradigm sacrifices closed-loop reactivity: in contact-rich physical interactions, even small local perturbations can rapidly amp",
+      "authors": [
+        "Yi Pan",
+        "Miao Pan",
+        "Qi Lu",
+        "Jiaming Huang",
+        "Man Zhang"
+      ],
+      "published": "2026-07-02",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 18
+    },
+    {
+      "title": "MultAttnAttrib: Training-Free Multimodal Attribution in Long Document Question Answering",
+      "url": "https://huggingface.co/papers/2607.01420",
+      "abstract": "As grounded QA systems are increasingly deployed in AI assistants, accurately attributing generated answers to evidence is critical for user trust and model safety. While unimodal attributions have been explored in depth, the multimodal setting remains relatively under-researched. As a result, we introduce MultAttnAttrib, a training-free attribution-generation method that leverages a model's prefill pass, selected attention heads, and calibrated thresholds to locate source evidence within a docu",
+      "authors": [
+        "Dang Quang Thien Tran",
+        "Quang V. Dang",
+        "Vinamra Tyagi",
+        "Sai Soorya Rao Veeravalli",
+        "Trang Nguyen"
+      ],
+      "published": "2026-07-01",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "DataComp-VLM: Improved Open Datasets for Vision-Language Models",
+      "url": "https://huggingface.co/papers/2606.28551",
+      "abstract": "Building performant Vision-Language Models (VLMs) requires carefully curating large-scale training datasets, yet the community lacks systematic benchmarks for evaluating such curation strategies. We introduce DataComp for VLMs (DCVLM), a benchmark for controlled data-centric experiments to improve VLM training. As part of DCVLM, we collect 160 datasets spanning four data types -- image-caption pairs, multimodal interleaved documents, text-only, and instruction-tuning data -- into a corpus of 6T ",
+      "authors": [
+        "Matteo Farina",
+        "Vishaal Udandarao",
+        "Thao Nguyen",
+        "Selim Kuzucu",
+        "Maximilian Böther"
+      ],
+      "published": "2026-06-26",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 7
+    },
+    {
       "title": "AGVBench: A Reliability-Oriented Benchmark of Data Augmentation for Vein Recognition",
       "url": "https://huggingface.co/papers/2607.02271",
       "abstract": "Vein recognition is a secure biometric technology often constrained by limited annotated data and imaging variations. While data augmentation mitigates this, strategies designed for natural images may disrupt the fine-grained topology and textures essential for identity discrimination. We present AGVBench, which evaluates 30 representative augmentation strategies on five public palm- and finger-vein datasets with seven backbone architectures, covering classic CNNs, vision transformers, and vein-",
@@ -7352,93 +7445,8 @@
       "source": "arXiv",
       "category": "NLP / Computation and Language",
       "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "MultiHashFormer: Hash-based Generative Language Models",
-      "url": "http://arxiv.org/abs/2606.28057v1",
-      "abstract": "Language models (LMs) represent tokens using embedding matrices that scale linearly with the vocabulary size. To constrain the parameter footprint, prior work proposes hashing many tokens into a single vector within encoder-only models. While this offers parameter efficiency, many-to-one collisions prevent its use in causal LMs. In this paper, we propose MultiHashFormer, a new framework that allows hash-based autoregression. Each token is represented as a unique hash signature, a short sequence ",
-      "authors": [
-        "Huiyin Xue",
-        "Atsuki Yamaguchi",
-        "Nikolaos Aletras"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "Single and Multi Truth Data Fusion using Large Language Models",
-      "url": "http://arxiv.org/abs/2606.28062v1",
-      "abstract": "Data fusion, also known as truth discovery, is a data integration problem that aims to determine the correct value or set of values for each attribute of an object when presented with potentially conflicting values from multiple sources. Data fusion tasks belong to two main categories: single-truth scenarios, where each attribute has only one correct value, and multi-truth scenarios, where multiple values can be valid simultaneously. This paper investigates the use of Large Language Models (LLMs",
-      "authors": [
-        "Hira Beril Kucuk",
-        "Norman W Paton",
-        "Jiaoyan Chen",
-        "Zhenyu Wu"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "Scaling limit of the Random Language Model",
-      "url": "http://arxiv.org/abs/2606.28105v1",
-      "abstract": "We develop a quantitative theory of the Random Language Model (RLM), an ensemble of stochastic context-free grammars, in a scaling limit where the number of hidden symbols $N \\to \\infty$ while the grammar temperature $\\tildeε_d \\to 0$ at fixed $x = {\\tildeε}_d \\log N$. In this limit, the model admits a controlled description based on a large-deviation principle over rule-usage patterns. A semi-annealed approximation maps the problem to a class of Random Energy Models with nontrivial combinatoric",
-      "authors": [
-        "Eric De Giuli"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "Mechanism-Driven Monitors for Preemptive Detection of LLM Training Instability",
-      "url": "http://arxiv.org/abs/2606.28116v1",
-      "abstract": "Frontier large language model training consumes massive accelerator fleets and long wall-clock computation, making stability failures costly when they occur. After a numerical or a hyperparameter fault has already destabilized the training dynamics, it may continue for thousands of steps while loss and gradient norms still appear normal. We study mechanism-driven detection of training instability by deriving internal monitors from the functional role of each critical module and from the earliest",
-      "authors": [
-        "Ruixuan Huang",
-        "Yipei Wang",
-        "Wenyi Fang",
-        "Hantao Huang",
-        "Yifan Huang"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "From Tokens to States: LLMs as a Special Case of World Models and the Continuous Path Beyond",
-      "url": "http://arxiv.org/abs/2606.28127v1",
-      "abstract": "The AI community has framed the relationship between large language models (LLMs) and world models as a dichotomy: LLMs predict tokens; world models simulate reality. Yann LeCun argues in 2022 that reaching general intelligence requires abandoning autoregressive token prediction in favour of latent-space architectures. This framing is unnecessarily binary. Two claims will be defended. First, LLMs are a degenerate special case of world models: the state space is the set of all token sequences, th",
-      "authors": [
-        "Paul Dubois"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "HPRO: Hierarchical Progressive Reward Optimization via Preference Extraction for Emotional Text-to-Speech",
-      "url": "http://arxiv.org/abs/2606.28249v1",
-      "abstract": "Recently, Large Language Model (LLM)-based Text-to-Speech (TTS) models have achieved remarkable naturalness. However, the standard Supervised Fine-Tuning paradigm often converges to statistically averaged prosody, limiting emotional expressiveness. While preference-driven optimization offers a promising alternative, existing approaches suffer from two structural mismatches: information conflict, where content and emotion in a shared latent space produce conflicting gradients, leading to reward h",
-      "authors": [
-        "Sihang Nie",
-        "Xiaofen Xing",
-        "Rui Xing",
-        "Haoming Li",
-        "Ruitong Xiao"
-      ],
-      "published": "2026-06-26",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
     }
   ],
-  "last_updated": "2026-07-05T09:25:57.833897",
+  "last_updated": "2026-07-06T11:10:23.458825",
   "total": 500
 }
