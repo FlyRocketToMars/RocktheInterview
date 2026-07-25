@@ -1,6 +1,70 @@
 {
   "top_papers": [
     {
+      "title": "An Exam for Active Observers",
+      "url": "https://huggingface.co/papers/2607.16165",
+      "abstract": "Human vision is a closed loop: gaze is continuously redirected by intermediate hypotheses rather than a single snapshot. Decades of psychophysics and cognitive science have argued that this active observation is essential for a wide range of tasks. Whether today's multimodal large language models (MLLMs) exercise active observation is an empirical question that current vision-language benchmarks do not answer. We introduce ActiveVision, a benchmark that makes active observation measurable for ML",
+      "authors": [
+        "Jiarui Zhang",
+        "Muzi Tao",
+        "Shangshang Wang",
+        "Ollie Liu",
+        "Xuezhe Ma"
+      ],
+      "published": "2026-07-17",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 24
+    },
+    {
+      "title": "FinanceComplexQA: Benchmarking Agentic Reasoning on Industrial-grade Financial Documents",
+      "url": "https://huggingface.co/papers/2607.19238",
+      "abstract": "Agentic Reasoning has become a transformative force in financial analysis due to its ability to integrate large-scale information and generate reliable and accurate content. However, when handling complex real-world problems, different agents still show significant performance variation. In this work, we design Finance-LaTeX SKILL, a skill for synthesizing financial documents with complex layouts based on expert knowledge. Using an agent workflow built on this skill, we generate 2,000 profession",
+      "authors": [
+        "Xianfu Cheng",
+        "Shiwei Zhang",
+        "Jiyu Zhao",
+        "Jian Yang",
+        "Xinyuan Wang"
+      ],
+      "published": "2026-07-21",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 5
+    },
+    {
+      "title": "Multi-Turn On-Policy Distillation with Prefix Replay",
+      "url": "https://huggingface.co/papers/2607.04763",
+      "abstract": "We study on-policy distillation (OPD) for agentic tasks, where an LLM agent interacts with an environment over multiple turns and a student imitates a teacher over these multi-turn interaction histories. Fully online OPD is costly because each update requires fresh student rollouts through the environment and teacher queries at visited histories. We propose Replayed-Prefix On-Policy Distillation (ReOPD), an off-environment alternative that reuses pre-collected teacher trajectories as replayed pr",
+      "authors": [
+        "Baohao Liao",
+        "Hanze Dong",
+        "Christof Monz",
+        "Xinxing Xu",
+        "Li Dong"
+      ],
+      "published": "2026-07-16",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 8
+    },
+    {
+      "title": "Dataset Distillation by Influence Matching",
+      "url": "https://huggingface.co/papers/2607.16859",
+      "abstract": "We revisit dataset distillation from an outcome-centric perspective. Rather than aligning process surrogates (per-step gradients or training trajectories), Influence Matching (Inf-Match) aligns the final outcome of training: it learns a compact synthetic set whose effect on the converged parameters matches that of the full dataset. Concretely, we introduce a fully differentiable, sample-level influence estimator that quantifies parameter shifts from adding or removing data, without time-consumin",
+      "authors": [
+        "Haoru Tan",
+        "Wang Wang",
+        "Sitong Wu",
+        "Xiuzhe Wu",
+        "Yangtian Sun"
+      ],
+      "published": "2026-07-18",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
       "title": "SLAM in Low-Light Environments: Project Report",
       "url": "https://huggingface.co/papers/2607.17699",
       "abstract": "Simultaneous localization and mapping (SLAM) is one of the fundamental problems in robotics, as it enables autonomous operations in real-world scenarios. Under low illumination, reduced contrast, sensor noise, and motion blur degrade both feature extraction and feature matching, while compensating with LiDAR, depth, or thermal sensors raises cost, power draw, and integration complexity. Existing benchmarks remain dominated by well-lit indoor or daylight sequences, leaving open how far SLAM with ",
@@ -7333,67 +7397,8 @@
       "source": "arXiv",
       "category": "NLP / Computation and Language",
       "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "Frontier AI performance across the business disciplines: a case-grounded benchmark of knowledge work and analytical reasoning",
-      "url": "http://arxiv.org/abs/2607.16057v1",
-      "abstract": "Large language models (LLMs) are improving rapidly as reflected in benchmark scores, yet these AI benchmarks largely test capabilities such as factual recall, narrow question answering, mathematical problem-solving, and coding and agentic tool-use. What remains poorly measured is AI progress on the analytical knowledge work white-collar professionals perform daily, including synthesizing complex information, exercising judgment under uncertainty and incomplete information, applying strategic and",
-      "authors": [
-        "Ajay Patel",
-        "Kartik Hosanagar",
-        "Ramayya Krishnan",
-        "Chris Callison-Burch",
-        "Karim Lakhani"
-      ],
-      "published": "2026-07-17",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "Frontier Language Models Struggle to Copy: Text Can Be Better Viewed in 2D",
-      "url": "http://arxiv.org/abs/2607.16072v1",
-      "abstract": "While large language models (LLMs) can solve advanced reasoning problems in seconds, we show that even frontier models fail to perform a much simpler operation: exactly copying an input string that lies well within their context windows. We attribute this failure to positional encodings in Transformer architectures, whose inductive bias favors copying through a shortcut based on matching local contexts rather than carefully locating the corresponding input positions. To address this issue, we in",
-      "authors": [
-        "Haodong Wen",
-        "Yiran Zhang",
-        "Yingfa Chen",
-        "Kaifeng Lyu"
-      ],
-      "published": "2026-07-17",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "HCIG: A Hierarchical Cross-Modal Incongruity Graph Network for Multimodal Sarcasm and Cyberbullying Detection",
-      "url": "http://arxiv.org/abs/2607.16076v1",
-      "abstract": "Multimodal sarcasm and cyberbullying detection remain challenging because the intended meaning often emerges from incongruity between textual and visual information rather than from either modality alone. Existing multimodal approaches primarily rely on feature fusion or cross-modal attention, which may not effectively capture hierarchical semantic inconsistencies across different levels of representation. To address this limitation, this paper proposes HCIG (Hierarchical Cross-modal Incongruity",
-      "authors": [
-        "Bhavana Verma",
-        "Priyanka Meel",
-        "Dinesh Kumar Vishwakarma"
-      ],
-      "published": "2026-07-17",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "Controlling Implicit Shortcut Reliance in L2 Spoken English Auto-markers",
-      "url": "http://arxiv.org/abs/2607.16085v1",
-      "abstract": "Increasingly, speech and language processing tasks take either audio or text directly rather than extracting features from these as the input to the classifier or regressor. Often these systems make use of complex, for example transformer-based, processes that have the ability to derive highly non-linear mappings between the input and the output. Unfortunately these systems can also learn ''shortcuts'' where the classifier is overly reliant on particular aspects of the input to yield the output.",
-      "authors": [
-        "Shilin Gao",
-        "Mark J. F. Gales",
-        "Kate M. Knill"
-      ],
-      "published": "2026-07-17",
-      "source": "arXiv",
-      "category": "NLP / Computation and Language",
-      "arxiv_category": "cs.CL"
     }
   ],
-  "last_updated": "2026-07-24T09:01:35.953539",
+  "last_updated": "2026-07-25T08:31:36.878531",
   "total": 500
 }
