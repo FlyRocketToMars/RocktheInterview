@@ -1,6 +1,80 @@
 {
   "top_papers": [
     {
+      "title": "Σ-Mem: An Online Reliability Memory for LLM-based Multi-Agent Systems",
+      "url": "https://huggingface.co/papers/2607.27958",
+      "abstract": "Memory is central to long-horizon LLM agents, yet existing memory systems primarily preserve interaction content rather than modeling which agents can be trusted and under what conditions. This limitation is particularly important in multi-agent systems, where a central model may be unable to directly verify plausible or correlated peer responses. We introduce Σ-Mem, an online reliability memory that records historical competence evidence for individual peers and peer relationship evidence acros",
+      "authors": [
+        "Peilin Feng",
+        "Suorong Yang",
+        "Soujanya Poria"
+      ],
+      "published": "2026-07-30",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 8
+    },
+    {
+      "title": "Fairness Pruning: Locating Demographic Bias in GLU-MLP Layers via Differential Activations",
+      "url": "https://huggingface.co/papers/2607.28319",
+      "abstract": "This work presents Fairness Pruning, a lightweight structural intervention method designed for the management and future mitigation of demographic bias in large language models (LLMs). As a foundational empirical validation of this method, this work focuses on causal bias localization. Using minimally contrastive prompt pairs and inference-time activation capture, the method identifies neurons that react differentially when processing demographic attributes in GLU architectures, evaluating the s",
+      "authors": [
+        "Pere Martra",
+        "Eugenio Martínez Cámara",
+        "Alfonso Ureña López"
+      ],
+      "published": "2026-07-30",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Beyond Geometric Complementarity: Coherent Overlap in Sparse Mixture-of-Experts Routing",
+      "url": "https://huggingface.co/papers/2607.28308",
+      "abstract": "Sparse mixture-of-experts (MoE) language models route each token to multiple experts, suggesting a geometric account of their benefit: co-selected experts should contribute distinct representation directions. Existing evidence often conflates route coherence, candidate quality, and candidate-by-context interaction. We distinguish these quantities using an Expert Subspace Separation Index (ESSI), matched-route residuals, and a prefix-controlled 2times2 factorial; frozen-route interventions and a ",
+      "authors": [
+        "Huiyuan Tian",
+        "Bonan Xu",
+        "Shijian Li"
+      ],
+      "published": "2026-07-30",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "β-OPSD: Deriving with Policy Optimization, Training with Self-Distillation",
+      "url": "https://huggingface.co/papers/2607.28582",
+      "abstract": "On-policy self-distillation (OPSD) is a promising approach to improve reasoning language models, but it remains brittle in practice: making it work reliably often requires substantial engineering effort. We identify a structural source of this difficulty: vanilla OPSD is precisely the β=1 member of a broader policy-optimization family, where β weights the KL penalty anchoring the student to a reference policy. This equivalence turns β from an implicit value fixed at one into a controllable regul",
+      "authors": [
+        "Jiawei Xu",
+        "Minghui Liu",
+        "Juzheng Zhang",
+        "Tom Goldstein",
+        "Furong Huang"
+      ],
+      "published": "2026-07-30",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 17
+    },
+    {
+      "title": "OmniScope: Modality-Decoupled Token Compression for Omnimodal Large Language Models",
+      "url": "https://huggingface.co/papers/2607.23193",
+      "abstract": "Existing token compression methods for omnimodal large language models typically rely on one modality to determine what to retain in the other. We show that this assumption often breaks down: for the same query, audio and video relevance often peaks at different moments. This cross-modal salience mismatch makes unidirectional guidance prone to discarding answer-critical cues under aggressive compression. We propose OmniScope, a training-free token compression framework that uses the query as a s",
+      "authors": [
+        "Jinsen Su",
+        "Yongdong Luo",
+        "Yuexiao Ma",
+        "Yibo Hu",
+        "Meiguang Jin"
+      ],
+      "published": "2026-07-28",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
       "title": "VideoCoCo: Code-as-CoT for Physically-Consistent Video Generation via an Agentic Dual-Engine System",
       "url": "https://huggingface.co/papers/2607.27380",
       "abstract": "Text-to-video models have achieved remarkable visual quality, yet they still struggle to generate physically consistent dynamics because the temporal evolution of a scene must be inferred implicitly from a highly compressed text prompt. Existing chain-of-thought approaches introduce intermediate plans or visual states, but these representations are typically non-executable or temporally sparse, limiting their ability to instantiate and control the complete spatiotemporal process. To address this",
@@ -7329,85 +7403,8 @@
       "source": "arXiv",
       "category": "Information Retrieval / RecSys",
       "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "Legal Nugget Extraction for Granular Retrieval over Long Jurisprudential Texts",
-      "url": "http://arxiv.org/abs/2607.22479v1",
-      "abstract": "Legal retrieval over jurisprudential collections is challenging because court decisions are long, heterogeneous documents whose relevant legal thesis may occupy only a small portion of the text. This paper asks whether legal nuggets, defined as short and self-contained legal theses extracted from source documents, can improve dense retrieval over Brazilian legal collections. We propose a pipeline that extracts nuggets from each document, indexes them with embeddings, retrieves nugget-level evide",
-      "authors": [
-        "Lucas Pereira",
-        "Erick Brito",
-        "Roberto Lotufo",
-        "Jayr Pereira"
-      ],
-      "published": "2026-07-24",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "HiKV: Hierarchical Importance-Aware KV Cache with Hardware Acceleration for LLM Decoding",
-      "url": "http://arxiv.org/abs/2607.22389v1",
-      "abstract": "With the rapid adoption of long-context large language models (LLMs), the continuously growing KV cache during decoding has become the critical memory bottleneck. To tackle this challenge, we propose HiKV, a novel algorithm-hardware co-design that exploits KV cache redundancy through hierarchical importance awareness. Algorithmically, HiKV compresses the KV cache at two granularities: Stage I evicts unimportant tokens within a fixed budget, and Stage II further loads only the significant element",
-      "authors": [
-        "Chao Fang",
-        "Jun Yin",
-        "Man Shi",
-        "Marian Verhelst"
-      ],
-      "published": "2026-07-24",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "A Self-Calibrating Agentic AI Framework for Autonomous Edge Resource Allocation",
-      "url": "http://arxiv.org/abs/2607.22400v1",
-      "abstract": "Large Language Models (LLMs) are increasingly deployed as autonomous agents, transitioning from static conversational interfaces to dynamic systems capable of complex reasoning, tool execution, and decision-making. However, the operational reliability of these agentic AI systems is fundamentally challenged by the absence of reliable ground truth in open-ended environments and the risk of increasing operational drift over time. To address this challenge, we propose and experimentally evaluate an ",
-      "authors": [
-        "Fin Gentzen",
-        "Marla Grunewald",
-        "Iulisloi Zacarias",
-        "Mounir Bensalem",
-        "Admela Jukan"
-      ],
-      "published": "2026-07-24",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "PRIMS: Physics-guided Representation for Fluid Identification in Multimodal Sensing",
-      "url": "http://arxiv.org/abs/2607.22422v1",
-      "abstract": "Accurate on-device fluid identification is essential for microfluidic applications, yet maintaining reliability under varying flow, pressure, and temperature remains a key challenge. Existing learning-based methods often treat sensor signals as domain-agnostic features, neglecting the underlying physical relationships that govern fluid behavior, thereby limiting generalization and interpretability. To address this, we propose PRIMS, a physics-aware multimodal Transformer that integrates physical",
-      "authors": [
-        "Hai-Long Nguyen",
-        "Trung Thanh Nguyen",
-        "Lars Holm",
-        "Dennis Alveringh",
-        "Duc Viet Le"
-      ],
-      "published": "2026-07-24",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "Robot Learning to Communicate through Projected Visual Abstractions",
-      "url": "http://arxiv.org/abs/2607.22434v1",
-      "abstract": "Humans routinely communicate through abstractions of their bodies, including shadows, silhouettes, and reflections. Yet robots remain largely confined to expressing themselves through their physical morphology. Enabling robots to communicate through such projected visual abstractions requires reasoning not only about bodily motion but also about how that motion is transformed into an external representation perceived by an observer. Among these abstractions, shadows provide a particularly compel",
-      "authors": [
-        "Danyang Yan",
-        "Boyuan Wang",
-        "Jiaxun Liu",
-        "Boyuan Chen"
-      ],
-      "published": "2026-07-24",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
     }
   ],
-  "last_updated": "2026-07-31T09:21:49.700674",
+  "last_updated": "2026-08-01T08:37:59.252823",
   "total": 500
 }
