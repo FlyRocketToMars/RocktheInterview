@@ -1,6 +1,146 @@
 {
   "top_papers": [
     {
+      "title": "TailBooster: A Dual-Layer Generative Framework for Extreme Value Augmentation with Operational Validity Enforcement",
+      "url": "https://huggingface.co/papers/2608.11951",
+      "abstract": "Extreme events in air transport, such as severe arrival delays and abnormal air times, cause cascading network disruptions with substantial operational, economic, and safety costs. Such events are rare in historical records, leaving insufficient training signal for machine learning models. Synthetic data augmentation offers a principled solution, but conventional generative models under-represent distributional tails and give no guarantee against operationally infeasible instances, such as a sho",
+      "authors": [
+        "Karim Aly",
+        "Alexei Sharpanskykh",
+        "Jacco Hoekstra"
+      ],
+      "published": "2026-08-12",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "PixSDS: Why Latent SDS Makes Noisy Pixels",
+      "url": "https://huggingface.co/papers/2608.12997",
+      "abstract": "Score Distillation Sampling (SDS) enables text-to-3D generation by optimizing rendered images with a pretrained diffusion prior, but latent SDS often produces structured color artifacts and high-frequency texture noise. We identify a failure mode of latent SDS caused by VAE-induced pixel drift: the optimized image can move along pixel-space directions that are weakly constrained by the VAE encoder, so its latent representation remains clean and semantically meaningful while the image itself accu",
+      "authors": [
+        "Vsevolod Skorokhodov"
+      ],
+      "published": "2026-08-13",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
+      "title": "Specification-first convergence with an AI coding agent: a case study of dismantling a core architectural invariant across 189 files in a 717k-line codebase with no test oracle and no human code review",
+      "url": "https://huggingface.co/papers/2608.12440",
+      "abstract": "This paper reports a single, fully instrumented case study of a large-scale architectural refactoring by an AI coding agent under a specification-first protocol, with no human review of the generated code and no pre-existing oracle to validate the target behaviour. The task, dismantling a central invariant across a large interdependent codebase, was assessed by the author as effectively infeasible through incremental refactoring, the kind of change that conventionally calls for a rewrite instead",
+      "authors": [
+        "Joel Abenhaim"
+      ],
+      "published": "2026-08-12",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Hybrid-Policy Self-Editing for Composable Unstructured Knowledge Editing",
+      "url": "https://huggingface.co/papers/2608.11660",
+      "abstract": "Large language models (LLMs) achieve remarkable performance across natural language tasks, yet they are trained on static corpora and their knowledge quickly becomes outdated in a fast-changing world. This motivates knowledge editing (KE), which updates specific knowledge in an LLM without changing unrelated others. Recent works move from structured knowledge triples toward unstructured KE (UKE), where the edit is a free-form passage that may state multiple facts at once. Nonetheless, existing e",
+      "authors": [
+        "Tianci Liu",
+        "Zihan Dong",
+        "Tianchun Li",
+        "Yi-Chung Chen",
+        "Qiming Cao"
+      ],
+      "published": "2026-08-12",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "Mitigating Gender Bias in English to Romanian Machine Translation",
+      "url": "https://huggingface.co/papers/2608.08606",
+      "abstract": "Machine translation (MT) systems often fail to correctly translate gender, especially when converting from a gender-neutral language like English to a gendered target language such as Romanian. This bias results in translations that default to masculine forms or reinforce gender stereotypes. We propose a hybrid pipeline to mitigate this issue by combining large language model (LLM)-based gender classification with neural machine translation (NMT). Our system uses a fine-tuned LLM to detect the i",
+      "authors": [
+        "Ioana Grigore",
+        "Sergiu Nisioi"
+      ],
+      "published": "2026-08-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
+      "title": "From Inaudible Inputs to Model Failures: Low-Frequency Safety Risks in LALMs",
+      "url": "https://huggingface.co/papers/2608.09158",
+      "abstract": "Large audio-language models (LALMs) have demonstrated strong capabilities in understanding diverse audio inputs. This diversity includes low-frequency signals that are inaudible to humans but can still enter the model and influence its generation. However, the practical impact of such low-frequency inputs on LALMs remains largely unexplored. In this paper, we propose Intermittent Low-Frequency Lockout (ILL), an inaudible red teaming method that evaluates this risk using a universal waveform temp",
+      "authors": [
+        "Yuanhe Zhang",
+        "Weiliu Wang",
+        "Jie Ren",
+        "Liang Lin",
+        "Zhenhong Zhou"
+      ],
+      "published": "2026-08-10",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Context-Matched Distillation: Teacher Causality for Autoregressive Video Distillation",
+      "url": "https://huggingface.co/papers/2608.13391",
+      "abstract": "Interactive autoregressive video generation demands both low-latency rollouts and precise online control. Few-step distillation accelerates generation by reducing denoising steps, while online control imposes a causal constraint: frames and blocks should depend on history and controls available during generation. Existing video distribution matching distillation (DMD) pipelines, however, often supervise causal few-step students using bidirectional teachers that score complete clips. The score fo",
+      "authors": [
+        "Hmrishav Bandyopadhyay",
+        "Xuanchi Ren",
+        "Zijian Huang",
+        "Jay Zhangjie Wu",
+        "Tianshi Cao"
+      ],
+      "published": "2026-08-13",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "RibAssist 3D: Biplanar Rib-Fracture Detection, Addressing, and Selective 3D Localization from CT-Derived Projections",
+      "url": "https://huggingface.co/papers/2608.06914",
+      "abstract": "Rib fractures are common and time-consuming to localize on computed tomography (CT). We ask whether fractures detected independently in two orthogonal CT-derived projections (anteroposterior and lateral) can be paired across views and triangulated into reliable 3D points at a controlled rate of false outputs, and we answer it with a staged diagnostic study. The projection geometry is exact, and given correct correspondence, localization is accurate (median 4.0 mm, 88% within 10 mm, 93.6% rib-exa",
+      "authors": [
+        "Kabila Haile Soboka"
+      ],
+      "published": "2026-08-10",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 0
+    },
+    {
+      "title": "Thought-Level Beam Search for Reasoning",
+      "url": "https://huggingface.co/papers/2608.08020",
+      "abstract": "Test-time compute scaling is a primary driver of performance in large reasoning models (LRMs), but extreme inefficiency bounds current approaches, shifting the critical question from how much compute to spend, to where to allocate it. We formalize test-time reasoning as a constrained compute allocation problem over partial trajectories. Under a fixed hardware budget, existing paradigms fail to actively allocate the compute to the most promising partial progress: traditional parallel sampling tre",
+      "authors": [
+        "Lijie Yang",
+        "Hongyin Luo",
+        "Jiawei Zhao",
+        "Tri Dao",
+        "Ravi Netravali"
+      ],
+      "published": "2026-08-11",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "Maglev: Sliding Recurrent Memory",
+      "url": "https://huggingface.co/papers/2608.02870",
+      "abstract": "We introduce , a recurrent Transformer architecture with fixed-size memory that generalizes sliding-window attention while remaining parallelizable during training.  consists of two coupled models: a prefiller Q, which leverages full attentionIn practice, we use interleaved full and sliding-window attention for Q, as this yields stronger performance. The essential requirement is that Q be more expressive than P, with access to the full history. to produce memory targets m'_t, and a decoder P, wh",
+      "authors": [
+        "Bo Liu",
+        "Qiang Liu"
+      ],
+      "published": "2026-08-05",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
       "title": "Ready Cohorts: Bounding GPU Opportunity and Avoiding Host Round Trips in LLM-Agent Control",
       "url": "https://huggingface.co/papers/2608.12123",
       "abstract": "LLM-agent services repeatedly execute small deterministic transitions between model and tool calls: route an outcome, update state, and emit the next effect. We ask when this control path exposes enough concurrent work for GPU execution, and what changes when a GPU-computed route decision remains on device. We formalize the ready-cohort boundary using fixed-partition share F, exact offline share P*, local upper bound U, and online achieved share A. Under zero service time, unlimited capacity, an",
@@ -7290,159 +7430,8 @@
       "source": "arXiv",
       "category": "Computer Vision",
       "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Same Attention, Different Truths: Put Logit-Lens over Visual Attention to Detect and Mitigate LVLM Object Hallucination",
-      "url": "http://arxiv.org/abs/2608.07302v1",
-      "abstract": "Large Vision-Language Models (LVLMs) often suffer from object hallucination, generating objects that are absent from the image. Prior work largely attributes this to insufficient visual attention. However, we find that both real and hallucinated objects receive equally strong visual attention in the model's mid-to-late layers, suggesting that the key issue may not be how much the model attends, but what it attends to and why. To this end, we decode the visual features of high-attention regions u",
-      "authors": [
-        "Zichuan Wang",
-        "Songlin Yang",
-        "Bo Peng",
-        "Zhenchen Tang",
-        "Yang Li"
-      ],
-      "published": "2026-08-07",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "TEMPO: Semantic-Action Decoupled RL Post-Training for Vision-Language-Action Models",
-      "url": "http://arxiv.org/abs/2608.07314v1",
-      "abstract": "Vision-language-action (VLA) models are commonly adapted to downstream manipulation tasks via supervised fine-tuning (SFT) or online reinforcement learning (RL) post-training. SFT is prone to distribution mismatch, and existing RL approaches typically apply a single, uniform update strategy to all model components, ignoring their distinct functional roles. We propose TEMPO, a semantic-action decoupled, two-timescale RL post-training framework for VLA models. TEMPO freezes the pretrained vision-l",
-      "authors": [
-        "Ziheng Liu",
-        "Quantao Yang"
-      ],
-      "published": "2026-08-07",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "H2AL: Hyperbolic Hierarchy-aware Aggregative Learning for Registration-based Few-shot Medical Image Segmentation",
-      "url": "http://arxiv.org/abs/2608.07340v1",
-      "abstract": "Registration-based Few-shot medical image segmentation (RFMIS) aims to generate pseudo-labels for unlabeled images by warping a labeled image through registration. However, existing methods primarily perform pixel-level optimization and inference in Euclidean space, treating anatomical structures as flat and disjoint. This neglect of inherent hierarchies degrades pseudo-label quality and weakens the discrimination of ambiguous regions, limiting the segmentation performance. To overcome this chal",
-      "authors": [
-        "Jia Wang",
-        "Jiaming Cai",
-        "Zunying Hu",
-        "Zhanjie Wu",
-        "Jinyuan Liu"
-      ],
-      "published": "2026-08-07",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Depth-Wise Probing and Pruning of the Planning Token in a Driving Vision-Language-Action Model",
-      "url": "http://arxiv.org/abs/2608.07361v1",
-      "abstract": "Vision-language-action (VLA) models route driving decisions through a deep language model, but it is unclear how much of that depth the action itself requires. We study a representative driving VLA whose entire plan is carried by a single planning token that a generative planner decodes into a trajectory. Borrowing the planner as a trajectory-space logit lens, we decode the planning token from every one of the 32 decoder layers and measure two signals: the linear decodability of the navigation c",
-      "authors": [
-        "Harisankar Babu",
-        "Benjamin Coors",
-        "Christopher Lang",
-        "Hendrik Berkemeyer",
-        "Tamim Asfour"
-      ],
-      "published": "2026-08-07",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Measurements Automatically Extracted from Zero Echo Time MRI Using Deep Learning Image Segmentation and Geometric Modeling Agree with Expert Manual Readings",
-      "url": "http://arxiv.org/abs/2608.07368v1",
-      "abstract": "Computed tomography (CT) remains the reference for 3D osseous morphometry in femoroacetabular impingement (FAI) but requires ionizing radiation and manual measurement. Zero echo time (ZTE) MRI visualizes cortical bone and yields FAI angles that agree with CT, but automated angle extraction remains limited. We developed and validated automated FAI angle computation from ZTE MRI and assessed agreement with expert manual measurements in a cross-sectional study (level of evidence, 3). Pelvic ZTE MRI",
-      "authors": [
-        "Jack Consolini",
-        "Eric A. Bogner",
-        "Meghan Sahr",
-        "Matthew F. Koff",
-        "Kevin M. Koch"
-      ],
-      "published": "2026-08-07",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "SkySeaLand: A Wide-Format Satellite Transportation Benchmark with an Ultra-Lightweight Detection Baseline",
-      "url": "http://arxiv.org/abs/2608.07382v1",
-      "abstract": "Satellite object detection is challenged by small targets and wide-format scenes that lose detail under standard square-input resizing. We introduce SkySeaLand, a public dataset of 1,307 high-resolution satellite images and 19,101 verified bounding boxes across airplane, boat, car, and ship classes in terrestrial and maritime scenes. Native COCO and YOLO annotations are provided. The collection is dominated by large source images and wide scene geometry: 84.5 percent exceed 3,836 pixels on the l",
-      "authors": [
-        "Md. Zahid Hasan Riad",
-        "Md Sultanul Islam Ovi"
-      ],
-      "published": "2026-08-07",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "GeoDistill-Refine: Silhouette-First Geometry Distillation for Annotation-Free Spacecraft Segmentation",
-      "url": "http://arxiv.org/abs/2608.07405v1",
-      "abstract": "Foundation segmentation models can provide supervision for spacecraft imagery without manual training masks, but their predictions vary with textual prompts and may contain geometric errors that are amplified during distillation. This paper presents GeoDistill-Refine, a two-stage framework that transfers offline SAM 3 pseudo-masks to a compact segmentation network. Six fixed prompts are fused by an unweighted 50% vote to stabilize the teacher output. The student first learns the foreground silho",
-      "authors": [
-        "Yonglong Zhang",
-        "Zongwu Xie",
-        "Yang Liu"
-      ],
-      "published": "2026-08-07",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "UniJEPA: A Unified Joint-Embedding Predictive Architecture for Task-Agnostic Visual World Modeling",
-      "url": "http://arxiv.org/abs/2608.07409v1",
-      "abstract": "Joint-Embedding Predictive Architectures (JEPAs) have emerged as a principled framework for self-supervised learning of world models in compact latent spaces, yet existing methods are fragmented: some predict masked parts of a single image in latent space (I-JEPA), others learn to predict global photometric transformations (Image World Models), while video-scale JEPAs predict future temporal states and are post-trained for action-conditioned planning (V-JEPA~2, DINO-World, DINO-WM). These object",
-      "authors": [
-        "An Lanji",
-        "Dawei Liu",
-        "Jin Li",
-        "Haoran Xu",
-        "Mei Chen"
-      ],
-      "published": "2026-08-07",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "I Seek You in Videos: Identity-Conditioned Queries for Person-Centric Video Reasoning",
-      "url": "http://arxiv.org/abs/2608.07417v1",
-      "abstract": "Real-world video reasoning often involves multimodal, multi-source inputs, whereas existing video reasoning tasks typically assume a simplified video-text setting, limiting identity matching and person-centric reasoning. To bridge this gap, we introduce the Identity-conditioned Queries (ICQ) task, in which models are required to jointly associate and interpret an input video and a reference image of a person, and leverage this conditioning to address identity grounding, behavior understanding, a",
-      "authors": [
-        "Shibo Gao",
-        "Chongxiao Wang",
-        "Chenglong Huang",
-        "Jie Ma",
-        "Haolin Shi"
-      ],
-      "published": "2026-08-07",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
-    },
-    {
-      "title": "Conformal Coverage Guarantees for Any Video Temporal Grounder",
-      "url": "http://arxiv.org/abs/2608.07434v1",
-      "abstract": "Event boundaries in continuous video are ambiguous: re-annotate the same query-video pair and independent annotators mark moments that overlap by less than half on a large fraction of samples. The ground truth for video temporal grounding is therefore a distribution over intervals, yet every grounder returns a single interval with no statement of reliability, so at deployment a wrong interval is indistinguishable from a right one. COVER changes the output object: a post-hoc, model-agnostic wrapp",
-      "authors": [
-        "Aseel Mohamed",
-        "Rasul Khanbayov",
-        "Erchin Serpedin",
-        "Hasan Kurban"
-      ],
-      "published": "2026-08-07",
-      "source": "arXiv",
-      "category": "Computer Vision",
-      "arxiv_category": "cs.CV"
     }
   ],
-  "last_updated": "2026-08-14T07:55:53.139320",
+  "last_updated": "2026-08-15T07:05:09.972763",
   "total": 500
 }
