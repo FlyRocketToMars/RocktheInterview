@@ -1,6 +1,65 @@
 {
   "top_papers": [
     {
+      "title": "QCell: Recombining and Aligning Cell Queries for Overlapping Instance Segmentation",
+      "url": "https://huggingface.co/papers/2608.29253",
+      "abstract": "Instance segmentation of overlapping cells in microscopy remains challenging due to semi-transparent structures that produce weak boundaries and mixed visual evidence in overlap regions. Existing methods address this through local regions of interest or shape priors but lack global reasoning across overlapping objects. We present QCell, a novel query-based model that de-overlaps cell instances in microscopy scenes. Our approach combines (i) an instance recombination module that decomposes and re",
+      "authors": [
+        "Yaroslav Prytula",
+        "Anton Popov",
+        "Dmytro Fishman"
+      ],
+      "published": "2026-08-29",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 13
+    },
+    {
+      "title": "Locked at the Entrance, Open Inside: Where RLVR Narrows the Solution Space",
+      "url": "https://huggingface.co/papers/2608.29188",
+      "abstract": "Reinforcement learning with verifiable rewards (RLVR) substantially improves single-sample accuracy (pass@1) but causes the policy's solution space to contract, diminishing the returns of test-time scaling. In this work, we investigate where inside a reasoning trajectory this breadth is lost: does the policy fail to access a valid solution family, or does it fail to execute computation once initiated? To disentangle access from execution, we analyze the Countdown task, whose solution space can b",
+      "authors": [
+        "Qiancheng Zhou",
+        "Ruizhe Li"
+      ],
+      "published": "2026-08-29",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 8
+    },
+    {
+      "title": "VeriPhy: Agentic Physical Reasoning for World Model Evaluation and Refinement",
+      "url": "https://huggingface.co/papers/2609.03153",
+      "abstract": "Visual fluency in generated video does not imply physical reliability, and a scalar quality score alone is incapable of indicating the obligation a clip violates or the moment it fails. We present VeriPhy, an auditable physical-verification system in which a text-only planner compiles the prompt into typed physical obligations and a statically validated execution plan before any frame is observed. During execution, observations gate and scope only declared calls to frozen low-level experts (e.g.",
+      "authors": [
+        "Wenzhuo Xu",
+        "Yuchen Zhu",
+        "Chongjian Ge",
+        "Xuan Shen",
+        "Jing Shi"
+      ],
+      "published": "2026-09-02",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 12
+    },
+    {
+      "title": "RoboTok: An Internet-Scale Data Engine for Human Demonstration Retrieval and Dexterous Manipulation Learning",
+      "url": "https://huggingface.co/papers/2609.03199",
+      "abstract": "Robot learning increasingly depends on broad and diverse demonstrations, yet collecting robot data remains expensive and poorly suited to covering the long tail of real-world tasks. To address this bottleneck, we introduce RoboTok, an internet-scale data engine that, given a query human manipulation video, retrieves manipulation-relevant human demonstrations from web videos for training dexterous robot policies. Specifically, we learn a latent motion space from 3D hand trajectories expressed in ",
+      "authors": [
+        "Howard Qian",
+        "Yiting Chen",
+        "Yunfei Xie",
+        "Kejia Ren",
+        "Podshara Chanrungmaneekul"
+      ],
+      "published": "2026-09-02",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 34
+    },
+    {
       "title": "Debias-SparseGPT: Bias-Aware Pruning for Large Language Models",
       "url": "https://huggingface.co/papers/2609.02496",
       "abstract": "Model compression techniques such as pruning and quantization facilitate the efficient deployment and acceleration of Large Language Models (LLMs). However, recent studies show that weight sparsification methods, such as SparseGPT, can amplify existing biases in models, with outputs varying significantly depending on persona cues in the prompt. In this paper, we introduce Debias-SparseGPT, a post-training pruning method incorporating representational debiasing using a second-order term defined o",
@@ -7368,65 +7427,8 @@
       "source": "arXiv",
       "category": "Statistical ML",
       "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "I-FLOP: Fast Learning of Order and Parents from Interventional Data",
-      "url": "http://arxiv.org/abs/2608.28245v1",
-      "abstract": "We extend the FLOP (fast learning of order and parents) algorithm recently proposed by Wienöbst et al. (2026) from observational to interventional data. In particular, we use the interventional BIC score of Hauser and Bühlmann (2012), adapting it to be used with the iterative Cholesky-based score updates that are partly responsible for FLOP's speed. We show that, in the sample limit, I-FLOP recovers a DAG in the same interventional Markov equivalence class as the data-generating DAG. We compare ",
-      "authors": [
-        "Liuting Chen",
-        "Alex Markham"
-      ],
-      "published": "2026-08-28",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Localizing Global Discrepancies: Marginal Contributions and Contextual Anomaly Detection",
-      "url": "http://arxiv.org/abs/2608.28375v1",
-      "abstract": "Global goodness-of-fit and discrepancy statistics can establish that a sample departs from a reference distribution without identifying which observations drive the departure. We develop a framework for this localization problem by assigning to each observation its conditional or marginal contribution across random statistical contexts. This connects resampling diagnostics and data valuation to projection theory and event-level anomaly detection. For symmetric statistics, fixed-size replacement ",
-      "authors": [
-        "Tommaso dorigo"
-      ],
-      "published": "2026-08-28",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "LitCurate: A Configuration-Driven AI-Assisted Framework for Scientific Database Construction with an Application to Lower-Mantle Equation-of-State Data",
-      "url": "http://arxiv.org/abs/2608.27629v1",
-      "abstract": "The growing scientific literature contains decades of experimental and computational results that could support data-driven and physics-based modeling, yet much of this infor- mation remains locked in publications and is not readily usable for large-scale analysis or sci- entific software. Building structured databases from the literature is particularly challenging whenrelevantstudiesmustfirstbediscoveredamonglargecollectionsofpapersandreported quantities must be extracted with enough scientifi",
-      "authors": [
-        "Abin Shakya",
-        "Wilson Samuels",
-        "Dominica Wilson",
-        "Gioia A. Marchi",
-        "Israa Draz"
-      ],
-      "published": "2026-08-27",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "Beyond the Vacuum: Combinatorial Strategy Selection for Competitor-Aware Generative Engine Optimization",
-      "url": "http://arxiv.org/abs/2608.27631v1",
-      "abstract": "Generative Engine Optimization (GEO) has emerged as a novel paradigm for transforming content to increase visibility in Large Language Model (LLM) responses. Traditional GEO methods, however, select rewriting strategies in isolation, ignoring a critical externality: as adoption of content optimization grows, optimal strategies for rewriting content change. We formalize GEO as a competitor-aware strategy selection problem and propose a two-phase pipeline to solve it: (1) We use Bayesian Optimizat",
-      "authors": [
-        "Vaibhav Sourirajan",
-        "Yao Zhang",
-        "Himanshu Kumar",
-        "Sahil Wadhwa",
-        "Mann Patel"
-      ],
-      "published": "2026-08-27",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
     }
   ],
-  "last_updated": "2026-09-04T11:32:10.912758",
+  "last_updated": "2026-09-05T10:47:40.729581",
   "total": 500
 }
