@@ -1,6 +1,65 @@
 {
   "top_papers": [
     {
+      "title": "Memory as Plans: World-Action Modeling with Memory-Grounded Planning",
+      "url": "https://huggingface.co/papers/2609.11561",
+      "abstract": "Mainstream robotic policies often adopt a Markovian formulation, but many complex real-world manipulation tasks are inherently non-Markovian, requiring long-horizon memory beyond the current observation. Existing memory mechanisms often rely on language summaries, growing visual windows, or their combinations, and may therefore lose fine-grained visual evidence or face a trade-off between history coverage and execution efficiency. We introduce MaP-WAM, a Memory-as-Plans framework that decomposes",
+      "authors": [
+        "Sizhe Zhao",
+        "Haozhe Xie",
+        "Weiyu Zhao",
+        "Chenchu Zhang",
+        "Huan Wang"
+      ],
+      "published": "2026-09-10",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 22
+    },
+    {
+      "title": "Beyond Solver Verdicts: Generative Reward Models for Autoformalization",
+      "url": "https://huggingface.co/papers/2609.11085",
+      "abstract": "Neurosymbolic systems rely on mathematical solvers to guarantee reasoning correctness, yet solvers are fundamentally blind to whether a formal translation maintains strict reference-equivalence to a designated formalization. We formalize this vulnerability as Verdict-Preserving-Unfaithfulness (VPU): a failure mode where an incorrect encoding executes successfully and matches the expected verdict. We theoretically prove that structural, verdict-only verification heuristics are mathematically boun",
+      "authors": [
+        "Vikash Singh",
+        "Debargha Ganguly",
+        "Aman Goel",
+        "Ali Torkamani",
+        "Xiaoxue Han"
+      ],
+      "published": "2026-09-10",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 12
+    },
+    {
+      "title": "Adaptive Bridge: A Proxy-Based Decoupling Layer for Mitigating DDS Backpressure in ROS 2",
+      "url": "https://huggingface.co/papers/2608.15380",
+      "abstract": "In systems built on Robot Operating System 2 (ROS 2) and using Data Distribution Service (DDS), a single network-impaired or throttled subscriber on a RELIABLE topic can cause backpressure that degrades throughput and latency for all other subscribers, including safety-critical ones sharing the publisher, because the publisher's DDS writer can no longer accept new samples. We present Adaptive Bridge, a proxy-based layer that decouples critical subscribers from degraded or noncritical ones, there",
+      "authors": [
+        "Kaushalraj Puwar",
+        "B. Thangaraju"
+      ],
+      "published": "2026-09-06",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 12
+    },
+    {
+      "title": "Think Before You Link: Rarity, Reasoning, and Retrieval in Multilingual Entity Linking",
+      "url": "https://huggingface.co/papers/2609.10745",
+      "abstract": "Multimodal entity linking grounds entity mentions in text and images to knowledge-base entries. These systems degrade on rare entities, but prior work measures rarity primarily through popularity-based metrics such as pageviews. We broaden this view using knowledge-graph structural metrics that capture how well an entity is documented and connected. These metrics identify many rare entities that popularity metrics miss. Across the resulting rare-entity slices, state-of-the-art accuracy drops by ",
+      "authors": [
+        "Parinthapat Pengpun",
+        "Simran Khanuja",
+        "Graham Neubig"
+      ],
+      "published": "2026-09-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 12
+    },
+    {
       "title": "StochBench: A Domain-Specific Benchmark for Stochastic Processes in Lean",
       "url": "https://huggingface.co/papers/2609.09264",
       "abstract": "Leading benchmarks for formal theorem proving with large language models are small collections drawn from competition math, such as the IMO and Putnam, that poorly represent field-specific applications. We introduce StochBench, a Lean 4 benchmark of 450 graduate stochastic-processes problems at varying abstraction levels, each paired with its natural-language source. Addressing a field underrepresented in Mathlib, it covers finite and countable Markov chains, renewal processes, random walks, mar",
@@ -7314,66 +7373,8 @@
       "source": "arXiv",
       "category": "Statistical ML",
       "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "A Closed-Form Formula for Consistent Lipschitz Regression on Metric Spaces with Sparse Neural Network Realizations",
-      "url": "http://arxiv.org/abs/2609.03129v1",
-      "abstract": "Several classical machine-learning methods, such as KRRs and SVRs, are both computationally and analytically tractable since their estimators either admit closed-form expressions or are obtained by minimizing convex training objectives; neither feature is generally available for deep neural networks. We address this by introducing a simple closed-form ``two-stage'' compositional formula $\\hat{f}$ for reconstructing an unknown Lipschitz function $f:\\mathcal{X}\\to \\mathbb{R}$ on a metric space $(\\",
-      "authors": [
-        "Ruiyang Hong",
-        "Hrad Ghoukasian",
-        "Anastasis Kratsios"
-      ],
-      "published": "2026-09-02",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "How Perturbations Propagate: A Multi-Level Analysis of Robustness in Large Language Models",
-      "url": "http://arxiv.org/abs/2609.03322v1",
-      "abstract": "Language models encounter typos, corrupted text, altered words, and disrupted token order, yet robustness is usually evaluated only through output behavior. We study how six naturalistic and synthetic input perturbations propagate through decoder-only language models at three levels: output behavior, hidden-state geometry, and attention-head function. We evaluate behavioral effects across four GPT-2 and two Qwen2.5 checkpoints by analyzing layerwise geometry using centered kernel alignment and i",
-      "authors": [
-        "Dun Li Chan",
-        "Emily Liu",
-        "Niyathi Allu",
-        "Christian Hoang"
-      ],
-      "published": "2026-09-03",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "ALRA: Adaptive Local Relational Alignment for Logit-Based Pre-training Distillation of Autoregressive Language Models",
-      "url": "http://arxiv.org/abs/2609.03355v1",
-      "abstract": "Logit-based knowledge distillation for autoregressive language models usually aligns teacher and student next-token distributions over the entire vocabulary. However, this global objective overlooks relative preferences among likely token alternatives. Existing local approaches often select candidate tokens from either the teacher or the student alone. Teacher-only selection can miss tokens that the student considers likely, while student-only selection can rely on an inaccurate ranking early in",
-      "authors": [
-        "Quang Hoang Trung",
-        "Quang Huu Hieu",
-        "Nguyen Van Hoang Phuc",
-        "Vo Nguyen Le Duy"
-      ],
-      "published": "2026-09-03",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Spectral characteristics of autoencoder parameters as a vector representation of data",
-      "url": "http://arxiv.org/abs/2609.03495v1",
-      "abstract": "This paper examines the relationship between the parameters of autoencoder models and the statistical properties of the data on which they are trained. Autoencoders are defined as models with an encoder-decoder architecture, trained to reconstruct input data through a compressed latent representation. It is proposed that the model parameters can be viewed as a dense vector representation of the corresponding sample. To test this hypothesis, a theoretical and experimental study is conducted in wh",
-      "authors": [
-        "Maria Nikitina",
-        "Anton Bishuk",
-        "Oleg Bakhteev"
-      ],
-      "published": "2026-09-03",
-      "source": "arXiv",
-      "category": "Statistical ML",
-      "arxiv_category": "stat.ML"
     }
   ],
-  "last_updated": "2026-09-11T11:38:08.069975",
+  "last_updated": "2026-09-12T11:02:01.596231",
   "total": 500
 }
