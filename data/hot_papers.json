@@ -1,6 +1,347 @@
 {
   "top_papers": [
     {
+      "title": "GATOR: Generative and Agentic 3D Object Reconstruction From Casual Images",
+      "url": "https://huggingface.co/papers/2610.11215",
+      "abstract": "Reconstructing complete, scene-aligned 3D objects from casual images requires integrating sparse, uncertain observations and inferring surfaces hidden by occlusions. We present GATOR, a generative and agentic framework that recovers textured object assets and their scene-relative pose from one or more images. Our local modality mixer couples patch-aligned RGB, target-mask, and pointmap features before cross-view reasoning, preserving scene context while distinguishing the target from its surroun",
+      "authors": [
+        "Qirui Wu",
+        "Stan Birchfield",
+        "Hesam Rabeti",
+        "Angel X. Chang",
+        "Bowen Wen"
+      ],
+      "published": "2026-10-08",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Few-Step Generation via Data-Space Iteration",
+      "url": "https://huggingface.co/papers/2610.12102",
+      "abstract": "Flow matching has emerged as a scalable paradigm for training high-quality generative models, but sampling from the learned probability flow requires many network evaluations. Distillation can reduce this cost to one or a few evaluations; however, one-step generation often sacrifices quality, making few-step generation the practical operating regime. Existing few-step methods perform their iterative computation along the probability flow and therefore require a fixed, manually chosen timestep di",
+      "authors": [
+        "Shanchuan Lin",
+        "Yansong Peng",
+        "Fu-Yun Wang",
+        "Haoqi Fan"
+      ],
+      "published": "2026-10-08",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "Clinician use of language models diverges from how the models are evaluated",
+      "url": "https://huggingface.co/papers/2610.11069",
+      "abstract": "Large language model (LLM) assistants are being deployed to clinicians across health systems, and judgments about their readiness rest largely on benchmark scores, most of them derived from examination questions or curated cases. A benchmark predicts performance in deployment only to the extent that its items resemble real use, yet whether benchmarks reflect the work these systems receive has rarely been measured. Here we analyze 127,833 queries sent by 6,342 physicians, advanced practice provid",
+      "authors": [
+        "Krithik Vishwanath",
+        "Haitong Lin",
+        "Anton Alyakin",
+        "Jin Vivian Lee",
+        "D. Brock Hewitt"
+      ],
+      "published": "2026-10-08",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "BudgetPix: Compute-Adaptive Tokenization for Pixel-Space Image Diffusion",
+      "url": "https://huggingface.co/papers/2610.12307",
+      "abstract": "Most image generation models rely on uniform tokenization, allocating the exact same computational budget to equally-sized image patches. This static paradigm cannot adapt to different resource constraints at inference time, and yields suboptimal quality-cost tradeoff by devoting the same effort to both plain backgrounds and intricate details. We propose BudgetPix, an adaptive tokenization framework that dynamically allocates compute based on visual complexity and spatial layout, enabling flexib",
+      "authors": [
+        "Ozgur Kara",
+        "Yujia Chen",
+        "Daniel Watson",
+        "David Forsyth",
+        "James Matthew Rehg"
+      ],
+      "published": "2026-10-08",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "Mental-Models for Multi-Agent Systems",
+      "url": "https://huggingface.co/papers/2610.12453",
+      "abstract": "Large foundation models have accelerated progress toward general-purpose agents that interact with humans and other agents through language and multimodal signals. However, robust multi-agent decision-making requires reasoning about what other agents know, intend, and are likely to do under partial observability. Current agentic systems often operate through prompt design, memory, or end-to-end behavioral shaping, but typically do not learn an explicit partner-state representation that can be re",
+      "authors": [
+        "Hanan Gani",
+        "Lulu Shao",
+        "Manmohan Chandraker"
+      ],
+      "published": "2026-10-08",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "Humanity's Sixth Sense: Benchmarking Intuitive Visual Reasoning in Multimodal Models",
+      "url": "https://huggingface.co/papers/2610.08966",
+      "abstract": "Humans perceive far more in a scene than what is explicitly depicted: a single glance captures past causes and future trajectories; a quick peek determines if a vehicle can fit between two parked cars; a few seconds of video reveals who holds authority in a room; and a fleeting clip highlights subtle abstract patterns like unwritten rules or hidden labels. This capacity reflects a form of humanity's sixth sense: an intuitive reasoning mechanism that recovers implicit information beyond raw senso",
+      "authors": [
+        "Xingang Guo",
+        "Jing Gu",
+        "Brian Jang",
+        "Renxiong Wang",
+        "Utkarsh Tyagi"
+      ],
+      "published": "2026-10-08",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 19
+    },
+    {
+      "title": "Multi-Stream Attention Residuals",
+      "url": "https://huggingface.co/papers/2610.13630",
+      "abstract": "Attention Residuals (AttnRes) enables content-dependent retrieval over network depth, which can be viewed as single-stream softmax attention along the depth axis. Inspired by the success of multi-head attention along the sequence axis, we introduce Multi-Stream Attention Residuals (MSAR), an extension of AttnRes that generalizes this mechanism to multi-head depth attention, yielding substantial performance gains with minimal additional overhead. MSAR draws stream diversity from sequence context ",
+      "authors": [
+        "Xiaohan Qin",
+        "Xiangdong Zhang",
+        "Tuo Dai",
+        "Sunan Zou",
+        "Huaijin Wu"
+      ],
+      "published": "2026-10-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 33
+    },
+    {
+      "title": "Systematic Multi-Agent Vision-and-Language Navigation: Formulation, Benchmark, and Method",
+      "url": "https://huggingface.co/papers/2609.35965",
+      "abstract": "Vision-and-Language Navigation (VLN) has largely focused on a single agent following a single instruction, yet many real-world applications require teams of robots to tackle tasks beyond the capabilities of any individual agent. We present Systematic Multi-Agent Vision-and-Language Navigation, providing, to our knowledge, the first systematic formalization of multi-agent VLN as a constrained coordination problem: each mission consists of subtasks carrying dependency and resource constraints (pre",
+      "authors": [
+        "Yunzhe Xu",
+        "Zhe Liu"
+      ],
+      "published": "2026-10-07",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 10
+    },
+    {
+      "title": "Thinking Inertia: LLMs Keep Thinking When Told Not To",
+      "url": "https://huggingface.co/papers/2610.11765",
+      "abstract": "Large Language Models (LLMs) increasingly ship with explicit \"thinking modes\", yet their counterpart, \"no-thinking\", has received far less attention. We study LLMs' no-thinking behavior along two axes. a. How to measure no-thinking? Prior work typically defines no-thinking through proxies such as a disabled thinking mode or the absence of long traces. These proxies are unreliable: disabled thinking modes may still emit reasoning, while long traces may contain filler rather than genuine inference",
+      "authors": [
+        "Dianqiao Lei",
+        "Kevin Qinghong Lin",
+        "Pan Lu",
+        "Philip Torr",
+        "James Zou"
+      ],
+      "published": "2026-10-08",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 129
+    },
+    {
+      "title": "Relevance Does Not Imply Applicability: Experience Activation for Personal GUI Agents",
+      "url": "https://huggingface.co/papers/2609.33304",
+      "abstract": "Personal Graphical User Interface (GUI) agents rely on interaction history to infer what a user wants from ambiguous instructions and to anticipate recurring routines. Existing approaches retrieve task-relevant history and append it to the policy's context, implicitly assuming that experience relevant to a task remains useful for each decision within it. We find that this help is largely spent at the first decision: retrieved history strongly improves the opening step of an episode, yet provides",
+      "authors": [
+        "Fuyao Zhang",
+        "Xuan Wang",
+        "Zherui Li",
+        "Jiaming Zhang",
+        "Longtao Huang"
+      ],
+      "published": "2026-09-27",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 30
+    },
+    {
+      "title": "ARCS: Towards Precise Text-to-SQL via Structured Disambiguation",
+      "url": "https://huggingface.co/papers/2610.09396",
+      "abstract": "As text-to-SQL systems move beyond demonstrations toward real-world deployment, ambiguity in user questions becomes a primary source of errors. Such ambiguities are often subtle, domain- or data-specific, and can silently cause system outputs to deviate from the user's true intent. Ambiguity is traditionally addressed through conversational clarification, which is often inefficient, cognitively demanding, and poorly aligned with real-world user workflows. We propose structured disambiguation, a ",
+      "authors": [
+        "Yihao Hu",
+        "Yanlin Feng",
+        "Naoki Otani",
+        "Nikita Bhutani"
+      ],
+      "published": "2026-10-07",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 6
+    },
+    {
+      "title": "T3lescope: Arbitrary-Resolution High-Fidelity Generative Surface Reconstruction from Images",
+      "url": "https://huggingface.co/papers/2610.03308",
+      "abstract": "We reconstruct high-fidelity 3D scene meshes from posed multi-view images without per-scene optimization, across scales ranging from single objects to large outdoor scenes. Per-scene optimization methods lack the learned 3D prior needed when observations are sparse or surfaces are glossy or transparent. Existing generative methods leverage such priors to complete geometry in sparsely observed regions, but typically operate at a fixed resolution over a limited spatial extent, trading spatial cove",
+      "authors": [
+        "Atsuhiro Noguchi",
+        "Tianhan Xu",
+        "Yiming Liang",
+        "Yuta Kikuchi",
+        "Masahiro Ishiyama"
+      ],
+      "published": "2026-10-02",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 10
+    },
+    {
+      "title": "Scaling Agentic Data for Long-Horizon Terminal Intelligence",
+      "url": "https://huggingface.co/papers/2610.13166",
+      "abstract": "Terminal agents are moving beyond local operations toward completing real-world professional tasks. Short trajectories can demonstrate commands and tool calls, but they do not fully show how agents accumulate evidence through exploration, use it to inform judgments, continually adjust strategies based on feedback, and turn intermediate results into final deliverables. High-quality long-horizon trajectories capture these agentic behavioral patterns and their connections within a single problem-so",
+      "authors": [
+        "Shun Zou",
+        "Ziyu Ma",
+        "Yi Zou",
+        "Yong Wang",
+        "Lin Chen"
+      ],
+      "published": "2026-10-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 129
+    },
+    {
+      "title": "GroundingPI: A Grounding Foundation Model towards Physical Intelligence with Visual Primitives",
+      "url": "https://huggingface.co/papers/2609.39601",
+      "abstract": "Precise grounding matters. It specifies which object is the target and where that object is, even in clutter and for tiny objects, and it has to be fast enough for closed-loop control. Yet vision-language-action (VLA) and world-action models (WAMs) take perception from general-purpose vision-language and video-generation backbones, which still fail in these settings. We introduce GroundingPI, a 4B grounding foundation model that generates points and boxes as quantized coordinates in a shared voc",
+      "authors": [
+        "Qize Yu",
+        "Lianrui Fan",
+        "Boyu Chen",
+        "Jiaqi Liang",
+        "Xini Ding"
+      ],
+      "published": "2026-09-30",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 191
+    },
+    {
+      "title": "GroundAnything: Reconciling Parallel Decoding with Precise Visual Grounding at Flash Speed",
+      "url": "https://huggingface.co/papers/2609.39600",
+      "abstract": "Autoregressive (AR) grounding models serialize spatial predictions, introducing sequential latency and imposing a causal order on output tokens. We view grounding as visual evidence extraction: objects, locations, and spatial relations are jointly constrained by the image and query, yet their dependencies do not imply an intrinsic left-to-right generation order. This distinction makes bidirectional diffusion a natural fit, allowing spatial hypotheses to emerge in parallel and be jointly refined ",
+      "authors": [
+        "Qize Yu",
+        "Lianrui Fan",
+        "Bowen Ping",
+        "Xini Ding",
+        "Zetian Song"
+      ],
+      "published": "2026-09-30",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 20
+    },
+    {
+      "title": "AgentSWE: Can Coding Agents Build the Agent You Actually Want?",
+      "url": "https://huggingface.co/papers/2610.13361",
+      "abstract": "As the production of software passes into the hands of software itself, coding agents are increasingly commissioned to build agents fitted to their users' own workflows. This delegation carries a quiet assumption, that the delivered agent will faithfully serve the requirement it was built for, rather than merely appear to. No existing benchmark tests that assumption. We introduce AgentSWE, a benchmark for agent software engineering spanning three stages of the agent development lifecycle: Creati",
+      "authors": [
+        "Jiahao Wang",
+        "Hongjin Qian",
+        "Yuyang Hu",
+        "Jiajun Zhang",
+        "Zheng Liu"
+      ],
+      "published": "2026-10-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 199
+    },
+    {
+      "title": "Learning More by Training Less: Uncertainty-Guided Progressive Contraction for Efficient Reasoning Post-Training",
+      "url": "https://huggingface.co/papers/2610.12933",
+      "abstract": "Large language models have achieved remarkable advances in complex reasoning. However, scaling reasoning post-training with ever-larger corpora can substantially increase training cost without proportional performance gains. In this study, we therefore ask: how far can reasoning supervision be compressed without sacrificing capability? To this end, we propose an uncertainty-guided progressive contraction framework that concentrates supervision and optimization on the reasoning trajectories most ",
+      "authors": [
+        "Suorong Yang",
+        "Jiaxin Wang",
+        "Jiaming Su",
+        "Chentao Yue",
+        "Furao Shen"
+      ],
+      "published": "2026-10-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 5
+    },
+    {
+      "title": "SPLATIFY: Reproduce, Discover, Innovate! From Papers and Ideas to Trainable 3DGS Code",
+      "url": "https://huggingface.co/papers/2610.09116",
+      "abstract": "The rapid growth of 3D Gaussian Splatting (3DGS) research demands significant effort to reimplement papers before building on them. We introduce SPLATIFY, a multi-agent framework that converts 3DGS papers into trainable gsplat-based implementations, where generic paper-to-code methods and frontier models fail. SPLATIFY achieves this through five innovations: (1) A context-free grammar for gsplat over a modular method template with extension points for losses, densification, rendering, and optimi",
+      "authors": [
+        "Seemandhar Jain",
+        "Keshav Gupta",
+        "Manmohan Chandraker"
+      ],
+      "published": "2026-10-06",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "VIS-Ground: Video Interactive Storytelling with Contextual Grounding",
+      "url": "https://huggingface.co/papers/2610.09326",
+      "abstract": "Video interactive storytelling enables viewers to actively steer how a video unfolds. However, once we allow viewers to intervene during generation, a new challenge arises: The viewer's request can have latent dependencies on both the grounding source and the current rendered video state. These dependencies may not be explicitly stated in any individual input, but emerge only when the source, rendered history, and new viewer intent are considered jointly. Existing interactive video generation sy",
+      "authors": [
+        "Bingxuan Li",
+        "Yiwen Song",
+        "Xueqing Wu",
+        "Yanzhou Pan",
+        "Yang Li"
+      ],
+      "published": "2026-10-07",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 63
+    },
+    {
+      "title": "CrossTimeEdit: A Decade-Spanning Cross-View Dataset and Reward-Guided Editing for Historical Street-View Generation",
+      "url": "https://huggingface.co/papers/2609.36616",
+      "abstract": "Historical street-view imagery records urban evolution, but uneven coverage leaves substantial gaps in historical records. Generating plausible past appearances requires restoring changed structures while preserving persistent scene content. We construct VIGOR-his, a decade-spanning cross-view dataset containing 43,653 location-level quadruplets across 11 cities on three continents. Its automated pipeline performs spatial pairing, consistency screening, change classification, and the generation ",
+      "authors": [
+        "Hanwen Lu",
+        "Jun He",
+        "Mingjia Yang",
+        "Hao Wei",
+        "Jinhao Huang"
+      ],
+      "published": "2026-09-29",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 20
+    },
+    {
+      "title": "Branching On-Policy Distillation",
+      "url": "https://huggingface.co/papers/2610.13481",
+      "abstract": "On-policy distillation (OPD) provides teacher supervision on student-generated trajectories, but a single trajectory realizes only one continuation at each decision, limiting supervision coverage under a finite sampling budget. We propose BranchOPD (Branching On-Policy Distillation), which selects informative decision points using student uncertainty and teacher-student disagreement, resamples student-policy continuations from shared prefixes, and applies token-level teacher supervision to both ",
+      "authors": [
+        "Dongyang Chen",
+        "Shudong Liu",
+        "Shubo Li",
+        "Duoxun Tang",
+        "Jinwei Liang"
+      ],
+      "published": "2026-10-09",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Initialization Improves LLM-Driven Discovery",
+      "url": "https://huggingface.co/papers/2610.00707",
+      "abstract": "Large Language Models (LLMs) have been used for novel discovery of algorithms, theorems, drugs, and other tasks through the use of harnesses that prompt an LLM to iteratively optimize an objective. In this work, we study the relationship between the population of previous iterates and eventual discovery success. We generalize past work on harness design to develop a suite of 12 harnesses called 'Modular' and characterize their performance across 5 diverse discovery tasks, finding that discovery ",
+      "authors": [
+        "Mansi Sakarvadia",
+        "Marco Ciccone",
+        "Colin Raffel"
+      ],
+      "published": "2026-09-30",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
       "title": "Reflex: Visually Grounded Reactive Humanoid Control",
       "url": "https://huggingface.co/papers/2610.12772",
       "abstract": "Humans effortlessly react to the world; they adeptly return a tennis shot, catch a falling cup, step aside from a passing cart, or pass a box tossed during truck unloading. These everyday actions require anticipating a moving target and reflexively responding with the whole body within about a second. Such visual reactive whole-body control remains challenging for humanoids, which must (1) coordinate whole-body control, (2) react to object dynamics in real time, and (3) ground perception in egoc",
@@ -7106,326 +7447,8 @@
       "source": "arXiv",
       "category": "NLP / Computation and Language",
       "arxiv_category": "cs.CL"
-    },
-    {
-      "title": "Principled Under Pressure: Post-Training Decides Whether LLMs Act on Their Own Moral Judgment",
-      "url": "http://arxiv.org/abs/2610.08670v1",
-      "abstract": "Language models increasingly act as agents. An agent that says an action is wrong and then takes it anyway is a different failure from one that does not know better, and evaluations of stated values cannot see it. We build a pre-registered panel of 248 scenarios across five kinds of pressure. Each scenario is posed twice to the same model, once as the agent choosing what to do and once in the third person asking which option is right, so the model's own judgment is the reference. Every scenario ",
-      "authors": [
-        "Orion Reblitz-Richardson"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Variance-Optimal Off-Policy Evaluation with Conjunct Effect Modeling",
-      "url": "http://arxiv.org/abs/2610.08677v1",
-      "abstract": "Off-policy evaluation (OPE) for contextual bandit policies becomes challenging when action-level importance weighting incurs excessive variance. Doubly robust (DR) estimation remains unbiased under common support but retains these high-variance action-level weights. A prior estimator, Off-policy evaluation with Conjunct Effect Model (OffCEM), replaces them with more stable cluster-level weights, at the cost of relying on local correctness of the reward model. In this paper, we show that, under t",
-      "authors": [
-        "Nicolò Felicioni",
-        "Michael Benigni",
-        "Maurizio Ferrari Dacrema",
-        "Paolo Cremonesi"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Secure Speculative Decoding for Large Language Models",
-      "url": "http://arxiv.org/abs/2610.08678v1",
-      "abstract": "Speculative decoding accelerates inference for a large language model (LLM), referred to as the \\emph{target model}, by first using a smaller model, referred to as the \\emph{draft model}, to generate candidate tokens and then verifying them with the target model for acceptance or rejection. Prior studies primarily focused on the efficiency-utility trade-off of speculative decoding, e.g., lossy speculative decoding, leaving its security implications largely unexplored.\n  In this work, we bridge t",
-      "authors": [
-        "Yichi Zhang",
-        "Zhiqi Wang",
-        "Neil Gong",
-        "Yuchen Yang"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "A Systematic Study of Small Language Models on Abstract Reasoning Tasks",
-      "url": "http://arxiv.org/abs/2610.08680v1",
-      "abstract": "Endpoint accuracy on abstract-reasoning benchmarks does not reveal whether a language model has acquired a transferable rule or fit distribution-specific regularities. We study this distinction in small language models on the ARC-TGI benchmark, which organizes abstract grid transformations into controllable task families and supports resampling, spatial shifts, and cross-benchmark transfer. Across more than 1,000 runs, we profile decoder-only, encoder--decoder, and mixture-of-experts model famil",
-      "authors": [
-        "Nur A Zarin Nishat",
-        "Jens Lehmann",
-        "Andrei Aioanei",
-        "Sahar Vahdati"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Probabilistic Counterfactual Inference for Discrete Outcomes in Gaussian-Process Causal Models",
-      "url": "http://arxiv.org/abs/2610.08689v1",
-      "abstract": "Counterfactual inference in Gaussian-process structural causal models (GP-SCMs) has been developed primarily for continuous endogenous variables, limiting applicability to causal graphs that contain discrete child nodes with continuous parents. We introduce a unified probabilistic framework for counterfactual inference with heterogeneous variable types by pairing GP predictors with explicit exogenous noise mechanisms. For discrete outcomes, we derive exact conditional noise-abduction procedures ",
-      "authors": [
-        "Juliette Sinnott",
-        "Amir-Hossein Karimi",
-        "Mohammad Kohandel"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "GeneICL: A Tabular Foundation Model for Bulk Transcriptomics",
-      "url": "http://arxiv.org/abs/2610.08694v1",
-      "abstract": "Gene expression is widely measured in biomedicine, yet clinical outcome prediction remains challenging due to high dimensionality, strong feature correlations, and limited labeled data. Large self-supervised transcriptomic foundation models often fail to outperform simple supervised baselines. Tabular foundation models offer an alternative through in-context learning, but are typically pretrained on generic synthetic data rather than transcriptomic structure. We ask whether transcriptomics-aware",
-      "authors": [
-        "Michael Bohl",
-        "Alexander Theus",
-        "David Wissel",
-        "Valentina Boeva"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Prediction-powered inference for time series across space",
-      "url": "http://arxiv.org/abs/2610.08715v1",
-      "abstract": "The following motif is common in spatiotemporal settings: we have a sequence of covariate and label pairs observed for a relatively short, recent time period. We have access to unlabeled covariates over a longer time period. Data is observed over many spatial locations. For instance, crop yield might be observed over a large geographical area for recent years, but weather data (which is informative about crop yield) is available for a much longer period. The goal is to estimate, at each spatial ",
-      "authors": [
-        "Shahzar Rizvi",
-        "David Burt",
-        "Vishwak Srinivasan",
-        "Renato Berlinghieri",
-        "Stefano Del Col"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Co-Evolving Paths and Flows via Path-Flow Alignment",
-      "url": "http://arxiv.org/abs/2610.08717v1",
-      "abstract": "We study path-flow alignment as a unified training objective for flow matching. Instead of fixing the interpolation path and learning only the velocity field, we jointly train an endpoint-preserving path network and a flow network using the same alignment loss: the flow learns to match the path velocity, and the path learns to align its velocity to the current flow. Although every fixed learned path defines a valid flow-matching objective, the alignment loss alone is not a reliable criterion for",
-      "authors": [
-        "Zeyu Michael Li",
-        "William Xingxu Chen",
-        "Xiang Cheng"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "When Forgetting is not Catastrophic: On the Mechanics of Spurious Forgetting",
-      "url": "http://arxiv.org/abs/2610.08718v1",
-      "abstract": "Knowledge that a language model appears to forget during finetuning often remains stored and can be recovered, a phenomenon called spurious forgetting. Finetuning on new facts can even produce forgetting that undoes itself: recall of the old facts collapses, recovers as training continues on new facts alone, and only then erodes for good. We seek to understand when such forgetting is not catastrophic. A minimal associative memory reproduces these dynamics with three ingredients: keys with shared",
-      "authors": [
-        "Vedant Palit",
-        "Florent Draye",
-        "Nicolas Zucchet",
-        "Zhijing Jin",
-        "Bernhard Schölkopf"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Does an Agent's History Tell You When Compaction Will Hurt? A Modest, Bounded Effect on the TRACE Paired-Replay Corpus",
-      "url": "http://arxiv.org/abs/2610.08722v1",
-      "abstract": "Many long-horizon agents compact their context on a global rule, usually a token budget, blind to what the agent was doing. We ask whether the agent's recent behaviour predicts when a compaction will hurt. TRACE's public corpus of 590 harness-triggered AppWorld compaction boundaries replays each boundary from a re-executed prefix state under the pre-compaction context and under the summary, and records the burden of the next actions: calls that error or repeat a call already made. We find that p",
-      "authors": [
-        "Egor Pakhomov",
-        "Erik Nijkamp"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Optimal and Efficient Online Inverse Optimization",
-      "url": "http://arxiv.org/abs/2610.08735v1",
-      "abstract": "In online inverse linear optimization, a learner recommends an action and then observes the choice of an expert who maximizes a fixed, unknown linear objective on $\\mathbb{R}^{d}$; the goal is to learn to optimize this objective without observing it. Sakaue recently obtained the optimal regret $O(\\sqrt d)$ with a randomized algorithm making $(dT)^{O(d)}$ linear optimizations per round, and asked whether it can be attained in polynomial time. We answer positively: our deterministic algorithm has ",
-      "authors": [
-        "Anupam Gupta",
-        "Guru Guruganesh",
-        "Honghao Lin",
-        "Vahab Mirrokni",
-        "Renato Paes Leme"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Denoising Hierarchical Representations: Joint Continuous Diffusion for Language Modeling",
-      "url": "http://arxiv.org/abs/2610.08738v1",
-      "abstract": "Diffusion Language Models (DLMs) hold the promise of order-agnostic, parallel text generation. Recently, continuous diffusion and flow matching models have seen substantial gains, driven by carefully crafted token representations and diffusion/flow spaces. In this work, we introduce Hierarchical Continuous Diffusion Language Models (H-CDLMs), a simple framework that further improves continuous DLMs with minimal compute and parameter overhead. Drawing on the discrete DLM and continuous image diff",
-      "authors": [
-        "Mathias Ollu",
-        "Nikos Komodakis"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "On the Computational Tractability of Robust Bandits",
-      "url": "http://arxiv.org/abs/2610.08740v1",
-      "abstract": "Learning when the environment does not belong to the learner's hypothesis class is typically handled using agnostic learning guarantees. However, for anything beyond supervised learning, agnostic guarantees are difficult to come by. Recently, imprecise bandits (Kosoy, 2025) (later renamed to robust bandits in Appel and Kosoy, 2025) were introduced as another approach to unrealizable learning in the bandits setting and a $Θ(\\sqrt{T})$ regret learner was shown for a large class. However, no comput",
-      "authors": [
-        "Vanessa Kosoy",
-        "Vinayak Pathak"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Reinforcement Learning with Conformal Action Sets: An Application to Sequential Recommendation",
-      "url": "http://arxiv.org/abs/2610.08743v1",
-      "abstract": "Sequential recommenders typically use a fixed slate size even though the number of useful alternatives changes within a session. We propose Reinforcement Learning with Calibrated Pruning (RLCP), which adapts the retained action set using critic scores and an online threshold. The threshold is updated from binary feedback indicating whether the set contains an action in a proxy target. We prove a deterministic bound on the observed proxy miss rate along adaptive trajectories. To quantify the effe",
-      "authors": [
-        "Wenwen Si",
-        "Honghao Wei"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Linear Bandits under Exact Sliding-Window Constraints",
-      "url": "http://arxiv.org/abs/2610.08745v1",
-      "abstract": "We study linear bandits under exact sliding-window constraints, where every consecutive block of actions must belong to a prescribed feasible set. In the offline setting, where the reward function is known, we show that convexity and cyclic-shift invariance make a stationary solution optimal when $w\\mid T$ and within an additive $O(w)$ gap otherwise. In the online setting, we show that geometric structure alone is insufficient for learning, and sublinear regret can be impossible. We introduce a ",
-      "authors": [
-        "Seyed Mohammad Hadi Hosseini",
-        "Yasin Abbasi-Yadkori",
-        "Sattar Vakili"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Neural Petri flows for chemical reactions",
-      "url": "http://arxiv.org/abs/2610.08750v1",
-      "abstract": "Petri nets have been used to describe chemical processes such as reactions.They map well to chemistry: Places are the bonds between atoms and the free valence of each atom, a token is a unit of bond order, a transition forms or breaks a bond, the conserved quantities are the valence budgets of the atoms, and the enabling rule is the valence rule. These semantics are not guaranteed by learned models of reactions or neural networks that are built on Petri nets that use the net as a scaffold for me",
-      "authors": [
-        "Jose Eduardo Escrig Molina",
-        "Daniel Probst"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Rapid Fredholm stabilization of the Kuramoto--Sivashinsky equation with unrestricted, spatially-varying anti-diffusion",
-      "url": "http://arxiv.org/abs/2610.08764v1",
-      "abstract": "We develop the first feedback design for rapid stabilization of the Kuramoto--Sivashinsky equation with a spatially varying anti-diffusion coefficient. For constant coefficients, the single-input Fredholm design of Coron and Lü (2015) excludes a discrete set of values at which repeated unstable eigenvalues cause a loss of controllability. We overcome this obstruction by introducing a second boundary input and assigning the two inputs distinct roles. The key idea, inspired by Heymann's Lemma, is ",
-      "authors": [
-        "Luke Bhan",
-        "Miroslav Krstic",
-        "Yuanyuan Shi"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "AdvSim2Real : Training Web Agents Against Adaptive Prompt Injection in a Web World Model",
-      "url": "http://arxiv.org/abs/2610.08773v1",
-      "abstract": "Web agents complete user requests by reading and acting on pages that third parties write, so an instruction planted on a page can redirect the agent away from the user's goal. The agent cannot simply ignore the page, because the page also holds the values and controls the task requires. Current defenses fine-tune the agent on injections fixed before training, and attackers that adapt to the trained model bypass them. Adversarial training lets the attacker adapt but keeps the tasks fixed, so a t",
-      "authors": [
-        "Sarim Hashmi",
-        "Mukul Ranjan",
-        "Kshitij Mishra",
-        "Mikhail Kuznetsov",
-        "Praneeth Vepakomma"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Conformal Prediction Sets Quantify Information Gain: A Theoretical Perspective",
-      "url": "http://arxiv.org/abs/2610.08785v1",
-      "abstract": "Conformal prediction is a popular tool for uncertainty quantification that outputs prediction sets with finite-sample coverage guarantees. While prediction set size is commonly used as a heuristic measure of uncertainty, the information-theoretic basis for this interpretation remains poorly understood. In this work, we provide such a foundation using a decision-theoretic generalization of entropy tailored to set-valued prediction. In particular, we introduce a family of generalized information m",
-      "authors": [
-        "Kevin Zhang",
-        "Stephen Bates"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "QF3: Fast Flow RL with Filtered Q-Gradients",
-      "url": "http://arxiv.org/abs/2610.08789v1",
-      "abstract": "Flow policies have become a standard policy class for learning robot behaviors from demonstrations, but reinforcement learning is still critical for improving pre-trained flow policies or learning them from scratch through interaction. We introduce QF3 (Fast Flow RL with Filtered Q-Gradients), an online off-policy RL algorithm that trains a flow policy with flow matching plus the critic's action gradient, backpropagated through a one-step prediction of the flow's output. To keep updates where th",
-      "authors": [
-        "Chung Min Kim",
-        "Brent Yi",
-        "David McAllister",
-        "Hongsuk Choi",
-        "Himanshu Gaurav Singh"
-      ],
-      "published": "2026-10-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Memadapter: Counterfactual Adaptation Against Memory-induced Sycophancy",
-      "url": "https://huggingface.co/papers/2610.05162",
-      "abstract": "Long-term memory enables LLM-based agents to retain and reuse information across tasks and sessions, supporting personalization and long-horizon interactions. However, persistent memories can also induce sycophancy, causing agents to over-align with users' historical beliefs even when they are inaccurate, outdated, or inconsistent with objective evidence. Existing mitigation methods assume that memory-induced sycophancy originates from biased or incorrect memories and attempt to reduce this risk",
-      "authors": [
-        "Ruqing Ning",
-        "Haibo Meng",
-        "Zhishang Xiang",
-        "Zerui Chen",
-        "Jinsong Su"
-      ],
-      "published": "2026-10-04",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 22
-    },
-    {
-      "title": "Code2Games: Enabling Coding Agents for Gaming World Generation",
-      "url": "https://huggingface.co/papers/2610.05033",
-      "abstract": "Generating a high-quality gaming world from a natural-language game intent requires joint reasoning about scene structure, spatial layout, gameplay objectives, interactive entities, and executable gameplay logic. Existing coding agents can generate individual assets, scenes, or scripts, but often struggle to maintain consistency across these components. We propose Code2Games, an agentic framework that builds a structured gaming world upon a base Blender world generated from the same game intent.",
-      "authors": [
-        "Wei Wu",
-        "Ziyang Xu",
-        "Zeyu Zhang",
-        "Yang Zhao",
-        "Hao Tang"
-      ],
-      "published": "2026-10-04",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 3
     }
   ],
-  "last_updated": "2026-10-12T15:50:20.785689",
+  "last_updated": "2026-10-13T14:26:35.404768",
   "total": 500
 }
