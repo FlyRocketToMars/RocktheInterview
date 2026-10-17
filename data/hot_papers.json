@@ -1,6 +1,154 @@
 {
   "top_papers": [
     {
+      "title": "PAIR: Bridging Perception and Action in Vision-Language-Action Models",
+      "url": "https://huggingface.co/papers/2610.09016",
+      "abstract": "Vision-language-action (VLA) models map visual observations and language instructions to continuous robot actions. This task requires a transition from representations that describe the scene and instruction to representations that support action generation. Many continuous-action VLAs leave this transition implicit and supervise it mainly through the final action-prediction loss. We introduce PAIR, a framework that learns a shared perception-action representation between these two spaces. Durin",
+      "authors": [
+        "Kaixi Feng",
+        "Guoheng Sun",
+        "Ang Li"
+      ],
+      "published": "2026-10-06",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Explaining the Roles of Experts in Mixture-of-Experts LLMs for Personalization",
+      "url": "https://huggingface.co/papers/2610.22127",
+      "abstract": "Personalization of Large Language Models (LLMs) is increasingly important for user-centric applications, yet prior methods mainly adapt dense LLMs, whose polysemantic neurons, each encoding multiple unrelated concepts, hinder localizing the components behind personalization, and thus understanding and controlling it. We propose to personalize Mixture-of-Experts (MoE) LLMs, which sparsely route each token to a few specialized experts, reducing polysemanticity and enabling such localization. We ad",
+      "authors": [
+        "Sekh Mainul Islam",
+        "Pepa Atanasova",
+        "Isabelle Augenstein"
+      ],
+      "published": "2026-10-15",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "Copy-Paste Language Models",
+      "url": "https://huggingface.co/papers/2610.19247",
+      "abstract": "Transformers are intuitively considered to be efficient at copying from their inputs. We actually show that the ability of LLMs to copy in context can be improved through explicit modeling. We propose Copy-Paste Language Models (CPLMs), which add a lightweight Copy-Paste head to the conventional language modeling (LM) head. CPLMs improve training efficiency, downstream performance, and offer new operating points in long-context and retrieval setups. We validate our approach by pretraining models",
+      "authors": [
+        "Nathan Godey",
+        "Yoav Artzi"
+      ],
+      "published": "2026-10-13",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "Learning to Read Out: Unembedding Dynamics in Language Model Pretraining",
+      "url": "https://huggingface.co/papers/2610.21025",
+      "abstract": "When does a language model acquire a capability? Developmental studies usually answer this by tracking when models start producing the correct token. But that prediction passes through the unembedding matrix, or readout, which is itself still being learned during pretraining. We show that a model's hidden states can encode task information before its own readout expresses it, so timelines read from outputs conflate what the model encodes with what its readout expresses. To track the readout dire",
+      "authors": [
+        "Matteo He",
+        "William F. Shen",
+        "Alex Iacob",
+        "Andrej Jovanovic",
+        "Xinchi Qiu"
+      ],
+      "published": "2026-10-14",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "LeanPRM: Lean-Grounded Process Supervision for Natural Language Proof Verification",
+      "url": "https://huggingface.co/papers/2610.17697",
+      "abstract": "AI systems now write long and difficult mathematical proofs, and checking their step-by-step validity is becoming a bottleneck. A learned verifier could check proofs cheaply, but training one requires a correctness label on every step, and such labels are hard to obtain for open-ended proofs. Existing methods take them from human annotators, which is costly, or derive them from final answers, which proofs do not have, and formalizing each proof in Lean requires expert effort. We introduce LeanPR",
+      "authors": [
+        "Rodney Lafuente-Mercado",
+        "Salman Rahman",
+        "Jingyan Shen",
+        "James Shiffer",
+        "Saadia Gabriel"
+      ],
+      "published": "2026-10-13",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "Scalable Weak-to-Strong Verifier Hardening for Agent Environments",
+      "url": "https://huggingface.co/papers/2610.15924",
+      "abstract": "Agent environments are essential for large language model (LLM) development. They use programmatic verifiers to turn complex outcomes into rewards. Verifiers can be attacked into awarding full credit to cheating agents without completing the intended task, causing inaccurate evaluation and misalignment in training. As agent environments scale in numbers and difficulty, so must the repairing of exploitable verifiers. To this end, we ask whether today's model with scaled compute can automatically ",
+      "authors": [
+        "Chong Zeng",
+        "Ziqian Zhong",
+        "Kexun Zhang",
+        "Ivan Bercovich",
+        "Ivgeni Segal"
+      ],
+      "published": "2026-10-11",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "LEASH: Uncertainty-Aware Weak-to-Strong Escalation and Oversight for Computer-Use Agents",
+      "url": "https://huggingface.co/papers/2610.22280",
+      "abstract": "Computer-use agents increasingly tackle long-horizon tasks, where running a frontier model at every step is expensive and a small open-weight model alone often fails. Weak-to-strong escalation offers a middle ground where a weak agent acts by default and hands control to a strong one only when needed. The core challenge is deciding when to escalate, which requires an uncertainty signal cheap enough to check at every step. However, even after handoff, the strong agent can still get lost, but a bl",
+      "authors": [
+        "Qingni Wang",
+        "Changdae Oh",
+        "Yuzhe Yang",
+        "Sharon Li",
+        "Jiachen Yang"
+      ],
+      "published": "2026-10-15",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 6
+    },
+    {
+      "title": "Diminishing Returns of Data in Sparse Autoencoders: Functional Behavior does not Guarantee Feature Reproducibility",
+      "url": "https://huggingface.co/papers/2610.20680",
+      "abstract": "Sparse autoencoders (SAEs) are typically trained on hundreds of millions to billions of activation tokens, yet little work has tested whether this scale is necessary. We study how much activation data SAEs need by training four SAE architectures on three language models with budgets ranging from 5M tokens to a 500M-token reference. We measure two notions of convergence: functional behavior on standard evaluations and one-to-one reproducibility of learned features. Functional data requirements ar",
+      "authors": [
+        "Sambit Ghosh",
+        "Madelyn Mathai",
+        "R. Venkatesh Babu",
+        "Chirag Agarwal"
+      ],
+      "published": "2026-10-14",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Behavioral Compositionality of Sparse Autoencoder Representations",
+      "url": "https://huggingface.co/papers/2610.21261",
+      "abstract": "Sparse autoencoders (SAEs) represent model activations with sparse, linearly decoded features, but the downstream effects of those features need not compose additively. We introduce SAE Additivity Residuals (SAR), which measure the behavioral variation left unexplained above a chosen interaction order. Under independent feature subset sampling, population SAR is exactly the normalized energy of interactions above that order and bounds coalition ordering error for the optimal low order approximat",
+      "authors": [
+        "Haotian Ma",
+        "Ziye Mei",
+        "Frederic Sala"
+      ],
+      "published": "2026-10-15",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 104
+    },
+    {
+      "title": "Mine, Sample, Render: Test-Time Diversity Alignment Of Generative Models",
+      "url": "https://huggingface.co/papers/2610.21185",
+      "abstract": "Modern generative models produce high-quality individual outputs but struggle to sample diversely, even when explicitly instructed to do so. We introduce MINE-SAMPLE-RENDER (MSR), a test-time approach that externalizes the diversity into an explicit, corpus-derived sampling procedure. Our pipeline (i) mines an interpretable categorical schema from a corpus of real artifacts and supplies statistics for sampling; (ii) samples attribute configurations from the corpus-derived statistics; (iii) uses ",
+      "authors": [
+        "Kostas Triaridis",
+        "Morris E. Sharp",
+        "Nebojsa Jojic"
+      ],
+      "published": "2026-10-15",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 5
+    },
+    {
       "title": "Each Reward to Its Relevant Tokens: Reward-Specific Token-Level Credit Assignment for Multi-Reward RL",
       "url": "https://huggingface.co/papers/2610.21439",
       "abstract": "Language models are increasingly trained against several verifiable rewards at once, such as the correctness and the format of a tool call, or the individual constraints of a complex instruction. Reward-decoupled normalization (GDPO) normalizes each reward separately so that different reward combinations keep distinct advantages, but it still spreads every reward's advantage evenly over the whole response, although each verifier checks only a few positions. We propose MRTPO, which assigns the ad",
@@ -7285,159 +7433,8 @@
       "source": "HuggingFace Daily",
       "category": "AI/ML (Trending)",
       "upvotes": 5
-    },
-    {
-      "title": "MIRA: A Musical Intent Refinement Agent for Aligning Text-to-Music Generation with User Intent",
-      "url": "https://huggingface.co/papers/2610.10355",
-      "abstract": "Text-to-music systems produce increasingly convincing audio, yet evaluation reveals little about whether the result matches user intent. A global text-audio relevance score can overlook the implicit intent in underspecified prompts and mask failures in specific requirements, such as instrumentation, structure, rhythm, or mood progression. To bridge this gap, we formulate text-to-music intent alignment as satisfying a per-request rubric of independently verifiable items covering both a request's ",
-      "authors": [
-        "Zekai Liu",
-        "Zhilin Wang",
-        "Xuzheng He",
-        "Yu Cheng",
-        "Yang Yang"
-      ],
-      "published": "2026-10-07",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 2
-    },
-    {
-      "title": "SpecFold: Folding Multi-Branch Redundancy for Faster Speculative Decoding in Diffusion Language Models",
-      "url": "https://huggingface.co/papers/2610.04875",
-      "abstract": "Diffusion large language models (DLLMs) generate text through iterative block denoising, and multi-branch speculative decoding accelerates this process by verifying a main branch together with multiple draft branches in a single forward pass. While prior DLLM acceleration methods primarily exploit temporal redundancy across denoising steps, we identify a complementary redundancy axis within each speculative verification step: multi-branch computational redundancy. During speculative verification",
-      "authors": [
-        "Chung-En Ho",
-        "Weiyu Sun",
-        "Cheng-Jhih Shih",
-        "He Li",
-        "Yong Liu"
-      ],
-      "published": "2026-10-06",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 3
-    },
-    {
-      "title": "Synthesis Through Simulation: Generating Coherent Enterprise Data via Scalable Agent-System Interaction",
-      "url": "https://huggingface.co/papers/2610.10549",
-      "abstract": "Tool-calling agents have become central to enterprise AI, yet training and evaluating them at scale remains severely constrained due to business and legal restrictions on enterprise systems, data, and database schemas. Tabular data synthesis offers a natural alternative, but its effectiveness is fundamentally limited by structural validity and schema availability, while procedure-based approaches yield the opposite weakness, typically lacking distributional fidelity without per-domain authoring.",
-      "authors": [
-        "Yipeng Li",
-        "Ashutosh Hathidara",
-        "Jane Lo",
-        "Harshavardhan Abichandani",
-        "Gunraj Singh"
-      ],
-      "published": "2026-09-24",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 3
-    },
-    {
-      "title": "Frozen Models, Evolving Expertise: Model-Agnostic Learning from Deployment Experience for Multimodal Medical AI",
-      "url": "https://huggingface.co/papers/2610.09146",
-      "abstract": "Large language models (LLMs) and vision-language models (VLMs) are usually frozen after deployment, so they do not learn from the cases they solve. This is especially concerning in medicine, where new clinical evidence, updated guidelines, and new therapies can change established practice. Fine-tuning can update the model, but it requires access to model weights and additional training. Parameter-free methods avoid training, but they may overfit a fixed validation set, lack reliable domain knowl",
-      "authors": [
-        "Yexiao He",
-        "Yucheng Tang",
-        "Pengfei Guo",
-        "Yufan He",
-        "Andriy Myronenko"
-      ],
-      "published": "2026-10-06",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 2
-    },
-    {
-      "title": "Mara Chain: Rethinking Failure as a Stepping Stone for AI System Auto-Evolution",
-      "url": "https://huggingface.co/papers/2609.35855",
-      "abstract": "Optimizing deployed AI systems increasingly amounts to editing prompts, skills, harnesses, and code rather than model weights. Existing approaches commonly optimize these artifacts through propose-evaluate-select procedures, where candidate configurations are evaluated and only those meeting an acceptance criterion are selected. Yet our analysis shows that discarded candidates often contain information critical for subsequent optimization. Discarding them causes later proposals to revisit the sa",
-      "authors": [
-        "Yubin Lyu",
-        "Fu Li",
-        "Jiawei Fei",
-        "Yang Zhao",
-        "Weixing Mei"
-      ],
-      "published": "2026-09-25",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 5
-    },
-    {
-      "title": "A GPU-Parallel Framework for Heterogeneous Multi-Task Reinforcement Learning",
-      "url": "https://huggingface.co/papers/2606.03335",
-      "abstract": "GPU-parallel simulation provides abundant robot interaction, but existing benchmarks rarely combine this scale with heterogeneous manipulation tasks and standardized multi-task RL evaluation. We introduce Hebero (Heterogeneous Benchmark for Robot Learning), a GPU-parallel Isaac Lab benchmark that enables efficient joint training and evaluation of a single policy across all 40 heterogeneous tasks. Scaling experiments show that increasing parallel replicas per task improves success under a fixed w",
-      "authors": [
-        "Rui Zhang",
-        "Qiwei Wu",
-        "Zhengyu Zhang",
-        "Tao Li",
-        "Hongyu Zhou"
-      ],
-      "published": "2026-10-06",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 8
-    },
-    {
-      "title": "Predicting Cable Dynamics with Physical Attention Bias",
-      "url": "https://huggingface.co/papers/2610.11975",
-      "abstract": "Learned simulators for deformable linear objects (DLOs) such as cables have to predict the motion of cables they were not trained on and stay stable over long rollouts. Most of their error occurs where the cable touches itself or the floor. Attention over all pairs of cable segments can represent contact between parts of the cable that are far apart along its length, but attention has no notion of geometry. A cable has two pairwise distances, which agree only while it is straight: the arc-length",
-      "authors": [
-        "Avihai Giuili",
-        "Rotem Atari",
-        "Avishai Sintov",
-        "Maya Bechler-Speicher"
-      ],
-      "published": "2026-10-08",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 1
-    },
-    {
-      "title": "Skill Constellations: Tracing the Supply Chain of Agent Skills on GitHub",
-      "url": "https://huggingface.co/papers/2610.11169",
-      "abstract": "Agent skills are SKILL.md instructions and scripts that AI coding agents such as Claude Code and Codex run with the permissions of their user. Developers share skills by copying them between repositories, which makes them a software supply chain without a registry, versions or provenance. The origin of a copied skill, the reach of a security fix and the repositories that warrant review are therefore unknown. Studies that record which repositories hold a skill at a single point in time cannot rev",
-      "authors": [
-        "Fahd Seddik"
-      ],
-      "published": "2026-10-08",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 1
-    },
-    {
-      "title": "Opera: A Verbal Critic Framework for Long-horizon Coding Agents",
-      "url": "https://huggingface.co/papers/2609.33987",
-      "abstract": "Long-horizon coding agents need timely corrections, yet feedback can be ineffective or even harmful when it misjudges ongoing work or fails to address the underlying problem. Existing critics focus on evaluating trajectories and generating feedback, but rarely track what happens after feedback is delivered. We present Opera, a verbal critic framework that treats each correction as a persistent note, followed until the diagnosed problem is resolved. Opera decides when to review through periodic a",
-      "authors": [
-        "Kai Mei",
-        "Zhiyuan Hu",
-        "Yutong Dai",
-        "Juntao Tan",
-        "Yifan Zhang"
-      ],
-      "published": "2026-10-08",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 8
-    },
-    {
-      "title": "Evaluating the Transfer of Co-Evolved Communication from 2D to 3D Simulation",
-      "url": "https://huggingface.co/papers/2610.09280",
-      "abstract": "This work examines the transfer of a co-evolved communication mechanism between two robotic agents from a discrete two-dimensional (2D) simulator to a three-dimensional simulator with real physics (3D). The study focuses on whether a communication mechanism co-evolved in a 2D environment retains its functional role after transfer to a 3D physics-based simulator. To support this analysis, the effects of the episode time budget, the social cue, and the asymmetry between the two co-evolved roles we",
-      "authors": [
-        "Fernando Montes-Gonzalez"
-      ],
-      "published": "2026-10-07",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 0
     }
   ],
-  "last_updated": "2026-10-16T11:42:36.033430",
+  "last_updated": "2026-10-17T11:01:06.140211",
   "total": 500
 }
