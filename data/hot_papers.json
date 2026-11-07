@@ -1,6 +1,65 @@
 {
   "top_papers": [
     {
+      "title": "Information Games: Strategic Crowding and Firm Repositioning in Language-Model Space",
+      "url": "https://huggingface.co/papers/2609.37820",
+      "abstract": "When firms respond to new market opportunities, their capacity choices alter the future discounted free cash flows available to both competitors and investors. In competitive markets, these investment decisions publicized in news articles and analyst reports, measuring the changes in capital structure, product mix, firm leadership, risk exposure and operating procedure made by the firm. Modern search engines rely on Large Language Models to measure the relevancy of source documents to given sear",
+      "authors": [
+        "Marcus Gawronsky",
+        "Chun-Sung Huang"
+      ],
+      "published": "2026-11-05",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "OpenFrontiers: A Collection of Open Research Problems and a Benchmark for Scientific Rediscovery",
+      "url": "https://huggingface.co/papers/2610.37739",
+      "abstract": "Large language models (LLMs) have shown increasing promise in research-level problem solving, yet a comprehensive collection of such problems is still missing, and evaluating them on research-level problems remains challenging. We introduce OpenFrontiers, a cross-disciplinary resource that combines a structured corpus of open research problems with a retrospective benchmark of recently resolved problems in mathematics. The corpus records problem statements, context, progress, and other informati",
+      "authors": [
+        "Jiarui Yao",
+        "Ruida Wang",
+        "Tong Zhang"
+      ],
+      "published": "2026-10-27",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "StepX-OPD: Rethinking Multi-Teacher On-Policy Distillation in Diffusion Models",
+      "url": "https://huggingface.co/papers/2611.04386",
+      "abstract": "A deployable text-to-image diffusion model must hold several capabilities at once, such as instruction following, text rendering and human preference, and must sample in a few steps. Capabilities and few-step sampling are built in separate stages: a full-step model first consolidates capabilities through multi-teacher on-policy distillation, then serves as a fixed teacher for step distillation. Every full-step model we evaluate scores lower once compressed, and the second stage cannot begin unti",
+      "authors": [
+        "Chenru Wang",
+        "Xuanyang Zhang",
+        "Yucheng Han",
+        "Wenbo Nie",
+        "Wei Cheng"
+      ],
+      "published": "2026-11-03",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "Tools Need Not Speak in Text: Latent Context Compression for Agents",
+      "url": "https://huggingface.co/papers/2611.06500",
+      "abstract": "Large language model (LLM) agents typically append raw tool outputs to their context. Over multi-step interactions, long and noisy observations incur substantial context overhead and dilute the agent's attention to task-relevant information. Existing token pruning and summarization methods remain constrained by discrete text representations, limiting the achievable compression ratios.\n  In this work, we challenge the prevailing assumption that agents must consume tool observations as explicit te",
+      "authors": [
+        "Yuetong Liu",
+        "Zhehao Zhou",
+        "Yitong Zhang",
+        "Haorui Chen",
+        "Jia Li"
+      ],
+      "published": "2026-11-04",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
       "title": "HERIT: Enabling Global Access to Hanja-to-English Historical Translation by Mitigating Temporal Bias",
       "url": "https://huggingface.co/papers/2611.04949",
       "abstract": "Historical archives are invaluable for multidisciplinary research but remain inaccessible globally due to severe language barriers. While manual translation is prohibitively expensive and time-consuming, simply applying existing machine translation models is inadequate due to unique linguistic nuances and the temporal bias inherent in scarce human-labeled corpora. To address these challenges, we propose HERIT, a systematic domain-adaptation pipeline that leverages retrieval-augmented generation ",
@@ -7327,67 +7386,8 @@
       "source": "HuggingFace Daily",
       "category": "AI/ML (Trending)",
       "upvotes": 9
-    },
-    {
-      "title": "No Channels Left Behind: Understanding Diffusion Acceleration through Residual Gates",
-      "url": "https://huggingface.co/papers/2610.40914",
-      "abstract": "Training acceleration methods for diffusion transformers, such as REPA and dispersive regularization, are commonly explained by additional supervision, spatial-structure priors, or improved feature geometry. We revisit this view and uncover a striking internal change: the AdaLN-Zero residual gate α, which directly controls how conditioned updates enter the residual stream, is substantially reorganized by these methods. This observation motivates our hypothesis that acceleration arises, at least ",
-      "authors": [
-        "Junha Park",
-        "Jaemyung Yu",
-        "Jaehui Hwang",
-        "Jong-Seok Lee",
-        "Dongyoon Han"
-      ],
-      "published": "2026-10-29",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 18
-    },
-    {
-      "title": "SciGame: Let Agents Play the Scientific Discovery Games in the Real and Counterfactual World",
-      "url": "https://huggingface.co/papers/2610.37919",
-      "abstract": "Large language model agents are increasingly used for scientific discovery. However, existing benchmarks mix law inference with programming, score data fitting instead of prediction on unseen inputs, and do not separate empirical evidence from pretrained priors. We introduce SciGame, a controlled benchmark that converts scientific literature into structured scientific cards. Each card yields a pair of Original and dimensionally consistent Counterfactual environments with the same task interface.",
-      "authors": [
-        "Yusheng Zhao",
-        "Bowei He",
-        "Xue Liu",
-        "Mingxiao Li"
-      ],
-      "published": "2026-10-27",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 3
-    },
-    {
-      "title": "VoxLock: Target-Speaker Extraction for Voice Agents Without an Enrollment Step",
-      "url": "https://huggingface.co/papers/2610.40727",
-      "abstract": "A voice agent's speech recognizer transcribes everyone near the microphone, including people other than the caller. I fine-tuned a public causal target-speaker extraction model (REAL-TSE, 27M parameters) on one GPU to work from a voice sample cut from the call itself, and released it as VoxLock. I score it by what a recognizer writes on real recordings. On Krisp's 265-recording benchmark it reaches 4.95% WER against 23.21% unprocessed and lets 9 background words into the transcript over 85 minut",
-      "authors": [
-        "Arbaz Siddiqui"
-      ],
-      "published": "2026-10-29",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 2
-    },
-    {
-      "title": "MemSteer: Turning User Histories into Supervision for Agent Memory Optimization",
-      "url": "https://huggingface.co/papers/2610.39276",
-      "abstract": "An effective agent memory system should adapt to a user's history and task requirements. Human-annotated supervision can guide this adaptation by providing feedback for evaluating and improving memory designs. Yet suitable labels are rarely available for new user histories, and manually constructing QA pairs and supporting evidence is costly. We introduce MemSteer, which turns unlabeled user histories into question-answer (QA) supervision with supporting evidence for memory-design optimization. ",
-      "authors": [
-        "Jie Huang",
-        "Cuiling Lan",
-        "Qize Yu",
-        "Xiulian Peng",
-        "Yan Lu"
-      ],
-      "published": "2026-10-29",
-      "source": "HuggingFace Daily",
-      "category": "AI/ML (Trending)",
-      "upvotes": 4
     }
   ],
-  "last_updated": "2026-11-06T14:28:24.285376",
+  "last_updated": "2026-11-07T13:22:46.031447",
   "total": 500
 }
