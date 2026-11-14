@@ -1,6 +1,100 @@
 {
   "top_papers": [
     {
+      "title": "Experience-Handoff Reinforcement Learning for Recursive Self-Improvement",
+      "url": "https://huggingface.co/papers/2611.16409",
+      "abstract": "It is common to train Large Language Models (LLMs) for agentic tasks with Reinforcement Learning (RL) from scalar rewards. However, this throws away the fine-grained information about the environment that the agent experienced during the trial (e.g., error logs). To utilize this rich information, recent works wrap the agent in a harness that refines its own inputs through reflection or compaction and hands past experience to future rollouts, but the construction of the handed-off artifacts (e.g.",
+      "authors": [
+        "Doyoung Kim",
+        "Byeongguk Jeon",
+        "Kailin Zhang",
+        "Sherry Yang"
+      ],
+      "published": "2026-11-12",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "A frontier machine intelligence for human neuroimaging",
+      "url": "https://huggingface.co/papers/2611.15094",
+      "abstract": "Medical imaging is essential for diagnosing disease, guiding treatment and monitoring patients over time. Although artificial intelligence has advanced image interpretation, existing medical models often address restricted tasks, while general-purpose proprietary models lack access to private clinical imaging required to achieve medical expertise. Developing models that can interpret complex examinations and communicate their findings in the context of clinical decisions remains a major challeng",
+      "authors": [
+        "Chenhui Zhao",
+        "Akshay Rao",
+        "Akhil Kondepudi",
+        "Yiwei Lyu",
+        "Xinhai Hou"
+      ],
+      "published": "2026-11-11",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "The Value of Thinking: Learning When to Reason in Hybrid Decision Models",
+      "url": "https://huggingface.co/papers/2611.16961",
+      "abstract": "Existing adaptive-reasoning methods shorten the explicit reasoning a model writes, or skip it by switching modes; either way the answer is still written out token by token. Rather than deciding how much to think, we explore a different paradigm, zero-or-T thinking: a single model either answers from the implicit thinking inside one forward pass, generating no token, or performs full autoregressive reasoning at a cost of T tokens when that is worth paying. We realise it in a hybrid decision model",
+      "authors": [
+        "Zhengxu Yu",
+        "Ke Xu",
+        "Meng Fang",
+        "Haitham Ammar",
+        "Weilin Luo"
+      ],
+      "published": "2026-11-12",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "TurtLES: A Large-Scale Benchmark for Turbulent 3D Neural PDE Surrogates",
+      "url": "https://huggingface.co/papers/2611.09567",
+      "abstract": "Machine-learning surrogates are increasingly used to accelerate computational fluid dynamics, yet progress is limited by the lack of benchmarks capturing realistic, time-dependent turbulent flows. We introduce TurtLES, a 14 TB dataset of 3D turbulent cylinder wakes in the shear-layer transition regime, computed via high-fidelity implicit large-eddy simulations. The dataset contains 400 trajectories of 400 time steps each, with 3-11 million points per frame, spanning variations in geometry, Reyno",
+      "authors": [
+        "Jarno Platenburg",
+        "Armand Kassaï Koupaï",
+        "Paola Cinnella",
+        "Patrick Gallinari"
+      ],
+      "published": "2026-11-06",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "EgoX: Egocentric Cross-Embodiment Manipulation with Embodiment Dreaming",
+      "url": "https://huggingface.co/papers/2611.16728",
+      "abstract": "Generalist manipulation policies can benefit from the complementary experience of humans, real robots, and simulated agents. However, differences in morphology, sensing, and control interfaces make it difficult to learn effectively from their combined demonstrations. We introduce EgoX, an egocentric cross-embodiment learning framework that organizes heterogeneous demonstrations through semantically corresponding observation and action modalities. EgoX pretrains a Modularized Cross-Embodiment Tra",
+      "authors": [
+        "Yaru Niu",
+        "Binghong Chen",
+        "Changwei Yao",
+        "Shangtao Li",
+        "Zhenlong Fang"
+      ],
+      "published": "2026-11-12",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "Who Remembers What? Multi-Granularity Memory Extraction for Multi-User, Multi-Agent Interaction",
+      "url": "https://huggingface.co/papers/2611.10439",
+      "abstract": "Self-evolving agents improve their own skills, memory, and harness code from experience without retraining the base LLM, and group-evolving agents go further by sharing these lessons across agents. Yet most such systems overlook that sharing across users and heterogeneous agents requires deciding who can benefit from each lesson and what information must remain private. We present MixUA, a memory system that distills independent user-agent trajectories into lessons and assigns each lesson to a u",
+      "authors": [
+        "Yunzhe Wang",
+        "Mesut Erhan Unal",
+        "Sheng Zhang",
+        "Shabnam Ghadar",
+        "Peng Tang"
+      ],
+      "published": "2026-11-07",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 5
+    },
+    {
       "title": "ScrapeBench: Evaluating Legal Compliance of AI Agents in Website Scraping",
       "url": "https://huggingface.co/papers/2611.11306",
       "abstract": "AI agents deployed on the open web are becoming more capable of performing actions that may breach contractual provisions and violate computer security laws. In this paper, we introduce ScrapeBench, the first agentic benchmark for empirically evaluating the legal compliance of AI agents with website scraping policies, namely terms of service (ToS) and robots.txt directives. Across widely used closed-weight and open-weight AI agents, we find that most agents exhibit low compliance rates (< 5%) wh",
@@ -7311,93 +7405,8 @@
       "source": "arXiv",
       "category": "Machine Learning",
       "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Flow-Guided Target-Space Alignment via Path Consistency",
-      "url": "http://arxiv.org/abs/2611.09863v1",
-      "abstract": "Many multimodal alignment problems require mapping a source modality into a fixed space defined by a target modality, where the target space is not merely an intermediate embedding but is used directly for downstream analysis. In this setting, successful alignment should preserve both the global structure of the target distribution and the instance-level correspondence observed in paired source--target training data. Existing objectives typically address only part of this goal: contrastive losse",
-      "authors": [
-        "Ruizhi Yuan",
-        "Zeqiu Yu",
-        "Wei Gao",
-        "Wei Chen",
-        "Xiwei Tang"
-      ],
-      "published": "2026-11-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Prehensile Loco-Manipulation",
-      "url": "http://arxiv.org/abs/2611.09864v1",
-      "abstract": "Loco-manipulation, which requires mobile manipulators to coordinate locomotion and manipulation over long horizons, is a key capability for large-object rearrangement in applications such as service robotics and warehouse automation. Despite recent progress, reliably executing these tasks remains challenging because performance depends on complex robot-object and object-environment interaction dynamics. Existing approaches address this challenge either through model-based methods, which often re",
-      "authors": [
-        "Xun Tu",
-        "Minghao Zou",
-        "Karthik Desingh"
-      ],
-      "published": "2026-11-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
-      "url": "http://arxiv.org/abs/2611.09878v1",
-      "abstract": "The Gaussian jet of an image is a graded vector space: a dilation by $λ$ multiplies derivatives of order $k$ by $λ^{-k}$. Local graded convolutions are exactly homogeneous differential operators, and a local feature is dilation-invariant if and only if it factors through the scale-normalized jet or, without the scale, through the retraction onto the weighted sphere of the grading. Under unknown Gaussian blur the retraction changes only by a change of scale, whereas the scale-normalized jet acqui",
-      "authors": [
-        "Tanush Shaska"
-      ],
-      "published": "2026-11-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
-      "url": "http://arxiv.org/abs/2611.09882v1",
-      "abstract": "Predicting the future motion of multiple people is inherently stochastic: the same observed history admits many plausible continuations depending on intent, coordination, and social context. Yet the dominant paradigm in multi-person 3D motion prediction remains deterministic, with existing methods producing a fixed number of outputs per agent. In contrast, we present a conditional flow matching framework that jointly generates diverse future motions for multiple agents, modeling both global traj",
-      "authors": [
-        "Aadya Agrawal",
-        "Ho Kei Cheng",
-        "Alexander Schwing"
-      ],
-      "published": "2026-11-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "On the (non-)closedness of the set of ReLU networks",
-      "url": "http://arxiv.org/abs/2611.09887v1",
-      "abstract": "We prove that the set $\\mathcal{N}_N$ of ReLU networks with one hidden layer and at most $N\\in\\mathbb N$ neurons is weakly closed in $W^{1,p}(Ω)$, for a bounded connected open set $Ω\\subset\\mathbb R^d$. Consequently, every coercive, weakly lower semicontinuous energy on this space attains its minimum over $\\mathcal{N}_N$. This covers the Deep Ritz method with convex integrands, Sobolev training and Lipschitz learning. Moreover, as the weight decay parameter tends to zero, minimizers of the regul",
-      "authors": [
-        "Eloi Martinet",
-        "Leon Bungert"
-      ],
-      "published": "2026-11-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
-    },
-    {
-      "title": "On Agentic Manipulation Policies",
-      "url": "http://arxiv.org/abs/2611.09892v1",
-      "abstract": "Recent work on robot manipulation has focused on specialist policies trained on demonstrations. We show that generalist AI models can control manipulators more reliably than specialist policies such as vision-language-action models (VLAs) and world-action models (WAMs). We systematically analyze agentic manipulation policies (AMPs), in which a generalist AI model commands the manipulator directly, adapting its actions as the task unfolds. We present AMP1, a reference harness that runs unchanged ",
-      "authors": [
-        "Chen Chen",
-        "Omid Bagherieh",
-        "Naveen Nikamanth Appiah Balaji",
-        "Jesse T. Gonzalez",
-        "Negin Heravi"
-      ],
-      "published": "2026-11-06",
-      "source": "arXiv",
-      "category": "Machine Learning",
-      "arxiv_category": "cs.LG"
     }
   ],
-  "last_updated": "2026-11-13T14:45:41.418163",
+  "last_updated": "2026-11-14T13:42:07.770278",
   "total": 500
 }
