@@ -1,6 +1,115 @@
 {
   "top_papers": [
     {
+      "title": "System 1 agents: a method for local, reliable and fast agentic AI",
+      "url": "https://huggingface.co/papers/2611.21053",
+      "abstract": "Agentic artificial intelligence could automate analyses of sensitive clinical data, but current agents depend on large language models (LLMs). Cloud LLMs expose patient data. Local LLMs hallucinate, and an invented value in a tool call propagates through every later step. Here we present a method to build System 1 agents: local agents that call tools without generating text. A deterministic compiler turns each tool's schema and the request into multiple-choice questions whose options come from t",
+      "authors": [
+        "Eleftherios Tzanis",
+        "Michail E. Klontzas"
+      ],
+      "published": "2026-11-16",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 6
+    },
+    {
+      "title": "Language Models Can Rewrite Their Own Weights",
+      "url": "https://huggingface.co/papers/2611.21885",
+      "abstract": "Language models are trained once, frozen and deployed: improving one again takes another training run, and a prompt, a scaffold or extra computation at inference is gone once the task ends. A frontier model has been shown to edit the weights of a much smaller one. We ask whether a model can rewrite its own weights to make itself better, and find that it can, by its own reasoning, with no gradients and no training; we call this self-rewriting. Given its weights, graded answers and the ability to ",
+      "authors": [
+        "Jiajun Fan",
+        "Neil He",
+        "Changyi Yang",
+        "Andy Mao",
+        "Xi Zhu"
+      ],
+      "published": "2026-11-16",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 7
+    },
+    {
+      "title": "In Situ Training of Optical Neural Networks by Coding Agents",
+      "url": "https://huggingface.co/papers/2611.23875",
+      "abstract": "Optical neural networks promise fast, energy-efficient computing, but every device departs from its design and must be trained with the hardware. In situ training relies on an expert-built calibrated digital model of each device or on gradient-free trial and error. Coding agents, large language models that write and run programs, have shown an emergent ability to understand and edit the weights of digital neural networks. Here we introduce optics as code, a method in which a coding agent trains ",
+      "authors": [
+        "Ilker Oguz",
+        "Colin Christian",
+        "Christophe Moser",
+        "Demetri Psaltis",
+        "Gordon Wetzstein"
+      ],
+      "published": "2026-11-18",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 3
+    },
+    {
+      "title": "Squoosh Bench: Evaluating UX-1 on 318 Historical Website A/B Tests",
+      "url": "https://huggingface.co/papers/2611.25200",
+      "abstract": "Experimentation teams must decide which proposed website changes to test with live traffic. We evaluated whether forecasts from simulated shoppers could inform that choice. We screened 412 historical website A/B tests and evaluated four systems on the 318 that ran longer than 21 days. Each system predicted an original win, a variant win, or an inconclusive result. Page roles were masked and recorded outcomes were withheld during inference. Squoosh UX-1, a model fine-tuned on human browsing data,",
+      "authors": [
+        "Rohith Pasula",
+        "Johari Dramiga",
+        "Viraj Shah",
+        "Suzan Halim",
+        "Tyler Dooskin"
+      ],
+      "published": "2026-11-18",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 2
+    },
+    {
+      "title": "Lang-SVG: Hierarchical Image Vectorization with Language Priors",
+      "url": "https://huggingface.co/papers/2611.15941",
+      "abstract": "Image vectorization reconstructs raster images as compact scalable vector graph- ics (SVG), providing a structured and editable code representation of images. However, most existing vectorization methods optimize for pixel-level render- ing fidelity, often producing SVGs that lack alignment with human-perceived object-part hierarchies, making them difficult to manipulate. To address this, we propose Lang-SVG, which introduces an explicit tree structure to organize SVG primitives with semantic la",
+      "authors": [
+        "Xi Liu",
+        "Chaoyi Zhou",
+        "Run Wang",
+        "Jiaang Li",
+        "Feng Luo"
+      ],
+      "published": "2026-11-11",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 1
+    },
+    {
+      "title": "PAD: Policy-Aware Data Valuation for Autonomous Driving",
+      "url": "https://huggingface.co/papers/2611.25604",
+      "abstract": "End-to-end autonomous driving increasingly depends on scaling training demonstrations, yet data growth does not guarantee proportional gains. However, additional data do not guarantee better policies: a demonstration that benefits one planner may be redundant or harmful to another. Existing curation methods typically infer data value from intrinsic sample properties or training-dependent proxies that do not measure downstream policy utility. To address this, we introduce Policy-Aware Data Valuat",
+      "authors": [
+        "Chengkai Xu",
+        "Yicheng Guo",
+        "Jiaqi Liu",
+        "Yiming Cui",
+        "Shiyu Fang"
+      ],
+      "published": "2026-11-19",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
+      "title": "Teaching Vision-Language-Action Models to Stop Safely",
+      "url": "https://huggingface.co/papers/2611.26239",
+      "abstract": "Vision-language-action (VLA) models enable robots to perform diverse tasks from visual observations and language instructions. While prior work has explored task suppression and refusal, stopping prohibited behavior once execution is underway and controlling the resulting physical response remain challenging. Our evaluation reveals that policies which suppress a task from its initial state can still complete it when taking over partway through execution. Even when the task remains unfinished, th",
+      "authors": [
+        "Zheyuan Liu",
+        "Chuhan Wang",
+        "Jinduo Guo",
+        "Yue Huang",
+        "Xiangchi Yuan"
+      ],
+      "published": "2026-11-19",
+      "source": "HuggingFace Daily",
+      "category": "AI/ML (Trending)",
+      "upvotes": 4
+    },
+    {
       "title": "WM^MLLM: Turning MLLMs into World Models",
       "url": "https://huggingface.co/papers/2611.24193",
       "abstract": "Video world models keep the world in the context of a generator, so a revisit is synthesized again and earlier edits can drift or disappear. We present WM^MLLM, the first interactive world model built on multimodal large language models (MLLMs), for persistent, editable world generation from a single image. WM^MLLM keeps the world state outside every generator, as a panorama with a revision history, and lets the MLLMs write it: they turn each request into operations on this state, select where a",
@@ -7262,112 +7371,8 @@
       "source": "arXiv",
       "category": "Statistical ML",
       "arxiv_category": "stat.ML"
-    },
-    {
-      "title": "Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries",
-      "url": "http://arxiv.org/abs/2611.17726v1",
-      "abstract": "Large-scale digital repositories with million plus digitized volumes serve as vital engines for scientific and scholarly discovery. However, as collections grow, finding specific research or educational material remains a significant challenge. This difficulty is compounded by the multimodal nature of texts, that is, texts which combine dense narrative content with essential illustrative charts, annotated diagrams, and complex layouts. Historically, discovery has been supported by full-text sear",
-      "authors": [
-        "Krishna Priya",
-        "Sai Navya Jyesta",
-        "Sachith Withana",
-        "Neelesh Karthikeyan",
-        "Beth Plale"
-      ],
-      "published": "2026-11-13",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "RecMem: Recurrent Memory Compression for Long-Sequence Generative Recommendation",
-      "url": "http://arxiv.org/abs/2611.17921v1",
-      "abstract": "Generative recommendation benefits from long interaction histories, but the cost of processing them directly grows with history length. We propose RecMem, a recurrent memory compression framework guided by three desiderata: space invariance, semantic fidelity, and lifelong evolvability. RecMem compresses historical segments into a fixed set of memory slots using a bifurcated encoder-decoder with shared lower layers and slot-wise forget-gated updates. Recommendation supervision trains the memory ",
-      "authors": [
-        "Haoyi Hu",
-        "Gaoyang Guo",
-        "Yunjia Xi",
-        "Wen Chen",
-        "Weiwen Liu"
-      ],
-      "published": "2026-11-13",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "Who Counts as Exposed? Measurement Choices in an Open, Re-estimable Index of Occupational AI Exposure",
-      "url": "http://arxiv.org/abs/2611.18168v1",
-      "abstract": "Occupational AI exposure indices are used as inputs to economic analysis, workforce planning, and policy, and the choices built into them decide which workers are described as exposed. We build an open, re-estimable task-level index and vary its two main design decisions, context and calibration, to show how much the answer depends on them. For each of the 18,796 occupation--task pairs in \\onet, seven open-weight reasoning models rate exposure under a common rubric. Each model rates with or with",
-      "authors": [
-        "Luca Mouchel",
-        "Pierre Bouquet",
-        "Yossi Sheffi"
-      ],
-      "published": "2026-11-13",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "Explanations that Transfer: Interpreting Medical Retrieval with Sparse AutoEncoders",
-      "url": "http://arxiv.org/abs/2611.18179v1",
-      "abstract": "Medical AI systems that answer users' queries rely on retrieving medical knowledge from large document collections. In this context, finetuning general models on medical datasets can improve retrieval relevance. Yet the dense embeddings underlying modern retrieval systems remain largely opaque, making it difficult to understand the mechanics behind their results. Moreover, adapting to a specific medical dataset risks losing transferability to new clinical corpora. In this work, we tackle these i",
-      "authors": [
-        "Diane Bouchacourt",
-        "Gaëtan Brison"
-      ],
-      "published": "2026-11-13",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "RACE: Ranking-Uncertainty Aware Capacity-Adaptive Customization for Efficient Sequential Recommendation",
-      "url": "http://arxiv.org/abs/2611.18244v1",
-      "abstract": "Efficient sequential recommendation has emerged as a promising paradigm for providing real-time personalized service. To deploy models under resource-constrained environment, model compression becomes a necessity, yet existing methods typically apply uniform compression ratios, overlooking the heterogeneity in user intent complexity. This \"one-size-fits-all\" approach leads to a fundamental Capacity-Complexity Mismatch, where computational resources are either wasted on simple instances or insuff",
-      "authors": [
-        "Tianqi Liu",
-        "Kaipu Sun",
-        "Kairui Fu",
-        "Wenkai Wang",
-        "Sihao Liu"
-      ],
-      "published": "2026-11-13",
-      "source": "arXiv",
-      "category": "Information Retrieval / RecSys",
-      "arxiv_category": "cs.IR"
-    },
-    {
-      "title": "LECAT: Measuring LLM Category Learning from Pretraining Data",
-      "url": "http://arxiv.org/abs/2611.18419v1",
-      "abstract": "Humans know that airplanes are fast, that this extends to red airplanes, but that it does not hold for broken airplanes. How do LLMs acquire category knowledge that humans learn and apply effortlessly? We introduce LeCat, a two-part framework to analyze LLM's Learning of Category knowledge. First, we use LeCat to evaluate models on their ability to learn category knowledge, distinguishing between three cases: memorization of in-domain category knowledge, generalization to unseen instances, and a",
-      "authors": [
-        "Jimin Mun",
-        "Maarten Sap",
-        "Yanai Elazar"
-      ],
-      "published": "2026-11-13",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
-    },
-    {
-      "title": "Towards Explainable Sleep Stage Classification using Single-Channel Electroencephalogram",
-      "url": "http://arxiv.org/abs/2611.18434v1",
-      "abstract": "Automated sleep staging has achieved strong bench- mark accuracy; however, clinical adoption remains limited due to a lack of interpretability. In this work, we fill the research gap by extending the SleepXAI sleep staging framework to systematically compare five different XAI methods. Further, attribution fidelity is evaluated using Spearman rank correlation with AASM-defined EEG frequency bands, serving as clinically grounded reference signals. In this paper, we focus on single- channel Electr",
-      "authors": [
-        "Gurinder Kaur Sandhu",
-        "Jude Koenig",
-        "Ankita Shukla",
-        "Shruti Kshirsagar"
-      ],
-      "published": "2026-11-13",
-      "source": "arXiv",
-      "category": "Artificial Intelligence",
-      "arxiv_category": "cs.AI"
     }
   ],
-  "last_updated": "2026-11-20T15:39:33.979186",
+  "last_updated": "2026-11-21T14:49:55.188892",
   "total": 500
 }
